@@ -4,7 +4,7 @@ Reusable AI-agent skills maintained by Kalepail.
 
 ## Skills
 
-- `skills/agent-browser-webauthn` - drive passkey and Stellar smart-account browser tests with `agent-browser` and Chrome DevTools virtual WebAuthn authenticators.
+- `skills/agent-browser-webauthn` - drive passkey and Stellar smart account browser tests with `agent-browser` and Chrome DevTools virtual WebAuthn authenticators.
 
 ## Install
 
