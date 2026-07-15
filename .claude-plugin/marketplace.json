@@ -1,7 +1,7 @@
 {
   "name": "kalepail-skills",
   "owner": {
-    "name": "kalepail"
+    "name": "Tyler van der Hoeven"
   },
   "metadata": {
     "description": "Reusable Fan Solo and agent-browser WebAuthn testing skills."

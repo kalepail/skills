@@ -1,7 +1,7 @@
 {
   "name": "kalepail-skills",
   "interface": {
-    "displayName": "Kalepail Skills"
+    "displayName": "kalepail Skills"
   },
   "plugins": [
     {

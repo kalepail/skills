@@ -20,14 +20,14 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Kalepail Skills",
+    "displayName": "kalepail Skills",
     "shortDescription": "Fan Solo and agent-browser WebAuthn skills",
-    "longDescription": "Install Kalepail's reusable Fan Solo and agent-browser WebAuthn testing workflows.",
-    "developerName": "kalepail",
+    "longDescription": "Install Tyler van der Hoeven's reusable Fan Solo and agent-browser WebAuthn testing workflows.",
+    "developerName": "Tyler van der Hoeven",
     "websiteURL": "https://github.com/kalepail/skills",
     "defaultPrompt": [
-      "Use the best matching Kalepail skill for this task.",
-      "Show which installed Kalepail skill fits this workflow."
+      "Use the best matching kalepail skill for this task.",
+      "Show which installed kalepail skill fits this workflow."
     ]
   }
 }

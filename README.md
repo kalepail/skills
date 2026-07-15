@@ -1,6 +1,6 @@
-# Kalepail Skills
+# kalepail Skills
 
-Reusable AI-agent skills maintained by Kalepail.
+Reusable AI-agent skills maintained by Tyler van der Hoeven.
 
 ## Skills
 
