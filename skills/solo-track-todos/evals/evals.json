@@ -1,0 +1,38 @@
+{
+  "skill_name": "solo-track-todos",
+  "evals": [
+    {
+      "prompt": "Turn this plan into Solo todos: API and UI can run together; verification waits for both. Add handoff requirements and show ready work.",
+      "expected_output": "Confirm project/live todo semantics, create bounded API/UI/verification todos, block verification on both lanes, add priorities/tags/acceptance/handoff, and list unblocked work without spawning agents.",
+      "assertions": [
+        "Creates actionable todos without duplicating whole plan",
+        "Models verification blockers explicitly",
+        "Includes acceptance and durable handoff fields",
+        "Does not spawn agents or claim completion"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Could you clean up my Solo todos?",
+      "expected_output": "Inspect and summarize current todo state first, distinguish complete/backlog/stale/blocked, and avoid deleting, transferring, completing, unlocking, or replacing tags/blockers without explicit intent.",
+      "assertions": [
+        "Handles ambiguous cleanup read-first",
+        "Preserves locked and blocked work",
+        "Avoids permanent deletion or broad status mutation",
+        "Requests direction for consequential cleanup choices"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Spawn workers for every unblocked todo and monitor them until integration is done.",
+      "expected_output": "Route to solo-orchestrate-agents; todo skill may expose ready work but must not spawn, control processes, schedule worker timers, or perform final integration itself.",
+      "assertions": [
+        "Recognizes orchestration neighboring workflow",
+        "Routes to solo-orchestrate-agents",
+        "Does not use todo locks as process authority",
+        "Keeps final integration with root/operator"
+      ],
+      "files": []
+    }
+  ]
+}

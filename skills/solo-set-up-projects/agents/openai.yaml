@@ -1,0 +1,10 @@
+interface:
+  display_name: "Solo: Set Up Projects"
+  short_description: "Configure Solo projects and shared command stacks"
+  default_prompt: "Use $solo-set-up-projects to configure this repository as a safe, shareable Solo project."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "solo"
+      description: "Local Solo MCP server"

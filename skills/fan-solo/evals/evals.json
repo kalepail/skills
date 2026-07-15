@@ -1,0 +1,68 @@
+{
+  "skill_name": "fan-solo",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I just installed Solo and want a sensible workflow for projects, commands, agents, notes, and recurring tasks. Where do I start?",
+      "expected_output": "Uses Fan Solo as router, establishes Solo mental model and live whoami/help/docs source order, then proposes a minimal sequence through project setup, processes/observation, one-agent work, durable state, and later automation without dumping every API detail.",
+      "assertions": [
+        "Uses fan-solo for broad multi-capability routing",
+        "Starts from live identity and help before static guidance",
+        "Routes to at least solo-set-up-projects and one focused follow-on skill",
+        "Explains scratchpad versus todo at a useful level",
+        "Avoids treating Solo as an IDE or agent provider"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "yo i've got codex and a dev server open in solo and keep losing track of what happened, what's the chill way to organize this?",
+      "expected_output": "Recognizes casual broad Solo request, checks live scope, defaults to one-agent flow, routes read-only service inspection to solo-observe-services and durable narrative to solo-keep-scratchpads, adding solo-track-todos only for actionable owned work.",
+      "assertions": [
+        "Triggers on casual phrasing without explicit skill names",
+        "Defaults to one agent rather than unnecessary orchestration",
+        "Distinguishes scratchpad narrative from actionable todos",
+        "Routes status inspection to solo-observe-services",
+        "Does not restart or close processes without authorization"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Use Solo to split a large refactor across three agents, keep them from colliding, wake me when they are done, and integrate only verified results.",
+      "expected_output": "Routes primary workflow to solo-orchestrate-agents, with todos for bounded lanes, scratchpad for shared plan/evidence, locks for collision avoidance, timers for wakeups, recursive process ownership, and real diff/test/output checks before integration.",
+      "assertions": [
+        "Routes to solo-orchestrate-agents rather than solo-work-with-agents",
+        "Requires independent bounded lanes and lead-owned integration",
+        "Uses todos, scratchpad, locks, and timers for their distinct roles",
+        "States idle is not completion",
+        "Requires artifact or diff and test evidence before completion"
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Implement JWT authentication in this Express API and add tests. Solo is not installed in this repository.",
+      "expected_output": "Does not invoke or recommend Fan Solo merely because word Solo appears in negative context. Handles as ordinary coding task or selects a relevant non-Solo skill.",
+      "assertions": [
+        "Does not trigger fan-solo for explicitly non-Solo work",
+        "Does not require Solo installation",
+        "Keeps focus on requested Express implementation and tests"
+      ],
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "My Solo dev server is stopped. Start only that existing command, wait for its port, and show me the evidence that it is ready.",
+      "expected_output": "Routes lifecycle mutation to solo-run-processes and readiness evidence to solo-observe-services, checks identity/project and exact target, avoids orchestration and broad Fan Solo explanation, and distinguishes bound port from full application correctness.",
+      "assertions": [
+        "Routes start action to solo-run-processes",
+        "Routes readiness inspection to solo-observe-services",
+        "Uses exact authorized process target",
+        "Does not spawn agents or use orchestration",
+        "Reports real readiness evidence and its limit"
+      ],
+      "files": []
+    }
+  ]
+}

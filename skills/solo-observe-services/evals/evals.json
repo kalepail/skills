@@ -1,0 +1,38 @@
+{
+  "skill_name": "solo-observe-services",
+  "evals": [
+    {
+      "prompt": "Find the API service URL, wait until it binds, and show the last relevant startup errors without changing anything.",
+      "expected_output": "Scope project, inspect services/ports, wait for bound port, search rendered output narrowly, and report listener readiness plus any remaining application-health uncertainty.",
+      "assertions": [
+        "Uses services_list or get_process_ports and wait_for_bound_port",
+        "Uses rendered output before raw output",
+        "Reports detected URL instead of assumed default",
+        "Performs no process, output, UI-selection, or configuration mutation"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Is everything okay in Solo?",
+      "expected_output": "Resolve scope, gather project status, process states, services, and resource snapshot, then state what evidence proves and what remains unverified without broad remediation.",
+      "assertions": [
+        "Handles ambiguous scope with whoami/list/select read-only flow",
+        "Separates lifecycle, trust, listener readiness, and health",
+        "Reports concise evidence and limitations",
+        "Does not restart, clear, kill, or send input"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "The worker failed. Restart it and fix whatever broke.",
+      "expected_output": "Route diagnosis to solo-troubleshoot and authorized restart to solo-run-processes; do not perform lifecycle or repair actions inside observation workflow.",
+      "assertions": [
+        "Recognizes neighboring diagnosis and lifecycle request",
+        "Does not restart or edit configuration",
+        "Preserves failure output",
+        "Requires ownership or exact authority before any later mutation"
+      ],
+      "files": []
+    }
+  ]
+}

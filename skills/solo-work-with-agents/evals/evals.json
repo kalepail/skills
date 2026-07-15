@@ -1,0 +1,49 @@
+{
+  "skill_name": "solo-work-with-agents",
+  "evals": [
+    {
+      "prompt": "Launch one Codex worker in this Solo project to inspect the auth tests, then wake when it goes idle and summarize its evidence. Do not let it edit.",
+      "expected_output": "Confirm identity/project, discover live agent tools, spawn one read-only bounded worker, record returned child ID, send bootstrap plus contract, use an owned-child idle timer, inspect real output, and preserve a durable handoff without Git actions.",
+      "assertions": [
+        "Calls whoami/help and discovers current agent installation",
+        "Records returned child process ID and uses only that child",
+        "States read-only ownership, acceptance evidence, and forbidden edits",
+        "Treats idle as inspection trigger and leaves Git/integration to operator"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Can you check on the agents and clean up whatever is done?",
+      "expected_output": "Inspect scope and recorded descendants, avoid closing from idle/completed state alone, and request exact authority for any parent, sibling, unrelated, YAML-backed, or unrecorded process.",
+      "assertions": [
+        "States process authority is recursive and non-transferable",
+        "Uses recorded child IDs rather than guessing parentage",
+        "Persists handoff and inspects partial edits before owned-child close",
+        "Does not stop, close, select, rename, input, or clear unauthorized processes"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Solo does not show my custom agent in the launch menu, and I also want its default --high flag plus Solo guidance in AGENTS.md.",
+      "expected_output": "Route to agent setup and health: inspect enabled tool/environment health and Runtime Doctor, explain that Solo does not install the CLI, save default flags in Settings, and use setup_agent_integration only after authorization to edit AGENTS.md and review the diff.",
+      "assertions": [
+        "Distinguishes Disabled, Ready, Not checked, Missing, and Broken launchability",
+        "Keeps agent installation and shell repair outside Solo",
+        "Uses saved default flags rather than one-launch extra_args for persistent behavior",
+        "Treats setup_agent_integration as an authorized repository edit and reviews the result"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Coordinate three different agents to plan, implement, and independently review this feature.",
+      "expected_output": "Route to solo-orchestrate-agents because request needs multi-agent planning, blockers, timers, synthesis, and integration controls; do not blindly spawn workers through single-agent lifecycle.",
+      "assertions": [
+        "Recognizes multi-agent neighboring workflow",
+        "Routes to solo-orchestrate-agents",
+        "Does not spawn before plan and ownership decomposition",
+        "Keeps root/operator responsible for integration"
+      ],
+      "files": []
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "skill_name": "solo-automate",
+  "evals": [
+    {
+      "prompt": "Use Solo to write a shell check that lists every failed process across projects and exits nonzero when any exist.",
+      "expected_output": "Choose Solo CLI, use live CLI help when needed, request --json, paginate project/process results, parse stable envelopes, and map failure to intentional script exit without exposing the local token.",
+      "assertions": [
+        "Selects the bundled Solo CLI instead of hard-coding the local HTTP port or bearer token.",
+        "Uses --json and accounts for pagination plus documented CLI exit-code semantics.",
+        "Keeps the workflow read-only and does not restart, stop, delete, or clear any process."
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Can you see what Solo can automate for this project?",
+      "expected_output": "Treat ambiguity as read-only discovery: inspect identity/project scope, call Solo help and live tool summary, describe enabled categories and unavailable/toggled features, then ask for a concrete operation only if needed.",
+      "assertions": [
+        "Calls or recommends whoami, help, and mcp_tools_summary before assuming a catalog.",
+        "Reports effective project scope and distinguishes current runtime tools from hosted documentation.",
+        "Performs no mutation, spawning, process input, feedback, or destructive action."
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Refactor the payment service and split the coding work among three subagents; commit and open a pull request when done.",
+      "expected_output": "Route primary work to coding, multi-agent orchestration, and GitHub publishing skills. Do not invoke Solo automation merely because agents or processes are involved, and do not spawn agents, commit, push, or open a PR without those workflows and explicit authority.",
+      "assertions": [
+        "Recognizes this as a coding/orchestration/GitHub task rather than a Solo integration-surface task.",
+        "Routes multi-agent coordination to solo-orchestrate-agents only if user specifically wants Solo-managed workers; otherwise uses platform collaboration tooling.",
+        "Does not create Solo processes, mutate local Solo state, commit, push, or open a PR as an incidental side effect."
+      ],
+      "files": []
+    }
+  ]
+}

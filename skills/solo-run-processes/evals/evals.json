@@ -1,0 +1,38 @@
+{
+  "skill_name": "solo-run-processes",
+  "evals": [
+    {
+      "prompt": "Start the Web and Queue commands in project 12, then verify each is running. I authorize those exact shared commands.",
+      "expected_output": "Confirm project/process IDs and trust, use targeted start actions under explicit authority, poll final status, and report per-command result without touching other processes.",
+      "assertions": [
+        "Uses Solo project/process IDs and verifies exact targets",
+        "Treats explicit named authorization as authority for shared commands",
+        "Checks trust before starting and verifies final status",
+        "Does not start all commands or mutate unrelated processes"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Can you clean up the idle agents?",
+      "expected_output": "Do not close anything from idle state alone; identify self and recorded descendants, request exact authority for parent, siblings, unrelated agents, or another agent's descendants, and report ownership uncertainty.",
+      "assertions": [
+        "States idle does not transfer ownership",
+        "Controls only self and recorded spawned descendants",
+        "Requires returned child IDs or exact user/runbook authority",
+        "Does not close, stop, select, rename, input, or clear unauthorized agents"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "What localhost URL is the dev server using, and is it ready?",
+      "expected_output": "Route to solo-observe-services, use read-only service/port readiness inspection, and avoid starting, restarting, or clearing output.",
+      "assertions": [
+        "Recognizes read-only neighboring observation request",
+        "Does not mutate lifecycle state",
+        "Does not hard-code a framework port",
+        "Distinguishes bound-port readiness from application health"
+      ],
+      "files": []
+    }
+  ]
+}

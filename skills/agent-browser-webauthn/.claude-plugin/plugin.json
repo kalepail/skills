@@ -1,0 +1,14 @@
+{
+  "name": "agent-browser-webauthn",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "description": "Test passkey, WebAuthn, Stellar smart-account, wallet, and browser-signing flows with agent-browser.",
+  "author": {
+    "name": "Tyler van der Hoeven"
+  },
+  "homepage": "https://github.com/kalepail/skills/tree/main/skills/agent-browser-webauthn",
+  "repository": "https://github.com/kalepail/skills",
+  "skills": [
+    "./"
+  ]
+}

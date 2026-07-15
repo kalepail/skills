@@ -1,0 +1,10 @@
+interface:
+  display_name: "Solo: Track Todos"
+  short_description: "Manage Solo tasks, blockers, and handoffs"
+  default_prompt: "Use $solo-track-todos to turn this work into accurate Solo todos with blockers and handoffs."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "solo"
+      description: "Local Solo MCP server"

@@ -1,0 +1,124 @@
+# Orchestration workflow reference
+
+Read this reference when planning multi-agent work, mapping dependencies, dispatching workers, choosing timers, reviewing evidence, or recovering a cohort.
+
+## Contents
+
+- Bootstrap
+- State placement
+- Plan and graph
+- Dispatch contract
+- Timers and monitoring
+- Evidence and integration
+- Recovery
+- Sources
+
+## Bootstrap
+
+1. Call `whoami`; preserve effective project unless cross-project work is explicit.
+2. Call live `help(topic=...)` for each active surface: `spawning`, `timers`, `locks`, `scratchpads`, `todos`, `coordination`.
+3. Inspect enabled tools through current discovery or `mcp_tools_summary`. Feature toggles remove tools; never guess absent schemas.
+4. Inventory processes, current capacity, todos, blockers, todo locks, and general locks.
+5. Read repository instructions and current canonical plan before creating Solo state.
+
+## State placement
+
+| State | Primitive |
+|---|---|
+| Goal, assumptions, decisions, evidence, plan, current summary | Scratchpad |
+| Owned action, acceptance, status, priority, blockers, handoff | Todo |
+| Task-local progress and final report | Todo comment |
+| Small structured phase/process-to-todo pointer | KV |
+| Active task claim | Todo lock |
+| Shared file/logical-area exclusion | General lease lock |
+| Resume after delay/idle | Timer |
+| Reusable prompt shape | Prompt template |
+
+Keep each fact in narrowest authoritative primitive. Do not duplicate full plan into todos or store prose/logs in KV.
+
+## Plan and graph
+
+Write scratchpad sections for goal, scope/non-goals, project and any relevant branch/worktree, constraints, risky files, lanes/ownership, dependencies, decisions, verification, open questions, current summary, and handoffs. Worktrees are optional isolation, not required by Solo.
+
+Create todos only for actionable lanes. Include:
+
+```text
+Objective
+Authoritative inputs and scratchpad section
+Owned files/surface
+Forbidden work
+Acceptance checks and evidence format
+Priority/tags
+Blockers
+Handoff destination
+```
+
+Use explicit blockers. Verification depends on implementation; integration depends on required handoffs. Avoid cycles. Dispatch only unblocked independent lanes.
+
+## Dispatch contract
+
+Call `list_agent_tools` and choose a launchable installation by task fit. Spawn one worker per lane. Immediately record returned child ID, project, tool, todo, and ownership. Prepend returned `agent_instructions`.
+
+Require worker prompt to state:
+
+```text
+Objective: <one outcome>
+Context: scratchpad <id>, section <heading>; todo <id>
+Ownership: <disjoint files or read-only surface>
+Do not: <non-goals; unrelated edits; Git/publish/integrate>
+Coordination: lock owned todo and named shared area
+Acceptance: <commands, tests, citations, artifacts>
+Handoff: changed files/artifacts, checks, blockers, risk, next action
+```
+
+Keep coupled edits with lead. Use different model families for consequential independent review; reconcile by evidence, not vote.
+
+## Timers and monitoring
+
+- `timer_fire_when_idle_any`: ignore already-idle members at scheduling and wait for a new idle transition or deadline. Use to harvest first newly quiet worker, then reschedule.
+- `timer_fire_when_idle_all`: count already-idle members as satisfied; if all are already idle, expect already-satisfied response and no pending timer. Use only for true barrier.
+- `timer_set`: use bounded delayed or periodic checkpoint, then cancel when phase ends.
+- Keep watch set separate from `delivery_process_id`. Never re-identify session to reroute timer.
+- Write trusted, self-contained timer body with process IDs, todo/scratchpad IDs, evidence to inspect, and reschedule/cancel rule.
+- Use `wait_for_bound_port` for service readiness. Idle does not prove listener readiness or task completion.
+
+On wake: re-check scope, inspect status and actual output, persist progress/blocker, review artifacts, remove finished child from watch set, and reschedule for remainder.
+
+## Evidence and integration
+
+Require real evidence at correct layer:
+
+1. Worker output and durable todo comment.
+2. Actual files, diff, artifact, or cited research.
+3. Narrowest relevant command/test first.
+4. Broader risk-appropriate checks.
+5. Independent verification for consequential findings.
+
+Integrate one lane at time. Root/operator owns Git index, commits, pushes, PRs, releases, publishing, deployment, and final synthesis unless explicitly delegated. Workers preserve dirty trees and never revert unrelated changes.
+
+## Recovery
+
+- Spawn unavailable: refresh live agent tools; keep lane with lead or choose launchable alternative.
+- Worker quiet: inspect output/status; send bounded follow-up only if needed.
+- Worker blocked: comment exact blocker, update graph, ask user only for missing authority/decision.
+- Lock contention: inspect owner, avoid overlap, schedule bounded retry.
+- Scratchpad conflict: reread, merge, retry smallest targeted edit.
+- Timer deadline: treat as checkpoint, not success.
+- Todo transfer: rebuild blockers and locks in target project.
+- Solo restart: re-check identity/scope and durable state before writes.
+- Closed worker: inspect filesystem before further integration; closing does not roll back edits.
+
+## Sources
+
+- https://soloterm.com/api/v1/docs/workflows/agent-orchestration
+- https://soloterm.com/api/v1/docs/workflows/agents-spawning-agents
+- https://soloterm.com/api/v1/docs/workflows/scratchpads-and-todos
+- https://soloterm.com/api/v1/docs/mcp-tools/agent-terminal
+- https://soloterm.com/api/v1/docs/mcp-tools/timers
+- https://soloterm.com/api/v1/docs/mcp-tools/coordination
+- https://soloterm.com/api/v1/docs/mcp-tools/key-value
+- https://soloterm.com/api/v1/docs/mcp-tools/scratchpads
+- https://soloterm.com/api/v1/docs/mcp-tools/todos
+- https://soloterm.com/api/v1/docs/agents/idle-detection
+- https://x.com/aarondfrancis/status/2075213903332581379
+- https://x.com/aarondfrancis/status/2075571055041675691

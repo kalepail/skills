@@ -1,0 +1,10 @@
+interface:
+  display_name: "Solo: Keep Scratchpads"
+  short_description: "Maintain durable revision-safe Solo notes"
+  default_prompt: "Use $solo-keep-scratchpads to preserve this context in a structured Solo scratchpad."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "solo"
+      description: "Local Solo MCP server"

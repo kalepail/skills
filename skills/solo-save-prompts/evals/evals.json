@@ -1,0 +1,38 @@
+{
+  "skill_name": "solo-save-prompts",
+  "evals": [
+    {
+      "prompt": "Save a project-scoped Solo prompt template for bounded worker handoffs with placeholders for objective, owned scope, checks, and scratchpad/todo context.",
+      "expected_output": "Discover live template tools, inspect existing names, create a project-scoped template with valid placeholders and literal safety boundaries, and review it without launching or submitting work.",
+      "assertions": [
+        "Uses project scope and avoids same-scope duplicate",
+        "Uses valid reusable placeholders",
+        "Keeps Git/publishing/integration prohibition literal",
+        "Performs no agent, todo, timer, or process side effects"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Can you save this prompt for later?",
+      "expected_output": "Inspect current project and template catalog, determine or ask whether scope should be global versus project when material, preserve prompt text safely, and do not send or execute it.",
+      "assertions": [
+        "Handles ambiguous scope without guessing consequentially",
+        "Checks for existing template before create",
+        "Keeps secrets and transient IDs out of template",
+        "Does not insert-and-submit or trigger workflow"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Use my saved review template to launch Claude, Codex, and Gemini, then merge their fixes.",
+      "expected_output": "Route execution to solo-orchestrate-agents; template skill may retrieve/render text but must not spawn agents, assert process ownership, mutate files, or integrate fixes.",
+      "assertions": [
+        "Recognizes multi-agent execution boundary",
+        "Routes to solo-orchestrate-agents",
+        "Rechecks identity/scope/ownership before any later execution",
+        "Leaves final integration and Git actions to root/operator"
+      ],
+      "files": []
+    }
+  ]
+}

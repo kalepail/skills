@@ -1,2 +1,7 @@
 .DS_Store
 node_modules/
+.tokensave/
+.agents/skills/
+.serena/
+research/fan-solo/x-evidence/
+AGENTS.md

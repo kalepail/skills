@@ -1,0 +1,23 @@
+{
+  "name": "kalepail-skills",
+  "owner": {
+    "name": "kalepail"
+  },
+  "metadata": {
+    "description": "Reusable Fan Solo and agent-browser WebAuthn testing skills."
+  },
+  "plugins": [
+    {
+      "name": "kalepail-skills",
+      "source": "./",
+      "description": "Install the complete Fan Solo and agent-browser WebAuthn testing collection.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "agent-browser-webauthn",
+      "source": "./skills/agent-browser-webauthn",
+      "description": "Test passkey, WebAuthn, Stellar smart-account, wallet, and browser-signing flows with agent-browser.",
+      "version": "0.1.0"
+    }
+  ]
+}

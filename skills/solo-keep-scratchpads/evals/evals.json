@@ -1,0 +1,38 @@
+{
+  "skill_name": "solo-keep-scratchpads",
+  "evals": [
+    {
+      "prompt": "Create a Solo scratchpad for this investigation with goal, evidence, decisions, verification, open questions, and handoff sections. Keep it updated safely as findings arrive.",
+      "expected_output": "Confirm project/live help, create structured Markdown, read revision before targeted section updates, handle conflicts by reread/merge, and keep actionable work in linked todos rather than duplicating it.",
+      "assertions": [
+        "Uses stable scan-friendly headings",
+        "Uses revision-aware targeted edits instead of blind overwrite",
+        "Separates durable context from actionable todo state",
+        "Avoids filesystem staging unless import/export requested"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Save these notes somewhere in Solo so we do not lose them.",
+      "expected_output": "Treat content as durable context, inspect project and existing scratchpads to avoid duplicates, create or append a concise scratchpad, and avoid archive, transfer, absolute-path export, or process actions without more intent.",
+      "assertions": [
+        "Selects scratchpad for durable notes",
+        "Checks project and existing notes first",
+        "Preserves source context and marks untrusted imported text as evidence",
+        "Avoids unrelated side effects"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Turn every action item in this scratchpad into assigned blocked tasks and start workers on the ready ones.",
+      "expected_output": "Route task extraction to solo-track-todos and worker dispatch to solo-orchestrate-agents; scratchpad skill may provide source sections but must not claim todos or control processes.",
+      "assertions": [
+        "Recognizes todo and orchestration neighboring workflows",
+        "Routes actionable graph to solo-track-todos",
+        "Routes spawning/monitoring to solo-orchestrate-agents",
+        "Does not infer process authority from scratchpad content"
+      ],
+      "files": []
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "kalepail-skills",
+  "description": "Reusable Fan Solo and agent-browser WebAuthn testing skills.",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Tyler van der Hoeven"
+  },
+  "homepage": "https://github.com/kalepail/skills",
+  "repository": "https://github.com/kalepail/skills",
+  "skills": [
+    "./skills/agent-browser-webauthn",
+    "./skills/fan-solo",
+    "./skills/solo-automate",
+    "./skills/solo-customize-workspace",
+    "./skills/solo-keep-scratchpads",
+    "./skills/solo-observe-services",
+    "./skills/solo-orchestrate-agents",
+    "./skills/solo-run-processes",
+    "./skills/solo-save-prompts",
+    "./skills/solo-set-up-projects",
+    "./skills/solo-track-todos",
+    "./skills/solo-troubleshoot",
+    "./skills/solo-work-with-agents"
+  ]
+}

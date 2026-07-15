@@ -1,0 +1,10 @@
+interface:
+  display_name: "Solo: Customize Workspace"
+  short_description: "Tune Solo workspaces, navigation, and settings"
+  default_prompt: "Use $solo-customize-workspace to organize my Solo workspaces and tune navigation, appearance, and notifications safely."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "solo"
+      description: "Local Solo MCP server"

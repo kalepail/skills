@@ -1,0 +1,41 @@
+{
+  "skill_name": "solo-customize-workspace",
+  "evals": [
+    {
+      "name": "organize-client-workspaces",
+      "prompt": "Use Solo to split my current projects into Client and Personal workspaces, put Client in a second window, reorder the sidebar to Agents, Todos, Commands, Terminals, Scratchpads, and bind a shortcut for the first workspace. Keep every running process alive.",
+      "expected_output": "Inspect current workspaces, projects, window ownership, running state, and live shortcut/settings availability; preview moves; create or reuse workspaces; move projects without stopping processes; move Client to a new window; apply section order and a non-conflicting workspace binding; verify resulting state and report any UI-only step.",
+      "assertions": [
+        "Checks current Solo state and live version-sensitive controls before mutation.",
+        "States that moving projects between workspaces does not stop processes and verifies they remain running.",
+        "Does not edit project directories, solo.yml, commands, or agent configuration.",
+        "Checks hotkey conflicts and verifies workspace order because numbered bindings follow that order."
+      ],
+      "files": []
+    },
+    {
+      "name": "make-solo-less-noisy",
+      "prompt": "Solo feels noisy and cramped. Can you make it calmer?",
+      "expected_output": "Treat the request as app customization, inspect current sidebar, notification, font, and resource-threshold settings, ask only preference questions that materially affect the result, then propose or apply a small reversible set such as collapsing/hiding empty sections, using Important notifications, adjusting thresholds, and preserving unread/running visibility.",
+      "assertions": [
+        "Triggers on casual ambiguous personalization language.",
+        "Inspects before changing and chooses reversible app-level preferences.",
+        "Does not suppress all notifications or hide running/unread work without explicit approval.",
+        "Separates interface density, terminal appearance, and notification routing."
+      ],
+      "files": []
+    },
+    {
+      "name": "route-project-process-agent-work",
+      "prompt": "Add my repo, write solo.yml, start the dev server, configure Claude and Codex, then spawn two agents to implement the feature. Also make the sidebar dark.",
+      "expected_output": "Handle only the explicit app appearance request if safe, and route repository/solo.yml work to solo-set-up-projects, command lifecycle to solo-run-processes, agent setup to solo-work-with-agents, and worker orchestration to solo-orchestrate-agents. Avoid starting processes, editing config, configuring agents, or spawning workers under this skill.",
+      "assertions": [
+        "Identifies hard neighboring-skill boundaries by name.",
+        "Does not add projects, edit solo.yml, start the dev server, configure agent tools, or spawn agents.",
+        "May change only Light/Dark/System appearance after checking live Settings.",
+        "Does not infer permission for side effects from the mixed request."
+      ],
+      "files": []
+    }
+  ]
+}

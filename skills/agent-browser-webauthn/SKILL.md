@@ -27,6 +27,7 @@ node "$WEBAUTHN_SKILL_DIR/scripts/agent-browser-webauthn-helper.mjs" run \
 ## Important Details
 
 - The helper uses `agent-browser get cdp-url`, `Target.attachToTarget`, `WebAuthn.enable`, and `WebAuthn.addVirtualAuthenticator`.
+- Setup, CDP calls, and the wrapped command have a 120-second timeout by default. Set `--timeout-ms` to a larger positive value for deliberately long flows.
 - Defaults are CTAP2, internal transport, resident keys enabled, user verification enabled, user verified, and automatic presence simulation enabled.
 - Use a local or otherwise trusted CDP endpoint. Remote CDP URLs are rejected unless `--allow-remote-cdp true` is passed deliberately.
 - Launch the site on `localhost` or HTTPS. WebAuthn requires a secure context; many passkey and smart-account SDKs also reject raw `127.0.0.1` for domain validation.
@@ -36,8 +37,10 @@ node "$WEBAUTHN_SKILL_DIR/scripts/agent-browser-webauthn-helper.mjs" run \
 ## Requirements
 
 - `agent-browser` CLI.
+- `$agent-browser` skill is recommended for current CLI workflow guidance but is not bundled automatically.
 - Node.js 22 or newer, for the built-in `WebSocket` client used by the helper.
 
 ## Script
 
 - `scripts/agent-browser-webauthn-helper.mjs` - wrap any command while a virtual authenticator is attached to the session.
+- `scripts/agent-browser-webauthn-helper.test.mjs` - run dependency-free CLI safety checks after changing the helper.

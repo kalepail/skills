@@ -1,0 +1,38 @@
+{
+  "skill_name": "solo-orchestrate-agents",
+  "evals": [
+    {
+      "prompt": "Use Solo to split this billing migration into API, UI, and independent review lanes. Keep dependencies explicit and bring back verified results.",
+      "expected_output": "Confirm live scope/tools, write plan scratchpad, create blocked todos, dispatch only disjoint unblocked workers, record child IDs, use idle timers, inspect output/diffs/checks, persist handoffs, and leave final Git integration to operator.",
+      "assertions": [
+        "Implements plan to scratchpad to blockers to bounded workers sequence",
+        "Records every returned child process ID and enforces recursive ownership",
+        "Uses idle-any for incremental harvest and evidence review before completion",
+        "Persists todo comments/scratchpad summary and reserves Git integration for root"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Get a few agents on this bug.",
+      "expected_output": "Do not maximize agent count; inspect task and current state, keep work single-agent if sequential/overlapping, or first define independent lanes, acceptance checks, ownership, and durable plan before any spawn.",
+      "assertions": [
+        "Treats fan-out as conditional optimization",
+        "Inventories project, processes, todos, and locks before dispatch",
+        "Requires disjoint ownership and bounded worker briefs",
+        "Does not spawn a vague swarm"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Save my standard three-agent review instructions so I can reuse them later; do not launch anyone now.",
+      "expected_output": "Route to solo-save-prompts, create or propose a scoped placeholder template, and perform no spawning, timer, todo-lock, process-input, or integration side effects.",
+      "assertions": [
+        "Recognizes reusable-text neighboring skill",
+        "Routes to solo-save-prompts",
+        "Does not spawn agents or create live orchestration state",
+        "Keeps live IDs and authority out of template"
+      ],
+      "files": []
+    }
+  ]
+}

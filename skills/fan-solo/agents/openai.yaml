@@ -1,0 +1,10 @@
+interface:
+  display_name: "Fan Solo"
+  short_description: "Route Solo work to focused skills safely"
+  default_prompt: "Use $fan-solo to choose and run the right Solo workflow for this task."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "solo"
+      description: "Local Solo MCP server"

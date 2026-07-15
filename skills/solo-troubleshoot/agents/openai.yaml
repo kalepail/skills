@@ -1,0 +1,10 @@
+interface:
+  display_name: "Solo: Troubleshoot"
+  short_description: "Diagnose Solo configuration and runtime failures"
+  default_prompt: "Use $solo-troubleshoot to diagnose this Solo failure and repair it only if requested."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "solo"
+      description: "Local Solo MCP server"

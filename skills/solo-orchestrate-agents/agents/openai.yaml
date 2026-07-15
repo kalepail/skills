@@ -1,0 +1,10 @@
+interface:
+  display_name: "Solo: Orchestrate Agents"
+  short_description: "Coordinate verified multi-agent Solo work"
+  default_prompt: "Use $solo-orchestrate-agents to plan and coordinate bounded Solo workers with durable handoffs."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "solo"
+      description: "Local Solo MCP server"

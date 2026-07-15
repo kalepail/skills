@@ -1,0 +1,31 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Agent Browser WebAuthn Testing",
+      "description": "WebAuthn and passkey testing through agent-browser, including wallet and Stellar smart-account flows.",
+      "skills": [
+        "agent-browser-webauthn"
+      ]
+    },
+    {
+      "title": "Fan Solo",
+      "description": "Complete Solo and SoloTerm collection covering setup, runtime, agents, durable state, and integrations.",
+      "skills": [
+        "fan-solo",
+        "solo-set-up-projects",
+        "solo-customize-workspace",
+        "solo-run-processes",
+        "solo-observe-services",
+        "solo-troubleshoot",
+        "solo-work-with-agents",
+        "solo-orchestrate-agents",
+        "solo-track-todos",
+        "solo-keep-scratchpads",
+        "solo-save-prompts",
+        "solo-automate"
+      ]
+    }
+  ]
+}

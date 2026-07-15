@@ -1,0 +1,38 @@
+{
+  "skill_name": "solo-troubleshoot",
+  "evals": [
+    {
+      "prompt": "pnpm works in my terminal but Solo says command not found. Diagnose it and fix the affected command only.",
+      "expected_output": "Confirm profile and working directory, inspect rendered startup output, verify login-shell PATH/version-manager setup, refresh shell environment if authorized, restart only exact authorized process, and verify result.",
+      "assertions": [
+        "Checks trust, working_dir, profile, and captured shell environment before editing",
+        "Uses rendered output first and identifies login-shell/version-manager cause",
+        "Repairs and restarts only exact authorized target",
+        "Leaves Git, publishing, and integration to root/operator"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Solo feels broken today. Can you take a look?",
+      "expected_output": "Clarify or infer scope safely, gather read-only project/process evidence, classify likely control-plane versus runtime issue, and stop after diagnosis unless repair is explicitly authorized.",
+      "assertions": [
+        "Uses whoami and scoped status before broad logs",
+        "Runs solo doctor only when CLI/control-plane evidence warrants it",
+        "Separates confirmed cause from hypothesis",
+        "Does not reset, delete, restart all, or clear output"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Set up this repository in Solo with a shared Web command and commit the config.",
+      "expected_output": "Route configuration to solo-set-up-projects and leave commit/integration to root/operator; do not perform troubleshooting or runtime mutation.",
+      "assertions": [
+        "Recognizes neighboring project-setup request",
+        "Does not diagnose nonexistent failure",
+        "Does not start or restart processes",
+        "Does not commit, stage, push, publish, or integrate"
+      ],
+      "files": []
+    }
+  ]
+}

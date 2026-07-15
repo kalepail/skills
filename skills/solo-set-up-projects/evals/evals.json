@@ -1,0 +1,38 @@
+{
+  "skill_name": "solo-set-up-projects",
+  "evals": [
+    {
+      "prompt": "Configure this pnpm monorepo as a Solo project with Web in apps/web and API in services/api. Share config with team, but do not start anything.",
+      "expected_output": "Inspect existing registration and repo commands, create or minimally edit root solo.yml with relative working directories and explicit safe defaults, explain sync/trust handoff, and avoid runtime or Git side effects.",
+      "assertions": [
+        "Uses or proposes root solo.yml only after checking existing project/config",
+        "Sets auto_start and auto_restart explicitly, defaulting false unless requested",
+        "Uses relative in-root working_dir values and excludes secrets",
+        "Does not start processes, commit, push, publish, or integrate"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Can you add this folder to Solo?",
+      "expected_output": "Resolve folder/project scope, check for canonical duplicate and existing solo.yml, register only if needed, then report any trust or UI setup step without inventing commands or launching them.",
+      "assertions": [
+        "Checks list_projects before create_project",
+        "Handles ambiguous folder or project scope safely",
+        "Does not assume solo.yml is required",
+        "Does not auto-run detected or shared commands"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "The API server is down. Restart its Solo process and tell me when port 3000 is ready.",
+      "expected_output": "Route lifecycle control to solo-run-processes and readiness observation to solo-observe-services; do not edit project configuration as a substitute.",
+      "assertions": [
+        "Recognizes request as neighboring lifecycle/readiness work",
+        "Does not edit solo.yml or project settings",
+        "Requires authority for YAML-backed shared process",
+        "Avoids unrelated setup side effects"
+      ],
+      "files": []
+    }
+  ]
+}

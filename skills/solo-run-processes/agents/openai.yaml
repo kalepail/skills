@@ -1,0 +1,10 @@
+interface:
+  display_name: "Solo: Run Processes"
+  short_description: "Control Solo process lifecycle and restart policy"
+  default_prompt: "Use $solo-run-processes to run the requested Solo processes and verify their final state."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "solo"
+      description: "Local Solo MCP server"
