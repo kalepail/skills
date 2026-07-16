@@ -1,0 +1,62 @@
+{
+  "skill_name": "solo-deep-research",
+  "evals": [
+    {
+      "prompt": "Use Fan Solo to deeply research whether passkeys are replacing passwords in consumer finance. Use Parallel and Perplexity where available, cross-check the evidence, and give me a cited report.",
+      "expected_output": "Frame a dated research brief, create distinct primary-source, landscape, counterevidence, and independent-synthesis lanes, use Parallel CLI as the preferred primary artifact path, Perplexity as an independent challenge lane, Parallel Search MCP as fallback, and Parallel Task MCP only for a warranted final deep-verification pass, then reconcile underlying sources rather than provider votes.",
+      "assertions": [
+        "Routes deep multi-provider research to solo-deep-research",
+        "Creates distinct evidence lanes instead of duplicate provider prompts",
+        "Prefers Parallel CLI, then Perplexity, with Parallel MCP used as fallback or final verification",
+        "Uses Solo scratchpad, todos, recorded child IDs, and timers for asynchronous work",
+        "Treats repeated URLs across providers as one source",
+        "Requires citations and reports unresolved disagreement"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Use Solo to find the current stable Rust version.",
+      "expected_output": "Treat this as a narrow lookup, use one current search source or official Rust source, cite it, and avoid multi-agent fan-out or paid deep-research tasks.",
+      "assertions": [
+        "Does not fan out a simple fact lookup",
+        "Prefers an authoritative current source",
+        "Avoids paid or asynchronous deep-research tooling"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Deeply compare three database vendors. Parallel Task MCP is unavailable and Perplexity is rate-limited, but parallel-cli works.",
+      "expected_output": "Record unavailable providers, reroute independent lanes through distinct parallel-cli search, extract, and research questions, save artifacts, preserve source independence, and avoid installing tools, authenticating, or purchasing credits.",
+      "assertions": [
+        "Falls back to available parallel-cli without blocking",
+        "Keeps lanes distinct despite using one provider",
+        "Saves JSON or Markdown artifacts and records run IDs",
+        "Does not install, authenticate, or add credit without authority"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Research this before we plan it: replace Redis with Kafka because our notifications are occasionally delayed.",
+      "expected_output": "Clarify only material ambiguity, separate delayed notifications from the proposed Redis-to-Kafka migration, frame concrete questions about the current code path, load, failure evidence, and delivery requirements, inspect code and official dependency docs, evaluate Kafka against simpler root-cause fixes, and stress-test the recommendation with specific operational and user-facing risks.",
+      "assertions": [
+        "Researches the notification delay rather than anchoring on Kafka",
+        "Inspects local code, configuration, callers, tests, and dependency versions",
+        "Evaluates the proposed migration explicitly against simpler alternatives",
+        "Names concrete downsides and failure modes",
+        "Hands verified context to planning instead of implementing"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Deeply research how we should improve onboarding.",
+      "expected_output": "Recognize that audience, target outcome, and in-scope onboarding surface materially change the research; batch concise tailored choices with plain-language tradeoffs before dispatch, then use only relevant codebase, user-impact, docs, and external-pattern lanes.",
+      "assertions": [
+        "Asks only material questions specific to onboarding",
+        "Explains option tradeoffs in plain language",
+        "Does not launch a generic maximum-size cohort",
+        "Includes user-flow, accessibility, error-state, and codebase evidence when relevant"
+      ],
+      "files": []
+    }
+  ]
+}

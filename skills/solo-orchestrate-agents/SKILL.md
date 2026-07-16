@@ -1,6 +1,6 @@
 ---
 name: solo-orchestrate-agents
-description: Plan and coordinate multi-agent work through Solo with bounded workers, durable state, locks, timers, evidence review, and handoffs. Use for parallel research, disjoint implementation lanes, cross-model review, cross-project cohorts, or delegation through several Solo agents.
+description: Plan and coordinate multi-agent work through Solo with bounded workers, durable state, locks, timers, evidence review, and handoffs. Use for parallel research, disjoint implementation lanes, cross-model review, cross-project cohorts, or delegation through several Solo agents. Do not use for single-agent, sequential, or shared-file work.
 ---
 
 # Orchestrate Solo Agents
@@ -41,6 +41,8 @@ Fan out only when lanes are independent, have disjoint write scopes or read-only
 ### 3. Dispatch Bounded Workers
 
 - Discover available agent tools live; choose by lane fit.
+- Route by fleet defaults: Fable to orchestrate and synthesize (never to code); Codex Sol to implement; Opus 4.8 for prose against a plan; GPT-5.6 Terra for research and tool-calling lanes; independent review by a family different from the implementer (Fable when Codex Sol implemented). Grok needs a custom Generic tool. Confirm the tool is launchable before relying on it.
+- Prefer Solo's maintained `worker_bootstrap` MCP prompt when the host exposes it, then layer lane specifics, instead of hand-rewriting the whole identity/lock/state contract.
 - Spawn one worker per independent lane.
 - Record every returned child `process_id` with todo and project immediately.
 - Prepend returned `agent_instructions` to self-contained worker prompt.
@@ -51,6 +53,7 @@ Fan out only when lanes are independent, have disjoint write scopes or read-only
 - Schedule idle-any timer to harvest first newly quiet worker; reschedule for remaining cohort.
 - Use idle-all only for true barrier after all current lanes must quiet.
 - Put process/todo/scratchpad IDs and exact next action in timer body.
+- Prefer Solo's `timer_followup` MCP prompt for wake handling and stale-timer cleanup when available.
 - Treat timer deadline, idle, prompt delivery, and summaries as inspection triggers only.
 
 ### 5. Review Evidence

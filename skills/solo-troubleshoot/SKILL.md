@@ -1,6 +1,6 @@
 ---
 name: solo-troubleshoot
-description: Diagnose Solo project, command, terminal, service, CLI, shell, version-manager, trust, solo.yml sync, working-directory, execution-profile, WSL, restart-loop, output, port, and readiness failures. Use when tooling is missing, commands fail, YAML changes do not apply, status disagrees, or services never become ready.
+description: Diagnose Solo project, command, terminal, service, CLI, shell, version-manager, trust, solo.yml sync, working-directory, execution-profile, WSL, restart-loop, output, port, and readiness failures. Use when tooling is missing, commands fail, YAML changes do not apply, status disagrees, or services never become ready. Do not use for routine status views or authorized routine start, stop, and restart.
 ---
 
 # Troubleshoot Solo

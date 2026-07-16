@@ -2,6 +2,17 @@
 
 Apply before any Solo mutation, agent spawn, shared-state edit, or process control.
 
+## Contents
+
+- Source and scope
+- Prefer one agent
+- Route to fleet models
+- Respect recursive process ownership
+- Store state once
+- Monitor without guessing
+- Mutate safely
+- Prove completion
+
 ## Source and scope
 
 1. Honor current user decision.
@@ -27,6 +38,22 @@ Orchestrate only independent lanes with clear ownership and integration value. B
 
 Lead owns plan, dependencies, integration, Git, publishing, and final completion. Worker owns one bounded lane.
 
+## Route to fleet models
+
+Match model and effort to the lane; never route a pure-orchestrator or reviewer model as the coder. Current fleet defaults (kalepail):
+
+| Lane | Model / effort |
+|---|---|
+| Plan, orchestrate, synthesize | Fable high (xhigh for the hardest); Sol high as alternate |
+| Independent adversarial review | Fable high by default for Codex Sol work; otherwise use a model family different from the implementer |
+| Implementation / coding | Codex Sol high (medium or xhigh as needed); Opus 4.8 high (xhigh as needed) |
+| Prose, docs, comments | Opus 4.8, executing a Fable or Sol plan |
+| Research, tool-calling, focused repo/docs sweeps | GPT-5.6 Terra, handing structured evidence up to an orchestrator/synthesizer |
+
+Fable orchestrates, reviews, and synthesizes—it does not code. Codex Sol is the default coder. Opus writes prose against a Sol or Fable plan. Terra runs focused sub or sub-sub tool-calling lanes (for example, driving `parallel-cli` in a subagent) and feeds a root Sol or Fable agent. Consequential independent review must use a different model family from the implementation; when Codex Sol writes the change, prefer Fable for review. Default to `high`; step to `xhigh` for the hardest reasoning or review, `medium` for cheap mechanical passes.
+
+Solo's built-in tool types are Claude, Codex, Amp, Gemini, OpenCode, Copilot, and Kimi. Grok is not built in; add it as a custom Generic tool before spawning it. Discover live launchable tools with `list_agent_tools`; treat this table as intent, not proof a given tool is installed and enabled.
+
 ## Respect recursive process ownership
 
 Control only self and recorded descendants. Parent, sibling, unrelated, YAML-backed shared process, or another agent's descendants remain outside authority unless user or runbook explicitly names exact target and action.
@@ -49,6 +76,8 @@ This gate applies to input, stop/restart/close, rename, clear output, UI selecti
 | Reconciled project behavior/architecture | Repository docs |
 
 Do not duplicate scratchpad narrative into todos. Point todo to relevant scratchpad section. KV has no compare-and-swap; protect competing read-modify-write or avoid it. Scratchpad edits use revision and smallest targeted mutation.
+
+Keep the live set ephemeral. Complete or backlog todos as lanes finish, archive scratchpads when their run goes cold, promote durable conclusions to repository docs, and cancel obsolete timers and locks. Backlog is for real future work, not finished or abandoned state; a small honest live set is the point.
 
 ## Monitor without guessing
 

@@ -1,6 +1,6 @@
 ---
 name: solo-set-up-projects
-description: Configure and import Solo projects and shared solo.yml command stacks. Use when adding repositories, defining commands, working directories, environment values, execution profiles, auto-start or restart policy, YAML sync, command storage, or trust review.
+description: Configure and import Solo projects and shared solo.yml command stacks. Use when adding repositories, defining commands, working directories, environment values, execution profiles, auto-start or restart policy, YAML sync, command storage, or trust review. Do not use for personal workspace UI, runtime process control, or failure diagnosis.
 ---
 
 # Set Up Solo Projects

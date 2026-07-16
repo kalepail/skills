@@ -16,6 +16,7 @@
     "./skills/solo-keep-scratchpads",
     "./skills/solo-observe-services",
     "./skills/solo-orchestrate-agents",
+    "./skills/solo-deep-research",
     "./skills/solo-run-processes",
     "./skills/solo-save-prompts",
     "./skills/solo-set-up-projects",

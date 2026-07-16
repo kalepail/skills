@@ -1,6 +1,6 @@
 ---
 name: solo-work-with-agents
-description: Configure, health-check, launch, prompt, inspect, resume, summarize, follow up with, and close one Solo-managed agent session. Use for built-in or custom CLI agent setup, launchability, one-off flags, input, output, status, summaries, idle or blocked handling, and owned-agent cleanup.
+description: Configure, health-check, launch, prompt, inspect, resume, summarize, follow up with, and close one Solo-managed agent session. Use for built-in or custom CLI agent setup, launchability, one-off flags, input, output, status, summaries, idle or blocked handling, and owned-agent cleanup. Do not use for multi-agent orchestration or non-Solo agents.
 ---
 
 # Work With Solo Agents
@@ -40,6 +40,8 @@ Read [agent-lifecycle.md](references/agent-lifecycle.md) before spawning, routin
 4. Record returned child ID before any later action.
 5. Prepend returned `agent_instructions` to first prompt.
 6. Send one self-contained prompt with objective, authoritative inputs, owned scope, forbidden work, acceptance checks, and handoff destination.
+
+Route by fleet defaults: Codex Sol to implement, Opus 4.8 for prose against a plan, Fable to orchestrate and synthesize (never to code), GPT-5.6 Terra for research and tool-calling; independent review by a family different from the implementer (Fable when Codex Sol implemented). Grok needs a custom Generic tool; confirm the chosen tool is launchable first.
 
 Do not spawn when work is tiny, sequential, or shares same edit surface with current agent. Handle it directly.
 

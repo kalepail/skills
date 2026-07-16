@@ -1,6 +1,6 @@
 ---
 name: solo-track-todos
-description: Create and maintain project-scoped Solo todos with status, priority, tags, blockers, comments, locks, completion, and cross-project transfer. Use when turning plans into tasks, finding ready work, claiming todos, recording progress or handoffs, updating dependencies, or completing work.
+description: Create and maintain project-scoped Solo todos with status, priority, tags, blockers, comments, locks, completion, and cross-project transfer. Use when turning plans into tasks, finding ready work, claiming todos, recording progress or handoffs, updating dependencies, or completing work. Do not use for narrative context, which belongs in scratchpads, or for controlling processes.
 ---
 
 # Track Solo Todos
@@ -30,6 +30,8 @@ Expected handoff
 ```
 
 Set honest status, priority, and small controlled tag set. Do not duplicate full scratchpad plan.
+
+Keep todos ephemeral. Complete them as work lands, move only real future work to `backlog`, and delete accidental duplicates. Finished and abandoned todos are clutter; durable conclusions belong in repository docs, not a stale todo list.
 
 ## Model Dependencies
 

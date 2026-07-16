@@ -10,7 +10,7 @@ Reusable AI-agent skills maintained by Tyler van der Hoeven.
 
 ### Fan Solo
 
-[Fan Solo](skills/fan-solo/) routes broad Solo and SoloTerm requests to focused skills. Install router plus all 11 skills below.
+[Fan Solo](skills/fan-solo/) routes broad Solo and SoloTerm requests to focused skills. Install router plus all 12 skills below.
 
 **Setup and workspace**
 
@@ -27,6 +27,7 @@ Reusable AI-agent skills maintained by Tyler van der Hoeven.
 
 - [Work with agents](skills/solo-work-with-agents/) — manage one bounded, owned Solo agent.
 - [Orchestrate agents](skills/solo-orchestrate-agents/) — coordinate independent worker lanes and integrate verified results.
+- [Deep research](skills/solo-deep-research/) — fan out cited research across Parallel CLI/MCP and Perplexity MCP, then reconcile evidence.
 
 **Durable work**
 
@@ -60,7 +61,7 @@ Replace `agent-browser-webauthn` with any listed skill name. Use it alone for We
 Install Fan Solo without the unrelated WebAuthn skill:
 
 ```bash
-npx skills add kalepail/skills -g -a claude-code -a codex -a opencode -y --skill fan-solo solo-set-up-projects solo-customize-workspace solo-run-processes solo-observe-services solo-troubleshoot solo-work-with-agents solo-orchestrate-agents solo-track-todos solo-keep-scratchpads solo-save-prompts solo-automate
+npx skills add kalepail/skills -g -a claude-code -a codex -a opencode -y --skill fan-solo solo-set-up-projects solo-customize-workspace solo-run-processes solo-observe-services solo-troubleshoot solo-work-with-agents solo-orchestrate-agents solo-deep-research solo-track-todos solo-keep-scratchpads solo-save-prompts solo-automate
 ```
 
 ### Claude Code
@@ -130,8 +131,12 @@ For one clearly scoped task, invoke matching `$solo-*` skill directly. Fan Solo 
 
 Before using Fan Solo in any host, enable Solo's local MCP server and configure that host to connect to it. Follow [Solo's MCP setup](https://soloterm.com/docs/integrations/mcp-server); the skill plugins do not bundle or authenticate Solo itself.
 
+`solo-deep-research` additionally uses whichever of Parallel CLI, Parallel Search or Task MCP, and Perplexity MCP are installed and authorized. Missing providers become documented fallbacks rather than hard failures.
+
+These are personal, opinionated skills: model routing (Fable orchestrates and reviews, Codex Sol codes, Opus 4.8 writes prose against a plan, GPT-5.6 Terra runs research and tool-calling lanes) and tool preferences are baked in. See [AGENTS.md](AGENTS.md) for the full fleet and third-party dependency manifest; `CLAUDE.md` points there too.
+
 ## Research and status
 
-Architecture derives from [OpenAI and Anthropic skill best practices](research/fan-solo/skill-best-practices.md) plus Solo research on [product docs](research/fan-solo/solo-product-docs.md), [MCP and APIs](research/fan-solo/solo-mcp-api.md), [coordination](research/fan-solo/solo-coordination.md), and [first-party X posts](research/fan-solo/solo-x-research.md). Anonymized project and session research informed house style but is intentionally excluded from publishable files. Research snapshot: 2026-07-15.
+Architecture derives from [OpenAI and Anthropic skill best practices](research/fan-solo/skill-best-practices.md) plus Solo research on [product docs](research/fan-solo/solo-product-docs.md), [MCP and APIs](research/fan-solo/solo-mcp-api.md), [coordination](research/fan-solo/solo-coordination.md), and [first-party X posts](research/fan-solo/solo-x-research.md). Anonymized project and session research informed house style but is intentionally excluded from publishable files. Research snapshot: 2026-07-16.
 
 Fan Solo is unofficial community work. Not affiliated with, endorsed by, or maintained by Solo, SoloTerm, OpenAI, or Anthropic. Product names belong to respective owners.

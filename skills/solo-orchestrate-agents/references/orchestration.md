@@ -71,7 +71,9 @@ Acceptance: <commands, tests, citations, artifacts>
 Handoff: changed files/artifacts, checks, blockers, risk, next action
 ```
 
-Keep coupled edits with lead. Use different model families for consequential independent review; reconcile by evidence, not vote.
+Keep coupled edits with lead. Use different model families for consequential independent review; reconcile by evidence, not vote. Route by fleet defaults: Fable orchestrates, synthesizes, and reviews (not codes); Codex Sol implements; Opus 4.8 writes prose against a plan; GPT-5.6 Terra runs research and tool-calling lanes. Grok is not a Solo built-in; add it as a custom Generic tool first.
+
+Keep the worker tree shallow. Each nesting level pays a self-contained-prompt and context-loss tax and dilutes lead authority over integration. Let a worker spawn its own sub-workers only when its lane genuinely decomposes into independent sub-lanes it must own and reconcile itself; otherwise flatten and keep the lane with the lead.
 
 ## Timers and monitoring
 

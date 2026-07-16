@@ -1,6 +1,6 @@
 ---
 name: solo-automate
-description: Automate and integrate Solo through MCP, CLI, local HTTP API, hosted API v1, documentation resources, prompts, and solo:// deep links. Use when scripting Solo, discovering live schemas, configuring MCP clients, consuming Solo docs programmatically, or choosing an integration surface.
+description: Automate and integrate Solo through MCP, CLI, local HTTP API, hosted API v1, documentation resources, prompts, and solo:// deep links. Use when scripting Solo, discovering live schemas, configuring MCP clients, consuming Solo docs programmatically, or choosing an integration surface. Do not use for normal interactive Solo work already owned by a focused skill.
 ---
 
 # Automate Solo

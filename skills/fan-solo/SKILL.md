@@ -1,6 +1,6 @@
 ---
 name: fan-solo
-description: Route broad or mixed Solo and SoloTerm requests across focused project, process, agent, durable-state, and automation skills. Use when choosing among Solo skills, learning Solo, or handling several Solo capabilities in one task.
+description: Route broad or mixed Solo and SoloTerm requests across focused project, process, agent, durable-state, and automation skills. Use when choosing among Solo skills, learning Solo, or handling several Solo capabilities in one task. Do not use for non-Solo work, or when one clearly scoped Solo action already maps to a single focused skill.
 ---
 
 # Fan Solo
@@ -34,6 +34,7 @@ Do not assume every documented tool is enabled. Discover current surface.
 | Diagnose Solo configuration, discovery, trust, or runtime failure | `$solo-troubleshoot` |
 | Launch and manage one bounded owned agent | `$solo-work-with-agents` |
 | Coordinate multiple independent agents and integrate their work | `$solo-orchestrate-agents` |
+| Conduct deep, comparative, or cross-checked research across Parallel and Perplexity surfaces | `$solo-deep-research` |
 | Create actionable shared work, blockers, locks, comments, or handoffs | `$solo-track-todos` |
 | Preserve plans, research, decisions, or durable project context | `$solo-keep-scratchpads` |
 | Create reusable cross-agent prompt templates | `$solo-save-prompts` |
@@ -47,6 +48,10 @@ Default to one agent for sequential work, shared-state edits, or one coherent ju
 
 Use `$solo-orchestrate-agents` only when at least two lanes are independent enough to own separately. Lead owns decomposition, boundaries, integration, and final verification. Workers own bounded lanes—not whole goal.
 
+Use `$solo-deep-research` when those lanes are evidence-gathering work across research providers. It owns provider selection, source independence, citation discipline, contradiction resolution, and research synthesis; `$solo-orchestrate-agents` still supplies the process mechanics.
+
+Match model and effort to the lane, never the reverse: Fable to orchestrate and synthesize (never to code); Codex Sol to implement; Opus for prose against a plan; GPT-5.6 Terra for research and tool-calling lanes; independent review by a family different from the implementer (Fable when Codex Sol implemented). See [house style](references/house-style.md) for the current fleet.
+
 ## Choose durable state
 
 - Scratchpad: plans, findings, decisions, evidence, handoff context.
@@ -57,6 +62,8 @@ Use `$solo-orchestrate-agents` only when at least two lanes are independent enou
 - Timer: wake-up/resumption, never proof worker or service finished.
 - Prompt template: reusable dispatch text, never current project truth.
 - Repository docs: reconciled durable project behavior and decisions.
+
+Keep the live set ephemeral. Scratchpads and todos exist to guide active work and legitimately backlogged work—nothing else. As a lane finishes, complete or backlog its todo, fold durable conclusions into repository docs, archive the scratchpad once its run goes cold, and cancel obsolete timers and locks. Stale todos and orphaned scratchpads are noise the next agent must re-litigate.
 
 Read [house style](references/house-style.md) before spawning agents, mutating shared state, or controlling processes.
 

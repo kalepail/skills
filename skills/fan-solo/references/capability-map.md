@@ -13,6 +13,7 @@ Use this map when request spans capabilities or adjacent skills could both match
 | `$solo-troubleshoot` | Diagnose MCP discovery, identity, project scope, trust, command config, API/CLI, or runtime failures | User only needs normal status view or authorized restart |
 | `$solo-work-with-agents` | Launch, prompt, inspect, wake, hand off, and close one owned agent | Two or more independent worker lanes need lead integration |
 | `$solo-orchestrate-agents` | Decompose independent lanes, spawn bounded workers, coordinate state/timers/locks, reconcile output | Work is sequential, shares same files, or needs one judgment loop |
+| `$solo-deep-research` | Fan out deep research across Parallel CLI/MCP and Perplexity MCP; preserve citations, source independence, contradictions, and synthesis | Request is a narrow lookup or general implementation/review orchestration |
 | `$solo-track-todos` | Actionable work records, blockers, priorities, claims, locks, comments, completion handoffs | Material is narrative context rather than owned action |
 | `$solo-keep-scratchpads` | Durable Markdown plans, research, decisions, evidence, summaries, and handoffs | Item needs assignee/status/blockers or reusable prompt behavior |
 | `$solo-save-prompts` | Cross-agent reusable prompt templates with placeholders and insert/send/copy flow | Content is current task truth or durable project decision |
@@ -55,6 +56,7 @@ Solo app
 - **Set up and run project:** `$solo-set-up-projects` → `$solo-run-processes` → `$solo-observe-services`.
 - **Single agent task:** `$solo-work-with-agents`; add `$solo-track-todos` or `$solo-keep-scratchpads` only when work needs durable state.
 - **Multi-agent task:** `$solo-orchestrate-agents` owns lead loop; use todos for lanes, scratchpad for shared plan/evidence, timers for wakeups.
+- **Deep research:** `$solo-deep-research` defines evidence lanes and provider roles; `$solo-orchestrate-agents` supplies bounded workers, timers, and handoffs.
 - **Multi-repository task:** keep each repository as its own project, optionally add parent folder as overview project, and require explicit cross-project spawn scope.
 - **Failure:** `$solo-troubleshoot` diagnoses; hand authorized lifecycle change to `$solo-run-processes`.
 - **Repeat workflow:** first prove interactively with focused skill; use `$solo-save-prompts` for reusable text or `$solo-automate` for programmatic integration.

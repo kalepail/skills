@@ -1,6 +1,6 @@
 ---
 name: solo-save-prompts
-description: Create, inspect, update, delete, fill, and export global or project Solo prompt templates with reusable placeholders. Use when saving recurring prompts, standardizing worker briefs or handoffs across agent tools, managing template scope, or backing templates up as Markdown.
+description: Create, inspect, update, delete, fill, and export global or project Solo prompt templates with reusable placeholders. Use when saving recurring prompts, standardizing worker briefs or handoffs across agent tools, managing template scope, or backing templates up as Markdown. Do not use for current task state or durable project decisions.
 ---
 
 # Save Solo Prompts

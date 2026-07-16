@@ -63,6 +63,31 @@
         "Reports real readiness evidence and its limit"
       ],
       "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "Use Fan Solo to deeply research this market with Parallel CLI, Parallel MCP, and Perplexity MCP, then reconcile the citations.",
+      "expected_output": "Routes to solo-deep-research for provider selection, independent evidence lanes, source-level cross-checking, contradiction resolution, and synthesis while retaining solo-orchestrate-agents for bounded worker mechanics.",
+      "assertions": [
+        "Routes the request to solo-deep-research",
+        "Distinguishes research methodology from generic agent orchestration",
+        "Requires independent sources and inline citations",
+        "Does not invoke every provider with an identical prompt by default"
+      ],
+      "files": []
+    },
+    {
+      "id": 7,
+      "prompt": "Use Fan Solo to run a refactor across a few agents in Solo: plan it, split the coding, and get an independent review.",
+      "expected_output": "Routes to solo-orchestrate-agents and applies the fleet routing: Fable or Sol plans and orchestrates; Codex Sol implements the coding lanes; Fable or another model family different from the implementer performs the independent adversarial review; Fable is never assigned as the coder. Keeps work single-agent when the lanes are not genuinely independent.",
+      "assertions": [
+        "Routes the multi-agent refactor to solo-orchestrate-agents",
+        "Assigns Codex Sol, not Fable, to the coding lanes",
+        "Uses Fable or Sol for planning and synthesis",
+        "Uses Fable or another model family different from the implementer for consequential independent review",
+        "Does not fan out when lanes are sequential or share an edit surface"
+      ],
+      "files": []
     }
   ]
 }

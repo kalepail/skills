@@ -1,6 +1,6 @@
 ---
 name: solo-observe-services
-description: Inspect Solo-managed service status, terminal output, resource use, subprocesses, bound ports, localhost URLs, and startup readiness. Use when checking what is running, whether a server is ready, recent logs, stale status, URLs, ports, CPU, or memory without changing runtime.
+description: Inspect Solo-managed service status, terminal output, resource use, subprocesses, bound ports, localhost URLs, and startup readiness. Use when checking what is running, whether a server is ready, recent logs, stale status, URLs, ports, CPU, or memory without changing runtime. Do not use to change process lifecycle, edit configuration, or repair failures.
 ---
 
 # Observe Solo Services

@@ -1,6 +1,6 @@
 ---
 name: solo-customize-workspace
-description: Customize Solo workspaces, windows, sidebar, navigation, command palette, keymaps, appearance, external tools, notifications, account display, and updates. Use when organizing or personalizing Solo's app-level workspace experience.
+description: Customize Solo workspaces, windows, sidebar, navigation, command palette, keymaps, appearance, external tools, notifications, account display, and updates. Use when organizing or personalizing Solo's app-level workspace experience. Do not use for repository or solo.yml changes, process lifecycle, or agent work.
 ---
 
 # Customize Solo Workspace
