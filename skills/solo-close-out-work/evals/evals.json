@@ -1,0 +1,37 @@
+{
+  "skill_name": "solo-close-out-work",
+  "evals": [
+    {
+      "prompt": "This run is finished. Close it out: we have three scratchpads and a batch of todos from it, plus a couple of timers still armed. Promote anything durable into the repo and clean up the rest.",
+      "expected_output": "Confirm project/live help and the repo's docs convention, inventory scratchpads, all-status todos, timers, and recorded locks/KV read-only, map links, build a manifest, then per item promote durable content into the nearest existing canonical doc and verify it before archiving scratchpads and completing/backlogging todos; cancel only owned obsolete timers; surface the doc diff without committing.",
+      "assertions": [
+        "Scopes to the finished run and inventories multiple surfaces read-only first",
+        "Promotes durable content and verifies the destination before retiring the source",
+        "Archives scratchpads and completes/backlogs todos rather than deleting",
+        "Leaves Git commit/publish to the operator and surfaces the diff"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "My todo list is a mess, just clean up my Solo todos.",
+      "expected_output": "Recognize single-surface todo maintenance and route to solo-track-todos rather than running a full multi-surface closeout; if closeout is still wanted, stay assessment-first and read before mutating, never sweeping or deleting.",
+      "assertions": [
+        "Routes single-surface todo cleanup to solo-track-todos",
+        "Does not run multi-surface promotion/retirement for a single-surface request",
+        "Defaults to read-first assessment, no blind mutation or deletion"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Close out this run and archive everything that's done, then delete the leftovers so the list is empty.",
+      "expected_output": "Prove the run cold by inspecting process/child status, preserve items a live child, foreign-locked todo, or linked backlog item still needs, leave any item active whose promotion write fails or whose revision changed mid-gate, refuse hard-delete in closeout by reporting suspected junk instead, and never touch the foreign lock or empty the list on request.",
+      "assertions": [
+        "Reads process/child status to prove coldness and preserves items a live child needs",
+        "Does not retire an item whose promotion failed or whose revision changed mid-gate",
+        "Refuses hard-delete and reports suspected junk to the owning skill instead",
+        "Fails closed on the foreign lock and does not force the list empty"
+      ],
+      "files": []
+    }
+  ]
+}

@@ -10,7 +10,7 @@ Reusable AI-agent skills maintained by Tyler van der Hoeven.
 
 ### Fan Solo
 
-[Fan Solo](skills/fan-solo/) routes broad Solo and SoloTerm requests to focused skills. Install router plus all 12 skills below.
+[Fan Solo](skills/fan-solo/) routes broad Solo and SoloTerm requests to focused skills. Install router plus all 13 skills below.
 
 **Setup and workspace**
 
@@ -33,6 +33,7 @@ Reusable AI-agent skills maintained by Tyler van der Hoeven.
 
 - [Track todos](skills/solo-track-todos/) — keep actionable work, blockers, locks, comments, and handoffs.
 - [Keep scratchpads](skills/solo-keep-scratchpads/) — preserve plans, research, decisions, evidence, and project context.
+- [Close out work](skills/solo-close-out-work/) — reconcile a finished run: promote durable conclusions to repo docs, then archive/complete the ephemeral state without losing incomplete work.
 - [Save prompts](skills/solo-save-prompts/) — maintain reusable cross-agent prompt templates.
 
 **Integration**
@@ -61,7 +62,7 @@ Replace `agent-browser-webauthn` with any listed skill name. Use it alone for We
 Install Fan Solo without the unrelated WebAuthn skill:
 
 ```bash
-npx skills add kalepail/skills -g -a claude-code -a codex -a opencode -y --skill fan-solo solo-set-up-projects solo-customize-workspace solo-run-processes solo-observe-services solo-troubleshoot solo-work-with-agents solo-orchestrate-agents solo-deep-research solo-track-todos solo-keep-scratchpads solo-save-prompts solo-automate
+npx skills add kalepail/skills -g -a claude-code -a codex -a opencode -y --skill fan-solo solo-set-up-projects solo-customize-workspace solo-run-processes solo-observe-services solo-troubleshoot solo-work-with-agents solo-orchestrate-agents solo-deep-research solo-track-todos solo-keep-scratchpads solo-close-out-work solo-save-prompts solo-automate
 ```
 
 ### Claude Code

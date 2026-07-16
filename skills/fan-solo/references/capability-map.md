@@ -8,14 +8,15 @@ Use this map when request spans capabilities or adjacent skills could both match
 |---|---|---|
 | `$solo-set-up-projects` | Add/configure Solo projects; audit or write shareable `solo.yml`; define commands and safe defaults | User wants personal workspace UI/settings rather than repo setup |
 | `$solo-customize-workspace` | Workspaces, project placement, navigation, appearance, notifications, hotkeys, sidebar behavior | Change belongs in repository or `solo.yml` |
-| `$solo-run-processes` | Mutating command/agent/terminal lifecycle: start, stop, restart, rename, close, bulk command control | Request is read-only status/readiness or failure diagnosis |
-| `$solo-observe-services` | Read-only process status/output, ports, URLs, service readiness, activity evidence | User asks to change lifecycle or repair failure |
+| `$solo-run-processes` | Mutating command/terminal lifecycle: start, stop, restart, rename, close, bulk command control | Request is read-only status/readiness, failure diagnosis, or a single agent session's launch/prompt/close (→ `$solo-work-with-agents`) |
+| `$solo-observe-services` | Read-only command/terminal status/output, ports, URLs, service readiness, activity evidence | User asks to change lifecycle, repair failure, or inspect one owned agent session (→ `$solo-work-with-agents`) |
 | `$solo-troubleshoot` | Diagnose MCP discovery, identity, project scope, trust, command config, API/CLI, or runtime failures | User only needs normal status view or authorized restart |
 | `$solo-work-with-agents` | Launch, prompt, inspect, wake, hand off, and close one owned agent | Two or more independent worker lanes need lead integration |
 | `$solo-orchestrate-agents` | Decompose independent lanes, spawn bounded workers, coordinate state/timers/locks, reconcile output | Work is sequential, shares same files, or needs one judgment loop |
 | `$solo-deep-research` | Fan out deep research across Parallel CLI/MCP and Perplexity MCP; preserve citations, source independence, contradictions, and synthesis | Request is a narrow lookup or general implementation/review orchestration |
 | `$solo-track-todos` | Actionable work records, blockers, priorities, claims, locks, comments, completion handoffs | Material is narrative context rather than owned action |
-| `$solo-keep-scratchpads` | Durable Markdown plans, research, decisions, evidence, summaries, and handoffs | Item needs assignee/status/blockers or reusable prompt behavior |
+| `$solo-keep-scratchpads` | Working (persistent-but-non-canonical) Markdown plans, research, decisions, evidence, summaries, and handoffs | Item needs assignee/status/blockers or reusable prompt behavior |
+| `$solo-close-out-work` | Multi-surface reconciliation of a finished run: promote durable content to repo docs, then archive/complete/backlog the ephemeral scratchpads, todos, timers, and owned locks/KV | Single-surface edit owned by the state skill, active work, or any process control |
 | `$solo-save-prompts` | Cross-agent reusable prompt templates with placeholders and insert/send/copy flow | Content is current task truth or durable project decision |
 | `$solo-automate` | Select and use Solo MCP, CLI, local HTTP, hosted API, or deep links; compose repeatable integrations | Request is normal interactive use already owned by focused workflow skill |
 
@@ -49,7 +50,7 @@ Solo app
 - For related repositories, a parent folder may be its own "Solo Parent" project while authorized workers spawn into child projects. Record cross-project child IDs and keep one active work lane per repository.
 - Process means command, agent, or terminal.
 - Command is reusable managed shell process; agent is real configured CLI agent; terminal is ad hoc shell.
-- Todo and scratchpad are project-scoped durable records, not processes.
+- Todo and scratchpad are project-scoped working records — persistent across sessions but non-canonical, promoted to repo docs at closeout — not processes.
 
 ## Common routing sequences
 

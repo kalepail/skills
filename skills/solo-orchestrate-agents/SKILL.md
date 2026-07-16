@@ -1,6 +1,6 @@
 ---
 name: solo-orchestrate-agents
-description: Plan and coordinate multi-agent work through Solo with bounded workers, durable state, locks, timers, evidence review, and handoffs. Use for parallel research, disjoint implementation lanes, cross-model review, cross-project cohorts, or delegation through several Solo agents. Do not use for single-agent, sequential, or shared-file work.
+description: Plan and coordinate multi-agent work through Solo with bounded workers, durable state, locks, timers, evidence review, and handoffs. Use for parallel research, disjoint implementation lanes, cross-model review, cross-project cohorts, or delegation through several Solo agents. Do not use for single-agent, sequential, or shared-file work, or when the deliverable is cited or comparative research synthesis (use solo-deep-research).
 ---
 
 # Orchestrate Solo Agents

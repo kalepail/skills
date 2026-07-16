@@ -1,0 +1,10 @@
+interface:
+  display_name: "Solo: Close Out Work"
+  short_description: "Reconcile a finished run, promote durable work, retire ephemeral state"
+  default_prompt: "Use $solo-close-out-work to reconcile this finished run: promote durable conclusions to repo docs, then retire the ephemeral Solo state without losing incomplete work."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "solo"
+      description: "Local Solo MCP server"

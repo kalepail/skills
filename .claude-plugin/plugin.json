@@ -12,6 +12,7 @@
     "./skills/agent-browser-webauthn",
     "./skills/fan-solo",
     "./skills/solo-automate",
+    "./skills/solo-close-out-work",
     "./skills/solo-customize-workspace",
     "./skills/solo-keep-scratchpads",
     "./skills/solo-observe-services",

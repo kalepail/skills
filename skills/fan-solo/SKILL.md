@@ -37,6 +37,7 @@ Do not assume every documented tool is enabled. Discover current surface.
 | Conduct deep, comparative, or cross-checked research across Parallel and Perplexity surfaces | `$solo-deep-research` |
 | Create actionable shared work, blockers, locks, comments, or handoffs | `$solo-track-todos` |
 | Preserve plans, research, decisions, or durable project context | `$solo-keep-scratchpads` |
+| Close out a finished run: promote durable conclusions to repo docs, then archive or complete the ephemeral state | `$solo-close-out-work` |
 | Create reusable cross-agent prompt templates | `$solo-save-prompts` |
 | Use Solo MCP, CLI, local HTTP API, hosted API, or deep links in automation | `$solo-automate` |
 
@@ -63,7 +64,7 @@ Match model and effort to the lane, never the reverse: Fable to orchestrate and 
 - Prompt template: reusable dispatch text, never current project truth.
 - Repository docs: reconciled durable project behavior and decisions.
 
-Keep the live set ephemeral. Scratchpads and todos exist to guide active work and legitimately backlogged work—nothing else. As a lane finishes, complete or backlog its todo, fold durable conclusions into repository docs, archive the scratchpad once its run goes cold, and cancel obsolete timers and locks. Stale todos and orphaned scratchpads are noise the next agent must re-litigate.
+Keep the live set ephemeral. Scratchpads and todos exist to guide active work and legitimately backlogged work—nothing else. As a lane finishes, complete or backlog its todo, fold durable conclusions into repository docs, archive the scratchpad once its run goes cold, and cancel obsolete timers and locks. Stale todos and orphaned scratchpads are noise the next agent must re-litigate. When a whole run ends and its residue spans several surfaces, route the reconciliation to `$solo-close-out-work`—it promotes durable content first, then retires the ephemeral copy without losing incomplete work.
 
 Read [house style](references/house-style.md) before spawning agents, mutating shared state, or controlling processes.
 
