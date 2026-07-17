@@ -36,6 +36,166 @@
         "Does not infer permission for side effects from the mixed request."
       ],
       "files": []
+    },
+    {
+      "name": "explicit-invocation-keymaps",
+      "prompt": "$solo-customize-workspace: rebind the command palette shortcut and add keymaps to jump between my three workspaces.",
+      "expected_output": "Use $solo-customize-workspace to inspect live keymap and palette settings, check for shortcut conflicts, then bind the command palette and per-workspace navigation shortcuts, verifying the workspace order that numbered bindings follow.",
+      "assertions": [
+        "Honors the explicit $solo-customize-workspace invocation.",
+        "Checks hotkey conflicts and live keymap availability before binding.",
+        "Does not touch projects, solo.yml, processes, or agents."
+      ],
+      "files": []
+    },
+    {
+      "name": "casual-tidy-sidebar",
+      "prompt": "Solo's sidebar is a cluttered mess. Can you tidy it up for me?",
+      "expected_output": "Use $solo-customize-workspace to inspect the current sidebar sections, then collapse or hide empty sections and reorder them into a calmer layout while preserving unread and running visibility.",
+      "assertions": [
+        "Triggers on casual, ambiguous personalization language.",
+        "Inspects current sidebar state before reordering or hiding sections.",
+        "Preserves unread and running visibility rather than hiding active work."
+      ],
+      "files": []
+    },
+    {
+      "name": "mixed-window-and-notifications",
+      "prompt": "Put my two work repos in their own window, and while you're at it stop the constant notification pings unless a build actually fails.",
+      "expected_output": "Use $solo-customize-workspace to move the two projects into a new window without stopping their processes, then route notifications to important-only so build failures still surface.",
+      "assertions": [
+        "Handles both the window layout and the notification routing under one skill.",
+        "Moves projects to a new window without stopping running processes.",
+        "Keeps failure notifications visible instead of silencing everything."
+      ],
+      "files": []
+    },
+    {
+      "name": "dark-mode-and-terminal-font",
+      "prompt": "Switch Solo to dark mode and use a monospace font in the terminal panel.",
+      "expected_output": "Use $solo-customize-workspace to check live appearance settings, then set the Light/Dark/System appearance to Dark and apply the terminal font preference.",
+      "assertions": [
+        "Treats theme and terminal font as app-level appearance preferences.",
+        "Checks live Settings before applying appearance changes.",
+        "Does not modify processes, projects, or agent configuration."
+      ],
+      "files": []
+    },
+    {
+      "name": "quiet-notifications-except-signal",
+      "prompt": "Only ping me when an agent finishes or a process crashes -- mute everything else.",
+      "expected_output": "Use $solo-customize-workspace to inspect notification settings and route them so agent-completion and crash events still notify while lower-signal notifications are muted.",
+      "assertions": [
+        "Configures notification routing at the workspace level.",
+        "Keeps high-signal completion and crash notifications enabled.",
+        "Does not disable all notifications outright."
+      ],
+      "files": []
+    },
+    {
+      "name": "favorites-and-faster-navigation",
+      "prompt": "Set up favorites for the projects I use most and make jumping between them faster.",
+      "expected_output": "Use $solo-customize-workspace to add favorites for the frequently used projects and configure navigation shortcuts or palette entries that speed switching between them.",
+      "assertions": [
+        "Configures favorites and navigation aids within the app shell.",
+        "Checks live navigation and shortcut availability before binding.",
+        "Does not alter project configuration or running processes."
+      ],
+      "files": []
+    },
+    {
+      "name": "route-add-repo-and-yaml",
+      "prompt": "Add my new repo to Solo and write its solo.yml command stack.",
+      "expected_output": "Do not use $solo-customize-workspace; route to $solo-set-up-projects to add the repository and define its solo.yml commands. Workspace customization does not cover repository or command configuration.",
+      "assertions": [
+        "Recognizes repository and solo.yml setup as out of scope.",
+        "Routes to $solo-set-up-projects by name.",
+        "Does not add the project or edit solo.yml under this skill."
+      ],
+      "files": []
+    },
+    {
+      "name": "route-env-and-execution-profile",
+      "prompt": "Configure the environment variables and execution profile for my project's commands.",
+      "expected_output": "Do not use $solo-customize-workspace; route to $solo-set-up-projects for environment values and execution-profile configuration on the project's commands.",
+      "assertions": [
+        "Distinguishes per-project command configuration from app-level customization.",
+        "Routes to $solo-set-up-projects by name."
+      ],
+      "files": []
+    },
+    {
+      "name": "route-start-and-watch-restart",
+      "prompt": "Start my dev server and restart it automatically whenever a file changes.",
+      "expected_output": "Do not use $solo-customize-workspace; route to $solo-run-processes to start the dev server and configure file-watch restart. Process lifecycle is out of scope for workspace customization.",
+      "assertions": [
+        "Recognizes process start and restart policy as process lifecycle.",
+        "Routes to $solo-run-processes by name.",
+        "Does not start or configure processes under this skill."
+      ],
+      "files": []
+    },
+    {
+      "name": "route-stop-and-relaunch-stack",
+      "prompt": "Stop all my running commands and relaunch the whole stack.",
+      "expected_output": "Do not use $solo-customize-workspace; route to $solo-run-processes for bulk stop and restart of the command stack.",
+      "assertions": [
+        "Treats bulk stop and relaunch as process lifecycle.",
+        "Routes to $solo-run-processes by name."
+      ],
+      "files": []
+    },
+    {
+      "name": "route-configure-agent-session",
+      "prompt": "Set up my Claude and Codex CLI agents in Solo and launch a session.",
+      "expected_output": "Do not use $solo-customize-workspace; route to $solo-work-with-agents to configure the CLI agents and launch a session. Agent work is out of scope for workspace customization.",
+      "assertions": [
+        "Recognizes agent configuration and launch as agent work.",
+        "Routes to $solo-work-with-agents by name.",
+        "Does not configure or launch agents under this skill."
+      ],
+      "files": []
+    },
+    {
+      "name": "route-parallel-agent-orchestration",
+      "prompt": "Spin up three agents to burn down my backlog in parallel and coordinate their handoffs.",
+      "expected_output": "Do not use $solo-customize-workspace; route to $solo-orchestrate-agents to plan and coordinate the parallel workers and their handoffs.",
+      "assertions": [
+        "Recognizes multi-agent orchestration as out of scope.",
+        "Routes to $solo-orchestrate-agents by name."
+      ],
+      "files": []
+    },
+    {
+      "name": "route-settings-wont-save",
+      "prompt": "Solo's appearance settings won't save and the theme keeps reverting. Figure out what's wrong.",
+      "expected_output": "Do not use $solo-customize-workspace; route to $solo-troubleshoot to diagnose why settings do not persist. This is a failure diagnosis, not a customization request.",
+      "assertions": [
+        "Recognizes a settings-persistence failure as diagnosis, not customization.",
+        "Routes to $solo-troubleshoot by name.",
+        "Does not re-apply the setting as if it were a routine preference change."
+      ],
+      "files": []
+    },
+    {
+      "name": "route-settings-panel-crash",
+      "prompt": "Every time I open the Settings panel Solo freezes and crashes. What's broken?",
+      "expected_output": "Do not use $solo-customize-workspace; route to $solo-troubleshoot to diagnose the crash when opening Settings.",
+      "assertions": [
+        "Recognizes a runtime crash as a diagnosis task.",
+        "Routes to $solo-troubleshoot by name."
+      ],
+      "files": []
+    },
+    {
+      "name": "route-status-and-readiness-check",
+      "prompt": "Show me which processes are running and whether the server is ready yet.",
+      "expected_output": "Do not use $solo-customize-workspace; route to $solo-observe-services for read-only status, readiness, and running-process inspection.",
+      "assertions": [
+        "Recognizes read-only status and readiness inspection as out of scope.",
+        "Routes to $solo-observe-services by name."
+      ],
+      "files": []
     }
   ]
 }

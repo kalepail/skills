@@ -27,6 +27,83 @@
       "files": []
     },
     {
+      "prompt": "Can you try registering a passkey and then logging back in with it on my dev site?",
+      "expected_output": "Use $agent-browser-webauthn to attach a virtual WebAuthn authenticator and drive registration then re-authentication in one helper invocation, verifying credentialAdded and credentialAsserted diagnostics.",
+      "assertions": [
+        "Triggers agent-browser-webauthn from casual passkey phrasing",
+        "Attaches a virtual WebAuthn authenticator",
+        "Keeps registration and login in one helper invocation",
+        "Verifies credential diagnostics before reporting success"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "$agent-browser-webauthn run the passkey registration test against localhost:3000.",
+      "expected_output": "Use $agent-browser-webauthn to open localhost:3000, attach the virtual authenticator, run the registration ceremony, and assert credentialAdded plus application output.",
+      "assertions": [
+        "Honors the explicit agent-browser-webauthn invocation",
+        "Opens the target page before attaching the authenticator",
+        "Runs registration inside the bundled helper",
+        "Asserts credentialAdded and application output"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Spin up the app, seed a test user, then run a passkey signup and login flow, and finally check the console for errors.",
+      "expected_output": "Use $agent-browser-webauthn for the passkey signup and login portion, wrapping both ceremonies in one helper invocation, while the surrounding app setup and console checks run through ordinary agent-browser steps.",
+      "assertions": [
+        "Routes the passkey signup and login portion to agent-browser-webauthn",
+        "Keeps signup and login in one helper invocation",
+        "Verifies credential diagnostics for the passkey portion",
+        "Leaves non-WebAuthn setup and console checks to agent-browser"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Test restoring a Stellar smart account wallet from an existing passkey in the browser.",
+      "expected_output": "Use $agent-browser-webauthn to attach the virtual authenticator, drive the restore ceremony, and require the restored C-address contract id or an explicit chain error before reporting success.",
+      "assertions": [
+        "Uses the WebAuthn helper for the restore ceremony",
+        "Checks for a restored contract id or explicit chain error",
+        "Does not treat a click as restore success",
+        "Uses localhost or HTTPS for the relying-party context"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Verify that signing a transaction with the passkey authenticator works end-to-end in the browser.",
+      "expected_output": "Use $agent-browser-webauthn to attach the authenticator, drive the signing ceremony, and assert credentialAsserted plus the signed transaction or submission result.",
+      "assertions": [
+        "Uses the WebAuthn helper for the signing ceremony",
+        "Verifies credentialAsserted diagnostics",
+        "Asserts the signed transaction or submission result",
+        "Does not report a click as signing success"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Set up a CDP virtual WebAuthn authenticator and assert a credential is created when the user clicks Register.",
+      "expected_output": "Use $agent-browser-webauthn to open the page, attach the CDP virtual authenticator, click Register with a native agent-browser click, and assert credentialAdded.",
+      "assertions": [
+        "Uses the bundled helper to attach the virtual authenticator",
+        "Attaches only after opening the intended page",
+        "Uses a native agent-browser click for Register",
+        "Asserts credentialAdded diagnostics"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Test the passkey connect and reject prompts in our wallet UI.",
+      "expected_output": "Use $agent-browser-webauthn to drive the connect and reject prompts inside one helper invocation and assert the resulting credential and application states rather than prompt visibility.",
+      "assertions": [
+        "Uses the WebAuthn helper for connect and reject prompts",
+        "Keeps connect and reject in one helper invocation",
+        "Asserts credential and application state, not prompt visibility",
+        "Cleans up the authenticator when the child exits"
+      ],
+      "files": []
+    },
+    {
       "prompt": "Use agent-browser to test this username and password login form. It has no passkeys or WebAuthn.",
       "expected_output": "Use ordinary agent-browser automation without invoking agent-browser-webauthn or creating a virtual authenticator.",
       "assertions": [
@@ -44,6 +121,86 @@
         "Explains the explicit trusted-endpoint override",
         "Does not auto-enable --allow-remote-cdp",
         "Does not expose secrets in arguments or assertions"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Fill out this multi-step signup form and take a screenshot at each step.",
+      "expected_output": "Do not use $agent-browser-webauthn; route to $agent-browser for the form filling and screenshots, since there is no WebAuthn ceremony.",
+      "assertions": [
+        "Does not trigger agent-browser-webauthn",
+        "Routes plain form automation to agent-browser",
+        "Does not attach a virtual WebAuthn authenticator"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Scrape the product listings from this e-commerce page.",
+      "expected_output": "Do not use $agent-browser-webauthn; route to $agent-browser for the data extraction, since no passkey or WebAuthn ceremony is involved.",
+      "assertions": [
+        "Does not trigger agent-browser-webauthn",
+        "Routes scraping to agent-browser",
+        "Does not attach a virtual WebAuthn authenticator"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Check my Slack unreads and send a message to the team channel.",
+      "expected_output": "Do not use $agent-browser-webauthn; route to $agent-browser, which owns Slack automation, since there is no WebAuthn ceremony.",
+      "assertions": [
+        "Does not trigger agent-browser-webauthn",
+        "Routes Slack automation to agent-browser",
+        "Does not attach a virtual WebAuthn authenticator"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Automate VS Code in Electron to open a file and run a command.",
+      "expected_output": "Do not use $agent-browser-webauthn; route to $agent-browser, which owns Electron desktop automation, since there is no passkey ceremony.",
+      "assertions": [
+        "Does not trigger agent-browser-webauthn",
+        "Routes Electron automation to agent-browser",
+        "Does not attach a virtual WebAuthn authenticator"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Run this browser test inside a Vercel Sandbox microVM.",
+      "expected_output": "Do not use $agent-browser-webauthn; route to $agent-browser, which owns Vercel Sandbox browser runs, unless the test itself performs a WebAuthn ceremony.",
+      "assertions": [
+        "Does not trigger agent-browser-webauthn on runtime alone",
+        "Routes the Vercel Sandbox run to agent-browser",
+        "Does not attach a virtual WebAuthn authenticator without a ceremony"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Log into the site with my Google OAuth SSO and verify the dashboard loads.",
+      "expected_output": "Do not use $agent-browser-webauthn; route to $agent-browser, since OAuth SSO login is not a WebAuthn ceremony.",
+      "assertions": [
+        "Does not trigger agent-browser-webauthn for OAuth login",
+        "Routes the SSO login to agent-browser",
+        "Does not attach a virtual WebAuthn authenticator"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Test the two-factor authentication flow that emails a TOTP code.",
+      "expected_output": "Do not use $agent-browser-webauthn; route to $agent-browser, since an emailed TOTP code is not a WebAuthn ceremony.",
+      "assertions": [
+        "Does not trigger agent-browser-webauthn for TOTP",
+        "Routes the 2FA flow to agent-browser",
+        "Does not attach a virtual WebAuthn authenticator"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Test the Stellar wallet connect flow using the Freighter browser extension.",
+      "expected_output": "Do not use $agent-browser-webauthn; route to $agent-browser, since a Freighter extension connect is not a passkey or WebAuthn ceremony.",
+      "assertions": [
+        "Does not trigger agent-browser-webauthn for the extension flow",
+        "Routes the Freighter connect to agent-browser",
+        "Does not attach a virtual WebAuthn authenticator"
       ],
       "files": []
     }

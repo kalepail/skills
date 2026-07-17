@@ -33,6 +33,149 @@
         "Leaves final integration and Git actions to root/operator"
       ],
       "files": []
+    },
+    {
+      "prompt": "Use $solo-save-prompts to store my standard code-review brief as a global template with placeholders for repo, diff scope, and severity bar.",
+      "expected_output": "Use $solo-save-prompts to discover live template tools, check the catalog for an existing name, and create a global-scoped template with valid placeholders, launching no review and mutating no files.",
+      "assertions": [
+        "Discovers live template tools before acting",
+        "Creates a global-scope template with valid reusable placeholders",
+        "Keeps secrets and transient IDs out of the template",
+        "Does not launch review or mutate files"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Update the objective placeholder in my saved handoff template and then export all my prompt templates to Markdown for backup.",
+      "expected_output": "Use $solo-save-prompts to read the existing template, preserve omitted fields while updating the placeholder, and export all templates to Markdown without any agent, todo, or process side effects.",
+      "assertions": [
+        "Reads existing template and preserves omitted fields before update",
+        "Exports templates to Markdown as requested",
+        "Handles both update and export in one flow",
+        "Performs no agent, todo, timer, or process side effects"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "I keep retyping the same kickoff message for every agent, can we stash it somewhere reusable?",
+      "expected_output": "Use $solo-save-prompts to recognize the reusable prompt intent, confirm global versus project scope when material, check for an existing template, and store the prompt shape rather than any orchestration state.",
+      "assertions": [
+        "Recognizes reusable prompt intent from casual phrasing",
+        "Confirms global versus project scope when material",
+        "Checks catalog for existing template before create",
+        "Stores prompt shape, not orchestration state"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Standardize our worker-brief prompt across Claude and Codex so everyone fills in the same fields.",
+      "expected_output": "Use $solo-save-prompts to create a tool-agnostic template with fillable placeholders that ports across agent tools, avoiding a same-scope duplicate and spawning no agent.",
+      "assertions": [
+        "Creates a tool-agnostic reusable template with fillable fields",
+        "Keeps template text portable across agent tools",
+        "Avoids same-scope duplicate",
+        "Does not spawn or prompt any agent"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Delete the outdated release-notes prompt template and make a fresh project-scoped one with a version placeholder.",
+      "expected_output": "Use $solo-save-prompts to read the template before deleting, confirm the destructive delete target, then create a project-scoped template with a valid version placeholder and no process or agent side effects.",
+      "assertions": [
+        "Reads template before deleting",
+        "Confirms destructive delete scope and name before acting",
+        "Recreates a project-scoped template with a valid version placeholder",
+        "Performs no process or agent side effects"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Fill my saved bug-triage template with these values and give me the rendered text to paste into a worker.",
+      "expected_output": "Use $solo-save-prompts to recheck identity and scope, retrieve and fill the saved template with the provided values, and return the rendered text without launching or submitting to any worker.",
+      "assertions": [
+        "Rechecks identity and scope before retrieval",
+        "Retrieves and fills the saved template with provided values",
+        "Returns rendered text without launching a worker",
+        "Does not insert-and-submit to any agent"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Save our architecture decision and the reasoning behind it so the next session has that context.",
+      "expected_output": "Do not use $solo-save-prompts; route to $solo-keep-scratchpads for durable decision content and reasoning, and suggest promoting canonical conclusions to repository docs.",
+      "assertions": [
+        "Recognizes durable decision content, not reusable prompt shape",
+        "Routes to solo-keep-scratchpads",
+        "Creates no prompt template",
+        "Suggests promoting canonical conclusions to repository docs"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Write up the current investigation notes and evidence into something persistent for the team.",
+      "expected_output": "Do not use $solo-save-prompts; route to $solo-keep-scratchpads for working notes and evidence, leaving the prompt-template catalog unchanged.",
+      "assertions": [
+        "Recognizes working notes and evidence belong in scratchpads",
+        "Routes to solo-keep-scratchpads",
+        "Does not treat notes as a template",
+        "Leaves the prompt-template catalog unchanged"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Compose a one-off prompt for this single Codex session to refactor the auth module and send it.",
+      "expected_output": "Do not use $solo-save-prompts; route to $solo-work-with-agents for one-off single-agent prompt composition and send, saving no reusable template.",
+      "assertions": [
+        "Recognizes one-off single-agent prompt composition and send",
+        "Routes to solo-work-with-agents",
+        "Saves no reusable template",
+        "Leaves execution and send to the agent skill"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Draft the exact instructions for my running Claude agent right now and feed them in.",
+      "expected_output": "Do not use $solo-save-prompts; route to $solo-work-with-agents for single running-agent prompt-and-feed, persisting no template and preserving ownership boundaries.",
+      "assertions": [
+        "Recognizes single running-agent prompt-and-feed intent",
+        "Routes to solo-work-with-agents",
+        "Does not persist a template or submit input itself",
+        "Preserves ownership and identity boundaries"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Record what I still need to do on the migration with priorities and blockers.",
+      "expected_output": "Do not use $solo-save-prompts; route to $solo-track-todos for current task state with priorities and blockers, encoding no task state as a prompt template.",
+      "assertions": [
+        "Recognizes current task state with priorities and blockers",
+        "Routes to solo-track-todos",
+        "Does not encode task state as a prompt template",
+        "Leaves the todo graph to the todo skill"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Track the remaining checklist items for this release as owned tasks.",
+      "expected_output": "Do not use $solo-save-prompts; route to $solo-track-todos for owned actionable work, creating no prompt template.",
+      "assertions": [
+        "Recognizes owned actionable work, not reusable prompt text",
+        "Routes to solo-track-todos",
+        "Creates no prompt template",
+        "Performs no template side effects"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Save this research summary so I can refer back to it later.",
+      "expected_output": "Do not use $solo-save-prompts; route to $solo-keep-scratchpads for durable content to refer back to, distinguishing it from reusable prompt shape and leaving the template catalog unchanged.",
+      "assertions": [
+        "Distinguishes durable content from reusable prompt shape",
+        "Routes to solo-keep-scratchpads",
+        "Does not save the summary as a template",
+        "Leaves the prompt-template catalog unchanged"
+      ],
+      "files": []
     }
   ]
 }

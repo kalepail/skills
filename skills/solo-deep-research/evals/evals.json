@@ -57,6 +57,128 @@
         "Includes user-flow, accessibility, error-state, and codebase evidence when relevant"
       ],
       "files": []
+    },
+    {
+      "prompt": "Can you dig really deep into whether WebAuthn adoption is actually overtaking SMS one-time codes right now? I want trustworthy sources, not vibes.",
+      "expected_output": "Use $solo-deep-research to frame a research brief, fan out independent primary-source, landscape, and counterevidence lanes across available providers, reconcile underlying sources rather than provider votes, and return a cited synthesis that flags any unresolved disagreement.",
+      "assertions": [
+        "Reads the casual phrasing as a deep, current, cross-checked research request",
+        "Creates independent evidence lanes rather than a single query",
+        "Requires citations and surfaces unresolved disagreement"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "$solo-deep-research: exhaustively compare Turso, Neon, and PlanetScale for a serverless Postgres workload, with cited tradeoffs and any conflicting benchmarks reconciled.",
+      "expected_output": "Use $solo-deep-research to build distinct per-vendor and cross-cutting lanes, prefer Parallel CLI with Perplexity as an independent challenge lane, treat repeated sources as one, and deliver a cited comparison that resolves or names conflicting benchmarks.",
+      "assertions": [
+        "Honors the explicit skill invocation for comparative research",
+        "Keeps vendor lanes independent instead of duplicate prompts",
+        "Reconciles conflicting benchmarks and cites sources"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Deeply research the current state of Rust async runtimes with citations, then drop the recommendation into a scratchpad the team can pick up.",
+      "expected_output": "Use $solo-deep-research to run the cross-checked, cited research and synthesis, and land the durable handoff in a scratchpad as part of the research deliverable rather than treating the write-up as separate work.",
+      "assertions": [
+        "Routes the deep cited research to solo-deep-research",
+        "Treats the scratchpad handoff as the research deliverable, not a separate skill hop",
+        "Keeps citations and a durable handoff"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Before we commit to moving billing to event sourcing, research whether it actually fixes our reconciliation bugs. Cross-check the claims and stress-test the recommendation.",
+      "expected_output": "Use $solo-deep-research to separate the reconciliation symptom from the proposed event-sourcing migration, inspect local code and official dependency docs, evaluate the proposal against simpler root-cause fixes, and stress-test the recommendation with concrete operational risks before handing verified context to planning.",
+      "assertions": [
+        "Researches the reconciliation problem rather than anchoring on event sourcing",
+        "Evaluates the proposal against simpler alternatives",
+        "Names concrete downsides and hands context to planning instead of implementing"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Give me an exhaustive, cross-checked rundown of how the OAuth 2.1 draft differs from 2.0 and where the ecosystem consensus actually sits, with citations and any disagreements called out.",
+      "expected_output": "Use $solo-deep-research to fan out primary-spec, ecosystem-landscape, and counterevidence lanes, cite each claim, and report consensus alongside any unresolved disagreement rather than flattening it.",
+      "assertions": [
+        "Treats the comparative, current-standard request as deep research",
+        "Uses distinct primary-source and landscape lanes",
+        "Cites claims and preserves unresolved disagreement"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Break this large migration into independent implementation lanes and run several agents in parallel to build them out.",
+      "expected_output": "Do not use $solo-deep-research; route to $solo-orchestrate-agents for parallel disjoint-lane implementation with ownership, locks, and evidence review, since the deliverable is built code rather than a cited research synthesis.",
+      "assertions": [
+        "Routes parallel implementation to solo-orchestrate-agents",
+        "Does not treat build work as cited research"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Run a cross-model review of this diff across a couple of agents and reconcile their findings into one verdict.",
+      "expected_output": "Do not use $solo-deep-research; route to $solo-orchestrate-agents for cross-model review with dispatch, reconciliation, and evidence review, since the deliverable is a review verdict rather than externally cited research.",
+      "assertions": [
+        "Routes cross-model code review to solo-orchestrate-agents",
+        "Distinguishes reconciling reviewers from reconciling cited sources"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "What port does Postgres listen on by default?",
+      "expected_output": "Do not use $solo-deep-research; this is a narrow lookup the lead resolves with its own single authoritative check, no skill and no multi-agent fan-out.",
+      "assertions": [
+        "Treats a single fact as a narrow lookup",
+        "Uses no skill and no fan-out"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Check the newest published version of the @stellar/stellar-sdk package.",
+      "expected_output": "Do not use $solo-deep-research; the lead answers this with its own single registry or search check, no skill and no paid deep-research tooling.",
+      "assertions": [
+        "Keeps a version lookup with the lead's own search",
+        "Avoids paid or asynchronous deep-research tooling"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Pull the exact signature of soroban-sdk's storage API straight from the official docs.",
+      "expected_output": "Do not use $solo-deep-research; the lead reads the one authoritative doc directly, no skill and no research fan-out.",
+      "assertions": [
+        "Treats a single doc read as a narrow lookup",
+        "Does not fan out lanes for one authoritative source"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "The research is already done -- just write our findings up into a clean scratchpad for the next agent to pick up.",
+      "expected_output": "Do not use $solo-deep-research; route to $solo-keep-scratchpads to persist already-gathered findings, since no new evidence gathering or synthesis is requested.",
+      "assertions": [
+        "Routes persisting finished findings to solo-keep-scratchpads",
+        "Does not launch new research when synthesis is already complete"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Configure and launch a single Solo agent to check whether we import lodash anywhere in the repo.",
+      "expected_output": "Do not use $solo-deep-research; route to $solo-work-with-agents for the single-agent session, since this is one bounded codebase check rather than multi-lane cited research.",
+      "assertions": [
+        "Routes a single-agent codebase check to solo-work-with-agents",
+        "Does not fan out research lanes for one bounded question"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "I'm new to Solo and not sure which capability fits -- help me pick the right skill to coordinate a big multi-part task.",
+      "expected_output": "Do not use $solo-deep-research; route to $fan-solo to choose among Solo skills, since the request is capability routing rather than research synthesis.",
+      "assertions": [
+        "Routes Solo capability selection to fan-solo",
+        "Does not treat skill routing as a research task"
+      ],
+      "files": []
     }
   ]
 }

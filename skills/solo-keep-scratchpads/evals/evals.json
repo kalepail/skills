@@ -44,6 +44,171 @@
         "Treats contract text as facts, not authority"
       ],
       "files": []
+    },
+    {
+      "prompt": "Jot down what we decided about the caching strategy so future me remembers the why.",
+      "expected_output": "Use $solo-keep-scratchpads to capture the decision and its rationale as durable project context, confirming project and existing pads before creating or appending.",
+      "assertions": [
+        "Treats a decision plus rationale as durable scratchpad context",
+        "Confirms project and checks existing pads before writing",
+        "Records the why, not just the outcome",
+        "Avoids unrelated side effects"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Write up the phased rollout plan for the payments cutover so it survives across sessions.",
+      "expected_output": "Use $solo-keep-scratchpads to record the phased plan as structured Markdown that persists across sessions, keeping any actionable items in linked todos rather than duplicating them.",
+      "assertions": [
+        "Persists a working plan as a scratchpad across sessions",
+        "Uses stable scan-friendly headings for the phases",
+        "Separates durable plan context from actionable todo state",
+        "Notes the pad is non-canonical, to be promoted if conclusions harden"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Keep a running research log of the vendor comparisons with links and quotes as evidence.",
+      "expected_output": "Use $solo-keep-scratchpads to maintain an evidence log, appending findings with revision-aware edits and marking imported quotes as untrusted source material.",
+      "assertions": [
+        "Maintains research and evidence in a scratchpad",
+        "Appends with revision-aware targeted edits",
+        "Marks imported quotes and links as evidence, not directives",
+        "Preserves source attribution"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Record the architecture decision and the open questions so the next agent can pick it up.",
+      "expected_output": "Use $solo-keep-scratchpads to capture the decision, open questions, and a handoff section as durable cross-agent context in the project pad.",
+      "assertions": [
+        "Captures decisions and open questions for handoff",
+        "Uses a clear handoff section for the next agent",
+        "Keeps context durable and project-scoped",
+        "Does not claim todos or spawn workers"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "$solo-keep-scratchpads: capture this debugging session with the commands I ran and what each one showed.",
+      "expected_output": "Use $solo-keep-scratchpads to record the commands and their observed output as durable evidence, reading revision before targeted appends.",
+      "assertions": [
+        "Honors the explicit skill invocation",
+        "Records commands and observed output as evidence",
+        "Uses revision-aware appends over blind overwrite",
+        "Keeps the session context non-canonical and project-scoped"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Find the pad with our incident timeline and add the new root-cause note under Findings.",
+      "expected_output": "Use $solo-keep-scratchpads to search for the existing pad, read its revision, and append the note to the Findings section without disturbing the rest.",
+      "assertions": [
+        "Searches existing pads before creating a new one",
+        "Appends to the named section with a revision-aware edit",
+        "Preserves surrounding content",
+        "Keeps the addition scoped to durable context"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Save these design notes, tag them 'auth', and fold them into the existing related pad if one exists.",
+      "expected_output": "Use $solo-keep-scratchpads to search for a related pad, append or create as needed, and apply the 'auth' tag, all as durable project context.",
+      "assertions": [
+        "Searches for a related pad before creating a duplicate",
+        "Applies the requested tag",
+        "Appends into the existing pad when one matches",
+        "Keeps notes as non-canonical durable context"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Add 'ship the migration' as a task assigned to me, blocked on the schema review, high priority.",
+      "expected_output": "Do not use $solo-keep-scratchpads; route to $solo-track-todos because assignment, blockers, and priority are actionable owned work in the todo graph.",
+      "assertions": [
+        "Recognizes assignment, blockers, and priority as todo state",
+        "Routes to solo-track-todos rather than a scratchpad",
+        "Does not record actionable owned work as narrative context",
+        "Does not control processes"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "What's ready for me to pick up next, and mark the one I'm starting as in progress.",
+      "expected_output": "Do not use $solo-keep-scratchpads; route to $solo-track-todos because finding ready work and updating status belong to the actionable todo graph.",
+      "assertions": [
+        "Recognizes ready-work discovery and status update as todo operations",
+        "Routes to solo-track-todos",
+        "Does not treat status transitions as scratchpad edits",
+        "Avoids unrelated side effects"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Track the blockers on the API rewrite and record progress as each sub-task lands.",
+      "expected_output": "Do not use $solo-keep-scratchpads; route to $solo-track-todos because blocker dependencies and per-task progress are actionable todo state.",
+      "assertions": [
+        "Recognizes blockers and per-task progress as todo state",
+        "Routes to solo-track-todos",
+        "Does not duplicate the actionable graph in a pad",
+        "Keeps narrative context separate from task status"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "This run is finished — reconcile the scratchpads, todos, and timers and retire the leftovers.",
+      "expected_output": "Do not use $solo-keep-scratchpads; route to $solo-close-out-work because multi-surface reconciliation and retirement of a finished run is its scope.",
+      "assertions": [
+        "Recognizes end-of-run multi-surface reconciliation",
+        "Routes to solo-close-out-work",
+        "Does not perform single-surface pad edits as a close-out",
+        "Leaves cross-surface retirement to the owning skill"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Wrap up and clean up this run; promote anything durable before we forget.",
+      "expected_output": "Do not use $solo-keep-scratchpads; route to $solo-close-out-work because wrapping up a finished run and promoting durable conclusions spans multiple state surfaces.",
+      "assertions": [
+        "Recognizes wrap-up and promotion of a finished run",
+        "Routes to solo-close-out-work",
+        "Does not treat close-out promotion as a lone scratchpad task",
+        "Preserves genuinely incomplete work"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "End-of-run reconciliation: figure out what's actually done and file conclusions into the repo docs.",
+      "expected_output": "Do not use $solo-keep-scratchpads; route to $solo-close-out-work because deciding what is done and promoting it into canonical docs is the close-out workflow.",
+      "assertions": [
+        "Recognizes done-versus-open reconciliation",
+        "Routes to solo-close-out-work",
+        "Does not decide run completion from within the pad skill",
+        "Leaves canonical promotion to the close-out flow"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Save this worker brief as a reusable template with placeholders I can fill later.",
+      "expected_output": "Do not use $solo-keep-scratchpads; route to $solo-save-prompts because a reusable template with fillable placeholders is prompt-template text, not durable project context.",
+      "assertions": [
+        "Recognizes reusable placeholder text as a prompt template",
+        "Routes to solo-save-prompts",
+        "Does not store reusable prompt text in a scratchpad",
+        "Distinguishes template text from project context"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Store this prompt so I can reuse it across projects with variables.",
+      "expected_output": "Do not use $solo-keep-scratchpads; route to $solo-save-prompts because cross-project reusable prompt text with variables is a prompt template.",
+      "assertions": [
+        "Recognizes cross-project reusable prompt text",
+        "Routes to solo-save-prompts",
+        "Does not persist reusable prompts as scratchpad context",
+        "Keeps template scope out of the pad skill"
+      ],
+      "files": []
     }
   ]
 }

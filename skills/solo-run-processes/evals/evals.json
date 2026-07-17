@@ -33,6 +33,176 @@
         "Distinguishes bound-port readiness from application health"
       ],
       "files": []
+    },
+    {
+      "prompt": "The API server is hogging my CPU, just kill it for now.",
+      "expected_output": "Use $solo-run-processes to identify the exact API command and apply the smallest stop action to it alone, then confirm it is no longer running.",
+      "assertions": [
+        "Resolves the casual request to a single targeted process",
+        "Applies a stop lifecycle action",
+        "Does not stop or touch unrelated processes"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "I pulled new dependencies — restart the frontend process so it reloads them.",
+      "expected_output": "Use $solo-run-processes to restart the targeted frontend command and report the post-restart status.",
+      "assertions": [
+        "Selects restart as the lifecycle action",
+        "Targets only the named frontend process",
+        "Verifies status after restarting"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Rename the process labeled worker-1 to billing-worker.",
+      "expected_output": "Use $solo-run-processes to rename the identified process entry from worker-1 to billing-worker without altering its run state.",
+      "assertions": [
+        "Recognizes rename as an owned lifecycle action",
+        "Confirms the exact process being renamed",
+        "Does not start, stop, or restart as a side effect"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Open a terminal in the api project and run the migration script there.",
+      "expected_output": "Use $solo-run-processes to spawn a terminal in the api project scope and send the migration command as input.",
+      "assertions": [
+        "Spawns a terminal or process in the requested scope",
+        "Sends the migration command as input to that terminal",
+        "Uses Solo process IDs, not OS PIDs"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "The dev server is sitting at a y/n prompt — send it a y.",
+      "expected_output": "Use $solo-run-processes to send the y keystroke as input to the waiting dev-server process.",
+      "assertions": [
+        "Sends input to the exact waiting process",
+        "Does not restart or clear the process to answer the prompt",
+        "Confirms the target before sending input"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Bring up the whole dev stack for project 7.",
+      "expected_output": "Use $solo-run-processes to run the bulk start-all action scoped to project 7 after confirming trust, then report per-command results.",
+      "assertions": [
+        "Recognizes a bulk start-all request scoped to one project",
+        "Checks trust before starting commands",
+        "Reports which commands started"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "$solo-run-processes restart all commands in the payments project.",
+      "expected_output": "Use $solo-run-processes to run the bulk restart-all action scoped to the payments project and verify each command comes back up.",
+      "assertions": [
+        "Honors the explicit skill invocation",
+        "Applies a bulk restart-all scoped to the named project",
+        "Verifies final status of each command"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Restart the api process and set it to auto-restart if it crashes.",
+      "expected_output": "Use $solo-run-processes to restart the api command and configure its crash-restart behavior in one owned flow.",
+      "assertions": [
+        "Handles the restart and crash-restart configuration together",
+        "Targets only the api process",
+        "Keeps both actions within process lifecycle ownership"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Show me the last 50 lines of logs from the api server and whether it's ready.",
+      "expected_output": "Do not use $solo-run-processes; route to $solo-observe-services for read-only log tail and readiness inspection without changing runtime.",
+      "assertions": [
+        "Recognizes a read-only output and readiness request",
+        "Routes to solo-observe-services",
+        "Does not restart, clear, or otherwise mutate the process"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Is anything currently running in project 3, and how much memory is it using?",
+      "expected_output": "Do not use $solo-run-processes; route to $solo-observe-services for read-only running-status and resource-usage inspection.",
+      "assertions": [
+        "Recognizes a read-only status and resource query",
+        "Routes to solo-observe-services",
+        "Does not change any process lifecycle state"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Add a new lint command to this repo's solo.yml.",
+      "expected_output": "Do not use $solo-run-processes; route to $solo-set-up-projects to define the new command in solo.yml.",
+      "assertions": [
+        "Recognizes command definition as configuration, not lifecycle",
+        "Routes to solo-set-up-projects",
+        "Does not attempt to start or run the new command"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Import this repository into Solo and define its dev and build commands.",
+      "expected_output": "Do not use $solo-run-processes; route to $solo-set-up-projects to import the repository and configure its command stack.",
+      "assertions": [
+        "Recognizes project import and command setup",
+        "Routes to solo-set-up-projects",
+        "Does not run commands before setup exists"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Set the working directory and env vars for the web command.",
+      "expected_output": "Do not use $solo-run-processes; route to $solo-set-up-projects to edit the web command's working directory and environment configuration.",
+      "assertions": [
+        "Recognizes command configuration versus runtime control",
+        "Routes to solo-set-up-projects",
+        "Does not restart the web command to apply changes"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "The web command keeps crash-looping and never becomes ready — figure out why.",
+      "expected_output": "Do not use $solo-run-processes; route to $solo-troubleshoot to diagnose the crash-loop and readiness failure.",
+      "assertions": [
+        "Recognizes a diagnosis request, not a restart request",
+        "Routes to solo-troubleshoot",
+        "Does not simply restart the crash-looping command"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "My solo.yml changes aren't taking effect — what's wrong?",
+      "expected_output": "Do not use $solo-run-processes; route to $solo-troubleshoot to diagnose the solo.yml sync failure.",
+      "assertions": [
+        "Recognizes a configuration-sync failure to diagnose",
+        "Routes to solo-troubleshoot",
+        "Does not treat it as a lifecycle action"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Launch a Claude agent session in this project and give it a prompt to start on.",
+      "expected_output": "Do not use $solo-run-processes; route to $solo-work-with-agents to launch and prompt the agent session.",
+      "assertions": [
+        "Distinguishes an agent session from a managed process",
+        "Routes to solo-work-with-agents",
+        "Does not spawn a plain terminal or command in its place"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Check whether my agent session is idle or blocked and summarize what it did.",
+      "expected_output": "Do not use $solo-run-processes; route to $solo-work-with-agents to inspect the agent session status and summarize its output.",
+      "assertions": [
+        "Recognizes an agent-session inspection request",
+        "Routes to solo-work-with-agents",
+        "Does not apply process lifecycle actions to the agent"
+      ],
+      "files": []
     }
   ]
 }

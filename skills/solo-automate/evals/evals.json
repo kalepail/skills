@@ -30,6 +30,156 @@
         "Does not create Solo processes, mutate local Solo state, commit, push, or open a PR as an incidental side effect."
       ],
       "files": []
+    },
+    {
+      "prompt": "My VS Code extension needs to talk to Solo locally over HTTP -- how does it find the right port and auth token?",
+      "expected_output": "Use $solo-automate to point the editor plugin at the local HTTP API: read the current discovery file for the live port, token, and capabilities instead of hard-coding them, and confirm the plugin only calls documented local endpoints.",
+      "assertions": [
+        "Selects the local HTTP API surface for an editor/plugin integration.",
+        "Reads live discovery for port, token, and capabilities rather than hard-coding any of them.",
+        "Does not conflate the local /api with the hosted /api/v1."
+      ],
+      "files": []
+    },
+    {
+      "prompt": "$solo-automate configure Claude Desktop and Cursor to connect to my local Solo MCP server.",
+      "expected_output": "Use $solo-automate to configure the MCP clients against the local Solo MCP server, deriving connection settings from live discovery and the documented MCP surface rather than assumed defaults.",
+      "assertions": [
+        "Treats MCP client configuration as the correct solo-automate integration task.",
+        "Sources connection details from live discovery/documentation instead of guessing schemas or ports.",
+        "Performs no Solo state mutation while wiring up the clients."
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Set up a nightly job that pulls project stats via the solo CLI and also posts a rollup to a hosted /api/v1 endpoint.",
+      "expected_output": "Use $solo-automate for both surfaces: script the solo CLI with --json for local stats, then call only documented hosted /api/v1 web services for the rollup, keeping the two APIs distinct and never leaking the local token to the hosted side.",
+      "assertions": [
+        "Recognizes a mixed request spanning the local CLI and the hosted API v1.",
+        "Requests --json from the CLI and restricts hosted calls to documented endpoints.",
+        "Keeps local /api and hosted /api/v1 separate and does not send local credentials to the hosted API."
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Fetch Solo's machine-readable product docs from soloterm.com and call the documented hosted service to list my account projects.",
+      "expected_output": "Use $solo-automate to consume the hosted /api/v1 docs programmatically and call only the documented hosted web services, reading the current contract instead of assuming request or response schemas.",
+      "assertions": [
+        "Selects the hosted /api/v1 docs and web services as the integration surface.",
+        "Reads the machine-readable contract before calling any hosted endpoint.",
+        "Does not substitute local MCP or CLI surfaces for a hosted-documentation request."
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Generate solo:// deep links that open a specific scratchpad and todo so I can drop them into a runbook.",
+      "expected_output": "Use $solo-automate to build solo:// deep links for human navigation and scratchpad/todo resource addressing, using current identifiers rather than fabricated link formats.",
+      "assertions": [
+        "Selects solo:// deep links as the addressing surface for navigation.",
+        "Uses real scratchpad/todo identifiers instead of inventing link schemes.",
+        "Does not open, edit, or mutate the referenced scratchpad or todo content."
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Before I script anything against Solo, discover the current MCP tool schemas and which capabilities are actually enabled so I don't hard-code them.",
+      "expected_output": "Use $solo-automate to discover live contracts first: inspect identity and scope, call help and the live tool summary, and report enabled versus toggled capabilities before any automation is written.",
+      "assertions": [
+        "Prioritizes live schema and capability discovery over assumed catalogs.",
+        "Calls or recommends whoami, help, and the live tool summary as the discovery path.",
+        "Performs discovery read-only with no mutation or spawning."
+      ],
+      "files": []
+    },
+    {
+      "prompt": "In CI, use the solo CLI to assert every project's dev stack has bound its port and fail the build otherwise.",
+      "expected_output": "Use $solo-automate to script the solo CLI in CI with --json, branch on documented exit codes, paginate results, and map an unbound-port condition to an intentional nonzero build exit without exposing the local token.",
+      "assertions": [
+        "Selects the solo CLI as the CI automation surface and requires --json.",
+        "Branches on documented CLI exit-code semantics and accounts for pagination.",
+        "Keeps the check read-only and does not restart or mutate processes to force readiness."
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Start my dev server, tail its output, and send it a restart when it hangs.",
+      "expected_output": "Do not use $solo-automate; route to $solo-run-processes for interactive process lifecycle: start, tail, input, and restart of Solo-managed commands. This is process operation, not an integration-surface choice.",
+      "assertions": [
+        "Recognizes interactive process control as owned by solo-run-processes.",
+        "Does not reframe routine start/tail/restart as a CLI or HTTP integration task.",
+        "Requires explicit authority before any restart is issued."
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Launch a single Solo agent to fix this failing test and show me its output.",
+      "expected_output": "Do not use $solo-automate; route to $solo-work-with-agents for one-off single-agent setup, launch, prompting, and output inspection. Involving a Solo agent does not make this an automation-surface task.",
+      "assertions": [
+        "Recognizes one-off single-agent work as owned by solo-work-with-agents.",
+        "Does not invoke solo-automate merely because an agent is involved.",
+        "Does not spawn the agent or run its work without explicit authority."
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Is my API server up yet, and what port did it bind to?",
+      "expected_output": "Do not use $solo-automate; route to $solo-observe-services for read-only status, readiness, ports, and localhost URLs. This is runtime inspection, not an integration-surface choice.",
+      "assertions": [
+        "Recognizes read-only status/readiness as owned by solo-observe-services.",
+        "Does not reach for the CLI or HTTP API when an interactive status view answers the question.",
+        "Changes no process lifecycle or configuration."
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Coordinate four Solo workers across disjoint lanes to refactor these modules and reconcile their results.",
+      "expected_output": "Do not use $solo-automate; route to $solo-orchestrate-agents for multi-agent planning, bounded workers, locks, timers, and handoffs. This is orchestration, not choosing an integration surface.",
+      "assertions": [
+        "Recognizes multi-agent coordination as owned by solo-orchestrate-agents.",
+        "Does not treat spawning coordinated workers as a solo-automate task.",
+        "Does not create Solo agents or mutate shared state without explicit authority."
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Add this repo to Solo and define its command stack in solo.yml.",
+      "expected_output": "Do not use $solo-automate; route to $solo-set-up-projects for project import and solo.yml command-stack configuration. Configuring Solo is a setup task, not an integration-surface choice.",
+      "assertions": [
+        "Recognizes project import and solo.yml editing as owned by solo-set-up-projects.",
+        "Does not reframe repo/command configuration as CLI or HTTP automation.",
+        "Does not modify solo.yml or project settings without explicit authority."
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Save this worker brief as a reusable Solo prompt template I can fill in later.",
+      "expected_output": "Do not use $solo-automate; route to $solo-save-prompts for creating and managing reusable prompt templates. Prompt-template management is not an integration-surface task even though automation can export templates.",
+      "assertions": [
+        "Recognizes prompt-template management as owned by solo-save-prompts.",
+        "Does not treat saving a template as choosing an automation surface.",
+        "Does not create or overwrite templates without explicit authority."
+      ],
+      "files": []
+    },
+    {
+      "prompt": "My solo.yml edits aren't taking effect and the CLI keeps erroring -- figure out why.",
+      "expected_output": "Do not use $solo-automate; route to $solo-troubleshoot for diagnosing CLI, solo.yml sync, and configuration failures. A malfunctioning CLI is a diagnosis task, not a scripting-surface choice.",
+      "assertions": [
+        "Recognizes CLI and solo.yml-sync failures as owned by solo-troubleshoot.",
+        "Does not treat a broken CLI as a routine automation-scripting request.",
+        "Investigates without applying speculative fixes beyond authorized scope."
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Write up my research plan and evidence in a Solo scratchpad so agents can pick it up later.",
+      "expected_output": "Do not use $solo-automate; route to $solo-keep-scratchpads for authoring and maintaining project scratchpads. Deep links can address a scratchpad, but creating its content is not an integration-surface task.",
+      "assertions": [
+        "Recognizes scratchpad authoring as owned by solo-keep-scratchpads.",
+        "Does not conflate solo:// resource addressing with writing scratchpad content.",
+        "Does not create or edit scratchpad content without explicit authority."
+      ],
+      "files": []
     }
   ]
 }

@@ -33,6 +33,171 @@
         "Avoids unrelated setup side effects"
       ],
       "files": []
+    },
+    {
+      "prompt": "$solo-set-up-projects for my new backend repo: define build, test, and migrate commands in solo.yml with correct working directories.",
+      "expected_output": "Use $solo-set-up-projects to inspect existing registration, then add build, test, and migrate commands to root solo.yml with relative working directories and explicit safe defaults, without launching them.",
+      "assertions": [
+        "Checks existing project and solo.yml before editing",
+        "Defines commands with relative working_dir values in shared solo.yml",
+        "Sets auto_start and auto_restart explicitly, defaulting false",
+        "Does not run the defined commands"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "hey can you get this repo wired up in Solo so the whole team shares the same commands?",
+      "expected_output": "Use $solo-set-up-projects to register the repository and capture shared commands in root solo.yml for team sync, explaining the trust handoff without starting anything.",
+      "assertions": [
+        "Calls list_projects before create_project",
+        "Places shared commands in root solo.yml for sync",
+        "Explains trust review handoff",
+        "Does not auto-run shared commands"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Set up environment values and a staging execution profile for the build command in this Solo project.",
+      "expected_output": "Use $solo-set-up-projects to add the execution profile and non-secret environment values to the build command's project configuration, keeping secrets out of shared solo.yml.",
+      "assertions": [
+        "Configures execution profile in project config",
+        "Excludes secrets from shared solo.yml",
+        "Keeps machine-specific values local",
+        "Does not start the build command"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Register this monorepo in Solo, set auto-restart on the API command and file-watch restart on web, but don't launch anything yet.",
+      "expected_output": "Use $solo-set-up-projects to register the monorepo and set the auto-restart and file-watch restart policies in configuration, deferring all process launch.",
+      "assertions": [
+        "Registers project only after checking list_projects",
+        "Sets restart policies explicitly in configuration",
+        "Honors the no-launch constraint",
+        "Does not start or spawn any process"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Import the existing solo.yml from this repo into Solo and walk me through the trust review before any command runs.",
+      "expected_output": "Use $solo-set-up-projects to import the repo's solo.yml, reconcile it with existing registration, and describe the trust review gate without executing commands.",
+      "assertions": [
+        "Imports and syncs the repo solo.yml",
+        "Reconciles with existing project registration",
+        "Surfaces trust review before command execution",
+        "Does not run imported commands"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Add lint and typecheck commands to this project's shared config and set their working directories to packages/core.",
+      "expected_output": "Use $solo-set-up-projects to add lint and typecheck commands to root solo.yml with packages/core as the relative working directory and safe defaults.",
+      "assertions": [
+        "Adds commands to shared solo.yml",
+        "Uses relative in-root working_dir values",
+        "Sets safe auto_start and auto_restart defaults",
+        "Does not execute lint or typecheck"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "I want this repo in Solo with its command definitions stored locally, not shared. Set that up.",
+      "expected_output": "Use $solo-set-up-projects to register the repository and store its command definitions in local project state rather than shared solo.yml, per the requested command storage scope.",
+      "assertions": [
+        "Registers project after checking existing state",
+        "Honors local command storage over shared solo.yml",
+        "Keeps machine-specific state local",
+        "Does not launch stored commands"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Switch Solo to a dark theme and rearrange my sidebar and window layout.",
+      "expected_output": "Do not use $solo-set-up-projects; route to $solo-customize-workspace for app-level appearance and layout personalization.",
+      "assertions": [
+        "Recognizes personal workspace UI, not project setup",
+        "Routes to solo-customize-workspace",
+        "Does not touch solo.yml or project registration",
+        "Avoids process side effects"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Remap the command palette shortcut and change my Solo notification settings.",
+      "expected_output": "Do not use $solo-set-up-projects; route to $solo-customize-workspace for keymaps and notification preferences.",
+      "assertions": [
+        "Recognizes keymap and notification personalization",
+        "Routes to solo-customize-workspace",
+        "Does not edit project or command configuration",
+        "Makes no runtime changes"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Connect my external editor to Solo and update my account display name.",
+      "expected_output": "Do not use $solo-set-up-projects; route to $solo-customize-workspace for external tool integration and account display.",
+      "assertions": [
+        "Recognizes external tool and account display scope",
+        "Routes to solo-customize-workspace",
+        "Does not register repositories or edit solo.yml",
+        "Avoids process or Git side effects"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Start the dev and API commands now.",
+      "expected_output": "Do not use $solo-set-up-projects; route to $solo-run-processes for command lifecycle control.",
+      "assertions": [
+        "Recognizes runtime process control",
+        "Routes to solo-run-processes",
+        "Does not edit solo.yml or project settings",
+        "Requires authority for YAML-backed shared commands"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Restart the web process and send 'rs' to the running dev command.",
+      "expected_output": "Do not use $solo-set-up-projects; route to $solo-run-processes for restart and process input.",
+      "assertions": [
+        "Recognizes restart and input as lifecycle work",
+        "Routes to solo-run-processes",
+        "Does not modify project configuration",
+        "Avoids unrelated setup side effects"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "My solo.yml edits aren't taking effect and the command still fails. Figure out why.",
+      "expected_output": "Do not use $solo-set-up-projects; route to $solo-troubleshoot for solo.yml sync and command failure diagnosis.",
+      "assertions": [
+        "Recognizes failure diagnosis, not new setup",
+        "Routes to solo-troubleshoot",
+        "Does not rewrite configuration blindly",
+        "Investigates sync and command failure first"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Solo shows the project as untrusted and status disagrees with what's actually running. Diagnose it.",
+      "expected_output": "Do not use $solo-set-up-projects; route to $solo-troubleshoot for trust and status-discrepancy diagnosis.",
+      "assertions": [
+        "Recognizes trust and status discrepancy as diagnosis",
+        "Routes to solo-troubleshoot",
+        "Does not re-register or reconfigure as a fix",
+        "Avoids runtime side effects"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Is the API server ready yet, and what is it listening on for port 3000?",
+      "expected_output": "Do not use $solo-set-up-projects; route to $solo-observe-services for read-only status, readiness, and port inspection.",
+      "assertions": [
+        "Recognizes read-only status and readiness query",
+        "Routes to solo-observe-services",
+        "Does not edit project configuration",
+        "Changes no runtime state"
+      ],
+      "files": []
     }
   ]
 }

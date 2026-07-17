@@ -33,6 +33,157 @@
         "Requires ownership or exact authority before any later mutation"
       ],
       "files": []
+    },
+    {
+      "prompt": "$solo-observe-services check whether the frontend dev server is listening on its port yet.",
+      "expected_output": "Use $solo-observe-services to scope the project, inspect services and bound ports, and report whether the listener is up without touching runtime.",
+      "assertions": [
+        "Uses services_list or get_process_ports to read listener state",
+        "Distinguishes port-listening from application-healthy",
+        "Performs no lifecycle, output, or configuration mutation"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "quick q -- is my backend up and did it finish booting?",
+      "expected_output": "Use $solo-observe-services to gather process status and startup readiness, then state what the evidence proves and what stays unverified.",
+      "assertions": [
+        "Resolves scope read-only via whoami or list/select",
+        "Separates process running from startup readiness",
+        "Does not restart, spawn, or send input"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Before the demo, confirm every service is ready, grab their localhost URLs, and show recent output for anything that looks flaky.",
+      "expected_output": "Use $solo-observe-services to snapshot all services, report detected URLs and readiness, and surface recent rendered output without changing runtime.",
+      "assertions": [
+        "Enumerates services and reports detected URLs instead of assumed defaults",
+        "Uses rendered output before raw output",
+        "Reports readiness per service and remaining health uncertainty",
+        "Makes no lifecycle or configuration change"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "How much memory and CPU is the indexer process chewing through right now?",
+      "expected_output": "Use $solo-observe-services to read the process resource snapshot and report current CPU and memory without altering the process.",
+      "assertions": [
+        "Uses get_process_status or project stats for resource figures",
+        "Reports observed values without projecting defaults",
+        "Does not restart, clear, or reconfigure the process"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "The status badge says running but I don't trust it -- confirm the process is actually alive and bound.",
+      "expected_output": "Use $solo-observe-services to reconcile reported status against live process and port evidence, flagging any stale-status discrepancy.",
+      "assertions": [
+        "Cross-checks reported status against process and port evidence",
+        "Separates lifecycle, listener readiness, and health",
+        "Repairs nothing and changes no runtime state"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "What's the localhost URL for the web app so I can open it in my browser?",
+      "expected_output": "Use $solo-observe-services to inspect the service's bound port and report the detected localhost URL rather than an assumed default.",
+      "assertions": [
+        "Uses get_process_ports or services_list to derive the URL",
+        "Reports detected URL instead of assumed default",
+        "Performs no mutation"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "List everything Solo is running and flag anything that hasn't come up yet.",
+      "expected_output": "Use $solo-observe-services to enumerate processes and services, then report which are ready and which remain unverified without acting on them.",
+      "assertions": [
+        "Enumerates processes and services read-only",
+        "Distinguishes ready from not-yet-ready without remediation",
+        "Does not start, restart, or stop anything"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Restart the api server, it's acting up.",
+      "expected_output": "Do not use $solo-observe-services; route to $solo-run-processes for the restart, since lifecycle changes fall outside observation.",
+      "assertions": [
+        "Recognizes an authorized lifecycle request",
+        "Routes restart to solo-run-processes",
+        "Does not perform the restart inside observation workflow"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Start the whole dev stack for me.",
+      "expected_output": "Do not use $solo-observe-services; route to $solo-run-processes to launch the stack, since starting commands changes runtime.",
+      "assertions": [
+        "Identifies a bulk start request",
+        "Routes to solo-run-processes",
+        "Observes only, never starts commands"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "The migration terminal is waiting for confirmation -- send it 'yes'.",
+      "expected_output": "Do not use $solo-observe-services; route to $solo-run-processes to send terminal input, since input changes process state.",
+      "assertions": [
+        "Recognizes a send-input request",
+        "Routes to solo-run-processes",
+        "Reads output but sends no input"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "The server never becomes ready and I can't tell why -- dig in and fix the trust prompt blocking it.",
+      "expected_output": "Do not use $solo-observe-services; route to $solo-troubleshoot to diagnose the readiness and trust failure and repair it.",
+      "assertions": [
+        "Separates observation from failure diagnosis",
+        "Routes readiness and trust repair to solo-troubleshoot",
+        "Preserves failure evidence without repairing"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "My solo.yml edits aren't taking effect -- figure out what's wrong.",
+      "expected_output": "Do not use $solo-observe-services; route to $solo-troubleshoot for the solo.yml sync failure.",
+      "assertions": [
+        "Recognizes a configuration-sync failure, not a status view",
+        "Routes to solo-troubleshoot",
+        "Changes no configuration"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Commands keep dying with 'node: command not found' -- sort out the version manager.",
+      "expected_output": "Do not use $solo-observe-services; route to $solo-troubleshoot to resolve the version-manager and command failure.",
+      "assertions": [
+        "Identifies a command-execution failure to diagnose",
+        "Routes to solo-troubleshoot",
+        "Performs no repair within observation"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Add a command that runs the worker and set its working directory.",
+      "expected_output": "Do not use $solo-observe-services; route to $solo-set-up-projects to define the command and working directory.",
+      "assertions": [
+        "Recognizes a project configuration change",
+        "Routes to solo-set-up-projects",
+        "Edits no configuration inside observation"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Stop everything, I'm done for the day.",
+      "expected_output": "Do not use $solo-observe-services; route to $solo-run-processes to stop the commands, since shutdown changes runtime.",
+      "assertions": [
+        "Identifies a bulk stop request",
+        "Routes to solo-run-processes",
+        "Observes only, never stops commands"
+      ],
+      "files": []
     }
   ]
 }

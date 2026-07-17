@@ -88,6 +88,187 @@
         "Does not fan out when lanes are sequential or share an edit surface"
       ],
       "files": []
+    },
+    {
+      "id": 8,
+      "prompt": "$fan-solo I'm setting up a fresh Solo project, want a couple agents reviewing the code, and need to keep notes and tasks straight—help me sequence this.",
+      "expected_output": "Use $fan-solo to route this explicit mixed request: establish live whoami/help/docs context, then sequence through solo-set-up-projects, owned agent work, and durable state, splitting narrative to solo-keep-scratchpads and actionable work to solo-track-todos, using the fewest skills that cover the task.",
+      "assertions": [
+        "Triggers on explicit $fan-solo invocation for a multi-capability request",
+        "Establishes live identity and help before static guidance",
+        "Routes project setup to solo-set-up-projects",
+        "Splits scratchpad narrative from actionable todos",
+        "Uses the fewest skills that fully cover the task"
+      ],
+      "files": []
+    },
+    {
+      "id": 9,
+      "prompt": "solo does like a hundred things and honestly i'm lost, what can it even do and which parts should i actually use for my project?",
+      "expected_output": "Use $fan-solo as the router for learning Solo: start from live help and docs source order, frame Solo as a native workspace around existing agents and commands, and map its capabilities to focused skills without dumping every API detail.",
+      "assertions": [
+        "Triggers on casual learning phrasing without explicit skill names",
+        "Starts from live help and docs rather than a static feature dump",
+        "Frames Solo as a workspace, not an IDE or agent provider",
+        "Maps capabilities to focused sibling skills"
+      ],
+      "files": []
+    },
+    {
+      "id": 10,
+      "prompt": "In Solo I want to bring up my dev stack, watch it come up, jot down what breaks, and file the fixes as tasks.",
+      "expected_output": "Use $fan-solo to route this mixed multi-surface request: solo-run-processes to start the stack, solo-observe-services for readiness evidence, solo-keep-scratchpads for what breaks, and solo-track-todos for the actionable fixes, defaulting to one agent.",
+      "assertions": [
+        "Triggers on a mixed request spanning several Solo surfaces",
+        "Routes lifecycle to solo-run-processes and readiness to solo-observe-services",
+        "Distinguishes scratchpad narrative from actionable todos",
+        "Defaults to one agent rather than orchestration"
+      ],
+      "files": []
+    },
+    {
+      "id": 11,
+      "prompt": "For building this feature in Solo, should I use one agent or several, and how do I keep their state from getting tangled?",
+      "expected_output": "Use $fan-solo to choose among Solo skills: default to one agent via solo-work-with-agents unless the lanes are genuinely independent, in which case solo-orchestrate-agents, and map durable state to scratchpads and todos.",
+      "assertions": [
+        "Triggers on choosing among Solo agent skills",
+        "Defaults to solo-work-with-agents for a single coherent loop",
+        "Escalates to solo-orchestrate-agents only for genuinely independent lanes",
+        "Maps durable state to scratchpads and todos"
+      ],
+      "files": []
+    },
+    {
+      "id": 12,
+      "prompt": "Launch a single Codex agent in Solo, give it one prompt, and show me its output when it finishes.",
+      "expected_output": "Do not use $fan-solo; route to $solo-work-with-agents for the single bounded owned-agent lifecycle: setup, launch, prompt, and output inspection, without orchestration or broad router explanation.",
+      "assertions": [
+        "Does not trigger fan-solo for a single scoped owned-agent action",
+        "Routes to solo-work-with-agents",
+        "Does not escalate to orchestration",
+        "Reports real agent output as evidence"
+      ],
+      "files": []
+    },
+    {
+      "id": 13,
+      "prompt": "I already know I want a lead plus three worker agents on separate Solo lanes, just set up the orchestration and integrate the verified results.",
+      "expected_output": "Do not use $fan-solo; route to $solo-orchestrate-agents, since the request already scopes cleanly to multi-agent coordination with bounded lanes, lead-owned integration, and evidence before merge.",
+      "assertions": [
+        "Does not linger in fan-solo when the scope is already clearly orchestration",
+        "Routes to solo-orchestrate-agents",
+        "Requires bounded lanes and lead-owned integration",
+        "Requires artifact or test evidence before integration"
+      ],
+      "files": []
+    },
+    {
+      "id": 14,
+      "prompt": "Add three Solo todos for the auth work, tag them, and mark the first one blocked on the second.",
+      "expected_output": "Do not use $fan-solo; route to $solo-track-todos for creating todos, tagging, and setting blockers on the actionable owned work graph.",
+      "assertions": [
+        "Does not trigger fan-solo for a single scoped todo action",
+        "Routes to solo-track-todos",
+        "Handles tags and blockers as todo-graph operations",
+        "Does not treat this as narrative scratchpad work"
+      ],
+      "files": []
+    },
+    {
+      "id": 15,
+      "prompt": "Save my research notes into a Solo scratchpad and tag it so I can find it later.",
+      "expected_output": "Do not use $fan-solo; route to $solo-keep-scratchpads for writing and tagging the durable, non-canonical narrative scratchpad.",
+      "assertions": [
+        "Does not trigger fan-solo for a single scoped scratchpad action",
+        "Routes to solo-keep-scratchpads",
+        "Treats notes as narrative, not actionable todos",
+        "Keeps the scratchpad non-canonical until promoted"
+      ],
+      "files": []
+    },
+    {
+      "id": 16,
+      "prompt": "Wire the Solo MCP server into my CLI client and script a project status call through the local HTTP API.",
+      "expected_output": "Do not use $fan-solo; route to $solo-automate for MCP client configuration and scripting Solo through the local HTTP API and other integration surfaces.",
+      "assertions": [
+        "Does not trigger fan-solo for a single scoped automation action",
+        "Routes to solo-automate",
+        "Treats MCP wiring and API scripting as integration work",
+        "Does not turn a scripting task into interactive orchestration"
+      ],
+      "files": []
+    },
+    {
+      "id": 17,
+      "prompt": "Do an exhaustive, cited comparison of these three vector databases across Parallel and Perplexity and reconcile any contradictions.",
+      "expected_output": "Do not use $fan-solo; route to $solo-deep-research for provider selection, independent evidence lanes, inline citations, and contradiction resolution.",
+      "assertions": [
+        "Does not linger in fan-solo when the scope is clearly deep research",
+        "Routes to solo-deep-research",
+        "Requires independent sources and inline citations",
+        "Requires contradiction resolution in the synthesis"
+      ],
+      "files": []
+    },
+    {
+      "id": 18,
+      "prompt": "This run is finished, promote the durable conclusions into the repo docs, then archive the scratchpads and close the todos.",
+      "expected_output": "Do not use $fan-solo; route to $solo-close-out-work to promote durable conclusions into canonical repo docs first, then retire the ephemeral scratchpads and todos without losing incomplete work.",
+      "assertions": [
+        "Does not trigger fan-solo for a scoped multi-surface close-out",
+        "Routes to solo-close-out-work",
+        "Promotes durable content before retiring ephemeral copies",
+        "Preserves genuinely incomplete work"
+      ],
+      "files": []
+    },
+    {
+      "id": 19,
+      "prompt": "Save this worker brief as a reusable Solo prompt template with placeholders for the repo and lane.",
+      "expected_output": "Do not use $fan-solo; route to $solo-save-prompts for creating a reusable prompt template with placeholders, scoped as global or project.",
+      "assertions": [
+        "Does not trigger fan-solo for a single scoped prompt-template action",
+        "Routes to solo-save-prompts",
+        "Treats the template as reusable dispatch text, not current project truth",
+        "Handles placeholders and scope"
+      ],
+      "files": []
+    },
+    {
+      "id": 20,
+      "prompt": "Rearrange the Solo sidebar, rebind a couple of keymaps, and switch the app to dark mode.",
+      "expected_output": "Do not use $fan-solo; route to $solo-customize-workspace for app-level sidebar, keymap, and appearance personalization.",
+      "assertions": [
+        "Does not trigger fan-solo for a scoped workspace personalization",
+        "Routes to solo-customize-workspace",
+        "Keeps changes at the app workspace level, not solo.yml or process control",
+        "Does not touch repository configuration"
+      ],
+      "files": []
+    },
+    {
+      "id": 21,
+      "prompt": "Add this repo to Solo and define the dev, test, and build commands in solo.yml with a working directory.",
+      "expected_output": "Do not use $fan-solo; route to $solo-set-up-projects for importing the repository and defining the shared solo.yml command stack and working directory.",
+      "assertions": [
+        "Does not trigger fan-solo for a single scoped project-setup action",
+        "Routes to solo-set-up-projects",
+        "Treats solo.yml command definition as project configuration",
+        "Does not start or observe processes as part of setup"
+      ],
+      "files": []
+    },
+    {
+      "id": 22,
+      "prompt": "My solo.yml changes aren't taking effect and the command won't run, figure out what's wrong.",
+      "expected_output": "Do not use $fan-solo; route to $solo-troubleshoot to diagnose the solo.yml sync and command-execution failure before any repair.",
+      "assertions": [
+        "Does not trigger fan-solo for a scoped failure diagnosis",
+        "Routes to solo-troubleshoot",
+        "Diagnoses solo.yml sync and command-run failure rather than reconfiguring blindly",
+        "Separates diagnosis from routine start or stop"
+      ],
+      "files": []
     }
   ]
 }

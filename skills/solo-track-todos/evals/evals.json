@@ -44,6 +44,171 @@
         "Links the handoff comment rather than copying it"
       ],
       "files": []
+    },
+    {
+      "prompt": "Mind tossing the follow-ups from our chat into Solo todos so we don't forget them?",
+      "expected_output": "Use $solo-track-todos to create bounded actionable todos from the follow-ups, add priorities and tags, and leave narrative context out of the todo graph.",
+      "assertions": [
+        "Treats casual phrasing as a real todo-creation request",
+        "Creates actionable todos rather than narrative",
+        "Adds priority and tags without inventing status",
+        "Does not spawn agents or start processes"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "$solo-track-todos claim the migration todo, set it in-progress, and lock it so another agent doesn't grab it.",
+      "expected_output": "Use $solo-track-todos to lock and claim the migration todo, set status to in-progress, and record the claim without overriding a lock another actor already holds.",
+      "assertions": [
+        "Honors the explicit skill invocation",
+        "Claims via todo locks, not general coordination locks",
+        "Sets in-progress status",
+        "Refuses to steal a lock held by another actor"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Log our decision to standardize on Postgres somewhere durable, and create Solo todos for the migration steps with the schema task blocking the data-copy task.",
+      "expected_output": "Use $solo-track-todos for the migration todos and the schema-blocks-data-copy edge, while noting the Postgres decision narrative belongs in $solo-keep-scratchpads.",
+      "assertions": [
+        "Owns the actionable todo portion of the mixed request",
+        "Models the schema-to-data-copy blocker explicitly",
+        "Redirects the decision narrative to scratchpads",
+        "Does not store decision prose inside todos"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "The auth refactor shouldn't begin until the schema todo is done. Wire that into our todos.",
+      "expected_output": "Use $solo-track-todos to block the auth-refactor todo on the schema todo, keeping the dependency explicit and ready work visible.",
+      "assertions": [
+        "Adds an explicit blocker edge",
+        "Keeps the blocked and ready distinction honest",
+        "Does not complete or start either task",
+        "Leaves rationale narrative out of the todo graph"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Leave a progress note on the indexer todo that the backfill is half done, and hand it to whoever picks it up next.",
+      "expected_output": "Use $solo-track-todos to add a progress comment to the indexer todo and record a durable handoff, without completing the work or spawning a successor agent.",
+      "assertions": [
+        "Adds a comment capturing progress",
+        "Records the handoff in the todo trail",
+        "Does not mark the todo complete",
+        "Does not spawn or assign an agent"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Which Solo todos are unblocked and ready for me to pick up right now?",
+      "expected_output": "Use $solo-track-todos to list unblocked ready todos with priority and tags, without claiming, locking, or starting any of them unprompted.",
+      "assertions": [
+        "Lists ready unblocked work",
+        "Surfaces priority and tags",
+        "Does not auto-claim or lock",
+        "Does not spawn agents"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "The parser todo's handoff checks out -- complete it and update anything that was waiting on it.",
+      "expected_output": "Use $solo-track-todos to complete the parser todo after its handoff evidence, then refresh dependent blockers so newly unblocked work becomes visible.",
+      "assertions": [
+        "Completes after reviewing handoff evidence",
+        "Unblocks dependents by updating blockers",
+        "Preserves the completed record and comments",
+        "Does not delete the todo before consumers acknowledge"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Write up the rollout plan and the trade-offs we weighed so the next agent understands the approach.",
+      "expected_output": "Do not use $solo-track-todos; route to $solo-keep-scratchpads, which owns plans, rationale, and narrative context; only distinct actionable steps would later become todos.",
+      "assertions": [
+        "Recognizes plan and rationale as scratchpad content",
+        "Routes to solo-keep-scratchpads",
+        "Does not create todos from prose",
+        "Notes only actionable steps become todos later"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Record the decision that we're dropping Redis and why, so it's not relitigated.",
+      "expected_output": "Do not use $solo-track-todos; route to $solo-keep-scratchpads for the decision record and reasoning; a todo would only track a follow-up action, not the decision itself.",
+      "assertions": [
+        "Treats decision-and-why as durable narrative",
+        "Routes to solo-keep-scratchpads",
+        "Keeps decision prose out of todos",
+        "Distinguishes the decision from any follow-up task"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Collect the benchmark evidence and my notes comparing the two caches into one place for later.",
+      "expected_output": "Do not use $solo-track-todos; route to $solo-keep-scratchpads, which owns research, evidence, and comparison notes; todos track work, not findings.",
+      "assertions": [
+        "Recognizes evidence and notes as scratchpad material",
+        "Routes to solo-keep-scratchpads",
+        "Does not encode findings as todos",
+        "Preserves the research and todo boundary"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "This run is done -- reconcile the scratchpads, todos, and locks, promote anything worth keeping, and retire the leftovers.",
+      "expected_output": "Do not use $solo-track-todos; route to $solo-close-out-work, which reconciles finished-run residue across several state surfaces and retires ephemeral copies; the todo skill only maintains the live actionable graph.",
+      "assertions": [
+        "Recognizes multi-surface end-of-run reconciliation",
+        "Routes to solo-close-out-work",
+        "Does not treat cross-surface cleanup as todo tidying",
+        "Keeps todo scope on the live actionable graph"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "The dev server task is stuck -- kill it and start it back up.",
+      "expected_output": "Do not use $solo-track-todos; route to $solo-run-processes for stopping and starting managed commands; a todo is not a running process and its lock is not process authority.",
+      "assertions": [
+        "Distinguishes a running process from a todo",
+        "Routes to solo-run-processes",
+        "Does not treat todo status as process state",
+        "Does not use todo locks as process authority"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Set the background worker to auto-start whenever the project opens and restart it if it crashes.",
+      "expected_output": "Do not use $solo-track-todos; route to $solo-run-processes for auto-start and crash-restart command policy; todos do not run or supervise commands.",
+      "assertions": [
+        "Recognizes command lifecycle policy",
+        "Routes to solo-run-processes",
+        "Does not model process supervision as a todo",
+        "Keeps todos to actionable work items"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Save the handoff message we keep rewriting as a reusable template with placeholders.",
+      "expected_output": "Do not use $solo-track-todos; route to $solo-save-prompts for reusable prompt templates with placeholders; a handoff comment on a todo is per-task, not a template.",
+      "assertions": [
+        "Recognizes reusable template intent",
+        "Routes to solo-save-prompts",
+        "Distinguishes a per-task handoff comment from a template",
+        "Does not store template text in todos"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Fan out the ready todos to parallel agents and coordinate them until the feature merges.",
+      "expected_output": "Do not use $solo-track-todos; route to $solo-orchestrate-agents for spawning and coordinating parallel workers; the todo skill may surface ready work but does not spawn or drive agents.",
+      "assertions": [
+        "Recognizes multi-agent orchestration",
+        "Routes to solo-orchestrate-agents",
+        "May surface ready work but does not spawn agents",
+        "Does not use todo locks as worker control"
+      ],
+      "files": []
     }
   ]
 }
