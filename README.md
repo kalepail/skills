@@ -120,6 +120,8 @@ git clone https://github.com/kalepail/skills.git
 
 Keep each skill directory intact so its scripts, references, evals, and metadata remain available.
 
+A clone is also self-hosting: committed `.claude/skills` and `.agents/skills` symlinks expose the live skills to Claude Code and `.agents`-aware tools when working inside the repository itself.
+
 ## Use
 
 For broad or mixed Solo work, ask:
