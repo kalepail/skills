@@ -1,3 +1,3 @@
 # CLAUDE.md
 
-See [AGENTS.md](AGENTS.md) for the model/agent fleet routing, third-party dependencies, and repo conventions. It is the source of truth for how to work in this repo.
+See [AGENTS.md](AGENTS.md) — the entry point for working in this repo: layout, house rules, authoring standard, dogfooding, and third-party dependencies.

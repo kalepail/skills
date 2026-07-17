@@ -1,16 +1,12 @@
 # kalepail Skills
 
-Reusable AI-agent skills maintained by Tyler van der Hoeven.
+Personal, opinionated AI-agent skills by [Tyler van der Hoeven](https://github.com/kalepail), portable across Claude Code, Codex, OpenCode, and Grok: **Fan Solo**, a router plus focused `solo-*` skills for driving [Solo](https://soloterm.com) (SoloTerm), and **Agent Browser WebAuthn**, passkey and Stellar smart-account browser testing through `agent-browser`.
 
 ## Skills
 
-### Agent Browser WebAuthn Testing
-
-- [Agent Browser WebAuthn](skills/agent-browser-webauthn/) — drive passkey and Stellar smart account browser tests with `agent-browser` and Chrome DevTools virtual WebAuthn authenticators.
-
 ### Fan Solo
 
-[Fan Solo](skills/fan-solo/) routes broad Solo and SoloTerm requests to focused skills. Install router plus all 13 skills below.
+[Fan Solo](skills/fan-solo/) routes broad Solo and SoloTerm requests to the focused skills below. Install the router together with all of them.
 
 **Setup and workspace**
 
@@ -33,113 +29,106 @@ Reusable AI-agent skills maintained by Tyler van der Hoeven.
 
 - [Track todos](skills/solo-track-todos/) — keep actionable work, blockers, locks, comments, and handoffs.
 - [Keep scratchpads](skills/solo-keep-scratchpads/) — preserve plans, research, decisions, evidence, and project context.
-- [Close out work](skills/solo-close-out-work/) — reconcile a finished run: promote durable conclusions to repo docs, then archive/complete the ephemeral state without losing incomplete work.
+- [Close out work](skills/solo-close-out-work/) — reconcile a finished run: promote durable conclusions to repo docs, then retire completed ephemeral copies without losing incomplete work.
 - [Save prompts](skills/solo-save-prompts/) — maintain reusable cross-agent prompt templates.
 
 **Integration**
 
 - [Automate](skills/solo-automate/) — use Solo MCP, CLI, local HTTP API, hosted API, and deep links.
 
+### Agent Browser WebAuthn
+
+- [Agent Browser WebAuthn](skills/agent-browser-webauthn/) — drive passkey and Stellar smart account browser tests with `agent-browser` and Chrome DevTools virtual WebAuthn authenticators.
+
+## Requirements
+
+Skills orchestrate external tools; they do not bundle or authenticate them.
+
+- **Solo MCP** — required by `fan-solo` and every `solo-*` skill. Enable [Solo's local MCP server](https://soloterm.com/docs/integrations/mcp-server) and connect your agent host to it.
+- **Optional research providers** — `solo-deep-research` prefers Parallel CLI, falls back to Parallel Search/Task MCP, and uses Perplexity MCP as an independent lane when available; missing providers degrade to documented fallbacks.
+- **agent-browser and Node.js 22+** — Agent Browser WebAuthn requires the `agent-browser` CLI and Node.js 22 or newer; the `$agent-browser` skill is recommended but not bundled here.
+
 ## Install
 
 ### skills.sh CLI
 
-List available skills, then install one selected skill explicitly:
-
 ```bash
+# list available skills
 npx skills add kalepail/skills --list
-npx skills add kalepail/skills -g --skill agent-browser-webauthn -a claude-code -a codex -a opencode -y
-```
 
-Install every skill globally for Claude Code, Codex, and OpenCode:
-
-```bash
+# install everything globally for Claude Code, Codex, and OpenCode
 npx skills add kalepail/skills -g --skill '*' -a claude-code -a codex -a opencode -y
-```
 
-Replace `agent-browser-webauthn` with any listed skill name. Use it alone for WebAuthn and passkey testing through `agent-browser`. Install `fan-solo` plus every `solo-*` skill for the complete Fan Solo collection.
+# install one skill
+npx skills add kalepail/skills -g --skill agent-browser-webauthn -a claude-code -a codex -a opencode -y
 
-Install Fan Solo without the unrelated WebAuthn skill:
-
-```bash
+# install Fan Solo without the unrelated WebAuthn skill
 npx skills add kalepail/skills -g -a claude-code -a codex -a opencode -y --skill fan-solo solo-set-up-projects solo-customize-workspace solo-run-processes solo-observe-services solo-troubleshoot solo-work-with-agents solo-orchestrate-agents solo-deep-research solo-track-todos solo-keep-scratchpads solo-close-out-work solo-save-prompts solo-automate
 ```
 
 ### Claude Code
 
-The Claude marketplace offers two alternatives. Install the complete collection:
-
 ```bash
 claude plugin marketplace add kalepail/skills
+
+# complete collection
 claude plugin install kalepail-skills@kalepail-skills
-```
 
-Or install Agent Browser WebAuthn alone:
-
-```bash
-claude plugin marketplace add kalepail/skills
+# or Agent Browser WebAuthn alone
 claude plugin install agent-browser-webauthn@kalepail-skills
 ```
 
 ### Codex
-
-The Codex marketplace installs the complete general collection:
 
 ```bash
 codex plugin marketplace add kalepail/skills
 codex plugin add kalepail-skills@kalepail-skills
 ```
 
-Use the skills.sh CLI above when only selected Codex skills are wanted.
+Use the skills.sh CLI when only selected Codex skills are wanted.
 
 ### OpenCode
 
-Use the skills.sh CLI above. OpenCode natively discovers shared `.agents/skills` project installs and `~/.agents/skills` global installs. No `.opencode/` mirror or plugin is needed.
+Use the skills.sh CLI above. OpenCode natively discovers `.agents/skills` project installs and `~/.agents/skills` global installs; no mirror or plugin is needed.
 
 ### Grok
 
-Grok reads Claude-compatible plugins directly. Install one of these alternatives:
+Grok reads Claude-compatible plugins directly:
 
 ```bash
-# Complete collection
+# complete collection
 grok plugin install kalepail/skills
 
 # Agent Browser WebAuthn only
 grok plugin install kalepail/skills#skills/agent-browser-webauthn
 ```
 
-Review Grok's trust prompt before enabling either plugin. No `.grok/` mirror is needed.
+Review Grok's trust prompt before enabling.
 
-### Manual fallback
-
-Clone repository and copy chosen `skills/<name>` directories into the agent's supported skill directory:
+### Manual
 
 ```bash
 git clone https://github.com/kalepail/skills.git
 ```
 
-Keep each skill directory intact so its scripts, references, evals, and metadata remain available.
-
-A clone is also self-hosting: committed `.claude/skills` and `.agents/skills` symlinks expose the live skills to Claude Code and `.agents`-aware tools when working inside the repository itself.
+Copy chosen `skills/<name>` directories intact into your agent's skill directory.
 
 ## Use
 
-For broad or mixed Solo work, ask:
+For broad or mixed Solo work:
 
 ```text
 Use $fan-solo to choose and run the right Solo workflow for this task.
 ```
 
-For one clearly scoped task, invoke matching `$solo-*` skill directly. Fan Solo expects local Solo MCP dependency named `solo`; it checks live identity, help, and documentation before static guidance.
+For one clearly scoped task, invoke the matching `$solo-*` skill directly. For passkey testing, use `$agent-browser-webauthn` with `$agent-browser` to drive a flow against a virtual WebAuthn authenticator.
 
-Before using Fan Solo in any host, enable Solo's local MCP server and configure that host to connect to it. Follow [Solo's MCP setup](https://soloterm.com/docs/integrations/mcp-server); the skill plugins do not bundle or authenticate Solo itself.
+These skills are personal and opinionated: model routing and tool preferences are baked in. [AGENTS.md](AGENTS.md) is the guide for working in this repo.
 
-`solo-deep-research` additionally uses whichever of Parallel CLI, Parallel Search or Task MCP, and Perplexity MCP are installed and authorized. Missing providers become documented fallbacks rather than hard failures.
+## Research
 
-These are personal, opinionated skills: model routing (Fable orchestrates and reviews, Codex Sol codes, Opus 4.8 writes prose against a plan, GPT-5.6 Terra runs research and tool-calling lanes) and tool preferences are baked in. See [AGENTS.md](AGENTS.md) for the full fleet and third-party dependency manifest; `CLAUDE.md` points there too.
+Architecture derives from [OpenAI and Anthropic skill best practices](research/skill-best-practices.md) plus Solo research on [product docs](research/fan-solo/solo-product-docs.md), [MCP and APIs](research/fan-solo/solo-mcp-api.md), [coordination](research/fan-solo/solo-coordination.md), and [first-party X posts](research/fan-solo/solo-x-research.md).
 
-## Research and status
+## Status and license
 
-Architecture derives from [OpenAI and Anthropic skill best practices](research/fan-solo/skill-best-practices.md) plus Solo research on [product docs](research/fan-solo/solo-product-docs.md), [MCP and APIs](research/fan-solo/solo-mcp-api.md), [coordination](research/fan-solo/solo-coordination.md), and [first-party X posts](research/fan-solo/solo-x-research.md). Anonymized project and session research informed house style but is intentionally excluded from publishable files. Research snapshot: 2026-07-16.
-
-Fan Solo is unofficial community work. Not affiliated with, endorsed by, or maintained by Solo, SoloTerm, OpenAI, or Anthropic. Product names belong to respective owners.
+Unofficial community work, licensed [Apache-2.0](LICENSE). Not affiliated with, endorsed by, or maintained by Solo, SoloTerm, OpenAI, or Anthropic. Product names belong to their respective owners.
