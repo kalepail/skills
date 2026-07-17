@@ -1,8 +1,8 @@
 {
   "name": "kalepail-skills",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "Apache-2.0",
-  "description": "Reusable Fan Solo and agent-browser WebAuthn testing skills.",
+  "description": "Fan Solo, Kalepail house research, and agent-browser WebAuthn testing skills.",
   "author": {
     "name": "Tyler van der Hoeven",
     "url": "https://github.com/kalepail"
@@ -16,13 +16,15 @@
     "webauthn",
     "passkeys",
     "agent-browser",
-    "webauthn-testing"
+    "webauthn-testing",
+    "deep-research",
+    "stellar"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "kalepail Skills",
-    "shortDescription": "Fan Solo and agent-browser WebAuthn skills",
-    "longDescription": "Install Tyler van der Hoeven's reusable Fan Solo and agent-browser WebAuthn testing workflows.",
+    "shortDescription": "Fan Solo, Kalepail house, and agent-browser WebAuthn skills",
+    "longDescription": "Install Tyler van der Hoeven's Fan Solo, Kalepail house research, and agent-browser WebAuthn testing workflows.",
     "developerName": "Tyler van der Hoeven",
     "websiteURL": "https://github.com/kalepail/skills",
     "defaultPrompt": [

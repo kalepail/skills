@@ -33,8 +33,7 @@ Do not assume every documented tool is enabled. Discover current surface.
 | Inspect status, output, logs, ports, or readiness without changing runtime | `$solo-observe-services` |
 | Diagnose Solo configuration, discovery, trust, or runtime failure | `$solo-troubleshoot` |
 | Launch and manage one bounded owned agent | `$solo-work-with-agents` |
-| Coordinate multiple independent agents and integrate their work | `$solo-orchestrate-agents` |
-| Conduct deep, comparative, or cross-checked research across Parallel and Perplexity surfaces | `$solo-deep-research` |
+| Coordinate multiple independent agents—including research or evidence-gathering lanes—and integrate their work | `$solo-orchestrate-agents` |
 | Create actionable shared work, blockers, locks, comments, or handoffs | `$solo-track-todos` |
 | Preserve plans, research, decisions, or durable project context | `$solo-keep-scratchpads` |
 | Close out a finished run: promote durable conclusions to repo docs, then archive or complete the ephemeral state | `$solo-close-out-work` |
@@ -49,7 +48,7 @@ Default to one agent for sequential work, shared-state edits, or one coherent ju
 
 Use `$solo-orchestrate-agents` only when at least two lanes are independent enough to own separately. Lead owns decomposition, boundaries, integration, and final verification. Workers own bounded lanes—not whole goal. A parenting agent writes coordination state, final synthesis, and at most mechanical integration-seam glue—a no-code lead delegates even that: assign every separable artifact change—including rework—to a worker lane, and take back concise evidence and artifact paths, not whole pasted output.
 
-Use `$solo-deep-research` when those lanes are evidence-gathering work across research providers. It owns provider selection, source independence, citation discipline, contradiction resolution, and research synthesis; `$solo-orchestrate-agents` still supplies the process mechanics.
+Evidence-gathering lanes are ordinary orchestration: `$solo-orchestrate-agents` supplies the worker mechanics, timers, and handoffs. Provider selection, citation discipline, and research synthesis are not Solo capabilities—they come from whatever research method or skill the session already carries.
 
 Choose model, effort, and same-CLI-built-in versus Solo topology from [house style](references/house-style.md)—the single source for the fleet table, per-CLI flags, subagent triggers, agent-teams topology, and the when-to-weave rubric. Discover launchable tools and verify CLI flags live before dispatch.
 

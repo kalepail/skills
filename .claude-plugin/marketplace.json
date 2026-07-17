@@ -4,14 +4,14 @@
     "name": "Tyler van der Hoeven"
   },
   "metadata": {
-    "description": "Reusable Fan Solo and agent-browser WebAuthn testing skills."
+    "description": "Fan Solo, Kalepail house research, and agent-browser WebAuthn testing skills."
   },
   "plugins": [
     {
       "name": "kalepail-skills",
       "source": "./",
-      "description": "Install the complete Fan Solo and agent-browser WebAuthn testing collection.",
-      "version": "0.1.0"
+      "description": "Install the complete collection: Fan Solo, Kalepail house research, and agent-browser WebAuthn testing.",
+      "version": "0.2.0"
     },
     {
       "name": "agent-browser-webauthn",

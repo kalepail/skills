@@ -21,12 +21,18 @@
         "solo-troubleshoot",
         "solo-work-with-agents",
         "solo-orchestrate-agents",
-        "solo-deep-research",
         "solo-track-todos",
         "solo-keep-scratchpads",
         "solo-close-out-work",
         "solo-save-prompts",
         "solo-automate"
+      ]
+    },
+    {
+      "title": "Kalepail House",
+      "description": "Tyler's personal workflows: cited multi-lane research synthesis across Parallel, Perplexity, and Stellar Raven, with optional Solo fan-out.",
+      "skills": [
+        "kalepail-deep-research"
       ]
     }
   ]

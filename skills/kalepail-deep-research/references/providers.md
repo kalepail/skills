@@ -1,6 +1,6 @@
 # Deep research provider guide
 
-Use current tool discovery as authority; verify provider names and commands against live listings or current official documentation before use.
+Use current tool discovery as authority; verify provider names and commands against live listings or current official documentation before use. These are the general-web surfaces; for Stellar-ecosystem questions read [stellar-raven.md](stellar-raven.md) first.
 
 ## Contents
 
@@ -66,7 +66,7 @@ List current processor tiers before choosing one:
 parallel-cli research processors --json
 ```
 
-Use `--no-wait` when a worker or lead can continue useful work. Record the returned run ID in the todo or scratchpad and schedule a Solo timer to inspect it later. Never infer completion from elapsed time.
+Use `--no-wait` when useful work can continue meanwhile. Record the returned run ID in your working state and check its status explicitly. Never infer completion from elapsed time.
 
 ## Parallel Task MCP final pass
 
@@ -74,7 +74,7 @@ Parallel Task MCP starts work but does not return the final report immediately:
 
 1. Start with `createDeepResearch` or `createTaskGroup`.
 2. Record the returned task identifier.
-3. Use `getStatus` for lightweight checks after a Solo timer fires.
+3. Use `getStatus` for lightweight checks when you return to the task.
 4. Call `getResultMarkdown` once complete.
 
 Tool names may be namespaced by the host. Discover them live rather than hard-coding the namespace.
@@ -109,7 +109,7 @@ For consequential conclusions, compare claims and underlying URLs—not provider
 - Missing MCP tool: finish with CLI and Perplexity evidence when sufficient.
 - Authentication or rate limit failure: record it and reroute.
 - Parallel `402` or insufficient balance: stop paid work; never add credit without explicit approval.
-- Long-running task: retain its ID and output path, schedule a bounded Solo timer, and continue other lanes.
+- Long-running task: retain its ID and output path, continue other lanes, and check back explicitly.
 - Weak or uncited result: narrow the question and run a targeted source-discovery lane instead of repeating the same broad prompt.
 
 ## Official references

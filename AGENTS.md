@@ -4,10 +4,13 @@ Personal, opinionated AI-agent skills for kalepail (Tyler van der Hoeven). This 
 
 ## What this repo is
 
-Shipped skills live under `skills/`, one directory per skill:
+Shipped skills live under `skills/`, one flat directory per skill, in three families:
 
-- `agent-browser-webauthn` — passkey and Stellar smart-account browser testing through `agent-browser` and Chrome DevTools virtual WebAuthn authenticators.
-- The **Fan Solo family** — `fan-solo` routes broad Solo/SoloTerm requests to the focused `solo-*` skills covering project setup, workspace, processes, observation, troubleshooting, agents, orchestration, deep research, todos, scratchpads, close-out, prompts, and automation.
+- The **Fan Solo family** — `fan-solo` routes broad Solo/SoloTerm requests to the focused `solo-*` skills covering project setup, workspace, processes, observation, troubleshooting, agents, orchestration, todos, scratchpads, close-out, prompts, and automation. Scope: driving the Solo product.
+- The **Kalepail house family** — `kalepail-*` skills encode Tyler's personal tool stack and idiosyncrasies. `kalepail-deep-research` owns cited research synthesis across Parallel, Perplexity, and Stellar Raven surfaces.
+- **Standalone skills** — `agent-browser-webauthn`, passkey and Stellar smart-account browser testing through `agent-browser` and Chrome DevTools virtual WebAuthn authenticators. Self-contained and tied to neither family.
+
+Family dependency direction is one-way: house skills may compose with Fan Solo skills when both are installed (`kalepail-deep-research` delegates fan-out mechanics to `$solo-orchestrate-agents`); Fan Solo and standalone skills never reference house skills. Families divide by scope, not by opinion — every family bakes in this repo's opinionated routing and tool preferences — and every skill still works installed alone.
 
 `README.md` is the human-facing catalog and install guide.
 
@@ -56,9 +59,10 @@ This repo self-hosts for Claude Code and `.agents`-aware hosts: the committed `.
 
 The skills orchestrate external tools; they do not bundle or authenticate them:
 
-- **Solo MCP** (`solo`) — required by `fan-solo` and every `solo-*` skill; no fallback. Enable Solo's local MCP server: <https://soloterm.com/docs/integrations/mcp-server>
-- **Parallel** — `solo-deep-research` prefers `parallel-cli` for reproducible saved artifacts, with Parallel Search / Task MCP as fallbacks.
-- **Perplexity MCP** — `solo-deep-research` uses it as an independent reasoning and counter-evidence lane.
+- **Solo MCP** (`solo`) — required by `fan-solo` and every `solo-*` skill; no fallback. Optional for `kalepail-deep-research`, which degrades to sequential single-agent research without it. Enable Solo's local MCP server: <https://soloterm.com/docs/integrations/mcp-server>
+- **Parallel** — `kalepail-deep-research` prefers `parallel-cli` for reproducible saved artifacts, with Parallel Search / Task MCP as fallbacks.
+- **Perplexity MCP** — `kalepail-deep-research` uses it as an independent reasoning and counter-evidence lane.
+- **Stellar Raven MCP** (`stellar-raven`) — `kalepail-deep-research` uses it as the first discovery surface for Stellar-ecosystem questions.
 - **agent-browser** — `agent-browser-webauthn` drives passkey / Stellar smart-account browser tests via Chrome DevTools virtual WebAuthn authenticators.
 
 Missing optional providers degrade to documented fallbacks, not hard failures.

@@ -2,7 +2,7 @@
 
 # kalepail Skills
 
-Personal, opinionated AI-agent skills by [Tyler van der Hoeven](https://github.com/kalepail), portable across Claude Code, Codex, OpenCode, and Grok: **Fan Solo**, a router plus focused `solo-*` skills for driving [Solo](https://soloterm.com) (SoloTerm), and **Agent Browser WebAuthn**, passkey and Stellar smart-account browser testing through `agent-browser`.
+Personal, opinionated AI-agent skills by [Tyler van der Hoeven](https://github.com/kalepail), portable across Claude Code, Codex, OpenCode, and Grok, in three families: **Fan Solo**, a router plus focused `solo-*` skills for driving [Solo](https://soloterm.com) (SoloTerm); **Kalepail house skills**, `kalepail-*` workflows tuned to Tyler's own tool stack; and **Agent Browser WebAuthn**, standalone passkey and Stellar smart-account browser testing through `agent-browser`.
 
 ## Skills
 
@@ -24,8 +24,7 @@ Personal, opinionated AI-agent skills by [Tyler van der Hoeven](https://github.c
 **Agents and coordination**
 
 - [Work with agents](skills/solo-work-with-agents/) — manage one bounded, owned Solo agent.
-- [Orchestrate agents](skills/solo-orchestrate-agents/) — coordinate independent worker lanes and integrate verified results.
-- [Deep research](skills/solo-deep-research/) — fan out cited research across Parallel CLI/MCP and Perplexity MCP, then reconcile evidence.
+- [Orchestrate agents](skills/solo-orchestrate-agents/) — coordinate independent worker lanes—implementation, review, or evidence-gathering—and integrate verified results.
 
 **Durable work**
 
@@ -38,7 +37,15 @@ Personal, opinionated AI-agent skills by [Tyler van der Hoeven](https://github.c
 
 - [Automate](skills/solo-automate/) — use Solo MCP, CLI, local HTTP API, hosted API, and deep links.
 
+### Kalepail house skills
+
+Personal `kalepail-*` workflows tuned to Tyler's own stack. They compose with Fan Solo when it is installed but do not require it.
+
+- [Deep research](skills/kalepail-deep-research/) — cited multi-lane research synthesis across Parallel CLI/MCP, Perplexity MCP, and Stellar Raven (the first discovery surface for Stellar-ecosystem questions), with optional Solo fan-out.
+
 ### Agent Browser WebAuthn
+
+Standalone; tied to neither family.
 
 - [Agent Browser WebAuthn](skills/agent-browser-webauthn/) — drive passkey and Stellar smart account browser tests with `agent-browser` and Chrome DevTools virtual WebAuthn authenticators.
 
@@ -46,8 +53,8 @@ Personal, opinionated AI-agent skills by [Tyler van der Hoeven](https://github.c
 
 Skills orchestrate external tools; they do not bundle or authenticate them.
 
-- **Solo MCP** — required by `fan-solo` and every `solo-*` skill. Enable [Solo's local MCP server](https://soloterm.com/docs/integrations/mcp-server) and connect your agent host to it.
-- **Optional research providers** — `solo-deep-research` prefers Parallel CLI, falls back to Parallel Search/Task MCP, and uses Perplexity MCP as an independent lane when available; missing providers degrade to documented fallbacks.
+- **Solo MCP** — required by `fan-solo` and every `solo-*` skill; optional for `kalepail-deep-research`, which runs sequentially without it. Enable [Solo's local MCP server](https://soloterm.com/docs/integrations/mcp-server) and connect your agent host to it.
+- **Optional research providers** — `kalepail-deep-research` prefers Parallel CLI, falls back to Parallel Search/Task MCP, uses Perplexity MCP as an independent lane, and uses Stellar Raven MCP as the first discovery surface for Stellar-ecosystem questions; missing providers degrade to documented fallbacks.
 - **agent-browser and Node.js 22+** — Agent Browser WebAuthn requires the `agent-browser` CLI and Node.js 22 or newer; the `$agent-browser` skill is recommended but not bundled here.
 
 ## Install
@@ -64,8 +71,8 @@ npx skills add kalepail/skills -g --skill '*' -a claude-code -a codex -a opencod
 # install one skill
 npx skills add kalepail/skills -g --skill agent-browser-webauthn -a claude-code -a codex -a opencode -y
 
-# install Fan Solo without the unrelated WebAuthn skill
-npx skills add kalepail/skills -g -a claude-code -a codex -a opencode -y --skill fan-solo solo-set-up-projects solo-customize-workspace solo-run-processes solo-observe-services solo-troubleshoot solo-work-with-agents solo-orchestrate-agents solo-deep-research solo-track-todos solo-keep-scratchpads solo-close-out-work solo-save-prompts solo-automate
+# install Fan Solo without the other families
+npx skills add kalepail/skills -g -a claude-code -a codex -a opencode -y --skill fan-solo solo-set-up-projects solo-customize-workspace solo-run-processes solo-observe-services solo-troubleshoot solo-work-with-agents solo-orchestrate-agents solo-track-todos solo-keep-scratchpads solo-close-out-work solo-save-prompts solo-automate
 ```
 
 ### Claude Code

@@ -66,13 +66,12 @@
     },
     {
       "id": 6,
-      "prompt": "Use Fan Solo to deeply research this market with Parallel CLI, Parallel MCP, and Perplexity MCP, then reconcile the citations.",
-      "expected_output": "Routes to solo-deep-research for provider selection, independent evidence lanes, source-level cross-checking, contradiction resolution, and synthesis while retaining solo-orchestrate-agents for bounded worker mechanics.",
+      "prompt": "Use Fan Solo to fan research lanes out across several Solo agents and then integrate their evidence.",
+      "expected_output": "Routes to solo-orchestrate-agents for bounded worker lanes, timers, and lead integration, and states that provider selection, citation discipline, and synthesis come from the session's research method or skill rather than from Solo.",
       "assertions": [
-        "Routes the request to solo-deep-research",
-        "Distinguishes research methodology from generic agent orchestration",
-        "Requires independent sources and inline citations",
-        "Does not invoke every provider with an identical prompt by default"
+        "Routes the multi-agent research fan-out to solo-orchestrate-agents",
+        "Distinguishes research methodology from Solo worker mechanics",
+        "Does not claim Solo owns provider selection or citation policy"
       ],
       "files": []
     },
@@ -200,13 +199,12 @@
     },
     {
       "id": 17,
-      "prompt": "Do an exhaustive, cited comparison of these three vector databases across Parallel and Perplexity and reconcile any contradictions.",
-      "expected_output": "Do not use $fan-solo; route to $solo-deep-research for provider selection, independent evidence lanes, inline citations, and contradiction resolution.",
+      "prompt": "Do an exhaustive, cited comparison of these three vector databases and reconcile any contradictions.",
+      "expected_output": "Do not use $fan-solo; no Solo capability is being chosen. The deliverable is cited research synthesis, owned by the session's research method or skill; solo-orchestrate-agents becomes relevant only if multi-agent Solo fan-out is explicitly wanted.",
       "assertions": [
-        "Does not linger in fan-solo when the scope is clearly deep research",
-        "Routes to solo-deep-research",
-        "Requires independent sources and inline citations",
-        "Requires contradiction resolution in the synthesis"
+        "Does not linger in fan-solo when the scope is research synthesis rather than Solo capability choice",
+        "Does not claim Solo owns citation or synthesis discipline",
+        "Mentions solo-orchestrate-agents only as optional worker mechanics"
       ],
       "files": []
     },

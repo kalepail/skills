@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kalepail: Deep Research"
+  short_description: "Cited multi-lane research synthesis"
+  default_prompt: "Use $kalepail-deep-research to research this question across the available research surfaces and synthesize cited findings."

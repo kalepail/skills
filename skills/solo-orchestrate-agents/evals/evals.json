@@ -136,21 +136,31 @@
     },
     {
       "prompt": "Research and write me a cited comparison of the top three passkey libraries.",
-      "expected_output": "Do not use $solo-orchestrate-agents; route to $solo-deep-research because the deliverable is cited, comparative research synthesis.",
+      "expected_output": "Do not use $solo-orchestrate-agents solely because the research is cited; the deliverable is research synthesis, owned by the session's research method or skill. Orchestration supplies bounded workers only when multi-agent Solo coordination is explicitly wanted or genuinely needed.",
       "assertions": [
-        "Recognizes cited comparative research as the deliverable",
-        "Routes to solo-deep-research",
+        "Recognizes cited comparative research as a research-synthesis deliverable",
+        "Does not spawn a Solo cohort merely because research is deep or cited",
         "Does not treat it as implementation orchestration"
       ],
       "files": []
     },
     {
       "prompt": "Do exhaustive, cross-checked research on current WebAuthn support and hand me a sourced report.",
-      "expected_output": "Do not use $solo-orchestrate-agents; route to $solo-deep-research because exhaustive cross-checked research with a cited handoff is a research-synthesis deliverable.",
+      "expected_output": "Do not use $solo-orchestrate-agents by default; exhaustive cross-checked research with a cited handoff is a research-synthesis deliverable owned by the session's research method or skill, which decides whether Solo fan-out is warranted.",
       "assertions": [
         "Recognizes exhaustive cross-checked research synthesis",
-        "Routes to solo-deep-research",
-        "Reserves multi-agent fan-out judgment to the research skill"
+        "Does not spawn a Solo cohort merely because research is deep or cited",
+        "Reserves multi-agent fan-out judgment to the research method"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Spin up a few Solo agents in parallel evidence lanes to gather sources on WebGPU adoption, then integrate what they find.",
+      "expected_output": "Use $solo-orchestrate-agents for the explicitly requested multi-agent Solo fan-out: bounded evidence lanes with owned handoffs, recorded child IDs, timers, and lead integration, while citation and synthesis discipline come from the session's research method.",
+      "assertions": [
+        "Accepts explicit multi-agent Solo research fan-out as orchestration work",
+        "Defines bounded lanes with owned handoffs and recorded child IDs",
+        "Leaves citation and synthesis policy to the research method"
       ],
       "files": []
     },
