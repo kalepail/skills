@@ -64,7 +64,7 @@ Match model and effort to the lane, never the reverse: Fable to orchestrate and 
 - Prompt template: reusable dispatch text, never current project truth.
 - Repository docs: reconciled durable project behavior and decisions.
 
-Keep the live set ephemeral. Scratchpads and todos exist to guide active work and legitimately backlogged work—nothing else. As a lane finishes, complete or backlog its todo, fold durable conclusions into repository docs, archive the scratchpad once its run goes cold, and cancel obsolete timers and locks. Stale todos and orphaned scratchpads are noise the next agent must re-litigate. When a whole run ends and its residue spans several surfaces, route the reconciliation to `$solo-close-out-work`—it promotes durable content first, then retires the ephemeral copy without losing incomplete work.
+Keep the live set ephemeral. Complete or backlog todos, promote durable conclusions as evidence lands, and cancel obsolete timers and locks; archive a scratchpad or delete a record only after its recorded consumers have consumed it at the current revision. An unconsumed handoff outlives its producing lane, though stale todos and orphaned scratchpads remain noise once safe to retire. When a whole run ends with residue across several surfaces, route reconciliation to `$solo-close-out-work`—it promotes durable content first, then retires the ephemeral copy without losing incomplete work.
 
 Read [house style](references/house-style.md) before spawning agents, mutating shared state, or controlling processes.
 

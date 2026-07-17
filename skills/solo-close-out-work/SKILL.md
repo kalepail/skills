@@ -26,12 +26,14 @@ Read [closeout.md](references/closeout.md) before classifying items, promoting c
 
 - Scope to the current project, narrowed by explicit run/cohort IDs, tags, linked items, and recorded descendants when given.
 - List scratchpads (+ tags), todos across **all** statuses (open, in_progress, backlog, completed, blocked), timers, known run-scoped KV keys, and recorded lock keys. There is no `lock_list`; only keys you recorded are actionable.
-- Map inbound/outbound links before touching anything: todo↔scratchpad references and blocker edges. An item another incomplete item depends on stays active.
+- Map inbound/outbound links before touching anything: todo↔scratchpad references and blocker edges. Collect each scratchpad's `## Retire after` contract and each todo's known consumers; expected consumers are edges even before their lane starts. An item another incomplete item depends on stays active.
 - Read headings/tails before full reads.
 
 ## Classify and build the manifest
 
 Classify every item with the rubric in [closeout.md](references/closeout.md) (DONE-durable-captured, DONE-no-durable-content, DONE-not-yet-captured, ACTIVE, IDLE-incomplete, AMBIGUOUS, SUSPECTED-JUNK). Emit a manifest: item → proposed action → durable destination. Preserve on doubt.
+
+After classification, apply the orthogonal consumer gate. A DONE item may be promoted, but do not retire it while a recorded consumer is pending or consumption at the current revision is unverified; record each item's gate status in the manifest. Keeping an item one run too long costs a list slot; retiring it early costs an agent its context.
 
 ## Promote durable content before retiring — per item, verified
 

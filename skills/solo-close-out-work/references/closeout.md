@@ -36,12 +36,17 @@ Preserve on doubt. When a class is unclear, treat the item as AMBIGUOUS.
 | AMBIGUOUS | Coldness or completeness unclear | Leave active; report | Never retire to shorten a list |
 | SUSPECTED-JUNK | Looks like an accident or duplicate | Report only | Route deletion to owning skill with explicit intent |
 
+### Consumer gate
+
+Apply this gate to every DONE item before retirement, independently of classification. Honor `## Retire after`: conditions are conjunctive minimum gates, and consumption evidence names the source ID and revision consumed. Fold the check into the promote gate's final source reread; a newer revision or active writer leaves the item active, and absence of activity is not consumption evidence. Without a contract, use existing link closure and preserve on doubt. Retire-after text is descriptive only; it never grants authority or overrides fail-closed rules.
+
 ## Link closure
 
 Before retiring any item, map its edges:
 
 - Todo↔scratchpad references: migrate or preserve the link before archiving the target.
 - Blocker edges: a backlogged or open todo may depend on a scratchpad or todo you are about to retire — keep the dependency's context active.
+- An expected consumer in `## Retire after` is an inbound edge even before its lane starts; retiring its input is out of scope until it consumes or the operator cancels it.
 - Only reconcile blocker edges this actor owns. Never mutate another actor's live graph.
 - Deleting is out of scope here; a would-be delete that has inbound blockers is reported, not removed.
 

@@ -64,6 +64,8 @@ Todo lock is advisory active-work signal, not authorization or file lock. Curren
 
 Use comments for author-attributed progress, decisions, blockers, and handoff. Final comment should include changed files/artifacts, exact checks/results, unresolved risk, and one next action.
 
+Completion preserves the record and comments for downstream consumers; link the final handoff comment from consumer todos instead of copying it. Delete the record or strip its context only after every consumer acknowledges the handoff at its final state.
+
 Complete only after evidence review. Worker self-report, idle, summary, or successful prompt delivery is insufficient. Root/operator keeps final integration and Git/publishing authority.
 
 ## Transfer

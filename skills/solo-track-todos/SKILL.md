@@ -31,7 +31,7 @@ Expected handoff
 
 Set honest status, priority, and small controlled tag set. Do not duplicate full scratchpad plan.
 
-Keep todos ephemeral. Complete them as work lands, move only real future work to `backlog`, and delete accidental duplicates. Finished and abandoned todos are clutter; durable conclusions belong in repository docs, not a stale todo list.
+Keep todos ephemeral. Complete them as work lands after evidence review; completion unblocks dependents and preserves the record and comments, so it is a status change, not erasure. Move only real future work to `backlog`. Except for accidental duplicates, delete a record only after every downstream consumer—lead harvest, reviewer, dependent lane—acknowledges the handoff; never reap it mid-cycle to shorten a list. Durable conclusions belong in repository docs, not a stale todo list.
 
 ## Model Dependencies
 

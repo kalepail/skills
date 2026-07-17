@@ -32,6 +32,17 @@
         "Fails closed on the foreign lock and does not force the list empty"
       ],
       "files": []
+    },
+    {
+      "prompt": "Close out this finished run. One scratchpad is DONE-not-yet-captured, but its `## Retire after` names a reviewer that has not consumed the latest revision.",
+      "expected_output": "Promote the scratchpad's durable content, but leave the pad active and record its consumer-gate status in the manifest; require consumption evidence that names the pad and current revision before retirement.",
+      "assertions": [
+        "Applies the consumer gate after classification",
+        "Allows promotion while retirement waits",
+        "Requires revision-anchored consumption evidence",
+        "Reports the kept item and why"
+      ],
+      "files": []
     }
   ]
 }

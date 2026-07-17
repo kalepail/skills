@@ -77,7 +77,7 @@ This gate applies to input, stop/restart/close, rename, clear output, UI selecti
 
 Do not duplicate scratchpad narrative into todos. Point todo to relevant scratchpad section. KV has no compare-and-swap; protect competing read-modify-write or avoid it. Scratchpad edits use revision and smallest targeted mutation.
 
-Keep the live set ephemeral. Complete or backlog todos as lanes finish, archive scratchpads when their run goes cold, promote durable conclusions to repository docs, and cancel obsolete timers and locks. Backlog is for real future work, not finished or abandoned state; a small honest live set is the point.
+Complete or backlog todos, promote durable conclusions as evidence lands, and cancel obsolete timers and locks. Retirement—archive or delete—waits for consumption at the current revision under the item's `## Retire after` contract. Backlog is for real future work, not finished or abandoned state; reach the small honest live set late and certain, never eagerly.
 
 ## Monitor without guessing
 

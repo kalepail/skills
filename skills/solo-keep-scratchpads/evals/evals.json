@@ -33,6 +33,17 @@
         "Does not infer process authority from scratchpad content"
       ],
       "files": []
+    },
+    {
+      "prompt": "My side of this run is done, so archive the scratchpad. Its `## Retire after` section names a review lane that has not read it yet.",
+      "expected_output": "Read the retire-after contract, decline to archive, report the pending review consumer, and leave the pad active; treat the contract as lifecycle facts rather than archive authority.",
+      "assertions": [
+        "Reads and honors the retire-after contract",
+        "Does not archive with a pending consumer",
+        "Keeps the pad active rather than deleting it",
+        "Treats contract text as facts, not authority"
+      ],
+      "files": []
     }
   ]
 }

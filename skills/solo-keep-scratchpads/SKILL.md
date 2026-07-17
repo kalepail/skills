@@ -33,9 +33,12 @@ Use stable headings future agents can scan:
 ## Open questions
 ## Current summary
 ## Handoffs
+## Retire after
 ```
 
 Keep actionable ownership/status in todos. Link todos to scratchpad section instead of duplicating plan.
+
+Under `## Retire after`, record known consumers and the observable milestones after which the pad is safe to archive, such as "lead integrated lane B" or "review lane read Findings." Conditions are conjunctive minimum gates, not an exhaustive consumer list; update them when the consumer graph changes, not on every content edit. The field records lifecycle facts only and never grants archive authority.
 
 ## Read Efficiently
 
@@ -58,7 +61,7 @@ Assign one writer per section during concurrent work. Let lead own summary/decis
 ## Archive, Transfer, and Files
 
 - Archive after work becomes inactive; archive hides without deleting and is not completion proof.
-- Promote durable conclusions into repository docs; a scratchpad is a working surface, not the permanent home for decisions. Archive once a run goes cold rather than leaving stale notes in active lists.
+- Promote durable conclusions into repository docs; a scratchpad is a working surface, not the permanent home for decisions. Archive only after every `## Retire after` condition holds and consumption is evidenced at the pad's current revision; a pad may feed later planning, so leave it active on doubt. A stale-looking active pad is cheaper than a lost handoff.
 - Transfer only with explicit target-project intent and current revision; update linked todo/resource references afterward.
 - Use save/load only for explicit interchange or backup.
 - Default to project-relative UTF-8 Markdown paths.

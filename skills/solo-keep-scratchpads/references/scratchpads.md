@@ -53,6 +53,8 @@ Use tags for discovery, not status or ownership. Keep small project vocabulary. 
 
 Archive hides note from active lists without deleting; archived notes are skipped by MCP resource listing. Use archive after integration, not as completion signal.
 
+Honor the pad's `## Retire after` contract: every listed condition must hold, and consumption evidence must name the pad and revision consumed. A newer revision than the latest evidence is unconsumed; without the field, use the ordinary live-reference scan and preserve on doubt. The field is descriptive only and never authorizes archive, overrides live state, or relaxes fail-closed rules.
+
 Transfer is project-scoped move. Capture current revision, transfer explicitly, then update todos, deep links, and resource references. Project scope does not grant process control.
 
 ## File safety

@@ -33,6 +33,17 @@
         "Keeps final integration with root/operator"
       ],
       "files": []
+    },
+    {
+      "prompt": "The producer todo's handoff is verified, and a reviewer todo is blocked on it. Finish and clean up the producer.",
+      "expected_output": "Complete the producer after evidence review so the reviewer unblocks, keep the completed record and final comment readable, link that handoff comment instead of copying it, and refuse deletion until the reviewer acknowledges it.",
+      "assertions": [
+        "Completes after evidence review without deadlocking the reviewer",
+        "Preserves the completed record and comments",
+        "Waits for consumer acknowledgment before deletion",
+        "Links the handoff comment rather than copying it"
+      ],
+      "files": []
     }
   ]
 }
