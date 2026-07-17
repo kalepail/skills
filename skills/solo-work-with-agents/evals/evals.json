@@ -68,7 +68,7 @@
       "files": []
     },
     {
-      "prompt": "Save default flags for my agent, then launch one to inspect the CI config and wake me when it goes idle.",
+      "prompt": "Set my agent tool's default launch flags in Settings, then launch it to inspect the CI config and watch for it to go idle.",
       "expected_output": "Use $solo-work-with-agents to persist default flags in Settings, confirm launchability, spawn one bounded read-only worker, record its child ID, send the inspection contract, and use an owned-child idle timer to inspect evidence.",
       "assertions": [
         "Saves persistent default flags rather than one-launch extra_args",

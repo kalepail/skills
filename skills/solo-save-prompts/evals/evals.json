@@ -134,7 +134,7 @@
       "files": []
     },
     {
-      "prompt": "Draft the exact instructions for my running Claude agent right now and feed them in.",
+      "prompt": "Draft instructions for my running Claude agent and feed them in\u2014one-off, no need to keep them for reuse.",
       "expected_output": "Do not use $solo-save-prompts; route to $solo-work-with-agents for single running-agent prompt-and-feed, persisting no template and preserving ownership boundaries.",
       "assertions": [
         "Recognizes single running-agent prompt-and-feed intent",

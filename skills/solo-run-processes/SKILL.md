@@ -1,6 +1,6 @@
 ---
 name: solo-run-processes
-description: Operate Solo-managed commands and terminals through start, stop, restart, spawn, input, bulk actions, trust gates, auto-start, crash restart, and file-watch restart. Use when launching a dev stack, controlling project commands, opening terminals, sending input, or configuring restart behavior. Do not use for read-only status and readiness, project or solo.yml setup, or failure diagnosis.
+description: Operate Solo-managed commands and terminals through start, stop, restart, rename, spawn, input, bulk actions, trust gates, auto-start, crash restart, and file-watch restart. Use when launching a dev stack, controlling project commands, renaming a process, opening terminals, sending input, or configuring restart behavior. Do not use for read-only status and readiness, project or solo.yml setup, or failure diagnosis.
 ---
 
 # Run Solo Processes

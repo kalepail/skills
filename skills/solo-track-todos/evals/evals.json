@@ -68,8 +68,8 @@
       "files": []
     },
     {
-      "prompt": "Log our decision to standardize on Postgres somewhere durable, and create Solo todos for the migration steps with the schema task blocking the data-copy task.",
-      "expected_output": "Use $solo-track-todos for the migration todos and the schema-blocks-data-copy edge, while noting the Postgres decision narrative belongs in $solo-keep-scratchpads.",
+      "prompt": "Create Solo todos for the Postgres migration steps with the schema task blocking the data-copy task, and capture the decision context in a comment on the lead todo.",
+      "expected_output": "Use $solo-track-todos for the migration todos, the schema-blocks-data-copy edge, and the decision context as a todo comment.",
       "assertions": [
         "Owns the actionable todo portion of the mixed request",
         "Models the schema-to-data-copy blocker explicitly",

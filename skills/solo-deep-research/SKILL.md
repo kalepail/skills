@@ -1,6 +1,6 @@
 ---
 name: solo-deep-research
-description: Conduct and synthesize deep research before planning or implementation through Solo by fanning out bounded research lanes across the codebase, official docs, available Parallel CLI or MCP tools, and Perplexity MCP. Use for deep, exhaustive, current, comparative, proposed-solution, or cross-checked research that benefits from multiple agents, cited evidence, contradiction resolution, recommendation stress-testing, and a durable research handoff. Do not use for narrow lookups or general implementation and review orchestration.
+description: Conduct and synthesize deep research on any topic before planning or implementation by fanning out bounded Solo research lanes across the codebase, official docs, available Parallel CLI or MCP tools, and Perplexity MCP. Use for deep, exhaustive, current, comparative, proposed-solution, or cross-checked research that benefits from multiple agents, cited evidence, contradiction resolution, recommendation stress-testing, and a durable research handoff. Do not use for narrow lookups (a single fact, version, or API signature) or general implementation and review orchestration.
 ---
 
 # Conduct Deep Research with Solo

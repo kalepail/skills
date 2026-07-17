@@ -91,7 +91,7 @@
     },
     {
       "id": 8,
-      "prompt": "$fan-solo I'm setting up a fresh Solo project, want a couple agents reviewing the code, and need to keep notes and tasks straight—help me sequence this.",
+      "prompt": "$fan-solo I'm setting up a fresh Solo project, want a couple agents reviewing the code, and need to keep notes and tasks straight\u2014help me sequence this.",
       "expected_output": "Use $fan-solo to route this explicit mixed request: establish live whoami/help/docs context, then sequence through solo-set-up-projects, owned agent work, and durable state, splitting narrative to solo-keep-scratchpads and actionable work to solo-track-todos, using the fewest skills that cover the task.",
       "assertions": [
         "Triggers on explicit $fan-solo invocation for a multi-capability request",
@@ -128,7 +128,7 @@
     },
     {
       "id": 11,
-      "prompt": "For building this feature in Solo, should I use one agent or several, and how do I keep their state from getting tangled?",
+      "prompt": "Which Solo skills should I lean on to build this feature\u2014one agent or several, and how do I keep their state from getting tangled?",
       "expected_output": "Use $fan-solo to choose among Solo skills: default to one agent via solo-work-with-agents unless the lanes are genuinely independent, in which case solo-orchestrate-agents, and map durable state to scratchpads and todos.",
       "assertions": [
         "Triggers on choosing among Solo agent skills",

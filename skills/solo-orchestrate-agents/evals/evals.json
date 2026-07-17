@@ -75,8 +75,8 @@
       "files": []
     },
     {
-      "prompt": "Split the search and payments work into separate lanes, save the worker brief as a reusable template, and launch the agents.",
-      "expected_output": "Use $solo-orchestrate-agents as the primary owner to define disjoint lanes and dispatch bounded workers, delegate the template save to $solo-save-prompts, and launch only after scope, ownership, and checks are set.",
+      "prompt": "Split the search and payments work into separate lanes, dispatch a bounded worker per lane, and reconcile their handoffs one lane at a time.",
+      "expected_output": "Use $solo-orchestrate-agents to define disjoint lanes, dispatch one bounded worker per lane, and integrate handoffs one lane at a time after evidence review.",
       "assertions": [
         "Keeps orchestration as the primary owner of the mixed request",
         "Delegates the reusable template save to solo-save-prompts",

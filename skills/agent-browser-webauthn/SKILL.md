@@ -1,6 +1,6 @@
 ---
 name: agent-browser-webauthn
-description: Use agent-browser with Chrome DevTools Protocol virtual WebAuthn authenticators to test passkey, WebAuthn, Stellar smart account, wallet creation, wallet restore, and browser signing flows. Trigger when a task mentions passkeys, WebAuthn, virtual authenticators, Stellar Smart Account Kit browser tests, or agent-browser passkey automation. Do not use for browser flows without a WebAuthn ceremony; use agent-browser alone.
+description: Use agent-browser with Chrome DevTools Protocol virtual WebAuthn authenticators to test passkey, WebAuthn, Stellar smart account, wallet creation, wallet restore, and browser signing flows. Trigger when a task mentions passkeys, WebAuthn, virtual authenticators, Stellar Smart Account Kit browser tests, or agent-browser passkey automation. Do not use for browser flows without a passkey or WebAuthn ceremony—password logins and extension-wallet connects route to agent-browser alone.
 ---
 
 # Agent Browser WebAuthn

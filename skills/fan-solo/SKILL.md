@@ -1,6 +1,6 @@
 ---
 name: fan-solo
-description: Route broad or mixed Solo and SoloTerm requests across focused project, process, agent, durable-state, and automation skills. Use when choosing among Solo skills, learning Solo, or handling several Solo capabilities in one task. Do not use for non-Solo work, or when one clearly scoped Solo action already maps to a single focused skill.
+description: Route broad or mixed Solo and SoloTerm requests across focused project, process, agent, durable-state, and automation skills. Use when choosing among Solo skills, deciding between one agent and an orchestrated cohort, learning Solo, or handling several Solo capabilities in one task. Do not use for non-Solo work, or when one clearly scoped Solo action already maps to a single focused skill.
 ---
 
 # Fan Solo
