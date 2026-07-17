@@ -3,10 +3,13 @@
   "evals": [
     {
       "prompt": "Use agent-browser to test creating and then using a passkey in this local web app.",
-      "expected_output": "Open the target page first, wrap the passkey interaction with the bundled virtual-authenticator helper, assert application-level registration and authentication results, and close the browser session.",
+      "expected_output": "Open the target page first, run create and authentication ceremonies inside one bundled-helper invocation, use native agent-browser clicks, verify credentialAdded and credentialAsserted diagnostics plus application results, and close the browser session.",
       "assertions": [
         "Uses agent-browser and the bundled WebAuthn helper",
         "Attaches only after opening the intended page",
+        "Keeps create and authentication in one helper invocation",
+        "Uses native agent-browser clicks rather than evaluated .click()",
+        "Verifies credentialAdded and credentialAsserted diagnostics",
         "Asserts application output rather than treating a click as success",
         "Cleans up the browser session and virtual authenticator"
       ],

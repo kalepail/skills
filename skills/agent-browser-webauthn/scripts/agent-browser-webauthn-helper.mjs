@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { execFile, spawn } from "node:child_process";
+import { appendFileSync, readFileSync } from "node:fs";
 import { promisify } from "node:util";
 
 const execFileAsync = promisify(execFile);
@@ -30,8 +31,13 @@ Options:
   --user-verification <bool> true | false
   --verified <bool>          true | false
   --presence <bool>          true | false
+  --require-credential <bool> Fail when no virtual credential is observed; default false
   --allow-remote-cdp <bool>  true | false; default false
   --timeout-ms <number>      Positive integer; default 120000
+
+Environment:
+  WEBAUTHN_EVENTS_FILE       Optional JSONL diagnostics file
+  WEBAUTHN_CONTROL_FILE      Optional file accepting uv:false and uv:true
 `);
 }
 
@@ -88,6 +94,30 @@ function parsePositiveInteger(value, fallback) {
   return parsed;
 }
 
+function logDiagnostic(record) {
+  const line = JSON.stringify({ at: new Date().toISOString(), ...record });
+  const file = process.env.WEBAUTHN_EVENTS_FILE;
+  if (file) {
+    try {
+      appendFileSync(file, `${line}\n`);
+      return;
+    } catch {
+      // Fall through to stderr so diagnostics are never lost silently.
+    }
+  }
+  console.error(line);
+}
+
+function redactCredential(credential) {
+  return {
+    credentialIdPrefix: String(credential.credentialId ?? "").slice(0, 16),
+    rpId: credential.rpId,
+    signCount: credential.signCount,
+    isResidentCredential: credential.isResidentCredential,
+    backupEligibility: credential.backupEligibility
+  };
+}
+
 async function runAgentBrowser(args, timeoutMs) {
   const { stdout } = await execFileAsync("agent-browser", args, { encoding: "utf8", timeout: timeoutMs });
   return stdout.trim();
@@ -140,13 +170,17 @@ async function resolveCurrentUrl(args, timeoutMs) {
   return getLastNonEmptyLine(output) ?? null;
 }
 
-function createCDPConnection(browserWsUrl, timeoutMs) {
+function createCDPConnection(browserWsUrl, timeoutMs, onEvent) {
   const socket = new WebSocket(browserWsUrl);
   let nextId = 0;
   const pending = new Map();
 
   socket.onmessage = (event) => {
     const message = JSON.parse(event.data);
+    if (message.method && !message.id) {
+      onEvent?.(message);
+      return;
+    }
     if (!message.id || !pending.has(message.id)) return;
     const { resolve, reject, timer } = pending.get(message.id);
     pending.delete(message.id);
@@ -247,12 +281,24 @@ async function commandRun(args, childCommand) {
   if (childCommand.length === 0) throw new Error("run requires a child command after --");
 
   const timeoutMs = parsePositiveInteger(args["timeout-ms"], DEFAULT_TIMEOUT_MS);
+  const requireCredential = parseBoolean(args["require-credential"], false);
   const cdpUrl = await resolveCDPUrl(args, timeoutMs);
   assertTrustedCDPUrl(cdpUrl, parseBoolean(args["allow-remote-cdp"], false));
   const preferredUrl = await resolveCurrentUrl(args, timeoutMs);
-  const connection = createCDPConnection(cdpUrl, timeoutMs);
+  let credentialAddedCount = 0;
+  let credentialAssertedCount = 0;
+  const connection = createCDPConnection(cdpUrl, timeoutMs, (message) => {
+    if (message.method !== "WebAuthn.credentialAdded" && message.method !== "WebAuthn.credentialAsserted") return;
+    if (message.method === "WebAuthn.credentialAdded") credentialAddedCount += 1;
+    else credentialAssertedCount += 1;
+    const params = { ...message.params };
+    if (params.credential) params.credential = redactCredential(params.credential);
+    logDiagnostic({ event: message.method, params });
+  });
   let sessionId;
   let authenticatorId;
+  let controlTimer;
+  let credentialFailure = false;
   let exitCode = 0;
   try {
     await connection.ready;
@@ -267,29 +313,73 @@ async function commandRun(args, childCommand) {
       automaticPresenceSimulation: parseBoolean(args.presence, DEFAULT_AUTHENTICATOR_OPTIONS.automaticPresenceSimulation)
     };
 
-    await connection.send("WebAuthn.enable", {}, sessionId);
+    await connection.send("WebAuthn.enable", { enableUI: false }, sessionId);
     ({ authenticatorId } = await connection.send(
       "WebAuthn.addVirtualAuthenticator",
       { options: authenticatorOptions },
       sessionId
     ));
 
-    console.error(
-      JSON.stringify(
-        {
+    logDiagnostic({
+      setup: {
           session: typeof args.session === "string" ? args.session : null,
           pageUrl: page.pageUrl,
+          targetId: page.targetId,
           authenticatorId,
-          options: authenticatorOptions
-        },
-        null,
-        2
-      )
-    );
+          options: authenticatorOptions,
+          enableUI: false
+      }
+    });
+
+    const controlFile = process.env.WEBAUTHN_CONTROL_FILE;
+    if (controlFile) {
+      let lastDirective = "";
+      controlTimer = setInterval(() => {
+        let directive;
+        try {
+          directive = readFileSync(controlFile, "utf8").trim().split("\n").at(-1);
+        } catch {
+          return;
+        }
+        if (!directive || directive === lastDirective) return;
+        lastDirective = directive;
+        if (directive !== "uv:false" && directive !== "uv:true") return;
+        connection
+          .send(
+            "WebAuthn.setUserVerified",
+            { authenticatorId, isUserVerified: directive === "uv:true" },
+            sessionId
+          )
+          .then(() => logDiagnostic({ controlApplied: directive }))
+          .catch((error) => logDiagnostic({ controlError: String(error) }));
+      }, 500);
+    }
 
     exitCode = await runChildCommand(childCommand[0], childCommand.slice(1), timeoutMs);
   } finally {
+    if (controlTimer) clearInterval(controlTimer);
     if (authenticatorId && sessionId) {
+      try {
+        const { credentials } = await connection.send("WebAuthn.getCredentials", { authenticatorId }, sessionId);
+        logDiagnostic({
+          finalCredentials: credentials.map(redactCredential),
+          credentialAddedCount,
+          credentialAssertedCount
+        });
+        if (credentials.length === 0) {
+          const message = credentialAddedCount
+            ? "No virtual credential remains; keep every ceremony in one helper invocation."
+            : "No virtual credential observed; run the entire create-to-sign flow in one helper invocation.";
+          console.error(`${requireCredential ? "Failure" : "Warning"}: ${message}`);
+          credentialFailure = requireCredential;
+        }
+      } catch (error) {
+        logDiagnostic({ getCredentialsError: String(error) });
+        console.error(
+          `${requireCredential ? "Failure" : "Warning"}: No virtual credential observed because WebAuthn.getCredentials failed.`
+        );
+        credentialFailure = requireCredential;
+      }
       try {
         await connection.send("WebAuthn.removeVirtualAuthenticator", { authenticatorId }, sessionId);
       } catch (error) {
@@ -308,6 +398,7 @@ async function commandRun(args, childCommand) {
     connection.close();
   }
 
+  if (exitCode === 0 && credentialFailure) exitCode = 1;
   process.exitCode = exitCode;
 }
 
