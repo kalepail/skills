@@ -1,3 +1,5 @@
+![kalepail Skills](public/header.png)
+
 # kalepail Skills
 
 Personal, opinionated AI-agent skills by [Tyler van der Hoeven](https://github.com/kalepail), portable across Claude Code, Codex, OpenCode, and Grok: **Fan Solo**, a router plus focused `solo-*` skills for driving [Solo](https://soloterm.com) (SoloTerm), and **Agent Browser WebAuthn**, passkey and Stellar smart-account browser testing through `agent-browser`.
