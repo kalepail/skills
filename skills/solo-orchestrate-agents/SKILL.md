@@ -44,7 +44,7 @@ Fan out only when lanes are independent, have disjoint write scopes or read-only
 - Discover available agent tools live; choose by lane fit.
 - Apply the fleet routing, explicit model/reasoning flags, extended-fleet weave, and built-in-versus-Solo topology rules in [orchestration.md](references/orchestration.md)—the single source for dispatch mechanics; discover launchable tools and verify every CLI flag live before dispatch.
 - Prefer Solo's maintained `worker_bootstrap` MCP prompt when the host exposes it, then layer lane specifics, instead of hand-rewriting the whole identity/lock/state contract.
-- Spawn one worker per independent lane.
+- Spawn one worker per independent lane. Route the lane first; then prefer retasking an owned idle worker that finished its lane and already matches the routed tool, model, and effort (`send_input` a fresh bounded contract). Never reuse for fresh-session or cross-family lanes.
 - Record every returned child `process_id` with todo and project immediately.
 - Prepend returned `agent_instructions` to self-contained worker prompt.
 - Require worker to lock its todo and relevant shared edit area, preserve unrelated changes, avoid Git/publishing/integration, and report exact evidence.
@@ -76,6 +76,7 @@ Fan out only when lanes are independent, have disjoint write scopes or read-only
 
 - Cancel stale timers and release owned locks.
 - Capture handoff before closing any worker.
+- Close or retask each owned worker in the same pass its lane completes and its evidence is reviewed. Unreviewed or partial results keep a worker open; a finished worker left live or idle while lead moves on is cruft—at every depth, one generation at a time, confirming a child's subtree is settled before closing it.
 - Close only descendants current actor spawned; never clean parent, sibling, unrelated, YAML-backed, or another actor's descendants without explicit authority.
 - Leave Git, commits, pushes, PRs, publishing, deployment, and final integration to root/operator unless expressly delegated.
 

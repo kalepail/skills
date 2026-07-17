@@ -183,6 +183,28 @@
         "Does not assume orchestration before scope is clear"
       ],
       "files": []
+    },
+    {
+      "prompt": "Worker A's evidence is reviewed and integrated, worker B is still mid-lane, worker C just went idle but I haven't read its output, and two more lanes are queued. Tidy up and keep the cohort moving.",
+      "expected_output": "Close or retask harvested worker A now (retask only if a queued lane matches its routed tool/model/effort; otherwise close after durable handoff), leave running worker B alone, inspect worker C's actual output and persist its handoff before any close, and touch only recorded direct children.",
+      "assertions": [
+        "Closes or retasks the harvested worker in the same pass instead of leaving it idle while dispatching new lanes",
+        "Refuses to close the worker whose results are not yet reviewed; inspects output and persists handoff first",
+        "Does not interrupt or clean the still-running worker and gates every action on recorded ownership",
+        "Reuses the idle worker only for a queued lane matching its routed tool, model, and effort; otherwise closes it and routes fresh"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "The Sol implementation worker just finished and I merged its diff. The next queued lane is the independent adversarial review of that same change, and the Sol worker is sitting idle\u2014reuse it for the review?",
+      "expected_output": "No. Consequential independent review requires a different model family from the implementer and a fresh session; close the harvested Sol worker after its handoff is durable and dispatch the review to a different-family reviewer.",
+      "assertions": [
+        "Refuses to reuse the implementer worker to review its own change",
+        "Routes the review to a different model family per fleet rules",
+        "Closes the harvested implementer worker after durable handoff instead of leaving it idle",
+        "Treats reuse as conditional on route fit, not a default"
+      ],
+      "files": []
     }
   ]
 }

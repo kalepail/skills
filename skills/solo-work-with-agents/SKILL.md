@@ -34,7 +34,7 @@ Read [agent-lifecycle.md](references/agent-lifecycle.md) before spawning, routin
 
 ## Launch One Agent
 
-1. Inventory current project processes and capacity.
+1. Inventory current project processes and capacity. Route the task first; then prefer retasking an owned idle agent that finished its previous task and already matches the routed tool, model, and effort (`send_input` a fresh bounded prompt). Never reuse when the task needs a fresh session or a different family.
 2. Call `list_agent_tools`; choose current configured, enabled, launchable installation by task fit.
 3. Call `spawn_agent`; prefer returned installation IDs and live options over remembered schemas.
 4. Record returned child ID before any later action.
@@ -65,7 +65,7 @@ Do not spawn when work is tiny, sequential, or shares same edit surface with cur
 2. Inspect output, files, diff, and checks at relevant layer.
 3. Leave Git/integration decision to root/operator.
 4. Cancel stale timers and release owned locks.
-5. Close only owned descendant after handoff is durable and partial edits are understood.
+5. Close or retask owned child in the same pass its task completes, its evidence is reviewed, and its handoff is durable—capture terminal-only findings claim-level first. Unreviewed or partial results keep it open; a finished agent left live or idle after moving on is cruft.
 
 ## Stop Conditions
 

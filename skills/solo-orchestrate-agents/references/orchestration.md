@@ -57,7 +57,7 @@ Use explicit blockers. Verification depends on implementation; integration depen
 
 ## Dispatch contract
 
-Call `list_agent_tools` and choose a launchable installation by task fit. Spawn one worker per lane. Immediately record returned child ID, project, tool, todo, and ownership. Prepend returned `agent_instructions`.
+Call `list_agent_tools` and choose a launchable installation by task fit. Spawn one worker per lane. Route the lane first; then prefer retasking an owned idle direct child that finished its previous lane and already matches the routed tool, model, and effort: `send_input` a fresh bounded contract. When its accumulated context is heavy, send the CLI's own compaction command first (Solo auto-summary is triage, not compaction); if the CLI has none, close after durable handoff and spawn fresh. Never reuse for lanes requiring a fresh session or a different family—cross-family review, failed-lane transfer, Kimi. Reuse obeys the same ownership and contract gates as a fresh spawn. Immediately record returned child ID, project, tool, todo, and ownership. Prepend returned `agent_instructions`.
 
 Require worker prompt to state:
 
@@ -91,7 +91,7 @@ Keep the worker tree shallow. Each nesting level pays a self-contained-prompt an
 - Write trusted, self-contained timer body with process IDs, todo/scratchpad IDs, evidence to inspect, and reschedule/cancel rule.
 - Use `wait_for_bound_port` for service readiness. Idle does not prove listener readiness or task completion.
 
-On wake: re-check scope, inspect status and actual output, persist progress/blocker, review artifacts, remove finished child from watch set, and reschedule for remainder.
+On wake: re-check scope, inspect status and actual output, persist progress/blocker, review artifacts, remove finished child from watch set—then, once its lane is complete, its evidence reviewed, and its handoff persisted, close or retask it in the same pass—and reschedule for remainder.
 
 ## Evidence and integration
 

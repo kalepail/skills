@@ -198,6 +198,17 @@
         "Does not record or manage it as a Solo child"
       ],
       "files": []
+    },
+    {
+      "prompt": "That Codex agent you spawned earlier finished and I already took its results. I have another small task in the same project now.",
+      "expected_output": "Reuse the owned idle agent only if the new task routes to the same tool, model, and effort: verify it is the recorded direct child and its previous task is closed, send the CLI's own compaction command first if accumulated context is heavy (or close and spawn fresh if the CLI has none), then send_input a fresh bounded prompt. If the task routes elsewhere or needs a fresh session, close the harvested agent after durable handoff and spawn to the route.",
+      "assertions": [
+        "Retasks the existing owned idle agent via send_input only when the new task matches its routed tool, model, and effort",
+        "Uses the CLI's own compaction command\u2014or closes and spawns fresh\u2014when accumulated context is heavy, and does not treat Solo auto-summary as compaction",
+        "Closes the harvested agent promptly after durable handoff if it is not being reused",
+        "Confirms recorded ownership before sending input or closing"
+      ],
+      "files": []
     }
   ]
 }

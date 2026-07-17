@@ -53,6 +53,7 @@ Built-in subagents versus more Solo agents: when a fan-out stays within one prov
 Claude agent teams (gate: `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` in settings `env`) upgrade subagents to peer teammates with a shared task list and mailbox. Prose-triggered in interactive sessions only—"Spawn three teammates…", always naming each teammate's model since unnamed teammates fall back to the default teammate model, not the lead's (effort is inherited); Solo-spawned claude TUIs form real teams, while `claude -p` silently substitutes subagents. One team per session, no nesting. Use for Claude-family workers that must talk to each other; details in fan-solo's house-style reference.
 - `setup_agent_integration` writes or updates Solo guidance in `CLAUDE.md` or `AGENTS.md`. Treat this as repository edit: require request, preserve local instructions, and review diff.
 
+- Route the task first; then prefer retasking an owned idle direct child that finished its previous task and already matches the routed tool, model, and effort: `send_input` a fresh bounded prompt. When its accumulated context is heavy, send the CLI's own compaction command first (Solo auto-summary is triage, not compaction); if the CLI has none, close after durable handoff and spawn fresh. Never reuse when the task requires a fresh session or a different model family. Reuse obeys the same ownership gates as a spawn.
 - Call `list_agent_tools`; choose returned configured installation by task fit.
 - Prefer `spawn_agent` for agents. Use generic `spawn_process(kind="agent")` only when generic process creation is required.
 - Treat `spawn_agent` response as authoritative for `process_id`, name, and `agent_instructions`.
@@ -92,6 +93,7 @@ Handoff: <destination plus changed files, tests, blockers, risk, next action>
 - Inspect partial changes before closing mid-task child.
 - Cancel owned stale timers and release owned locks.
 - Close only owned descendant. Self-close requires explicit user request and current live confirmation semantics.
+- Close or retask each owned child in the same pass its task completes, its evidence is reviewed, and its handoff is durable—capture terminal-only findings (research, citations, excerpts) claim-level first, since closing destroys the only copy. Unreviewed or partial results keep it open; a finished agent left live or idle after the parent moves on is cruft—at every depth, one generation at a time: each parent settles only the direct children it spawned and confirms a child's subtree is settled before closing it.
 - Leave Git index, commits, pushes, PRs, publishing, deployment, and final integration to root/operator unless explicitly delegated.
 
 ## Sources
