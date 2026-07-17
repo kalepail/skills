@@ -38,6 +38,8 @@ Orchestrate only independent lanes with clear ownership and integration value. B
 
 Lead owns plan, dependencies, integration, Git, publishing, and final completion. Worker owns one bounded lane.
 
+Any agent that parents workers—lead or mid-tree sub-orchestrator—spends its context on orchestration: decomposition, dispatch, targeted evidence review, integration judgment, and final synthesis. Assign every separable artifact change, including rework, to one end-to-end worker lane; rework returns to the owning lane, and a failed lane transfers whole to a fresh worker, never to an overlapping one. Once the cohort is closed and only trivial follow-through remains, the run is single-agent again—prefer one agent, not a fresh lane. The parent authors only coordination state (plans and summaries, todos and comments, worker prompts, timer bodies), user-facing synthesis and final evidence, and tightly coupled cross-lane integration edits—a no-code lead like Fable hands that coupled set to one integrator worker instead. Boundary glue qualifies as lead work only when mechanical, confined to the integration seam, and repairing no lane. Context discipline cuts both ways: require concise evidence and artifact paths back—claim-bound excerpts and citations are evidence—never whole pasted deliverables, and open files directly only where judgment requires it. Git, publishing, and verification stay with the root lead and are operations, not license to author delegable content.
+
 ## Route to fleet models
 
 Match model and effort to the lane; never route a pure-orchestrator or reviewer model as the coder. Current fleet defaults (kalepail):
@@ -56,31 +58,31 @@ Solo's built-in tool types are Claude, Codex, Amp, Gemini, OpenCode, Copilot, an
 
 ### Set model and reasoning explicitly
 
-Every spawn sets model and reasoning level explicitly—never assume the provider's default model or default reasoning is the routed one. Put standing choices in the tool's saved default flags in Solo Settings; pass per-lane overrides through `extra_args`. When a provider distinguishes thinking from non-thinking variants, always choose the thinking variant (Kimi: `kimi-k2-thinking`, not `kimi-k2`).
+Every spawn sets model and reasoning level explicitly—never assume the provider's default model or default reasoning is the routed one. Put standing choices in the tool's saved default flags in Solo Settings; pass per-lane overrides through `extra_args`. When a provider distinguishes thinking from non-thinking variants, always choose the thinking variant. Use `moonshotai/kimi-k3` for Kimi lanes; thinking is native and `--variant` is the only reasoning control.
 
 | CLI | Model flag | Reasoning flag | Canonical source |
 |---|---|---|---|
 | `claude` | `--model <alias\|id>` (`fable`, `opus`, `claude-fable-5`) | `--effort low\|medium\|high\|xhigh\|max` | `claude --help` |
 | `codex` | `-m <id>` (`gpt-5.6-sol`) | `-c model_reasoning_effort="none\|minimal\|low\|medium\|high\|xhigh\|max"` (config key; no dedicated flag) | `codex --help`, `codex exec --help`, `~/.codex/config.toml`, upstream `docs/config.md` |
-| `opencode` | `-m provider/model` (`moonshotai/kimi-k2-thinking`) | `--variant <provider-specific effort: minimal\|high\|max…>`; thinking is picked by model id, not a flag (`--thinking` only displays thinking blocks) | `opencode run --help`, `opencode models [provider]` |
+| `opencode` | `-m provider/model` (`moonshotai/kimi-k3`) | `--variant <provider-specific effort: minimal\|high\|max…>`; thinking is picked by model id, not a flag (`--thinking` only displays thinking blocks) | `opencode run --help`, `opencode models [provider]` |
 | `grok` | `-m <id>` (`grok-4.5`) | `--reasoning-effort <effort>` (alias `--effort`) | `grok --help`, `grok models` |
 
 Flags and accepted values drift with CLI releases; re-verify against each CLI's `--help` and model listing before relying on this table, and treat that live output as authoritative over it.
 
 ### Extended-fleet spawn routes
 
-Every route below was spawn-tested 2026-07-17; re-verify with `opencode models --verbose <provider>` and `grok models` before relying on it.
+Re-verify each extended-fleet route with `opencode models --verbose <provider>` or `grok models` before relying on it. The opencode TUI takes `-m` but not `--variant`, so Solo agent spawns pin variant through named agent definitions in `~/.config/opencode/agents/` (`glm-high`, `kimi-max`, `spark-xhigh` pin model + variant; add more with the same two frontmatter keys): spawn the OpenCode tool with `extra_args: ["--agent","<name>"]` and confirm the status bar shows agent · model · variant. The `opencode run --variant` forms below are the headless equivalents.
 
-| Model | Tested route | Reasoning values | Notes |
+| Model | Route | Reasoning values | Notes |
 |---|---|---|---|
 | Grok 4.5 | `grok --single "<prompt>" -m grok-4.5 --reasoning-effort high` | `low\|medium\|high` (rejects `max`) | grok CLI is the primary route (native subagents, `--best-of-n`); `opencode run -m xai/grok-4.5 --variant high` works as an alternate. 500k ctx; price doubles above 200k |
-| Kimi K3 | `opencode run -m moonshotai/kimi-k3 --variant max` | `--variant max` only: the Moonshot API honors only `reasoning_effort: "max"` today (`low`/`high` are catalog entries the client silently drops) | Thinking is native and interleaved (`reasoning_content`)—no separate `-thinking` id to pick; never feed it another model's transcript (thinking-history sensitivity). Moonshot is the only K3 provider today; prefer `cloudflare-ai-gateway/workers-ai/@cf/moonshotai/kimi-k3` if it appears, `nvidia` last—both carry only k2.x now. 1M ctx |
+| Kimi K3 | `opencode run -m moonshotai/kimi-k3 --variant max` | Run at `max`; confirm accepted variants with `opencode models --verbose moonshotai` | Thinking is native and interleaved (`reasoning_content`)—`--variant` is the only reasoning control; never feed it another model's transcript (thinking-history sensitivity). Prefer the `cloudflare-ai-gateway` route when it lists K3, `nvidia` last. 1M ctx |
 | Muse Spark 1.1 | `opencode run -m meta/muse-spark-1.1 --variant xhigh` | `none\|minimal\|low\|medium\|high\|xhigh` | Meta API; 1M ctx; multimodal input (image/video/pdf); cheapest of the extended fleet |
 | GLM-5.2 | `opencode run -m cloudflare-ai-gateway/workers-ai/@cf/zai-org/glm-5.2 --variant high` | `low\|medium\|high` (upstream Z.ai ladder is High\|Max; Cloudflare `high` ≈ upstream High, Max not exposed there) | Fallbacks: `cloudflare-workers-ai/@cf/zai-org/glm-5.2`, then `nvidia/z-ai/glm-5.2`. 262k ctx; text-only |
 
 ### Extended fleet: when to weave in
 
-Grok 4.5, Kimi K3, Muse Spark 1.1, and GLM-5.2 are second-string (care in that order). They earn a seat only where cross-family diversity, price, or a specific measured strength beats the core fleet—never as lead orchestrator, final reviewer, or flagship prose. Verdicts below are grounded in July 2026 evidence; K3 and Spark numbers are launch-week and vendor-heavy, so re-verify as independent benchmarks land.
+Grok 4.5, Kimi K3, Muse Spark 1.1, and GLM-5.2 are second-string (care in that order). They earn a seat only where cross-family diversity, price, or a specific measured strength beats the core fleet—never as lead orchestrator, final reviewer, or flagship prose. K3 and Spark verdicts lean on vendor-heavy numbers; re-check current vendor and independent benchmarks before relying on these rankings.
 
 | Job | First pick | Also fits | Keep away |
 |---|---|---|---|
@@ -90,13 +92,13 @@ Grok 4.5, Kimi K3, Muse Spark 1.1, and GLM-5.2 are second-string (care in that o
 | Synthesis / prose | Core fleet (Fable/Opus) stays primary | Kimi K3 `max` for structured drafts over supplied evidence—verify citations downstream; Grok 4.5 `medium` for structured docs from supplied material | GLM-5.2 (verbose, weak open-ended synthesis) |
 | Small sub-orchestrator | Muse Spark 1.1 `medium` (explicitly trained to plan, delegate to parallel subagents, and escalate) | — | Grok 4.5 (long-horizon gap), Kimi K3 (max-only cost, over-proactive, thinking-history breaks mixed-model context), GLM-5.2 (documented reward-hacking in agent loops, steerability tradeoff) |
 
-Standing caveats: Grok 4.5 hallucinates confidently (~2x its predecessor)—never accept its unverified factual output. Kimi K3's hosted API is Beijing-based—keep sensitive review content off it until the open weights self-host. Muse Spark's 1M window has weak needle retrieval—drive iterative tool-based retrieval instead of context-stuffing. GLM-5.2 is verbose—judge it on cost per task, not per token—and instrument its agent loops for reward-hacking. GPT-5.6 Luna (`codex exec -m gpt-5.6-luna -c model_reasoning_effort=medium`) is the incumbent cheap fan-out/triage lane—always cost-Pareto but with a hard long-context recall cliff, so keep its lanes small.
+Standing caveats: Grok 4.5 hallucinates confidently—never accept its unverified factual output. Kimi K3's hosted API is Beijing-based—keep sensitive review content off it. Muse Spark's 1M window has weak needle retrieval—drive iterative tool-based retrieval instead of context-stuffing. GLM-5.2 is verbose—judge it on cost per task, not per token—and instrument its agent loops for reward-hacking. GPT-5.6 Luna (`codex exec -m gpt-5.6-luna -c model_reasoning_effort=medium`) is the cheap fan-out/triage lane—always cost-Pareto but with a hard long-context recall cliff, so keep its lanes small.
 
 ### Built-in subagents vs Solo workers
 
-Prefer a CLI's built-in subagents when every lane stays within one provider—they are faster, cheaper, and share the parent harness. The moment a design crosses provider (Claude→Codex/grok/opencode), model family (Sol→Terra, Fable→Opus), or reasoning tier, route through Solo workers instead; that is most orchestration here, and that is fine. Exception: claude and codex subagents pin per-subagent model and effort within their own provider, so a same-provider mixed-tier fan-out can stay built-in.
+Prefer a CLI's built-in subagents when every lane stays within one CLI—they are faster, cheaper, and share the parent harness. Same-CLI model and tier mixes (Fable→Opus, Sol→Terra) stay built-in where the CLI pins per-subagent settings: claude and codex pin model and effort, opencode pins model and variant, grok pins model only (effort inherits the session). Route through Solo workers the moment a lane needs another provider's CLI (Claude→Codex/grok/opencode) or a per-subagent setting its CLI cannot pin; that is most orchestration here, and that is fine.
 
-All four trigger routes work headless (last verified 2026-07-17):
+All four trigger routes work headless; re-run a route live before relying on it:
 
 | CLI | How to trigger | Definitions and per-subagent settings |
 |---|---|---|

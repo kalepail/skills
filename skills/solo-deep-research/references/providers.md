@@ -1,6 +1,6 @@
 # Deep research provider guide
 
-Use current tool discovery as authority. The names below reflect official provider documentation as of 2026-07-16 and may change.
+Use current tool discovery as authority; verify provider names and commands against live listings or current official documentation before use.
 
 ## Contents
 

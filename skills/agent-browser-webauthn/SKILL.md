@@ -1,6 +1,6 @@
 ---
 name: agent-browser-webauthn
-description: Use agent-browser with Chrome DevTools Protocol virtual WebAuthn authenticators to test passkey, WebAuthn, Stellar smart account, wallet creation, wallet restore, and browser signing flows. Trigger when a task mentions passkeys, WebAuthn, virtual authenticators, Stellar Smart Account Kit browser tests, or agent-browser passkey automation.
+description: Use agent-browser with Chrome DevTools Protocol virtual WebAuthn authenticators to test passkey, WebAuthn, Stellar smart account, wallet creation, wallet restore, and browser signing flows. Trigger when a task mentions passkeys, WebAuthn, virtual authenticators, Stellar Smart Account Kit browser tests, or agent-browser passkey automation. Do not use for browser flows without a WebAuthn ceremony; use agent-browser alone.
 ---
 
 # Agent Browser WebAuthn
@@ -39,11 +39,11 @@ node "$WEBAUTHN_SKILL_DIR/scripts/agent-browser-webauthn-helper.mjs" run \
     ab wait --text "Connected"
 
     printf "uv:false\n" >"$WEBAUTHN_CONTROL_FILE"
-    sleep 1
+    until grep -q "\"controlApplied\":\"uv:false\"" "$WEBAUTHN_EVENTS_FILE"; do sleep 0.2; done
     ab find role button click --name "Connect passkey"
     ab wait --text "rejected"
     printf "uv:true\n" >"$WEBAUTHN_CONTROL_FILE"
-    sleep 1
+    until grep -q "\"controlApplied\":\"uv:true\"" "$WEBAUTHN_EVENTS_FILE"; do sleep 0.2; done
     ab find role button click --name "Sign"
     ab wait --text "Signed"
   '
@@ -55,7 +55,7 @@ agent-browser --session "$SESSION" close
 
 5. Adapt only the app URL, button names, and result text. Keep ceremony triggers as native `agent-browser click` or `find ... click` commands; never use evaluated DOM `.click()`.
 6. Assert real app output after each operation. For Stellar Smart Account Kit, assert a `C...` contract id or an explicit transaction/funding error. Do not treat a visible button click as success.
-7. Require both credential events and inspect the final `WebAuthn.getCredentials` diagnostic. `--require-credential true` fails clearly when no virtual credential was observed.
+7. Require both credential events and inspect the final `WebAuthn.getCredentials` diagnostic. `--require-credential true` fails clearly when no virtual credential was observed; without the flag the helper only warns and exits 0, so always pass it for credential flows.
 8. Close the fresh session after smoke tests so virtual authenticators and IndexedDB state do not leak across runs.
 
 ## Important Details
@@ -64,7 +64,7 @@ agent-browser --session "$SESSION" close
 - Headed and headless both work with this recipe. Start headed when diagnosing Chrome/WebAuthn behavior, then repeat headless after the headed flow passes.
 - The helper explicitly uses `WebAuthn.enable({enableUI:false})` and the proven CTAP2 config: `protocol: ctap2`, `transport: internal`, `hasResidentKey: true`, `hasUserVerification: true`, `isUserVerified: true`, and `automaticPresenceSimulation: true`.
 - Setup diagnostics include the target id and authenticator id. Credential events and redacted `WebAuthn.getCredentials` output go to stderr or `WEBAUTHN_EVENTS_FILE` as JSONL; private key material is never logged.
-- Set `WEBAUTHN_CONTROL_FILE` to exercise rejection: write `uv:false` before the rejected ceremony and `uv:true` before the next successful ceremony.
+- Set `WEBAUTHN_CONTROL_FILE` to exercise rejection: write `uv:false` before the rejected ceremony and `uv:true` before the next successful ceremony, then wait for the matching `controlApplied` event in `WEBAUTHN_EVENTS_FILE` before the next click—the helper applies directives on a 500 ms poll, so elapsed time does not prove one applied.
 - Setup, CDP calls, and the wrapped command have a 120-second timeout by default. Set `--timeout-ms` to a larger positive value for deliberately long flows.
 - Use a local or otherwise trusted CDP endpoint. Remote CDP URLs are rejected unless `--allow-remote-cdp true` is passed deliberately.
 - Launch the site on `localhost` or HTTPS. WebAuthn requires a secure context; many passkey and smart-account SDKs also reject raw `127.0.0.1` for domain validation.

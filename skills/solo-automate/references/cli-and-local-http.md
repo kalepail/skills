@@ -87,7 +87,7 @@ Stable errors: 400 `bad_request`, 401 `unauthorized`, 403 `forbidden`, 404 `not_
 
 ## Endpoint families
 
-Current public docs describe 45 local routes:
+Use the discovery document for the exact local route catalog. Route families include:
 
 - Discovery/status: `/api/version`, `/api/status`, `/api/discovery`.
 - Projects: list/create/get/patch/delete/move-to-workspace.

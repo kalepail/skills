@@ -1,6 +1,6 @@
 # Workspaces, windows, sidebar, and navigation
 
-Use this reference for workspace organization, multi-window layout, sidebar density, favorites, activity signals, palettes, and keymaps. Verify current labels in live Solo because these surfaces changed through v0.9.3.
+Use this reference for workspace organization, multi-window layout, sidebar density, favorites, activity signals, palettes, and keymaps. Verify labels and feature availability in live Solo before acting.
 
 ## Workspaces and windows
 
@@ -72,6 +72,6 @@ Sources: [command palette](https://soloterm.com/docs/command-palette/using), [co
 
 Sources: [default reference](https://soloterm.com/docs/keyboard-shortcuts/default-reference), [customizing](https://soloterm.com/docs/keyboard-shortcuts/customizing), [switching](https://soloterm.com/docs/keyboard-shortcuts/switching-projects-commands), [sidebar keyboard](https://soloterm.com/docs/keyboard-shortcuts/sidebar-navigation).
 
-## Version checks
+## Live verification
 
-Consult [changelog](https://soloterm.com/changelog) before asserting Windows/WSL execution-profile badges, favorite controls, workspace MCP coverage, or shortcut availability. v0.9.3 added favorites and per-environment agent/MCP behavior; v0.8.2 substantially changed execution profiles and navigation.
+Check live Settings, MCP discovery, and the current [changelog](https://soloterm.com/changelog) before asserting Windows/WSL execution-profile badges, favorite controls, workspace MCP coverage, or shortcut availability.

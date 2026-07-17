@@ -78,4 +78,4 @@ Sources: [execution profiles](https://soloterm.com/docs/environment/execution-pr
 
 ## Live verification
 
-Check live Settings and [changelog](https://soloterm.com/changelog) before promising named themes, Universal Agent GUI, Windows/WSL controls, or exact defaults. Marketing currently advertises bundled themes while operational docs say only Light/Dark/System are exposed; follow live Settings/docs.
+Check live Settings and the current [changelog](https://soloterm.com/changelog) before promising named themes, Universal Agent GUI, Windows/WSL controls, or exact defaults; offer only the themes and controls those surfaces expose.

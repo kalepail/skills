@@ -37,7 +37,7 @@ Keep narrow lookups and simple fact checks with one search surface.
 
 Fan out when the user asks for deep, exhaustive, comparative, or independently verified research, or when the question has at least two separable evidence lanes. Match worker count to complexity and prefer two to four distinct lanes. Divide by research angle first and provider second; duplicate prompts across engines only when measuring provider agreement is itself useful.
 
-Route worker models to the lane: GPT-5.6 Terra for research discovery and tool-calling sweeps, Perplexity for reasoning over collected evidence, and Fable or Sol for central synthesis and adversarial cross-check. Kimi K3 at `--variant max` (best published browse/long-horizon scores, 1M context; slow, fresh session only) and Muse Spark 1.1 at `--variant medium`–`high` (top scaled tool use, multimodal, cheapest) are strong extended-fleet research lanes; keep Grok 4.5 and GLM-5.2 out of open-ended factual research—both fabricate confidently. The Solo lead (Fable or Sol) owns reconciliation and never delegates the final judgment.
+Route discovery and tool-calling lanes to launchable research models and keep central synthesis, adversarial cross-check, and final judgment with the lead—it owns reconciliation and never delegates the verdict. The current fleet rubric, including which models earn research lanes and which fabricate, lives in fan-solo's house-style reference; verify routes against live listings before dispatch.
 
 ## Prefer This Provider Flow
 

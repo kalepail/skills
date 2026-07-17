@@ -47,11 +47,11 @@ For ambiguous or multi-surface requests, read [capability map](references/capabi
 
 Default to one agent for sequential work, shared-state edits, or one coherent judgment loop. Use `$solo-work-with-agents` for that lifecycle.
 
-Use `$solo-orchestrate-agents` only when at least two lanes are independent enough to own separately. Lead owns decomposition, boundaries, integration, and final verification. Workers own bounded lanes—not whole goal.
+Use `$solo-orchestrate-agents` only when at least two lanes are independent enough to own separately. Lead owns decomposition, boundaries, integration, and final verification. Workers own bounded lanes—not whole goal. A parenting agent writes coordination state, final synthesis, and at most mechanical integration-seam glue—a no-code lead delegates even that: assign every separable artifact change—including rework—to a worker lane, and take back concise evidence and artifact paths, not whole pasted output.
 
 Use `$solo-deep-research` when those lanes are evidence-gathering work across research providers. It owns provider selection, source independence, citation discipline, contradiction resolution, and research synthesis; `$solo-orchestrate-agents` still supplies the process mechanics.
 
-Match model and effort to the lane, never the reverse: Fable to orchestrate and synthesize (never to code); Codex Sol to implement; Opus for prose against a plan; GPT-5.6 Terra for research and tool-calling lanes; independent review by a family different from the implementer (Fable when Codex Sol implemented). The extended fleet—Grok 4.5, Kimi K3, Muse Spark 1.1, GLM-5.2—is second-string: cross-family adversarial review, cheap second passes, research/tool-calling lanes, and Muse Spark as a small sub-orchestrator; never lead orchestration, final review, or flagship prose. Every spawn sets model and reasoning explicitly—never assume a provider default—and prefers thinking variants where a provider offers them. Prefer a CLI's built-in subagents (claude Agent tool or agent teams, codex `multi_agent`, opencode `task` tool, grok `spawn_subagent`) when a fan-out stays within one provider; use Solo workers the moment lanes cross provider, model family, or reasoning tier—which is most orchestration here. See [house style](references/house-style.md) for the current fleet, per-CLI flags, subagent triggers, and the when-to-weave rubric.
+Choose model, effort, and same-CLI-built-in versus Solo topology from [house style](references/house-style.md)—the single source for the fleet table, per-CLI flags, subagent triggers, agent-teams topology, and the when-to-weave rubric. Discover launchable tools and verify CLI flags live before dispatch.
 
 ## Choose durable state
 

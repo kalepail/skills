@@ -1,4 +1,4 @@
 interface:
   display_name: "Agent Browser WebAuthn"
   short_description: "Drive passkey flows with agent-browser virtual authenticators."
-  default_prompt: "Use agent-browser with a virtual WebAuthn authenticator to test this passkey flow."
+  default_prompt: "Use $agent-browser-webauthn with $agent-browser to test this passkey flow with a virtual WebAuthn authenticator."

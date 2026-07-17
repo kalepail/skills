@@ -376,7 +376,7 @@ async function commandRun(args, childCommand) {
       } catch (error) {
         logDiagnostic({ getCredentialsError: String(error) });
         console.error(
-          `${requireCredential ? "Failure" : "Warning"}: No virtual credential observed because WebAuthn.getCredentials failed.`
+          `${requireCredential ? "Failure" : "Warning"}: WebAuthn.getCredentials failed (target replaced or closed?); credential state is unverified—re-run the full flow in one fresh session.`
         );
         credentialFailure = requireCredential;
       }

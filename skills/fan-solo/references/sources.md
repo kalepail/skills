@@ -1,12 +1,12 @@
 # Fan Solo sources
 
-Research snapshot: 2026-07-15. Use live Solo runtime and current official docs before these static notes when behavior may have changed.
+Use the live Solo runtime and current official docs as authority for behavior, schemas, and availability; these notes record provenance only.
 
 ## Maintainer research basis
 
 These provenance records live in the repository, not the standalone skill package, and are not required at runtime.
 
-- [Skill best practices](https://github.com/kalepail/skills/blob/main/research/fan-solo/skill-best-practices.md) — OpenAI/Anthropic skill architecture, triggering, disclosure, evals, and portability.
+- [Skill best practices](https://github.com/kalepail/skills/blob/main/research/skill-best-practices.md) — OpenAI/Anthropic skill architecture, triggering, disclosure, evals, and portability.
 - [Solo product docs synthesis](https://github.com/kalepail/skills/blob/main/research/fan-solo/solo-product-docs.md) — product hierarchy, UI, projects, processes, settings, and official documentation map.
 - [Solo MCP/API synthesis](https://github.com/kalepail/skills/blob/main/research/fan-solo/solo-mcp-api.md) — MCP, CLI, local HTTP, deep links, hosted API, schemas, discovery, and safety.
 - [Solo coordination synthesis](https://github.com/kalepail/skills/blob/main/research/fan-solo/solo-coordination.md) — agent ownership, spawning, timers, locks, KV, scratchpads, todos, handoffs, and completion.
@@ -39,8 +39,7 @@ When sources conflict, runtime controls availability; official docs control supp
 - [Deep links](https://soloterm.com/api/v1/docs/integrations/deep-links)
 - [Changelog](https://soloterm.com/changelog)
 
-## Known snapshot limits
+## Live authority limits
 
-- Queried runtime exposed 95 MCP tools while hosted docs described additional version-dependent workspace tools. Discover live availability.
-- Solo product and integrations continue changing; do not hard-code counts, ports, tokens, agent tool IDs, or optional groups.
-- X corpus is sampled and incomplete. Do not use it as complete changelog or schema source.
+- Discover available MCP tools at runtime; do not hard-code tool counts, ports, tokens, agent-tool IDs, or optional groups.
+- Use first-party posts for intent and examples only, never as a changelog or schema source.

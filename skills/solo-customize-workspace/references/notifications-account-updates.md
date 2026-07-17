@@ -78,7 +78,7 @@ Source: [Team licenses](https://soloterm.com/docs/account/team-licenses).
 - Quit/relaunch stops running commands, agents, and terminals. Solo confirms when any run and lists up to six names.
 - Relaunch reloads projects; eligible trusted auto-start commands may start again.
 - Never apply update, quit, or relaunch from an informational request.
-- Review [changelog](https://soloterm.com/changelog) before version-sensitive advice. Current public build observed in research was v0.9.3 (2026-06-21), but verify live version.
+- Read the installed Solo version and the current [changelog](https://soloterm.com/changelog) before version-sensitive advice.
 
 Sources: [installing updates](https://soloterm.com/docs/updates/installing-updates), [safe restart](https://soloterm.com/docs/updates/restarting-safely), [changelog](https://soloterm.com/changelog).
 

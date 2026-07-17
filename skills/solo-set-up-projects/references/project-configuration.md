@@ -36,7 +36,7 @@ Process fields:
 - `restart_when_changed`: optional string list, default empty. Match paths relative to project root. Invalid globs are ignored.
 - `env`: optional string map, default empty.
 
-Only commands are YAML-backed. Unknown extra keys are currently ignored, not extension points. Empty/comment-only YAML is valid. File limit is 1 MB.
+Only commands are YAML-backed. Unknown extra keys are ignored, not extension points. Empty/comment-only YAML is valid. File limit is 1 MB.
 
 ## Setup and storage
 

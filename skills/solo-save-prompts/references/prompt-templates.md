@@ -11,8 +11,8 @@ Read this reference before creating, scoping, updating, deleting, exporting, or 
 
 ## Tool surface
 
-- `list_prompt_templates`: list global plus effective-project summaries; filter by name/description and sort when live schema allows. Listing does not currently update last-selected time.
-- `get_prompt_template`: read full body and parsed placeholders. Current docs say reading updates last-selected time.
+- `list_prompt_templates`: list global plus effective-project summaries; filter by name/description and sort when live schema allows. Listing does not update last-selected time.
+- `get_prompt_template`: read full body and parsed placeholders; reading updates last-selected time.
 - `create_prompt_template`: create with name, Markdown body, optional description; omit project for global or pass project for project scope.
 - `update_prompt_template`: patch name, description, and/or body without changing scope; omitted fields persist and empty string clears supported text field.
 - `delete_prompt_template`: permanently delete by ID.

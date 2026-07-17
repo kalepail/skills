@@ -39,11 +39,9 @@ Read [agent-lifecycle.md](references/agent-lifecycle.md) before spawning, routin
 3. Call `spawn_agent`; prefer returned installation IDs and live options over remembered schemas.
 4. Record returned child ID before any later action.
 5. Prepend returned `agent_instructions` to first prompt.
-6. Send one self-contained prompt with objective, authoritative inputs, owned scope, forbidden work, acceptance checks, and handoff destination.
+6. Send one self-contained prompt with objective, authoritative inputs, owned scope, forbidden work, acceptance checks, and handoff destination. While the child owns that scope, stay read-only on it—route rework back through `send_input` rather than co-editing.
 
-Route by fleet defaults: Codex Sol to implement, Opus 4.8 for prose against a plan, Fable to orchestrate and synthesize (never to code), GPT-5.6 Terra for research and tool-calling; independent review by a family different from the implementer (Fable when Codex Sol implemented). The extended fleet (Grok 4.5, Kimi K3, Muse Spark 1.1, GLM-5.2) is second-string for cross-family review, cheap verification, and research lanes—see [agent-lifecycle.md](references/agent-lifecycle.md) for tested routes and limits. Grok needs a custom Generic tool; confirm the chosen tool is launchable first.
-
-Set model and reasoning explicitly on every launch—saved default flags in Settings or `extra_args` for one launch—never assuming the provider default; prefer thinking variants where offered. For a same-provider fan-out, prefer the CLI's built-in subagents over spawning more Solo agents; Solo earns it when lanes cross provider, model, or reasoning tier—the common case. Per-CLI flags, subagent triggers, and canonical sources live in [agent-lifecycle.md](references/agent-lifecycle.md).
+Choose model, effort, launch route, and same-CLI-built-in versus Solo topology from [agent-lifecycle.md](references/agent-lifecycle.md)—the single source for fleet routing, spawn routes, per-CLI flags, and subagent triggers. Set model and reasoning explicitly on every launch and confirm the chosen tool and flags live.
 
 Do not spawn when work is tiny, sequential, or shares same edit surface with current agent. Handle it directly.
 

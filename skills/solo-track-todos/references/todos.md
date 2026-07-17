@@ -20,12 +20,12 @@ Read this reference before advanced todo filtering, blocker replacement, locking
 - `todo_set_blockers`: replace full blocker list.
 - `todo_add_blocker` / `todo_remove_blocker`: mutate one dependency.
 - `todo_lock` / `todo_unlock`: acquire/release active todo edit claim.
-- `todo_complete`: complete/incomplete; live help currently says completion releases actor's lock unless disabled.
+- `todo_complete`: complete/incomplete; per live help, completion releases the actor's lock unless disabled.
 - `todo_comment_create` / `update` / `delete` / `list`: maintain task activity trail.
 - `todo_transfer`: move to target project; preserve comments/completion and clear blockers/locks.
 - `todo_delete`: permanent removal; prefer completion or backlog unless deletion is intentional.
 
-Todo/comment write tools currently default to slim receipts for normal orchestration; request rich response only when immediate hydrated state is necessary. Follow with explicit `todo_get` when authoritative read is clearer.
+Todo/comment write tools default to slim receipts for normal orchestration; request rich response only when immediate hydrated state is necessary. Follow with explicit `todo_get` when authoritative read is clearer.
 
 ## Fields and conventions
 

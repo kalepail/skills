@@ -6,7 +6,7 @@ Use this reference for Solo MCP transport, live discovery, identity, scope, tool
 
 Enable **Settings > MCP > MCP server** and use generated client configuration. Normal clients launch Solo's bundled stdio helper; no public MCP host or port exists. Helper reconnects across Solo restarts and buffers bounded in-flight requests. Solo-launched process identity persists across helper/app restarts; external clients retain session only for helper lifetime.
 
-Treat live MCP discovery as authority. Core and feature availability varies by Solo version and settings. Scratchpad, todo, timer, key-value, and prompt-template tools can be toggled. Hosted docs may advertise tools absent from current runtime; for example, one observed runtime exposed 95 tools without six documented workspace tools.
+Treat live MCP discovery as authority. Core and feature availability varies by Solo version and settings. Scratchpad, todo, timer, key-value, and prompt-template tools can be toggled. Hosted docs may advertise tools absent from the current runtime; call live discovery for the enabled tool set.
 
 ## Discovery sequence
 
@@ -46,11 +46,11 @@ Documented workspace tools are `list_workspaces`, `create_workspace`, `update_wo
 
 ## Output and search controls
 
-- Rendered/raw process reads: default 50 lines, maximum 200 in observed MCP schemas.
+- Rendered/raw process reads: take defaults and maximums from the live schema; paginate when needed.
 - Rendered/raw searches: case-insensitive substring; default 20, maximum 100 matches.
 - Scratchpad read: `full|content|headings|section`, line offset/limit, optional content-only response.
 - Scratchpad find: literal query, scope, case flag, 1–100 matches, 0–3 context lines.
-- Todo list: filters, text query, tags, sort, offset/limit; observed default 50, maximum 200.
+- Todo list: filters, text query, tags, sort, offset/limit; take limits from the live schema and continue until the response reports no more results.
 - Todo/comment writes: prefer default `response_mode=slim`; request `rich` only when hydrated payload is needed.
 
 ## Prompts
