@@ -42,6 +42,9 @@ Fan out only when lanes are independent, have disjoint write scopes or read-only
 
 - Discover available agent tools live; choose by lane fit.
 - Route by fleet defaults: Fable to orchestrate and synthesize (never to code); Codex Sol to implement; Opus 4.8 for prose against a plan; GPT-5.6 Terra for research and tool-calling lanes; independent review by a family different from the implementer (Fable when Codex Sol implemented). Grok needs a custom Generic tool. Confirm the tool is launchable before relying on it.
+- Set model and reasoning explicitly on every spawn (saved default flags or `extra_args`); never assume the provider default. Prefer thinking variants where offered. Per-CLI flags: `claude --model/--effort`, `codex -m` + `-c model_reasoning_effort=...`, `opencode -m provider/model --variant` (thinking via model id, e.g. `kimi-k2-thinking`), `grok -m --reasoning-effort`; verify against each CLI's `--help`.
+- Weave the extended fleet only into its earned lanes: Grok 4.5 `high` for cross-family adversarial review (reproduce its findings), Kimi K3 `max` for research/tool-calling lanes (fresh session only), Muse Spark 1.1 `medium` as a small sub-orchestrator, GLM-5.2 `high` for cheap calibrated verification. None of them leads orchestration, final review, or synthesis.
+- Prefer the CLI's built-in subagents for a same-provider fan-out (claude Agent tool; codex `multi_agent`—ask explicitly in the prompt; opencode `task` tool; grok `spawn_subagent`); use Solo workers when lanes cross provider, model, or reasoning tier—the common case.
 - Prefer Solo's maintained `worker_bootstrap` MCP prompt when the host exposes it, then layer lane specifics, instead of hand-rewriting the whole identity/lock/state contract.
 - Spawn one worker per independent lane.
 - Record every returned child `process_id` with todo and project immediately.
@@ -50,6 +53,7 @@ Fan out only when lanes are independent, have disjoint write scopes or read-only
 
 ### 4. Wait Without Polling
 
+- Never wait with shell `sleep` or ad-hoc polling loops; Solo timers are the wait primitive.
 - Schedule idle-any timer to harvest first newly quiet worker; reschedule for remaining cohort.
 - Use idle-all only for true barrier after all current lanes must quiet.
 - Put process/todo/scratchpad IDs and exact next action in timer body.

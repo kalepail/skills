@@ -54,6 +54,59 @@ Fable orchestrates, reviews, and synthesizes—it does not code. Codex Sol is th
 
 Solo's built-in tool types are Claude, Codex, Amp, Gemini, OpenCode, Copilot, and Kimi. Grok is not built in; add it as a custom Generic tool before spawning it. Discover live launchable tools with `list_agent_tools`; treat this table as intent, not proof a given tool is installed and enabled.
 
+### Set model and reasoning explicitly
+
+Every spawn sets model and reasoning level explicitly—never assume the provider's default model or default reasoning is the routed one. Put standing choices in the tool's saved default flags in Solo Settings; pass per-lane overrides through `extra_args`. When a provider distinguishes thinking from non-thinking variants, always choose the thinking variant (Kimi: `kimi-k2-thinking`, not `kimi-k2`).
+
+| CLI | Model flag | Reasoning flag | Canonical source |
+|---|---|---|---|
+| `claude` | `--model <alias\|id>` (`fable`, `opus`, `claude-fable-5`) | `--effort low\|medium\|high\|xhigh\|max` | `claude --help` |
+| `codex` | `-m <id>` (`gpt-5.6-sol`) | `-c model_reasoning_effort="none\|minimal\|low\|medium\|high\|xhigh\|max"` (config key; no dedicated flag; enum verified live against the API 2026-07-17) | `codex --help`, `codex exec --help`, `~/.codex/config.toml`, upstream `docs/config.md` |
+| `opencode` | `-m provider/model` (`moonshotai/kimi-k2-thinking`) | `--variant <provider-specific effort: minimal\|high\|max…>`; thinking is picked by model id, not a flag (`--thinking` only displays thinking blocks) | `opencode run --help`, `opencode models [provider]` |
+| `grok` | `-m <id>` (`grok-4.5`) | `--reasoning-effort <effort>` (alias `--effort`) | `grok --help`, `grok models` |
+
+Flags and accepted values drift with CLI releases; re-verify against each CLI's `--help` and model listing before relying on this table, and treat that live output as authoritative over it.
+
+### Extended-fleet spawn routes
+
+Every route below was spawn-tested 2026-07-17; re-verify with `opencode models --verbose <provider>` and `grok models` before relying on it.
+
+| Model | Tested route | Reasoning values | Notes |
+|---|---|---|---|
+| Grok 4.5 | `grok --single "<prompt>" -m grok-4.5 --reasoning-effort high` | `low\|medium\|high` (rejects `max`) | grok CLI is the live route; `opencode -m xai/grok-4.5` fails on expired xAI OAuth until `opencode providers login`. 500k ctx; price doubles above 200k |
+| Kimi K3 | `opencode run -m moonshotai/kimi-k3 --variant max` | `--variant max` only: the Moonshot API honors only `reasoning_effort: "max"` today (`low`/`high` are catalog entries the client silently drops) | Thinking is native and interleaved (`reasoning_content`)—no separate `-thinking` id to pick; never feed it another model's transcript (thinking-history sensitivity). Moonshot is the only K3 provider today; prefer `cloudflare-ai-gateway/workers-ai/@cf/moonshotai/kimi-k3` if it appears, `nvidia` last—both carry only k2.x now. 1M ctx |
+| Muse Spark 1.1 | `opencode run -m meta/muse-spark-1.1 --variant xhigh` | `none\|minimal\|low\|medium\|high\|xhigh` | Meta API; 1M ctx; multimodal input (image/video/pdf); cheapest of the extended fleet |
+| GLM-5.2 | `opencode run -m cloudflare-ai-gateway/workers-ai/@cf/zai-org/glm-5.2 --variant high` | `low\|medium\|high` (upstream Z.ai ladder is High\|Max; Cloudflare `high` ≈ upstream High, Max not exposed there) | Fallbacks (both tested): `cloudflare-workers-ai/@cf/zai-org/glm-5.2`, then `nvidia/z-ai/glm-5.2`. 262k ctx; text-only |
+
+### Extended fleet: when to weave in
+
+Grok 4.5, Kimi K3, Muse Spark 1.1, and GLM-5.2 are second-string (care in that order). They earn a seat only where cross-family diversity, price, or a specific measured strength beats the core fleet—never as lead orchestrator, final reviewer, or flagship prose. Verdicts below are grounded in July 2026 evidence; K3 and Spark numbers are launch-week and vendor-heavy, so re-verify as independent benchmarks land.
+
+| Job | First pick | Also fits | Keep away |
+|---|---|---|---|
+| Adversarial cross-family review | Grok 4.5 `high`—cheap, terse; reproduce every finding before acting | Kimi K3 `max` (fresh session, review-not-fix brief); GLM-5.2 `high` (lowest confident-hallucination rate; proven security-review results); Muse Spark `xhigh` (fourth-family voice) | Any of them as sole or final gate—Fable keeps that seat |
+| Second-pass verification | Grok 4.5 `medium` when the pass executes tests/terminal (evidence-producing only) | GLM-5.2 `high` for read-only checks (best calibration); Muse Spark `high` (abstains rather than guesses) | Kimi K3 as sole verifier (confident-hallucination lineage; use only as a diverse third vote) |
+| Research / tool-calling lanes | Kimi K3 `max` (best browse/long-horizon scores anywhere; 1M ctx; slow and verbose) | Muse Spark `medium`–`high` (top scaled tool use, multimodal input, cheapest); Grok 4.5 `low`–`medium` for mechanical high-volume tool lanes | Grok and GLM-5.2 for open-ended factual research (both fabricate confidently) |
+| Synthesis / prose | Core fleet (Fable/Opus) stays primary | Kimi K3 `max` for structured drafts over supplied evidence—verify citations downstream; Grok 4.5 `medium` for structured docs from supplied material | GLM-5.2 (verbose, weak open-ended synthesis) |
+| Small sub-orchestrator | Muse Spark 1.1 `medium` (explicitly trained to plan, delegate to parallel subagents, and escalate) | — | Grok 4.5 (long-horizon gap), Kimi K3 (max-only cost, over-proactive, thinking-history breaks mixed-model context), GLM-5.2 (documented reward-hacking in agent loops, steerability tradeoff) |
+
+Standing caveats: Grok 4.5 hallucinates confidently (~2x its predecessor)—never accept its unverified factual output, and its opencode route stays broken until `opencode providers login` re-auths xAI. Kimi K3's hosted API is Beijing-based—keep sensitive review content off it until the open weights self-host. Muse Spark's 1M window has weak needle retrieval—drive iterative tool-based retrieval instead of context-stuffing. GLM-5.2 is verbose—judge it on cost per task, not per token—and instrument its agent loops for reward-hacking. GPT-5.6 Luna (`codex exec -m gpt-5.6-luna -c model_reasoning_effort=medium`, spawn-tested 2026-07-17) is the incumbent cheap fan-out/triage lane—always cost-Pareto but with a hard long-context recall cliff, so keep its lanes small.
+
+### Built-in subagents vs Solo workers
+
+Prefer a CLI's built-in subagents when every lane stays within one provider—they are faster, cheaper, and share the parent harness. The moment a design crosses provider (Claude→Codex/grok/opencode), model family (Sol→Terra, Fable→Opus), or reasoning tier, route through Solo workers instead; that is most orchestration here, and that is fine. Exception: claude and codex subagents pin per-subagent model and effort within their own provider, so a same-provider mixed-tier fan-out can stay built-in.
+
+All four trigger routes spawn-tested headless 2026-07-17:
+
+| CLI | How to trigger | Definitions and per-subagent settings |
+|---|---|---|
+| `claude` | Auto-delegation from agent `description`, "use the X subagent", or the Agent tool; works under `claude -p` | `.claude/agents/*.md` or `--agents '<json>'`; per-agent `model` (`sonnet`/`opus`/`haiku`/`fable`/id/`inherit`) and `effort` (`low…max`); `--forward-subagent-text` exposes child transcripts in stream-json. Source: code.claude.com/docs/en/sub-agents |
+| `codex` | Conversational only—ask explicitly ("spawn one agent per…") or name custom agents in prose ("Have `pr_explorer` map the affected paths"); `AGENTS.md` standing instructions; `spawn_agents_on_csv` for batch; works under `codex exec` | `[features] multi_agent` stable-on; built-ins `default`/`worker`/`explorer`; per-agent `model` + `model_reasoning_effort` in `~/.codex/agents/<name>.toml` or `.codex/agents/`; `[agents] max_threads=6`, `max_depth=1`. Source: developers.openai.com/codex/subagents |
+| `opencode` | Primary agent auto-delegates via the `task` tool from agent descriptions; `@name` in TUI; works under `opencode run` | Built-in subagents `general`/`explore` (this install; docs add `scout`); custom in `.opencode/agents/*.md`, `~/.config/opencode/agents/`, or `opencode.json` `agent` key; per-agent `model` and `reasoningEffort`/`variant`; gate with `permission.task`. Source: opencode.ai/docs/agents |
+| `grok` | Model-driven `spawn_subagent`—steer by naming a type ("use the explore subagent"); `--no-subagents` disables; works under `--single` | Built-ins `general-purpose`/`explore`/`plan`; custom via `--agents '<json>'` or `--agent <file>` (Claude-compatible schema with per-subagent `model`); effort inherits session `--reasoning-effort`; `--best-of-n <N>` runs N headless attempts plus judge. Source: docs.x.ai/build CLI reference |
+
+Claude agent teams are a third topology—peer teammates with a shared task list and mailbox, versus report-back subagents. Gate: `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` in `~/.claude/settings.json` `env` (set 2026-07-17). Trigger with prose in an interactive session: "Spawn three teammates to review PR #142: one security, one performance, one test coverage." Teammates do not inherit the lead's model—name it in the prompt ("Use Sonnet for each teammate") or set Default teammate model in `/config`; they do inherit effort. Subagent definitions double as teammate roles ("Spawn a teammate using the security-reviewer agent type"). Experimental limits: one team per session, no nested teams, teammates are full sessions so tokens scale linearly. Headless `claude -p` quietly substitutes subagents—no team config is written—while a Solo-spawned claude TUI session forms a real team (both tested 2026-07-17: the teammate registered in `~/.claude/teams/*/config.json` `members` and completed its task). Two tested gotchas: a teammate spawned without a named model defaulted to Opus 4.8, not the lead's model—always name the teammate model; and a weak lead may claim it has no teammate tool—remind it the Agent tool spawns teammates when the gate is on. Pick teams over subagents only when Claude-family workers must talk to each other or self-claim shared tasks; anything cross-provider stays on Solo. Source: code.claude.com/docs/en/agent-teams
+
 ## Respect recursive process ownership
 
 Control only self and recorded descendants. Parent, sibling, unrelated, YAML-backed shared process, or another agent's descendants remain outside authority unless user or runbook explicitly names exact target and action.
