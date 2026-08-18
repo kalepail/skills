@@ -209,6 +209,17 @@
         "Confirms recorded ownership before sending input or closing"
       ],
       "files": []
+    },
+    {
+      "prompt": "Spin up a Fable reviewer for the auth change and have it grill the diff.",
+      "expected_output": "Treat Fable as a model, not an agent tool: discover live tools, spawn the Claude installation with explicit `--model fable` and an effort flag, and brief it as one bounded read-only reviewer.",
+      "assertions": [
+        "Spawns the Claude agent tool rather than searching for a tool or agent type named Fable",
+        "Passes `--model fable` (or `claude-fable-5`) plus an explicit `--effort` level through saved defaults or extra_args",
+        "Records the returned child process ID and sends a bounded review-not-fix brief",
+        "Keeps the reviewer read-only, with Git and integration left to the operator"
+      ],
+      "files": []
     }
   ]
 }

@@ -211,6 +211,7 @@
       "assertions": [
         "Refuses to reuse the implementer worker to review its own change",
         "Routes the review to a different model family per fleet rules",
+        "If it selects Fable, resolves it through the discovered Claude tool with explicit model and effort flags",
         "Closes the harvested implementer worker after durable handoff instead of leaving it idle",
         "Treats reuse as conditional on route fit, not a default"
       ],

@@ -84,6 +84,7 @@
         "Assigns Codex Sol, not Fable, to the coding lanes",
         "Uses Fable or Sol for planning and synthesis",
         "Uses Fable or another model family different from the implementer for consequential independent review",
+        "Resolves any selected Fable lane through the discovered Claude tool with explicit model and effort flags",
         "Does not fan out when lanes are sequential or share an edit surface"
       ],
       "files": []

@@ -34,6 +34,7 @@ When authority is unclear, inspect only. Ask user before mutation.
 - Refresh health explicitly. Runtime Doctor explains tool/environment launchability; MCP connection count/repair is a different diagnostic.
 - Saved default flags belong in Settings. `extra_args` appends one-launch flags without changing saved defaults; verify effective launch command in current UI when flags matter.
 - Always include explicit model and reasoning flags (saved defaults or `extra_args`); never rely on the provider's default model or reasoning level. When a provider offers thinking versus non-thinking variants, choose thinking. Kimi lanes run K3 only; thinking is native and `--variant` is the only reasoning control (routes in the extended-fleet paragraph below).
+- Fleet names are models, not agent tools. `list_agent_tools` returns CLI installations; spawn Fable as the Claude tool with `extra_args: ["--model","fable","--effort","high"]` (alias `fable`, id `claude-fable-5`).
 
 | CLI | Model flag | Reasoning flag | Canonical source |
 |---|---|---|---|
