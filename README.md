@@ -41,7 +41,7 @@ Personal, opinionated AI-agent skills by [Tyler van der Hoeven](https://github.c
 
 Personal `kalepail-*` workflows tuned to Tyler's own stack. They compose with Fan Solo when it is installed but do not require it.
 
-- [Deep research](skills/kalepail-deep-research/) — cited multi-lane research synthesis across Parallel CLI/MCP, Perplexity MCP, and Stellar Raven (the first discovery surface for Stellar-ecosystem questions), with optional Solo fan-out.
+- [Deep research](skills/kalepail-deep-research/) — cited multi-lane research synthesis across Parallel CLI/MCP, Perplexity MCP, and Stellar Raven (the first discovery surface for Stellar-ecosystem questions), with fan-out through whatever orchestration vehicle the session offers.
 
 ### Agent Browser WebAuthn
 
@@ -53,7 +53,8 @@ Standalone; tied to neither family.
 
 Skills orchestrate external tools; they do not bundle or authenticate them.
 
-- **Solo MCP** — required by `fan-solo` and every `solo-*` skill; optional for `kalepail-deep-research`, which runs sequentially without it. Enable [Solo's local MCP server](https://soloterm.com/docs/integrations/mcp-server) and connect your agent host to it.
+- **Solo MCP** — required by `fan-solo` and every `solo-*` skill. Enable [Solo's local MCP server](https://soloterm.com/docs/integrations/mcp-server) and connect your agent host to it.
+- **A fan-out vehicle** — optional for `kalepail-deep-research`, which runs evidence lanes through host-native subagents, a terminal or worktree manager, or a durable orchestrator, and runs them sequentially when none is present. No particular vehicle is required.
 - **Optional research providers** — `kalepail-deep-research` prefers Parallel CLI, falls back to Parallel Search/Task MCP, uses Perplexity MCP as an independent lane, and uses Stellar Raven MCP as the first discovery surface for Stellar-ecosystem questions; missing providers degrade to documented fallbacks.
 - **agent-browser and Node.js 22+** — Agent Browser WebAuthn requires the `agent-browser` CLI and Node.js 22 or newer; the `$agent-browser` skill is recommended but not bundled here.
 
