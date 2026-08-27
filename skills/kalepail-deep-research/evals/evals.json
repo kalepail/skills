@@ -27,22 +27,35 @@
       "files": []
     },
     {
-      "prompt": "Solo is not available in this session, but I still need deep, cross-checked research on how the EU AI Act affects open-weight model releases, with citations.",
-      "expected_output": "Proceed without Solo: run the same independent evidence lanes sequentially in this session with identical citation, source-independence, and verification discipline, and deliver the cited synthesis without requiring any Solo state.",
+      "prompt": "This session has no orchestrator or subagent tooling at all, but I still need deep, cross-checked research on how the EU AI Act affects open-weight model releases, with citations.",
+      "expected_output": "Treat sequential as a complete vehicle: run the same independent evidence lanes one after another in this session with identical citation, source-independence, and verification discipline, and deliver the cited synthesis without installing or authenticating any orchestrator.",
       "assertions": [
-        "Completes deep research without Solo",
+        "Completes deep research with no fan-out vehicle present",
         "Runs evidence lanes sequentially with unchanged citation and verification discipline",
-        "Does not treat missing Solo as a blocker or error"
+        "Does not treat a missing orchestrator as a blocker or error",
+        "Does not install or authenticate an orchestrator to obtain fan-out"
       ],
       "files": []
     },
     {
-      "prompt": "Solo is running here. Deeply research Deno versus Bun for our API workloads across independent evidence lanes and reconcile the findings into one cited recommendation.",
-      "expected_output": "With Solo present and multiple independent lanes, delegate bounded-worker mechanics, timers, and durable handoffs to solo-orchestrate-agents while keeping provider selection, reconciliation, adversarial cross-check, and the final verdict inside the research method.",
+      "prompt": "Deeply research Deno versus Bun for our API workloads across independent evidence lanes and reconcile the findings into one cited recommendation.",
+      "expected_output": "Discover which fan-out vehicles the session actually offers, pick the simplest that supplies isolated context, a bounded lane brief, a completion signal, and a durable result surface, delegate only the worker mechanics to it, and keep provider selection, reconciliation, adversarial cross-check, and the final verdict in the research method.",
       "assertions": [
-        "Delegates worker mechanics to solo-orchestrate-agents when Solo is available and lanes are independent",
-        "Keeps reconciliation and the final verdict with the research lead",
+        "Probes the live tool and skill listing instead of assuming a remembered vehicle",
+        "Chooses the simplest vehicle that clears the capability bar for the planned lane count",
+        "Delegates worker mechanics while keeping reconciliation and the final verdict with the lead",
+        "Records the vehicle alongside the provider for each lane",
         "Requires citations and source independence from every lane"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Kick off deep research on post-quantum signature adoption. It will take a while and I need the findings to survive past this session.",
+      "expected_output": "Recognize that lane duration and survival past the session are what call for a durable orchestrator, select one only if the session actually offers it, and otherwise run sequentially while persisting findings to a durable working surface. Evidence discipline is identical either way.",
+      "assertions": [
+        "Selects a durable vehicle for lane longevity rather than because the feature exists",
+        "Falls back to sequential plus a durable working surface when no orchestrator is present",
+        "Keeps citation and verification discipline identical across vehicles"
       ],
       "files": []
     },
@@ -150,28 +163,28 @@
     },
     {
       "prompt": "Break this large migration into independent implementation lanes and run several agents in parallel to build them out.",
-      "expected_output": "Do not use $kalepail-deep-research; route to $solo-orchestrate-agents for parallel disjoint-lane implementation with ownership, locks, and evidence review, since the deliverable is built code rather than a cited research synthesis.",
+      "expected_output": "Do not use $kalepail-deep-research; route to whichever multi-agent orchestration capability the session offers, since the deliverable is built code rather than a cited research synthesis.",
       "assertions": [
-        "Routes parallel implementation to solo-orchestrate-agents",
+        "Routes parallel implementation to an orchestration capability, not to the research skill",
         "Does not treat build work as cited research"
       ],
       "files": []
     },
     {
       "prompt": "Run a cross-model review of this diff across a couple of agents and reconcile their findings into one verdict.",
-      "expected_output": "Do not use $kalepail-deep-research; route to $solo-orchestrate-agents for cross-model review with dispatch, reconciliation, and evidence review, since the deliverable is a review verdict rather than externally cited research.",
+      "expected_output": "Do not use $kalepail-deep-research; route to whichever multi-agent orchestration capability the session offers, since the deliverable is a review verdict rather than externally cited research.",
       "assertions": [
-        "Routes cross-model code review to solo-orchestrate-agents",
+        "Routes cross-model code review to an orchestration capability, not to the research skill",
         "Distinguishes reconciling reviewers from reconciling cited sources"
       ],
       "files": []
     },
     {
       "prompt": "The research is already done -- just write our findings up into a clean scratchpad for the next agent to pick up.",
-      "expected_output": "Do not use $kalepail-deep-research; persist already-gathered findings in the session's durable working state (solo-keep-scratchpads when Solo is available), since no new evidence gathering or synthesis is requested.",
+      "expected_output": "Do not use $kalepail-deep-research; persist already-gathered findings in whatever durable working state the session has, since no new evidence gathering or synthesis is requested.",
       "assertions": [
         "Does not launch new research when synthesis is already complete",
-        "Persists finished findings instead of re-researching"
+        "Persists finished findings to the session's durable working state instead of re-researching"
       ],
       "files": []
     },

@@ -10,7 +10,7 @@ Shipped skills live under `skills/`, one flat directory per skill, in three fami
 - The **Kalepail house family** — `kalepail-*` skills encode Tyler's personal tool stack and idiosyncrasies. `kalepail-deep-research` owns cited research synthesis across Parallel, Perplexity, and Stellar Raven surfaces.
 - **Standalone skills** — `agent-browser-webauthn`, passkey and Stellar smart-account browser testing through `agent-browser` and Chrome DevTools virtual WebAuthn authenticators. Self-contained and tied to neither family.
 
-Family dependency direction is one-way: house skills may compose with Fan Solo skills when both are installed (`kalepail-deep-research` delegates fan-out mechanics to `$solo-orchestrate-agents`); Fan Solo and standalone skills never reference house skills. Families divide by scope, not by opinion — every family bakes in this repo's opinionated routing and tool preferences — and every skill still works installed alone.
+Family dependency direction is one-way: house skills may compose with Fan Solo skills when both are installed (`kalepail-deep-research` delegates fan-out mechanics to whichever orchestration skill the session offers, `$solo-orchestrate-agents` among them); Fan Solo and standalone skills never reference house skills. Families divide by scope, not by opinion — every family bakes in this repo's opinionated routing and tool preferences — and every skill still works installed alone.
 
 `README.md` is the human-facing catalog and install guide.
 
@@ -59,7 +59,8 @@ This repo self-hosts for Claude Code and `.agents`-aware hosts: the committed `.
 
 The skills orchestrate external tools; they do not bundle or authenticate them:
 
-- **Solo MCP** (`solo`) — required by `fan-solo` and every `solo-*` skill; no fallback. Optional for `kalepail-deep-research`, which degrades to sequential single-agent research without it. Enable Solo's local MCP server: <https://soloterm.com/docs/integrations/mcp-server>
+- **Solo MCP** (`solo`) — required by `fan-solo` and every `solo-*` skill; no fallback. Enable Solo's local MCP server: <https://soloterm.com/docs/integrations/mcp-server>
+- **A fan-out vehicle** — `kalepail-deep-research` runs evidence lanes through any host supplying isolated worker context, a bounded lane brief, a completion signal, and a durable result surface: host-native subagents, a terminal or worktree manager, or a durable orchestrator such as Solo. It names no required vehicle and runs its lanes sequentially when none is present.
 - **Parallel** — `kalepail-deep-research` prefers `parallel-cli` for reproducible saved artifacts, with Parallel Search / Task MCP as fallbacks.
 - **Perplexity MCP** — `kalepail-deep-research` uses it as an independent reasoning and counter-evidence lane.
 - **Stellar Raven MCP** (`stellar-raven`) — `kalepail-deep-research` uses it as the first discovery surface for Stellar-ecosystem questions.

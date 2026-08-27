@@ -26,7 +26,7 @@ Discover what is enabled before planning lanes; never assume remembered tool nam
 
 - **General web:** prefer `parallel-cli` for saved artifacts, Perplexity MCP as an independent lane, Parallel Search or Task MCP as fallback or final pass. Read [providers.md](references/providers.md) before assigning providers, launching paid research, or recovering a missing backend.
 - **Stellar ecosystem:** Stellar Raven MCP is the first discovery surface for any Stellar-ecosystem question. Read [stellar-raven.md](references/stellar-raven.md) before running a Stellar lane.
-- **Fan-out:** Solo MCP with the `$solo-orchestrate-agents` skill, when both are present, supplies bounded-worker mechanics.
+- **Fan-out:** read the session's own tool list and skill listing for a vehicle that can run lanes in parallel. Read [orchestration.md](references/orchestration.md) before dispatching a fan-out.
 
 ## Plan Evidence Lanes
 
@@ -36,8 +36,16 @@ Fan out only when the question is deep, exhaustive, comparative, or independentl
 
 ## Choose the Vehicle
 
-- **Solo available and at least two independent lanes:** delegate worker mechanics — bounded lanes, timers, durable handoffs — to `$solo-orchestrate-agents`. Keep reconciliation, adversarial cross-check, and the final verdict here; never delegate the verdict.
-- **Otherwise:** run the same lanes sequentially in this session with identical evidence discipline. Nothing in this skill requires Solo.
+Fan-out needs four things from a vehicle: isolated worker context, a bounded lane brief, a completion signal, and a durable place for results. Any host supplying all four can run lanes in parallel. Pick the simplest one that clears the bar for the planned lane count:
+
+- **Host-native subagents** — the default when the session spawns them itself.
+- **A terminal or worktree manager** — when lanes need separate models, processes, or checkouts.
+- **A durable orchestrator** — when lanes are long or expensive, or findings must outlive the session.
+- **Sequential** — when nothing else is present, or the question has one lane.
+
+Delegate worker mechanics to the vehicle's own companion skill when one is installed; otherwise drive the vehicle from its documentation. Keep provider selection, reconciliation, adversarial cross-check, and the final verdict here — never delegate the verdict.
+
+Sequential is a complete vehicle, not a degraded mode: the same lanes, run one after another, under identical citation and verification discipline. This skill requires no particular orchestrator, and vehicle availability never changes the evidence standard.
 
 ## Run the Research
 
