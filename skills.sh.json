@@ -3,14 +3,22 @@
   "notGrouped": "bottom",
   "groupings": [
     {
-      "title": "Agent Browser WebAuthn Testing",
-      "description": "WebAuthn and passkey testing through agent-browser, including wallet and Stellar smart-account flows.",
+      "title": "Engineering",
+      "description": "Technical testing skills.",
       "skills": [
         "agent-browser-webauthn"
       ]
     },
     {
-      "title": "Fan Solo",
+      "title": "Productivity",
+      "description": "General workflows for research and agent routing.",
+      "skills": [
+        "deep-research",
+        "routing-agent-work"
+      ]
+    },
+    {
+      "title": "Solo",
       "description": "Complete Solo and SoloTerm collection covering setup, runtime, agents, durable state, and integrations.",
       "skills": [
         "fan-solo",
@@ -26,13 +34,6 @@
         "solo-close-out-work",
         "solo-save-prompts",
         "solo-automate"
-      ]
-    },
-    {
-      "title": "Kalepail House",
-      "description": "Tyler's personal workflows: cited multi-lane research synthesis across Parallel, Perplexity, and Stellar Raven, with optional Solo fan-out.",
-      "skills": [
-        "kalepail-deep-research"
       ]
     }
   ]

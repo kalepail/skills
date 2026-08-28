@@ -1,0 +1,226 @@
+{
+  "skill_name": "solo-work-with-agents",
+  "evals": [
+    {
+      "prompt": "Launch one Codex worker in this Solo project to inspect the auth tests, then wake when it goes idle and summarize its evidence. Do not let it edit.",
+      "expected_output": "Confirm identity/project, discover live agent tools, spawn one read-only bounded worker, record returned child ID, send bootstrap plus contract, use an owned-child idle timer, inspect real output, and preserve a durable handoff without Git actions.",
+      "assertions": [
+        "Calls whoami/help and discovers current agent installation",
+        "Records returned child process ID and uses only that child",
+        "States read-only ownership, acceptance evidence, and forbidden edits",
+        "Treats idle as inspection trigger and leaves Git/integration to operator"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Can you check on the agents and clean up whatever is done?",
+      "expected_output": "Inspect scope and recorded descendants, avoid closing from idle/completed state alone, and request exact authority for any parent, sibling, unrelated, YAML-backed, or unrecorded process.",
+      "assertions": [
+        "States process authority is recursive and non-transferable",
+        "Uses recorded child IDs rather than guessing parentage",
+        "Persists handoff and inspects partial edits before owned-child close",
+        "Does not stop, close, select, rename, input, or clear unauthorized processes"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Solo does not show my custom agent in the launch menu, and I also want its default --high flag plus Solo guidance in AGENTS.md.",
+      "expected_output": "Route to agent setup and health: inspect enabled tool/environment health and Runtime Doctor, explain that Solo does not install the CLI, save default flags in Settings, and use setup_agent_integration only after authorization to edit AGENTS.md and review the diff.",
+      "assertions": [
+        "Distinguishes Disabled, Ready, Not checked, Missing, and Broken launchability",
+        "Keeps agent installation and shell repair outside Solo",
+        "Uses saved default flags rather than one-launch extra_args for persistent behavior",
+        "Treats setup_agent_integration as an authorized repository edit and reviews the result"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Coordinate three different agents to plan, implement, and independently review this feature.",
+      "expected_output": "Route to solo-orchestrate-agents because request needs multi-agent planning, blockers, timers, synthesis, and integration controls; do not blindly spawn workers through single-agent lifecycle.",
+      "assertions": [
+        "Recognizes multi-agent neighboring workflow",
+        "Routes to solo-orchestrate-agents",
+        "Does not spawn before plan and ownership decomposition",
+        "Keeps root/operator responsible for integration"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Spin up an agent in here to read over the README and flag anything stale. Just have it read, do not let it touch files.",
+      "expected_output": "Use $solo-work-with-agents to confirm identity and project, discover live agent tools, spawn one read-only bounded worker, record its child ID, send a bootstrap plus read-only contract, and inspect real output without Git edits.",
+      "assertions": [
+        "Confirms identity and project before spawning",
+        "Spawns exactly one bounded read-only worker and records its child ID",
+        "States read-only ownership and forbidden edits",
+        "Inspects real output and leaves Git to the operator"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Use $solo-work-with-agents to check the status of the Codex worker I started and pull its latest output.",
+      "expected_output": "Use $solo-work-with-agents to identify the recorded owned child, read its live status and real output, and report evidence without altering lifecycle or ownership.",
+      "assertions": [
+        "Targets only the recorded child ID rather than guessing",
+        "Reads live status and real output",
+        "Does not select, rename, input, or close the process",
+        "Reports evidence read-only"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Set my agent tool's default launch flags in Settings, then launch it to inspect the CI config and watch for it to go idle.",
+      "expected_output": "Use $solo-work-with-agents to persist default flags in Settings, confirm launchability, spawn one bounded read-only worker, record its child ID, send the inspection contract, and use an owned-child idle timer to inspect evidence.",
+      "assertions": [
+        "Saves persistent default flags rather than one-launch extra_args",
+        "Confirms launchability before spawning",
+        "Spawns one bounded read-only worker and records its child ID",
+        "Uses an owned-child idle timer to trigger inspection"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "The agent I had going stalled. Resume it and have it keep working on the auth refactor.",
+      "expected_output": "Use $solo-work-with-agents to locate the recorded owned child, send follow-up input to resume its work within existing ownership, and inspect returned output.",
+      "assertions": [
+        "Locates the recorded owned child rather than spawning a new one",
+        "Sends follow-up input within existing ownership and contract",
+        "Inspects returned output after resuming",
+        "Does not escalate scope or touch unauthorized processes"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Send my running Solo agent a follow-up: also cover the edge cases in the date parser.",
+      "expected_output": "Use $solo-work-with-agents to send follow-up input to the recorded owned child and inspect its response without changing scope or ownership.",
+      "assertions": [
+        "Sends follow-up input to the recorded owned child",
+        "Preserves existing scope and contract",
+        "Inspects the response as evidence",
+        "Does not alter lifecycle of other processes"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "That worker I launched is done. Grab its summary and shut just that one down.",
+      "expected_output": "Use $solo-work-with-agents to inspect the recorded owned child's final evidence, preserve a durable handoff, and close only that authorized child process.",
+      "assertions": [
+        "Inspects final evidence and any partial edits before closing",
+        "Preserves a durable handoff",
+        "Closes only the recorded authorized child",
+        "Does not close parent, sibling, or unrelated processes"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Set up a cohort of four agents across two projects to split the refactor and cross-review each other's work.",
+      "expected_output": "Do not use $solo-work-with-agents; route to $solo-orchestrate-agents because this needs multi-agent planning, ownership decomposition, cross-project cohorts, and evidence review across several agents.",
+      "assertions": [
+        "Recognizes multi-agent cross-project cohort workflow",
+        "Routes to $solo-orchestrate-agents",
+        "Does not spawn workers through single-agent lifecycle",
+        "Keeps decomposition and cross-review at the orchestration layer"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Run parallel research with several workers and synthesize their findings using locks and timers.",
+      "expected_output": "Do not use $solo-work-with-agents; route to $solo-orchestrate-agents because parallel workers, shared locks, timers, and synthesis are multi-agent orchestration.",
+      "assertions": [
+        "Recognizes parallel multi-agent research with shared coordination",
+        "Routes to $solo-orchestrate-agents",
+        "Does not treat this as one agent's lifecycle",
+        "Leaves synthesis and locks to orchestration"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Delegate three disjoint implementation lanes to separate agents and manage the handoffs between them.",
+      "expected_output": "Do not use $solo-work-with-agents; route to $solo-orchestrate-agents because disjoint lanes across multiple agents with inter-agent handoffs are multi-agent orchestration.",
+      "assertions": [
+        "Recognizes disjoint multi-agent implementation lanes",
+        "Routes to $solo-orchestrate-agents",
+        "Does not manage several agents through single-agent I/O",
+        "Keeps inter-agent handoffs at the orchestration layer"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Start my dev server and the worker queue, then restart them whenever files change.",
+      "expected_output": "Do not use $solo-work-with-agents; route to $solo-run-processes because launching commands and configuring file-watch restart is process lifecycle, not agent work.",
+      "assertions": [
+        "Recognizes plain command and terminal process control",
+        "Routes to $solo-run-processes",
+        "Does not treat commands as agent sessions",
+        "Leaves file-watch restart to process configuration"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Open a terminal in this project and send npm run build to it.",
+      "expected_output": "Do not use $solo-work-with-agents; route to $solo-run-processes because opening a terminal and sending command input is process control, not an agent lifecycle.",
+      "assertions": [
+        "Recognizes a terminal process rather than an agent",
+        "Routes to $solo-run-processes",
+        "Does not spawn or prompt an agent",
+        "Treats input as terminal command control"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "The dev stack crashed. Restart all commands and turn on crash auto-restart.",
+      "expected_output": "Do not use $solo-work-with-agents; route to $solo-run-processes because bulk command restart and crash auto-restart are process lifecycle controls.",
+      "assertions": [
+        "Recognizes bulk process restart and restart policy",
+        "Routes to $solo-run-processes",
+        "Does not treat the stack as an agent session",
+        "Leaves auto-restart to process configuration"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Spawn a Claude Code subagent with the Task tool to explore the codebase.",
+      "expected_output": "Do not use $solo-work-with-agents; no Solo skill applies because this agent is not Solo-managed, so handle it with the native tool outside Solo.",
+      "assertions": [
+        "Recognizes a non-Solo-managed agent",
+        "Declines to use any Solo agent skill",
+        "Directs the work to the native tool outside Solo",
+        "Does not attempt Solo spawn or lifecycle actions"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Kick off a GitHub Copilot CLI session in my shell to write the tests.",
+      "expected_output": "Do not use $solo-work-with-agents; no Solo skill applies because a shell-launched Copilot CLI is not a Solo-managed agent, so run it outside Solo.",
+      "assertions": [
+        "Recognizes a non-Solo agent launched in the shell",
+        "Declines to use any Solo agent skill",
+        "Runs the session outside Solo",
+        "Does not record or manage it as a Solo child"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "That Codex agent you spawned earlier finished and I already took its results. I have another small task in the same project now.",
+      "expected_output": "Reuse the owned idle agent only if the new task routes to the same tool, model, and effort: verify it is the recorded direct child and its previous task is closed, send the CLI's own compaction command first if accumulated context is heavy (or close and spawn fresh if the CLI has none), then send_input a fresh bounded prompt. If the task routes elsewhere or needs a fresh session, close the harvested agent after durable handoff and spawn to the route.",
+      "assertions": [
+        "Retasks the existing owned idle agent via send_input only when the new task matches its routed tool, model, and effort",
+        "Uses the CLI's own compaction command\u2014or closes and spawns fresh\u2014when accumulated context is heavy, and does not treat Solo auto-summary as compaction",
+        "Closes the harvested agent promptly after durable handoff if it is not being reused",
+        "Confirms recorded ownership before sending input or closing"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Spin up a Fable reviewer for the auth change and have it grill the diff.",
+      "expected_output": "The caller already selected Fable. Do not reroute the lane. Treat Fable as a Claude model, verify its current identifier and effort controls, then spawn one bounded read-only reviewer.",
+      "assertions": [
+        "Does not invoke routing-agent-work when the caller already fixed the route",
+        "Spawns the Claude agent tool rather than searching for a tool named Fable",
+        "Verifies and passes the selected model identifier and effort through saved defaults or extra_args",
+        "Records the returned child process ID and sends a bounded review-not-fix brief",
+        "Keeps the reviewer read-only, with Git and integration left to the operator"
+      ],
+      "files": []
+    }
+  ]
+}

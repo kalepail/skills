@@ -1,7 +1,7 @@
 {
   "name": "kalepail-skills",
-  "description": "Fan Solo, Kalepail house research, and agent-browser WebAuthn testing skills.",
-  "version": "0.2.0",
+  "description": "Engineering, productivity, and Solo agent skills.",
+  "version": "0.3.0",
   "license": "Apache-2.0",
   "author": {
     "name": "Tyler van der Hoeven"
@@ -9,20 +9,21 @@
   "homepage": "https://github.com/kalepail/skills",
   "repository": "https://github.com/kalepail/skills",
   "skills": [
-    "./skills/agent-browser-webauthn",
-    "./skills/fan-solo",
-    "./skills/kalepail-deep-research",
-    "./skills/solo-automate",
-    "./skills/solo-close-out-work",
-    "./skills/solo-customize-workspace",
-    "./skills/solo-keep-scratchpads",
-    "./skills/solo-observe-services",
-    "./skills/solo-orchestrate-agents",
-    "./skills/solo-run-processes",
-    "./skills/solo-save-prompts",
-    "./skills/solo-set-up-projects",
-    "./skills/solo-track-todos",
-    "./skills/solo-troubleshoot",
-    "./skills/solo-work-with-agents"
+    "./skills/engineering/agent-browser-webauthn",
+    "./skills/productivity/deep-research",
+    "./skills/productivity/routing-agent-work",
+    "./skills/solo/fan-solo",
+    "./skills/solo/solo-automate",
+    "./skills/solo/solo-close-out-work",
+    "./skills/solo/solo-customize-workspace",
+    "./skills/solo/solo-keep-scratchpads",
+    "./skills/solo/solo-observe-services",
+    "./skills/solo/solo-orchestrate-agents",
+    "./skills/solo/solo-run-processes",
+    "./skills/solo/solo-save-prompts",
+    "./skills/solo/solo-set-up-projects",
+    "./skills/solo/solo-track-todos",
+    "./skills/solo/solo-troubleshoot",
+    "./skills/solo/solo-work-with-agents"
   ]
 }

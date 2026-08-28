@@ -2,60 +2,63 @@
 
 # kalepail Skills
 
-Personal, opinionated AI-agent skills by [Tyler van der Hoeven](https://github.com/kalepail), portable across Claude Code, Codex, OpenCode, and Grok, in three families: **Fan Solo**, a router plus focused `solo-*` skills for driving [Solo](https://soloterm.com) (SoloTerm); **Kalepail house skills**, `kalepail-*` workflows tuned to Tyler's own tool stack; and **Agent Browser WebAuthn**, standalone passkey and Stellar smart-account browser testing through `agent-browser`.
+Personal, opinionated AI-agent skills by [Tyler van der Hoeven](https://github.com/kalepail). The collection works across Claude Code, Codex, OpenCode, and Grok.
+
+Skills use plain task names and live in three categories: engineering, productivity, and Solo.
 
 ## Skills
 
-### Fan Solo
+### Engineering
 
-[Fan Solo](skills/fan-solo/) routes broad Solo and SoloTerm requests to the focused skills below. Install the router together with all of them.
+Technical testing skills. See the [engineering catalog](skills/engineering/README.md).
+
+- [Agent Browser WebAuthn](skills/engineering/agent-browser-webauthn/) — test passkey, WebAuthn, wallet, and Stellar smart-account browser flows.
+
+### Productivity
+
+General workflows that are not tied to one product. See the [productivity catalog](skills/productivity/README.md).
+
+- [Deep research](skills/productivity/deep-research/) — produce cited syntheses from independent evidence lanes.
+- [Routing agent work](skills/productivity/routing-agent-work/) — choose an agent CLI, model, effort, fallback, reviewer, and report contract.
+
+### Solo
+
+[Fan Solo](skills/solo/fan-solo/) routes broad Solo and SoloTerm requests. See the [Solo catalog](skills/solo/README.md).
 
 **Setup and workspace**
 
-- [Set up projects](skills/solo-set-up-projects/) — configure projects, `solo.yml`, and shared commands.
-- [Customize workspace](skills/solo-customize-workspace/) — tune workspaces, navigation, appearance, settings, and notifications.
+- [Set up projects](skills/solo/solo-set-up-projects/) — configure projects, `solo.yml`, and shared commands.
+- [Customize workspace](skills/solo/solo-customize-workspace/) — configure workspaces, navigation, appearance, settings, and notifications.
 
 **Processes and services**
 
-- [Run processes](skills/solo-run-processes/) — start, stop, restart, rename, and manage process lifecycle.
-- [Observe services](skills/solo-observe-services/) — inspect status, output, ports, URLs, and readiness.
-- [Troubleshoot](skills/solo-troubleshoot/) — diagnose project, discovery, trust, shell, CLI, API, and runtime failures.
+- [Run processes](skills/solo/solo-run-processes/) — control process lifecycle and restart behavior.
+- [Observe services](skills/solo/solo-observe-services/) — inspect status, output, ports, URLs, and readiness.
+- [Troubleshoot](skills/solo/solo-troubleshoot/) — diagnose project, trust, shell, CLI, API, and runtime failures.
 
 **Agents and coordination**
 
-- [Work with agents](skills/solo-work-with-agents/) — manage one bounded, owned Solo agent.
-- [Orchestrate agents](skills/solo-orchestrate-agents/) — coordinate independent worker lanes—implementation, review, or evidence-gathering—and integrate verified results.
+- [Work with agents](skills/solo/solo-work-with-agents/) — manage one bounded, owned Solo agent.
+- [Orchestrate agents](skills/solo/solo-orchestrate-agents/) — coordinate independent Solo worker lanes and verified integration.
 
 **Durable work**
 
-- [Track todos](skills/solo-track-todos/) — keep actionable work, blockers, locks, comments, and handoffs.
-- [Keep scratchpads](skills/solo-keep-scratchpads/) — preserve plans, research, decisions, evidence, and project context.
-- [Close out work](skills/solo-close-out-work/) — reconcile a finished run: promote durable conclusions to repo docs, then retire completed ephemeral copies without losing incomplete work.
-- [Save prompts](skills/solo-save-prompts/) — maintain reusable cross-agent prompt templates.
+- [Track todos](skills/solo/solo-track-todos/) — maintain actionable work, blockers, locks, comments, and handoffs.
+- [Keep scratchpads](skills/solo/solo-keep-scratchpads/) — preserve plans, research, decisions, evidence, and project context.
+- [Close out work](skills/solo/solo-close-out-work/) — promote durable conclusions and retire completed temporary state.
+- [Save prompts](skills/solo/solo-save-prompts/) — maintain reusable Solo prompt templates.
 
 **Integration**
 
-- [Automate](skills/solo-automate/) — use Solo MCP, CLI, local HTTP API, hosted API, and deep links.
-
-### Kalepail house skills
-
-Personal `kalepail-*` workflows tuned to Tyler's own stack. They compose with Fan Solo when it is installed but do not require it.
-
-- [Deep research](skills/kalepail-deep-research/) — cited multi-lane research synthesis across Parallel CLI/MCP, Perplexity MCP, and Stellar Raven (the first discovery surface for Stellar-ecosystem questions), with fan-out through whatever orchestration vehicle the session offers.
-
-### Agent Browser WebAuthn
-
-Standalone; tied to neither family.
-
-- [Agent Browser WebAuthn](skills/agent-browser-webauthn/) — drive passkey and Stellar smart account browser tests with `agent-browser` and Chrome DevTools virtual WebAuthn authenticators.
+- [Automate](skills/solo/solo-automate/) — use Solo MCP, CLI, local HTTP API, hosted API, and deep links.
 
 ## Requirements
 
 Skills orchestrate external tools; they do not bundle or authenticate them.
 
 - **Solo MCP** — required by `fan-solo` and every `solo-*` skill. Enable [Solo's local MCP server](https://soloterm.com/docs/integrations/mcp-server) and connect your agent host to it.
-- **A fan-out vehicle** — optional for `kalepail-deep-research`, which runs evidence lanes through host-native subagents, a terminal or worktree manager, or a durable orchestrator, and runs them sequentially when none is present. No particular vehicle is required.
-- **Optional research providers** — `kalepail-deep-research` prefers Parallel CLI, falls back to Parallel Search/Task MCP, uses Perplexity MCP as an independent lane, and uses Stellar Raven MCP as the first discovery surface for Stellar-ecosystem questions; missing providers degrade to documented fallbacks.
+- **A fan-out vehicle** — optional for `deep-research`. It runs lanes sequentially when no orchestration vehicle exists.
+- **Optional research providers** — `deep-research` prefers Parallel CLI and uses Perplexity as an independent lane. It uses Stellar Raven first for Stellar questions.
 - **agent-browser and Node.js 22+** — Agent Browser WebAuthn requires the `agent-browser` CLI and Node.js 22 or newer; the `$agent-browser` skill is recommended but not bundled here.
 
 ## Install
@@ -72,7 +75,7 @@ npx skills add kalepail/skills -g --skill '*' -a claude-code -a codex -a opencod
 # install one skill
 npx skills add kalepail/skills -g --skill agent-browser-webauthn -a claude-code -a codex -a opencode -y
 
-# install Fan Solo without the other families
+# install the Solo category without the other categories
 npx skills add kalepail/skills -g -a claude-code -a codex -a opencode -y --skill fan-solo solo-set-up-projects solo-customize-workspace solo-run-processes solo-observe-services solo-troubleshoot solo-work-with-agents solo-orchestrate-agents solo-track-todos solo-keep-scratchpads solo-close-out-work solo-save-prompts solo-automate
 ```
 
@@ -84,18 +87,17 @@ claude plugin marketplace add kalepail/skills
 # complete collection
 claude plugin install kalepail-skills@kalepail-skills
 
-# or Agent Browser WebAuthn alone
+# install Agent Browser WebAuthn alone
 claude plugin install agent-browser-webauthn@kalepail-skills
 ```
 
 ### Codex
 
 ```bash
-codex plugin marketplace add kalepail/skills
-codex plugin add kalepail-skills@kalepail-skills
+npx skills add kalepail/skills -g -a codex -y --skill '*'
 ```
 
-Use the skills.sh CLI when only selected Codex skills are wanted.
+Use `--skill <name>` when only selected Codex skills are wanted. The repository does not ship a native Codex plugin.
 
 ### OpenCode
 
@@ -110,7 +112,7 @@ Grok reads Claude-compatible plugins directly:
 grok plugin install kalepail/skills
 
 # Agent Browser WebAuthn only
-grok plugin install kalepail/skills#skills/agent-browser-webauthn
+grok plugin install kalepail/skills#skills/engineering/agent-browser-webauthn
 ```
 
 Review Grok's trust prompt before enabling.
@@ -121,7 +123,7 @@ Review Grok's trust prompt before enabling.
 git clone https://github.com/kalepail/skills.git
 ```
 
-Copy chosen `skills/<name>` directories intact into your agent's skill directory.
+Copy chosen `skills/<category>/<name>` directories intact into your agent's skill directory.
 
 ## Use
 
@@ -131,13 +133,17 @@ For broad or mixed Solo work:
 Use $fan-solo to choose and run the right Solo workflow for this task.
 ```
 
-For one clearly scoped task, invoke the matching `$solo-*` skill directly. For passkey testing, use `$agent-browser-webauthn` with `$agent-browser` to drive a flow against a virtual WebAuthn authenticator.
+For one clearly scoped Solo task, invoke the matching `$solo-*` skill directly.
+
+Use `$routing-agent-work` when delegated lanes need model and effort selection. Use `$deep-research` for deep, cross-checked research.
+
+Use `$agent-browser-webauthn` with `$agent-browser` for virtual WebAuthn browser tests.
 
 These skills are personal and opinionated: model routing and tool preferences are baked in. [AGENTS.md](AGENTS.md) is the guide for working in this repo.
 
 ## Research
 
-Architecture derives from [OpenAI and Anthropic skill best practices](research/skill-best-practices.md) plus Solo research on [product docs](research/fan-solo/solo-product-docs.md), [MCP and APIs](research/fan-solo/solo-mcp-api.md), [coordination](research/fan-solo/solo-coordination.md), and [first-party X posts](research/fan-solo/solo-x-research.md).
+Architecture derives from [skill authoring research](research/skill-best-practices.md) and [agent-routing research](research/agent-routing.md). Solo evidence lives under [research/fan-solo](research/fan-solo/).
 
 ## Status and license
 

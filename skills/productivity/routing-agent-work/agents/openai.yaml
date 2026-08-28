@@ -1,0 +1,4 @@
+interface:
+  display_name: "Route Agent Work"
+  short_description: "Choose an agent, model, effort, and reviewer"
+  default_prompt: "Use $routing-agent-work to select an agent, model, effort, fallback, and report contract for this delegated lane."

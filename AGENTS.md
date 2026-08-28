@@ -1,16 +1,22 @@
 # kalepail skills — agent guide
 
-Personal, opinionated AI-agent skills for kalepail (Tyler van der Hoeven). This file is the entry point for working in this repo: what lives where, the house rules, the authoring standard, and how the repo dogfoods its own skills. `CLAUDE.md` points here.
+Personal, opinionated AI-agent skills for Tyler van der Hoeven. This file defines the repository structure and authoring rules. `CLAUDE.md` points here.
 
 ## What this repo is
 
-Shipped skills live under `skills/`, one flat directory per skill, in three families:
+Shipped skills live under category folders in `skills/`:
 
-- The **Fan Solo family** — `fan-solo` routes broad Solo/SoloTerm requests to the focused `solo-*` skills covering project setup, workspace, processes, observation, troubleshooting, agents, orchestration, todos, scratchpads, close-out, prompts, and automation. Scope: driving the Solo product.
-- The **Kalepail house family** — `kalepail-*` skills encode Tyler's personal tool stack and idiosyncrasies. `kalepail-deep-research` owns cited research synthesis across Parallel, Perplexity, and Stellar Raven surfaces.
-- **Standalone skills** — `agent-browser-webauthn`, passkey and Stellar smart-account browser testing through `agent-browser` and Chrome DevTools virtual WebAuthn authenticators. Self-contained and tied to neither family.
+- `engineering/`: technical testing skills.
+- `productivity/`: general workflows that are not tied to one product.
+- `solo/`: product-specific Solo and SoloTerm workflows.
 
-Family dependency direction is one-way: house skills may compose with Fan Solo skills when both are installed (`kalepail-deep-research` delegates fan-out mechanics to whichever orchestration skill the session offers, `$solo-orchestrate-agents` among them); Fan Solo and standalone skills never reference house skills. Families divide by scope, not by opinion — every family bakes in this repo's opinionated routing and tool preferences — and every skill still works installed alone.
+Use plain task names without an author prefix. Keep a product prefix when it gives necessary scope, such as `solo-*`.
+
+Each category has a `README.md`. It lists every skill and groups them by invocation mode.
+
+Every skill works when installed alone. A skill can invoke another model-invoked skill when available. It must keep a safe fallback.
+
+All current skills are model-invoked. Their descriptions include positive triggers and hard negative boundaries. Avoid automatic invocation when no skill-specific choice exists.
 
 `README.md` is the human-facing catalog and install guide.
 
@@ -18,21 +24,34 @@ Family dependency direction is one-way: house skills may compose with Fan Solo s
 
 | Path | What |
 |---|---|
-| `skills/<name>/SKILL.md` | Portable source of truth for the skill |
-| `skills/<name>/references/` | Progressive-disclosure detail, linked explicitly from `SKILL.md` |
-| `skills/<name>/agents/openai.yaml` | skills.sh installer interface (display name, prompt, tool deps) — not an OpenAI format |
-| `skills/<name>/evals/evals.json` | Trigger and behavior eval cases |
-| `skills/fan-solo/references/house-style.md` | House rules — see below |
+| `skills/<category>/<name>/SKILL.md` | Portable source of truth for the skill |
+| `skills/<category>/<name>/references/` | Progressive-disclosure detail, linked explicitly from `SKILL.md` |
+| `skills/<category>/<name>/agents/openai.yaml` | skills.sh installer interface for Codex presentation and dependencies |
+| `skills/<category>/<name>/evals/evals.json` | Trigger and behavior eval cases |
+| `skills/<category>/README.md` | Category catalog, grouped by invocation mode |
+| `.agents/skills/<name>`, `.claude/skills/<name>` | Flat project-discovery links into categorized sources |
+| `skills/productivity/routing-agent-work/` | Official agent, model, effort, fallback, and reviewer selection rules |
+| `skills/solo/fan-solo/references/house-style.md` | Solo-specific safety and orchestration mechanics |
 | `research/skill-best-practices.md` | The authoring standard this repo builds skills by |
 | `research/fan-solo/` | Solo product research: orientation and evidence, never fresher authority than live runtime or docs |
 
 ### Distribution surfaces
 
-Five files describe distribution: `skills.sh.json` and `.claude-plugin/plugin.json` enumerate every skill; `.claude-plugin/marketplace.json` lists the plugin products (the whole collection, plus `agent-browser-webauthn` sourced straight from its skill directory); `.codex-plugin/plugin.json` points at `./skills/`; `.agents/plugins/marketplace.json` points at the repo root. When a skill is added, renamed, or removed, inspect all five plus the README and update the ones whose contract actually changes — the enumerating files always, the root-pointing files only when their metadata is affected.
+Three files describe distribution. `skills.sh.json` and `.claude-plugin/plugin.json` enumerate every promoted skill. `.claude-plugin/marketplace.json` lists the Claude plugin products.
+
+Codex uses skills.sh or the flat `.agents/skills/` project surface. This repository does not ship a native Codex plugin. Native Codex plugins require real, flat skill directories and reject this repository's categorized source layout.
+
+Inspect all three files after adding, renaming, moving, or removing a skill. Always update enumerating files. Update marketplace metadata when its contract changes.
 
 ## House rules
 
-`skills/fan-solo/references/house-style.md` is the house rulebook. Read it before any Solo mutation, agent spawn, shared-state edit, or process control — in this repo's own development too. It is the routing authority: match model and effort to the lane, never route a pure-orchestrator or reviewer model as the coder, and give consequential independent review a different model family than the implementer. The fleet table, per-CLI flags, effort tiers, subagent topologies, and extended-fleet rubric live there; verify launchable tools and flags live before dispatch. Portable skills carry standalone operational copies of routing detail in their own `references/` (they cannot depend on a sibling skill); when routing changes, update house-style.md first, then reconcile the skill-local copies.
+`routing-agent-work` is the official selection authority for agent CLIs, models, effort, fallbacks, and reviewers. Use it when delegation selection can change the result.
+
+The skill uses a fixed, manually maintained fleet. It does not discover unknown models or update itself. Update its fleet reference and evals together.
+
+`skills/solo/fan-solo/references/house-style.md` owns Solo-specific safety and orchestration mechanics. Read it before any Solo mutation, agent spawn, shared-state edit, or process control.
+
+Solo skills invoke `routing-agent-work` when it is installed and a selection remains. Otherwise, they use the caller's explicit route or the configured tool defaults.
 
 ## Build skills by the research
 
@@ -48,22 +67,22 @@ Five files describe distribution: `skills.sh.json` and `.claude-plugin/plugin.js
 
 ## Dogfood: use the skills to build the skills
 
-This repo self-hosts for Claude Code and `.agents`-aware hosts: the committed `.claude/skills → ../skills` and `.agents/skills → ../skills` symlinks expose the live skills to sessions working in this repo.
+This repository self-hosts through direct per-skill links under `.agents/skills/` and `.claude/skills/`. The flat links point into the categorized source tree.
 
 - Route Solo/SoloTerm work through `$fan-solo` and the `solo-*` skills — especially while building them. Friction met in use is authoring signal: fix the skill, then continue.
 - A skill edit is live on its next invocation; instructions already loaded in the current conversation persist until re-invoked.
-- Machine-local dogfood wiring (not a distribution requirement): each skill gets three global symlinks — `~/.agents/skills/<name>` → this repo, then `~/.claude/skills/<name>` and `~/.codex/skills/<name>` → the `.agents` hub. Never copy skill directories into this wiring — copies drift. Installer-made copies elsewhere (skills.sh, manual install) are supported and fine.
-- New skill checklist: create `skills/<name>/` (`SKILL.md`, `agents/openai.yaml`, `evals/evals.json`), add the three global symlinks, then update the distribution surfaces and README per "Distribution surfaces".
+- Machine-local dogfood wiring gives each non-Solo skill three global symlinks. `~/.agents/skills/<name>` points into this repository. Claude and Codex links point to the `.agents` hub. Solo skills stay available through this project's `.agents/skills` and `.claude/skills` links.
+- New skill checklist: create `skills/<category>/<name>/` with `SKILL.md`, `agents/openai.yaml`, and `evals/evals.json`. Add three global symlinks for a non-Solo skill. Update the category catalog, root catalog, and distribution surfaces.
 
 ## Third-party dependencies
 
 The skills orchestrate external tools; they do not bundle or authenticate them:
 
 - **Solo MCP** (`solo`) — required by `fan-solo` and every `solo-*` skill; no fallback. Enable Solo's local MCP server: <https://soloterm.com/docs/integrations/mcp-server>
-- **A fan-out vehicle** — `kalepail-deep-research` runs evidence lanes through any host supplying isolated worker context, a bounded lane brief, a completion signal, and a durable result surface: host-native subagents, a terminal or worktree manager, or a durable orchestrator such as Solo. It names no required vehicle and runs its lanes sequentially when none is present.
-- **Parallel** — `kalepail-deep-research` prefers `parallel-cli` for reproducible saved artifacts, with Parallel Search / Task MCP as fallbacks.
-- **Perplexity MCP** — `kalepail-deep-research` uses it as an independent reasoning and counter-evidence lane.
-- **Stellar Raven MCP** (`stellar-raven`) — `kalepail-deep-research` uses it as the first discovery surface for Stellar-ecosystem questions.
+- **A fan-out vehicle** — `deep-research` uses any host that supplies isolated worker context and durable results. It runs lanes sequentially when none exists.
+- **Parallel** — `deep-research` prefers `parallel-cli` for saved artifacts. Parallel Search and Task MCP are fallbacks.
+- **Perplexity MCP** — `deep-research` uses it as an independent challenge lane.
+- **Stellar Raven MCP** (`stellar-raven`) — `deep-research` uses it first for Stellar-ecosystem discovery.
 - **agent-browser** — `agent-browser-webauthn` drives passkey / Stellar smart-account browser tests via Chrome DevTools virtual WebAuthn authenticators.
 
 Missing optional providers degrade to documented fallbacks, not hard failures.

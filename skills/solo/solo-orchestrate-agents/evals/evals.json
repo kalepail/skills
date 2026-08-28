@@ -1,0 +1,221 @@
+{
+  "skill_name": "solo-orchestrate-agents",
+  "evals": [
+    {
+      "prompt": "Use Solo to split this billing migration into API, UI, and independent review lanes. Keep dependencies explicit and bring back verified results.",
+      "expected_output": "Confirm live scope/tools, write plan scratchpad, create blocked todos, dispatch only disjoint unblocked workers, record child IDs, use idle timers, inspect output/diffs/checks, persist handoffs, and leave final Git integration to operator.",
+      "assertions": [
+        "Implements plan to scratchpad to blockers to bounded workers sequence",
+        "Records every returned child process ID and enforces recursive ownership",
+        "Uses idle-any for incremental harvest and evidence review before completion",
+        "Persists todo comments/scratchpad summary and reserves Git integration for root"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Get a few agents on this bug.",
+      "expected_output": "Do not maximize agent count; inspect task and current state, keep work single-agent if sequential/overlapping, or first define independent lanes, acceptance checks, ownership, and durable plan before any spawn.",
+      "assertions": [
+        "Treats fan-out as conditional optimization",
+        "Inventories project, processes, todos, and locks before dispatch",
+        "Requires disjoint ownership and bounded worker briefs",
+        "Does not spawn a vague swarm"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Save my standard three-agent review instructions so I can reuse them later; do not launch anyone now.",
+      "expected_output": "Route to solo-save-prompts, create or propose a scoped placeholder template, and perform no spawning, timer, todo-lock, process-input, or integration side effects.",
+      "assertions": [
+        "Recognizes reusable-text neighboring skill",
+        "Routes to solo-save-prompts",
+        "Does not spawn agents or create live orchestration state",
+        "Keeps live IDs and authority out of template"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "$solo-orchestrate-agents split this authentication refactor into independent API, client, and review lanes and bring back verified results.",
+      "expected_output": "Use $solo-orchestrate-agents to confirm live scope and tools, write a plan scratchpad, create blocked todos, dispatch only disjoint unblocked workers with acceptance checks, harvest with idle timers, review evidence, and reserve Git integration for the operator.",
+      "assertions": [
+        "Honors the explicit $solo-orchestrate-agents invocation",
+        "Defines disjoint lanes with acceptance checks before any spawn",
+        "Uses idle timers to harvest and reviews diffs and output before completion"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Can you get a bunch of agents running in parallel on the different parts of this feature?",
+      "expected_output": "Use $solo-orchestrate-agents, but first inventory processes, todos, and locks, then split the feature into disjoint bounded lanes with ownership and acceptance checks rather than spawning an unscoped swarm.",
+      "assertions": [
+        "Reads casual parallel phrasing as an orchestration trigger",
+        "Requires disjoint ownership and bounded worker briefs before dispatch",
+        "Does not spawn a vague swarm"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Have two different models each review this pull request independently, then reconcile their findings for me.",
+      "expected_output": "Use $solo-orchestrate-agents to dispatch independent cross-model reviewers over the same diff, keep their lanes isolated, harvest both reviews, and reconcile the evidence into a durable handoff.",
+      "assertions": [
+        "Recognizes independent cross-model review as an orchestration case",
+        "Keeps reviewer lanes isolated and harvests each result",
+        "Reconciles findings into a persisted handoff"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Spin up a cohort of agents across these three repositories to run the same security audit and collect the results.",
+      "expected_output": "Use $solo-orchestrate-agents to stand up a cross-project cohort with one bounded worker per repo, track child IDs and recursive ownership, harvest with idle timers, and collect verified findings into a durable summary.",
+      "assertions": [
+        "Treats a cross-project cohort as orchestration",
+        "Assigns one bounded worker per repo and records child IDs",
+        "Collects verified results into a durable handoff"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Split the search and payments work into separate lanes, dispatch a bounded worker per lane, and reconcile their handoffs one lane at a time.",
+      "expected_output": "Use $solo-orchestrate-agents to define disjoint lanes, dispatch one bounded worker per lane, and integrate handoffs one lane at a time after evidence review.",
+      "assertions": [
+        "Keeps orchestration as the primary owner of the mixed request",
+        "Delegates the reusable template save to solo-save-prompts",
+        "Launches workers only after lanes, ownership, and checks are defined"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Fan out several agents to each stress-test a different module in parallel and report the failures they find.",
+      "expected_output": "Use $solo-orchestrate-agents to assign one worker per module as a disjoint lane, bound each brief with failure-reporting checks, harvest incrementally with idle timers, and persist findings for the operator.",
+      "assertions": [
+        "Maps per-module parallel fan-out to disjoint lanes",
+        "Bounds each worker brief with acceptance checks",
+        "Harvests incrementally and persists findings"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Delegate these four independent tickets to separate Solo agents and keep them moving until they're all done.",
+      "expected_output": "Use $solo-orchestrate-agents to create blocked todos per ticket, dispatch one bounded worker per independent ticket, enforce recursive ownership of child IDs, harvest with idle timers, and persist per-ticket handoffs.",
+      "assertions": [
+        "Delegates independent tickets as disjoint bounded lanes",
+        "Records and recursively owns every child process ID",
+        "Tracks each ticket to verified completion with a handoff"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Launch one Claude agent to work through this refactor checklist step by step.",
+      "expected_output": "Do not use $solo-orchestrate-agents; route to $solo-work-with-agents because this is a single sequential agent session, not multi-agent orchestration.",
+      "assertions": [
+        "Recognizes single-agent sequential work",
+        "Routes to solo-work-with-agents",
+        "Creates no fan-out or multi-lane orchestration state"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "My agent session has gone idle -- check on it and send it a follow-up prompt.",
+      "expected_output": "Do not use $solo-orchestrate-agents; route to $solo-work-with-agents because inspecting and following up with one owned session is single-agent lifecycle work.",
+      "assertions": [
+        "Recognizes single-session inspect and follow-up",
+        "Routes to solo-work-with-agents",
+        "Does not spin up additional workers or lanes"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Have an agent make these edits to the shared config file, one change after another.",
+      "expected_output": "Do not use $solo-orchestrate-agents; route to $solo-work-with-agents because sequential edits to a shared file are single-lane work, not disjoint parallel lanes.",
+      "assertions": [
+        "Recognizes sequential shared-file work",
+        "Routes to solo-work-with-agents",
+        "Avoids parallel lanes over a shared file"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Research and write me a cited comparison of the top three passkey libraries.",
+      "expected_output": "Do not use $solo-orchestrate-agents solely because the research is cited; the deliverable is research synthesis, owned by the session's research method or skill. Orchestration supplies bounded workers only when multi-agent Solo coordination is explicitly wanted or genuinely needed.",
+      "assertions": [
+        "Recognizes cited comparative research as a research-synthesis deliverable",
+        "Does not spawn a Solo cohort merely because research is deep or cited",
+        "Does not treat it as implementation orchestration"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Do exhaustive, cross-checked research on current WebAuthn support and hand me a sourced report.",
+      "expected_output": "Do not use $solo-orchestrate-agents by default; exhaustive cross-checked research with a cited handoff is a research-synthesis deliverable owned by the session's research method or skill, which decides whether Solo fan-out is warranted.",
+      "assertions": [
+        "Recognizes exhaustive cross-checked research synthesis",
+        "Does not spawn a Solo cohort merely because research is deep or cited",
+        "Reserves multi-agent fan-out judgment to the research method"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Spin up a few Solo agents in parallel evidence lanes to gather sources on WebGPU adoption, then integrate what they find.",
+      "expected_output": "Use $solo-orchestrate-agents for the explicitly requested multi-agent Solo fan-out: bounded evidence lanes with owned handoffs, recorded child IDs, timers, and lead integration, while citation and synthesis discipline come from the session's research method.",
+      "assertions": [
+        "Accepts explicit multi-agent Solo research fan-out as orchestration work",
+        "Defines bounded lanes with owned handoffs and recorded child IDs",
+        "Leaves citation and synthesis policy to the research method"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Turn this rollout plan into a set of tracked tasks with priorities and blockers.",
+      "expected_output": "Do not use $solo-orchestrate-agents; route to $solo-track-todos because this is todo-graph maintenance, not agent dispatch.",
+      "assertions": [
+        "Recognizes todo-graph maintenance",
+        "Routes to solo-track-todos",
+        "Does not spawn agents or open lanes"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Start all my dev servers and restart the API process.",
+      "expected_output": "Do not use $solo-orchestrate-agents; route to $solo-run-processes because process lifecycle control is not multi-agent orchestration.",
+      "assertions": [
+        "Distinguishes process control from agent orchestration",
+        "Routes to solo-run-processes",
+        "Treats multiple processes as unrelated to multi-agent lanes"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "I have a mix of Solo tasks to do and I'm not sure which skill handles them.",
+      "expected_output": "Do not use $solo-orchestrate-agents; route to $fan-solo because skill selection across broad or mixed Solo requests is the router's job.",
+      "assertions": [
+        "Recognizes a broad mixed Solo routing need",
+        "Routes to fan-solo",
+        "Does not assume orchestration before scope is clear"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Worker A's evidence is reviewed and integrated, worker B is still mid-lane, worker C just went idle but I haven't read its output, and two more lanes are queued. Tidy up and keep the cohort moving.",
+      "expected_output": "Close or retask harvested worker A now (retask only if a queued lane matches its routed tool/model/effort; otherwise close after durable handoff), leave running worker B alone, inspect worker C's actual output and persist its handoff before any close, and touch only recorded direct children.",
+      "assertions": [
+        "Closes or retasks the harvested worker in the same pass instead of leaving it idle while dispatching new lanes",
+        "Refuses to close the worker whose results are not yet reviewed; inspects output and persists handoff first",
+        "Does not interrupt or clean the still-running worker and gates every action on recorded ownership",
+        "Reuses the idle worker only for a queued lane matching its routed tool, model, and effort; otherwise closes it and routes fresh"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "The Sol implementation worker just finished and I merged its diff. The next queued lane is the independent adversarial review of that same change, and the Sol worker is sitting idle\u2014reuse it for the review?",
+      "expected_output": "No. Invoke routing-agent-work when installed for the review route, require a fresh capable reviewer from another model family, and close the harvested implementer after its handoff is durable.",
+      "assertions": [
+        "Refuses to reuse the implementer worker to review its own change",
+        "Invokes routing-agent-work when installed for the review route",
+        "Applies the selected reviewer model and effort through the discovered Solo tool",
+        "Closes the harvested implementer worker after durable handoff instead of leaving it idle",
+        "Treats reuse as conditional on route fit, not a default"
+      ],
+      "files": []
+    }
+  ]
+}

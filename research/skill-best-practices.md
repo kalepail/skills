@@ -23,7 +23,7 @@ Research current through **2026-07-15**. Scope: reusable filesystem-based Agent 
 | Main instructions | Full `SKILL.md` read only after selection | Full rendered `SKILL.md` enters conversation after invocation and persists | Put common workflow and routing only in main file |
 | Supporting content | Optional scripts, references, assets; load/run as needed | Optional sibling docs, examples, scripts, templates; load/run as needed | Direct paths, explicit read/run conditions, one level deep |
 | Product adapter | `agents/openai.yaml` supplies UI, implicit-invocation policy, and MCP dependencies | Claude-only frontmatter controls invocation, tools, subagents, hooks, arguments, and dynamic context | Keep product behavior outside common core where possible |
-| Distribution | Local/repo skills; native Codex plugin uses `.codex-plugin/plugin.json` and one `skills` path | Local/project skills; Claude plugin uses `.claude-plugin/plugin.json` and may list skill paths | Flat shipped `skills/` tree supports both manifests |
+| Distribution | Local/repo skills; native Codex plugin requires one real, flat `skills` directory | Local/project skills; Claude plugin may list categorized skill paths | Use skills.sh and flat project links for Codex; use the Claude manifest for categorized sources |
 | Validation/evals | Official creator validates schema, tests scripts, and recommends real trigger prompts/iteration; official catalog has some `evaluations/` fixtures | Official docs recommend eval-first development, fresh with/without-skill baselines, at least three cases, human review, and model matrix | Run structural checks on every change; behavior evals for changed skills and releases |
 
 OpenAI explicitly says one skill should do one job, instructions should precede scripts, steps should have explicit inputs/outputs, and trigger prompts should test description quality ([Build skills](https://learn.chatgpt.com/docs/build-skills.md)). Its creator adds two important implementation rules: keep detailed facts out of `SKILL.md`, avoid duplicated content between main file and references, and test every added script by running it ([OpenAI skill creator](https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.system/skill-creator/SKILL.md)). Codex-specific presentation and dependencies belong in `agents/openai.yaml`, including human-facing labels/icons/default prompt and MCP declarations ([OpenAI YAML reference](https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.system/skill-creator/references/openai_yaml.md)).
@@ -66,10 +66,10 @@ What works:
 
 Risks and lessons:
 
-- Descriptions often spend most 1,024-character allowance on synonyms. This favors recall but consumes always-on context and can blur boundaries. Fan Solo should keep only distinct intent branches plus hard near-misses, then prove wording with trigger evals.
+- Descriptions often spend most 1,024-character allowance on synonyms. This favors recall but consumes always-on context and can blur boundaries. This repository should keep only distinct intent branches plus hard near-misses, then prove wording with trigger evals.
 - Main files average 304 lines and several sit at 487–497. They comply numerically but leave little growth margin. New material should default to references.
 - Eval fixtures are not run by shown validation workflow; CI proves schema, not output quality.
-- Twenty-five skill/reference files link outside skill directories into root `tools/`. Individual-skill installers may omit those dependencies, weakening self-contained portability. Fan Solo should keep required resource inside skill or declare/install external dependency explicitly ([ads example](https://github.com/coreyhaines31/marketingskills/blob/286d3718d9bd068071792e1e4275388056419928/skills/ads/SKILL.md)).
+- Twenty-five skill/reference files link outside skill directories into root `tools/`. Individual-skill installers may omit those dependencies, weakening self-contained portability. This repository should keep each required resource inside its skill or declare the external dependency explicitly ([ads example](https://github.com/coreyhaines31/marketingskills/blob/286d3718d9bd068071792e1e4275388056419928/skills/ads/SKILL.md)).
 
 ## Case study: `mattpocock/skills`
 
@@ -86,24 +86,27 @@ What works:
 
 Risks and lessons:
 
-- Dual-harness behavior is pragmatic, not strictly spec-clean. Running current OpenAI official validator against `ask-matt` fails because `disable-model-invocation` is unexpected; model-invoked `research` passes. Fan Solo should not copy Claude-only top-level fields into canonical portable files.
+- Dual-harness behavior is pragmatic, not strictly spec-clean. Running current OpenAI official validator against `ask-matt` fails because `disable-model-invocation` is unexpected; model-invoked `research` passes. This repository should not copy Claude-only top-level fields into canonical portable files.
 - No behavior evals and no validation CI beyond release workflow were present at snapshot. Lean prompts need tests as much as long prompts; composition creates hidden routing risk.
-- Bucketed layout forced repository to defer native Codex plugin: Codex manifest accepts one skills path while Claude manifest can enumerate promoted directories. Flat shipped tree avoids this packaging problem ([distribution ADR](https://github.com/mattpocock/skills/blob/e9fcdf95b402d360f90f1db8d776d5dd450f9234/.agents/adr/0002-ship-as-a-claude-code-plugin.md)).
+- A bucketed layout prevents native Codex packaging without copied skill bodies. Codex requires a real, flat `skills/` directory and rejects symlinked skill packages. Matt's repository therefore does not ship a native Codex plugin ([distribution ADR](https://github.com/mattpocock/skills/blob/e9fcdf95b402d360f90f1db8d776d5dd450f9234/.agents/adr/0002-ship-as-a-claude-code-plugin.md)).
 
-## Recommended Fan Solo architecture
+## Recommended repository architecture
 
-Use one source tree, strict portable core, thin platform adapters, and no generated duplicate skill bodies:
+Use categorized sources, strict portable cores, thin platform adapters, and no copied skill bodies:
 
 ```text
-fan-solo/
+skills-repository/
 ├── README.md
 ├── LICENSE
-├── .codex-plugin/
-│   └── plugin.json                 # when native Codex distribution is needed
 ├── .claude-plugin/
-│   └── plugin.json                 # when native Claude distribution is needed
-├── skills/                         # only shipped skills; flat, no draft buckets
-│   └── skill-name/
+│   └── plugin.json                 # enumerates categorized skill paths
+├── .agents/
+│   └── skills/                     # flat links for project discovery
+├── .claude/
+│   └── skills/                     # flat links for project discovery
+├── skills/                         # only shipped skills
+│   └── category/
+│       └── skill-name/
 │       ├── SKILL.md                # portable source of truth
 │       ├── agents/
 │       │   └── openai.yaml         # Codex UI/policy/dependencies
@@ -116,7 +119,7 @@ fan-solo/
     └── validate-skills.sh          # one structural/script check entrypoint
 ```
 
-Keep drafts outside `skills/`, for example `incubator/`, so native plugin can safely point at `./skills/`. Do not create category directories unless manifests on both hosts can select same shipped subset.
+Keep drafts outside `skills/`, for example `incubator/`. Keep every flat project surface synchronized with the categorized source set. Use skills.sh for Codex distribution.
 
 Canonical frontmatter:
 
@@ -126,7 +129,7 @@ name: skill-name
 description: Does specific job. Use when user asks for X or provides Y. Do not use for adjacent Z; use z-skill instead.
 license: MIT
 metadata:
-  author: fan-solo
+  author: maintainer
   version: "1.0.0"
 ---
 ```
@@ -140,12 +143,12 @@ Rules:
 - Keep resource links one level deep and relative to skill root. Skill must remain useful when installed alone. No required `../../shared` or repository-root links.
 - Start instruction-only. Add script after repeated runs show same code being regenerated or operation needs deterministic validation. Add smallest fixture and executable check beside test entrypoint.
 - Use assets only when output needs template, image, font, schema, or starter file. Do not store documentation in assets.
-- Store at least three behavior cases for each nontrivial skill. On pull requests, run schema plus script checks. On changed-skill release/nightly jobs, run fresh with/without-skill behavior evals on Codex and Claude models actually supported. Require human review for subjective Fan Solo outputs.
+- Store at least three behavior cases for each nontrivial skill. On pull requests, run schema plus script checks. On changed-skill release/nightly jobs, run fresh with/without-skill behavior evals on Codex and Claude models actually supported. Require human review for subjective outputs.
 - Version skill behavior in `metadata.version`; version plugin separately. Record behavior-changing description edits because triggering is API surface.
 
 ### Recommended acceptance gate
 
-A Fan Solo skill ships only when:
+A skill ships only when:
 
 - strict common frontmatter validates in Agent Skills and Codex validator;
 - name matches directory; description has positive trigger and adjacent boundary;
@@ -153,9 +156,9 @@ A Fan Solo skill ships only when:
 - every bundled script runs successfully on representative fixture and fails helpfully on bad input;
 - trigger set covers positive, hard negative, casual phrasing, and overlap with neighboring skill;
 - three behavior cases beat no-skill or previous-version baseline in clean sessions, without unacceptable token/time regression;
-- plugin installation exposes exactly shipped skills in both target hosts.
+- each distribution method exposes exactly the intended skill set.
 
-This combines Marketing Skills’ domain coverage, references, and per-skill eval artifacts with Matt Pocock’s lean composition, invocation taxonomy, and Codex adapters—while removing their main portability weaknesses: root-relative dependencies, unexecuted evals, bucketed packaging, and Claude-only fields in canonical frontmatter.
+This combines Marketing Skills' domain coverage, references, and eval artifacts with Matt Pocock's lean composition, invocation taxonomy, and Codex adapters. It also keeps platform packaging limits explicit.
 
 ## Sources
 

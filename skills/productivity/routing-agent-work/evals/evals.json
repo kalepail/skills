@@ -1,0 +1,226 @@
+{
+  "skill_name": "routing-agent-work",
+  "evals": [
+    {
+      "prompt": "Split this migration into implementation, testing, and independent review lanes. I was thinking Codex for both implementation and independent review. Pick agents and reasoning levels.",
+      "expected_output": "Use $routing-agent-work to define bounded lanes, route difficult implementation to GPT-5.6 Sol with explicit effort, and replace the same-family review idea with a fresh capable reviewer from another model family.",
+      "assertions": [
+        "Invokes the skill because delegation selection affects the result",
+        "Selects GPT-5.6 Sol for difficult implementation",
+        "Sets a supported model and effort for every lane",
+        "Challenges the same-family review idea and uses a fresh different-family reviewer",
+        "Returns compact route cards and report contracts"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "I need five agents to inspect separate packages and report the affected files. The parent should not consume their full transcripts. Two child orchestrators cannot load local skills.",
+      "expected_output": "Use $routing-agent-work to route the bounded repository-sweep lanes to GPT-5.6 Terra at medium or high effort. Pass explicit child routes to orchestrators that cannot load the skill, and require compact reports.",
+      "assertions": [
+        "Does not treat the requested agent count as a routing requirement",
+        "Selects GPT-5.6 Terra at medium or high effort for the repository sweeps",
+        "Uses a sub-orchestrator only when the topology helps",
+        "Passes child routes in the brief when a sub-orchestrator cannot load the skill",
+        "Routes child reports to direct parents",
+        "Rejects full transcript forwarding"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Route an ambiguous planning lane. Host status says the Fable 5 and GPT-5.6 Sol identifiers are unavailable. Opus 5 is available at high.",
+      "expected_output": "Record both failed identifier checks, advance through the planning fallbacks in order, and route to Opus 5 at high. Return Unrouted if every listed fallback fails.",
+      "assertions": [
+        "Records verification evidence for both unavailable identifiers",
+        "Advances through listed fallbacks in order",
+        "Returns Unrouted rather than inventing a route when all fallbacks fail"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Assign a worker to read a very large text-only design archive and trace its decisions into a long-running implementation.",
+      "expected_output": "Route the quality-first text-only long-context lane to GLM-5.3 at max through OpenCode, with Kimi K3 or Sol as fallback and a different-family reviewer when failure cost requires one.",
+      "assertions": [
+        "Selects full GLM-5.3 rather than GLM-5.3 Flash for hard text-only long-horizon work",
+        "Uses max effort for complex coding",
+        "Names Kimi K3 or Sol as a fixed-fleet fallback",
+        "Does not require a Kimi preserved-history contract for GLM-5.3"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Pick a low-cost model for multimodal tool use and a second model to challenge its findings.",
+      "expected_output": "Route the primary lane to GLM-5.3 Flash at high or max through OpenCode, with Grok 4.6, Sol, Fable, or Opus as a capable challenger selected for the failure cost.",
+      "assertions": [
+        "Uses GLM-5.3 Flash rather than full GLM-5.3",
+        "Uses at least high effort",
+        "Selects a capable challenger",
+        "Separates verification, fallback, reviewer, and report contract fields",
+        "Does not introduce an unknown model"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "The deliverable is a polished README and pull request description. The implementation owner already understands the change.",
+      "expected_output": "Use Opus 5 when prose quality justifies a dedicated lane, or keep the existing capable owner. Apply ASD-STE100 to every human-readable output and avoid a separate prose agent when it adds no value.",
+      "assertions": [
+        "Routes by the type of writing",
+        "Uses Opus 5 as the quality-first technical prose clue",
+        "Applies ASD-STE100",
+        "Does not require a separate prose lane"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Use this new unlisted model I heard about for a review lane. Find its current variants and score it first.",
+      "expected_output": "Do not use $routing-agent-work for live model discovery or scoring. Use a current research workflow, and treat any fleet change as a separate manual skill-maintenance task.",
+      "assertions": [
+        "Does not invoke the skill for live model discovery",
+        "Rejects live model discovery",
+        "Rejects unknown fleet members",
+        "Keeps fleet maintenance manual"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Review this pull request yourself and report the findings. Do not delegate the review.",
+      "expected_output": "Do not use $routing-agent-work. Complete the single-agent review directly because the user excluded delegation.",
+      "assertions": [
+        "Does not invoke the skill for a single-agent review",
+        "Does not create lanes or select a fleet model"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "How does Codex multi-agent orchestration work?",
+      "expected_output": "Do not use $routing-agent-work for orchestration mechanics. Use the relevant product documentation or orchestration skill instead.",
+      "assertions": [
+        "Does not use the skill for orchestration mechanics",
+        "Routes product behavior to documentation or the owning orchestration skill"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Assign a lead to turn an ambiguous product direction into an architecture and a bounded lane plan. Correctness matters more than cost.",
+      "expected_output": "Route the ambiguous planning and synthesis lane to Fable 5 at high or xhigh through Claude, with a clear completion check and stop budget.",
+      "assertions": [
+        "Selects Fable 5 for ambiguous planning and synthesis",
+        "Uses high or xhigh effort",
+        "Adds a completion check and stop budget",
+        "Does not assign a fixed worker count before defining lanes"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Assign a cheap worker to extract the same five fields from thousands of small independent records. The lane needs no broad judgment.",
+      "expected_output": "Route the narrow high-volume extraction lane to GPT-5.6 Luna at xhigh or max through Codex, keep each batch small, and fall back to Terra when recall becomes important.",
+      "assertions": [
+        "Selects GPT-5.6 Luna only for narrow high-volume extraction",
+        "Uses xhigh or max effort",
+        "Keeps the lane small",
+        "Names Terra as the safer recall fallback"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Assign an independent worker to research an API claim, exercise the code path, and challenge the implementer's result.",
+      "expected_output": "Route the research, testing, and challenge lane to Grok 4.6 at high or xhigh, require cited facts and executed checks, and name a listed fallback.",
+      "assertions": [
+        "Selects Grok 4.6 rather than another Grok version",
+        "Uses high or xhigh effort",
+        "Requires cited facts and reproducible checks",
+        "Names a fixed-fleet fallback"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Assign a worker to inspect screenshots and a PDF, then build and verify a long-running visual interface change.",
+      "expected_output": "Route the multimodal visual implementation to Muse Spark 1.2 at high or xhigh through OpenCode, check provider data terms, and use GLM-5.3 Flash or Sol as fallback.",
+      "assertions": [
+        "Selects Muse Spark 1.2 for visual implementation rather than GLM-5.3 Flash for multimodal review",
+        "Uses high or xhigh effort",
+        "Checks provider data terms",
+        "Names GLM-5.3 Flash or Sol as fallback"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Configure my OpenCode providers and API credentials so Kimi K3 can launch.",
+      "expected_output": "Do not use $routing-agent-work for provider setup or authentication. Use the relevant tool-management workflow and require normal credential safeguards.",
+      "assertions": [
+        "Does not invoke the skill for provider setup",
+        "Does not handle credentials inside a route card"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Give me an overall ranked comparison of every frontier model and score each one from one to ten.",
+      "expected_output": "Do not use $routing-agent-work for a general model comparison. Use current research sources and keep the routing skill limited to bounded delegated lanes.",
+      "assertions": [
+        "Does not invoke the skill for a general comparison",
+        "Does not turn the fixed fleet into an overall ranking"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Which model should replace the current model for this entire single-agent chat? I will not delegate anything.",
+      "expected_output": "Do not use $routing-agent-work because no delegated lane exists. Answer through the host's model-choice guidance instead.",
+      "assertions": [
+        "Does not invoke the skill for a nondelegated session choice",
+        "Does not create a route card"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Launch Claude with Fable 5 at xhigh for this already-written planning brief.",
+      "expected_output": "Do not use $routing-agent-work because the worker CLI, model, effort, and lane are already fixed. Apply the route through the current orchestration host.",
+      "assertions": [
+        "Does not invoke the skill when no selection remains",
+        "Keeps launch mechanics with the orchestration host"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Update our routing skill to add a newly released model to the approved fleet.",
+      "expected_output": "Do not run $routing-agent-work as a selector. Treat this as a skill-maintenance task with manual research, authoring, eval, and validation work.",
+      "assertions": [
+        "Does not let the routing skill update itself",
+        "Keeps fleet maintenance manual",
+        "Routes the change to skill authoring and research"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Route a difficult implementation lane to GPT-5.6 Sol. The selected xhigh value fails, but high is supported and still meets the lane requirement.",
+      "expected_output": "Keep GPT-5.6 Sol and use high because that supported value meets both the lane requirement and the model floor. Try the next fallback only when no supported effort meets both conditions.",
+      "assertions": [
+        "Distinguishes an effort-value failure from an identifier failure",
+        "Uses a supported effort that still meets the lane requirement",
+        "Does not lower below the model floor",
+        "Uses a listed fallback only when no adequate effort remains"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Route a bounded repository sweep. The host pins Claude for every worker. Targeted checks show that Fable 5 and Opus 5 are unavailable.",
+      "expected_output": "Respect the Claude pin and return an Unrouted lane. Do not select a model from another CLI, invent a Claude model, or launch a configured default.",
+      "assertions": [
+        "Respects the pinned worker CLI",
+        "Does not cross to Codex, Grok, or OpenCode",
+        "Does not invent an unlisted Claude model",
+        "Returns Unrouted and does not launch the lane"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Assign a worker to continue a multimodal long-horizon knowledge task. The OpenCode provider preserves complete Kimi reasoning and tool history.",
+      "expected_output": "Route the lane to Kimi K3 at high or max in a fresh OpenCode session. Preserve its complete reasoning and tool history, and use GLM-5.3 only when the input becomes text-only.",
+      "assertions": [
+        "Selects Kimi K3 for multimodal preserved-reasoning work",
+        "Uses high or max effort",
+        "Requires a fresh session and complete preserved reasoning and tool history",
+        "Distinguishes Kimi K3 from text-only GLM-5.3 and efficiency-first GLM-5.3 Flash"
+      ],
+      "files": []
+    }
+  ]
+}
