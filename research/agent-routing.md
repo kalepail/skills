@@ -2,6 +2,8 @@
 
 This research supports `routing-agent-work`. The shipped skill keeps only durable routing clues.
 
+Read [the current fleet update](routing-agent-work/model-fleet-update-2026-09-03.md) for measured scores, costs, latency, and runtime checks.
+
 ## Research method
 
 The research used separate lanes for official model documentation, independent benchmarks, practitioner reports, and adversarial review. Parallel CLI saved the primary artifacts. Parallel MCP and Perplexity supplied independent searches and counterevidence. Grok supplied an X-focused practitioner lane. Fable 5 and GPT-5.6 Sol reviewed the conclusions independently.
@@ -28,9 +30,9 @@ OpenAI documents Sol, Terra, and Luna as separate GPT-5.6 operating points. The 
 - [OpenAI model guidance](https://developers.openai.com/api/docs/guides/latest-model)
 - [OpenAI reasoning guide](https://developers.openai.com/api/docs/guides/reasoning)
 
-Anthropic documents Fable 5 and Opus 5 as high-capability models. Its effort documentation shows that effort is a provider-specific control. The research supports Fable for ambiguous planning and autonomy. It supports Opus for precision work and quality-first prose.
+Anthropic documents Fable 5.1 and Opus 5 as high-capability models. Its effort documentation shows that effort is a provider-specific control. The research supports Fable 5.1 for ambiguous planning and autonomy. It supports Opus for quality-first coding, precision work, and technical prose.
 
-- [Claude Fable 5 and Claude Mythos 5](https://www.anthropic.com/news/claude-fable-5-mythos-5)
+- [Claude Fable 5.1 and Claude Mythos 5.1](https://www.anthropic.com/claude-fable-and-mythos-5-1)
 - [Introducing Claude Opus 5](https://www.anthropic.com/news/claude-opus-5)
 - [Anthropic effort documentation](https://platform.claude.com/docs/en/build-with-claude/effort)
 
@@ -56,10 +58,9 @@ Moonshot documents Kimi K3 for multimodal long-context and agentic work. The mod
 - [Kimi K3 model card](https://huggingface.co/moonshotai/Kimi-K3)
 - [Kimi Code model configuration](https://www.kimi.com/code/docs/en/kimi-code/models.html)
 
-Meta documents Muse Spark 1.2 with Muse Code as its co-designed harness. The model supports multimodal and long-horizon coding work. The routing skill treats harness quality and provider data terms as route constraints.
+Meta documents Muse Spark 1.3 for multimodal and long-horizon coding work. The routing skill permits only version 1.3. It prefers contributor routes after data-term acceptance. It tries direct Meta contributor first and OpenRouter contributor second.
 
-- [Introducing Muse Code and Muse Spark 1.2](https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2)
-- [Build with Muse Code](https://developer.meta.com/ai/resources/blog/build-with-muse-code)
+- [Introducing Muse Spark 1.3](https://research.meta.ai/blog/introducing-muse-spark-1-3)
 
 ## Benchmark interpretation
 
@@ -67,6 +68,7 @@ Independent leaderboards helped identify task-specific strengths. They did not p
 
 - [Artificial Analysis Long Context Reasoning](https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning) tests synthesis across long documents.
 - [Artificial Analysis Terminal-Bench v2.1](https://artificialanalysis.ai/evaluations/terminalbench-v2-1) tests agentic terminal work.
+- [Terminal-Bench 4.0](https://www.tbench.ai) tests longer terminal tasks with confidence intervals.
 - [Artificial Analysis Omniscience](https://artificialanalysis.ai/evaluations/omniscience) measures knowledge and hallucination behavior.
 - [CursorBench](https://cursor.com/cursorbench) measures coding-agent behavior inside a specific harness.
 - [Lech Mazur writing benchmark](https://github.com/lechmazur/writing) uses pairwise judgments over constrained creative writing.

@@ -40,6 +40,14 @@ An `Unrouted` lane does not launch. Return it to the caller for an explicit cons
 
 Before launch, confirm only the selected configured identifier and effort control through host status or a targeted CLI check. If the identifier fails, try the next fallback. If only the effort value fails, use a supported value that meets the lane requirement and model floor. If none fits, try the next fallback. Do not enumerate or score unrelated models.
 
+Before rejecting a new or recently updated OpenCode identifier, refresh its model catalog once:
+
+```bash
+opencode models --refresh
+```
+
+Then use `opencode models <provider>` to check only the selected provider. Treat an identifier absent after refresh as unavailable, then use the listed fallback. Skip the refresh when host status already confirms the identifier.
+
 ## Set effort
 
 Set the model and effort explicitly for each worker and nested worker. Never rely on an unverified default.
