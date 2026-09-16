@@ -1,6 +1,6 @@
 ---
 name: routing-agent-work
-description: Select an agent CLI, model, and reasoning effort for delegated work. Use when an orchestrator, parent agent, or user must assign implementation, research, review, synthesis, multimodal, long-context, high-volume extraction, or prose lanes across Claude, Codex, Grok, or OpenCode. Do not use for orchestration mechanics, live model discovery, provider setup, general model comparisons, single-agent work with no delegation choice, or a lane whose worker, model, and effort are already fixed.
+description: Select an agent CLI, model, and reasoning effort for delegated work. Use when an orchestrator, parent agent, or user must assign implementation, security review, authorized vulnerability exploration, research, review, synthesis, multimodal, long-context, high-volume extraction, or prose lanes across Claude, Codex, Grok, or OpenCode. Do not use for orchestration mechanics, live model discovery, provider setup, general model comparisons, single-agent work with no delegation choice, or a lane whose worker, model, and effort are already fixed.
 ---
 
 # Route Agent Work
@@ -52,13 +52,17 @@ Then use `opencode models <provider>` to check only the selected provider. Treat
 
 Set the model and effort explicitly for each worker and nested worker. Never rely on an unverified default.
 
-- Use `medium` for bounded, clear, low-risk work.
+- Use the fleet's Codex preference: Astra at `high` for most Codex work.
+- Use `medium` for bounded, clear, low-risk work. Astra also permits `low` for trivial, readily checked tasks.
 - Use `high` for meaningful implementation, research, review, and synthesis.
 - Use `xhigh` for hard planning, debugging, synthesis, and adversarial review.
-- Use `max` or `ultra` for the hardest quality-first work with a clear stopping condition.
-- Never use an effort below `medium`. Apply each model's range and floor from the fleet reference.
+- Use `max` for the hardest quality-first work with a clear stopping condition.
+- Keep other models at `medium` or above. Apply each model's range and floor from the fleet reference.
 
 Use only supported effort values. Omit an unsupported flag only when the configured route confirms the required mode.
+
+Codex `ultra` enables automatic task delegation. Use it only when the caller's delegation limits and host support permit it.
+Use `max` when the caller requires one worker or a fixed delegation structure.
 
 ## Shape the delegation tree
 

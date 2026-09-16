@@ -1,0 +1,703 @@
+{
+  "date": "2026-09-16",
+  "baseline_commit": "dea99fa",
+  "evaluation_model": "gpt-6-astra",
+  "reasoning_effort": "high",
+  "method": "Separate clean-context native agent sessions per skill version. Each session evaluated the same 19 prompts. Prompt 36 was clarified to name the Codex host and rerun in both sessions. No expected answers were supplied to evaluators.",
+  "scope": "Primary route and effort decisions, trigger boundaries, plus manual review of recorded constraints. This is not a full assertion-suite run, provider-access test, or model-quality benchmark.",
+  "duration_seconds": null,
+  "token_usage": null,
+  "measurement_note": "The native agent interface did not return per-evaluation duration or token usage.",
+  "skill_sha256": {
+    "before": {
+      "SKILL.md": "d360dde8b551aec6a0299f79617bd31d7eaa6ade64bf5f848e915644a204a893",
+      "references/fleet.md": "d1d9548e79c5f0f605e9869ba7b06e84c986cfdac41fb52ecbb24b8c89861cec"
+    },
+    "after": {
+      "SKILL.md": "59a66ac872025d91ebbe1fe8abb76b63d346dcc02a74cad985c8aa4f5335f412",
+      "references/fleet.md": "f781816c2bec30791bc29fe4593d22ee12c04da7796f8e7786852a817b8ad6b6"
+    }
+  },
+  "summary": {
+    "cases": 19,
+    "before_pass": 11,
+    "after_pass": 19
+  },
+  "cases": [
+    {
+      "id": 24,
+      "prompt": "Route a Codex worker to implement a feature and run its integration checks. The host confirms all approved Codex models and effort levels. No budget constraint applies.",
+      "expected_primary_decision": [
+        "Astra",
+        "high"
+      ],
+      "before": {
+        "id": 24,
+        "invoke": true,
+        "model": "GPT-5.6 Sol",
+        "effort": "high",
+        "fallback": "none on the pinned CLI",
+        "reviewer": null,
+        "reason": "Codex implements the feature and runs integration checks. Sol fits implementation and primary verification.",
+        "verification": "The supplied host status confirms all approved Codex models and effort levels. No worker launched.",
+        "constraints": [
+          "Worker CLI: Codex",
+          "Run the required integration checks."
+        ]
+      },
+      "after": {
+        "id": 24,
+        "invoke": true,
+        "model": "GPT-6 Astra (Codex; gpt-6-astra)",
+        "effort": "high",
+        "fallback": "GPT-5.6 Sol (Codex), high",
+        "reviewer": null,
+        "reason": "Astra is the preferred Codex route for feature implementation and integration checks.",
+        "verification": "Supplied host status confirms the approved Codex models and efforts. No launch occurred.",
+        "constraints": "Implement the bounded feature and report integration check results. No budget constraint applies."
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": 25,
+      "prompt": "Pick a Codex worker for a small, well-defined file rename and import update. Existing checks cover every changed reference. Keep latency modest. Host status confirms Astra low, medium, and high.",
+      "expected_primary_decision": [
+        "Astra",
+        "medium"
+      ],
+      "before": {
+        "id": 25,
+        "invoke": true,
+        "model": "GPT-5.6 Terra",
+        "effort": "medium",
+        "fallback": "GPT-5.6 Sol if consequential interpretation becomes necessary",
+        "reviewer": null,
+        "reason": "Terra fits a bounded rename with complete existing checks. Medium meets the skill floor.",
+        "verification": "Astra status does not verify Terra. Confirm the selected Terra identifier and medium effort before launch.",
+        "constraints": [
+          "Worker CLI: Codex",
+          "Keep latency modest.",
+          "Astra is absent from this fleet."
+        ]
+      },
+      "after": {
+        "id": 25,
+        "invoke": true,
+        "model": "GPT-6 Astra (Codex; gpt-6-astra)",
+        "effort": "medium",
+        "fallback": "GPT-5.6 Sol (Codex), medium; availability unverified",
+        "reviewer": null,
+        "reason": "The rename is small and defined. Astra medium fits the task and latency preference.",
+        "verification": "Supplied host status confirms Astra medium. Existing checks cover the changed references. No checks ran.",
+        "constraints": "Rename the file, update imports, and run the existing checks."
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": 26,
+      "prompt": "Pick a Codex worker to alphabetize ten supplied labels and verify the exact output against a provided list. This is a trivial isolated task. Host status confirms Astra low and medium.",
+      "expected_primary_decision": [
+        "Astra",
+        "low"
+      ],
+      "before": {
+        "id": 26,
+        "invoke": true,
+        "model": "GPT-5.6 Terra",
+        "effort": "medium",
+        "fallback": null,
+        "reviewer": null,
+        "reason": "Terra fits this small deterministic task. Luna targets high-volume work and requires high effort.",
+        "verification": "The supplied Astra status does not verify Terra. Confirm Terra and medium effort before launch.",
+        "constraints": [
+          "Worker CLI: Codex",
+          "Compare all ten labels with the supplied expected list.",
+          "The skill forbids effort below medium."
+        ]
+      },
+      "after": {
+        "id": 26,
+        "invoke": true,
+        "model": "GPT-6 Astra (Codex; gpt-6-astra)",
+        "effort": "low",
+        "fallback": "GPT-5.6 Sol (Codex), medium; availability unverified",
+        "reviewer": null,
+        "reason": "Astra low is permitted for this trivial task with an exact output check.",
+        "verification": "Supplied host status confirms Astra low. No launch or output check occurred.",
+        "constraints": "Alphabetize only the ten supplied labels and compare the result with the provided list."
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": 27,
+      "prompt": "Route a Codex worker to implement a feature. Host status confirms Astra is unavailable and Sol supports high. Other CLIs are excluded.",
+      "expected_primary_decision": [
+        "Sol",
+        "high"
+      ],
+      "before": {
+        "id": 27,
+        "invoke": true,
+        "model": "GPT-5.6 Sol",
+        "effort": "high",
+        "fallback": "none on the pinned CLI",
+        "reviewer": null,
+        "reason": "Sol is the listed Codex route for feature implementation.",
+        "verification": "The supplied host status confirms Sol supports high. No worker launched.",
+        "constraints": [
+          "Worker CLI: Codex",
+          "Other CLIs are excluded."
+        ]
+      },
+      "after": {
+        "id": 27,
+        "invoke": true,
+        "model": "GPT-5.6 Sol (Codex; gpt-5.6-sol)",
+        "effort": "high",
+        "fallback": "GPT-5.6 Terra (Codex), high, only if the feature is bounded; otherwise Unrouted",
+        "reviewer": null,
+        "reason": "Astra is unavailable. Sol is the next Codex feature implementation route.",
+        "verification": "Supplied host status confirms Astra is unavailable and Sol supports high. Terra access is unverified.",
+        "constraints": "Use Codex only. Define the feature scope and completion checks before launch."
+      },
+      "before_pass": true,
+      "after_pass": true
+    },
+    {
+      "id": 29,
+      "prompt": "Select a worker to review our authentication service for vulnerabilities and validate patches. Testing stays in our isolated checkout. Host status confirms Daybreak Blue access and high effort.",
+      "expected_primary_decision": [
+        "Daybreak",
+        "high"
+      ],
+      "before": {
+        "id": 29,
+        "invoke": true,
+        "model": "Opus 5",
+        "effort": "high",
+        "fallback": "Fable 5.1; GPT-5.6 Sol; GLM-5.3 Flash; Grok 4.6",
+        "reviewer": "GPT-5.6 Sol at high",
+        "reason": "Opus fits precision review. Independent review helps validate consequential authentication patches.",
+        "verification": "Daybreak Blue is absent from this fleet. Opus and reviewer identifiers and efforts remain unverified.",
+        "constraints": [
+          "Worker CLI: Claude",
+          "Keep all tests in the isolated checkout.",
+          "Require reproducible vulnerability and patch evidence."
+        ]
+      },
+      "after": {
+        "id": 29,
+        "invoke": true,
+        "model": "Daybreak Blue (Codex; gpt-daybreak-blue-latest)",
+        "effort": "high",
+        "fallback": "GPT-6 Astra (Codex), high; availability unverified",
+        "reviewer": "Opus 5 (Claude), high, for independent review of consequential patches; access and effort unverified",
+        "reason": "Daybreak is the first route for security review and patch validation.",
+        "verification": "Supplied host status confirms Daybreak access and high effort. No security checks ran.",
+        "constraints": "Keep testing in the isolated checkout. Report reproducible findings and patch checks."
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": 30,
+      "prompt": "Choose a worker to explore vulnerabilities in our owned parser and build local reproducers. Daybreak Blue access is unavailable. Host status confirms Astra high. No external targets are allowed.",
+      "expected_primary_decision": [
+        "Astra",
+        "high"
+      ],
+      "before": {
+        "id": 30,
+        "invoke": true,
+        "model": "Opus 5",
+        "effort": "xhigh",
+        "fallback": "GPT-5.6 Sol; Fable 5.1",
+        "reviewer": "Grok 4.6 at high",
+        "reason": "Opus fits difficult debugging and local reproducer construction. Grok supplies independent challenge.",
+        "verification": "Neither Astra nor Daybreak Blue belongs to this fleet. Selected routes require targeted verification before launch.",
+        "constraints": [
+          "Worker CLI: Claude",
+          "Use only the owned parser and local reproducers.",
+          "No external targets are allowed."
+        ]
+      },
+      "after": {
+        "id": 30,
+        "invoke": true,
+        "model": "GPT-6 Astra (Codex; gpt-6-astra)",
+        "effort": "high",
+        "fallback": "Opus 5 (Claude), high; availability unverified",
+        "reviewer": null,
+        "reason": "Astra is the first security fallback when Daybreak is unavailable.",
+        "verification": "Supplied host status confirms Daybreak is unavailable and Astra supports high. No reproducers ran.",
+        "constraints": "Examine only the owned parser. Build local reproducers. Do not access external targets."
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": 31,
+      "prompt": "Select an independent security reviewer for code written by GPT-5.6 Sol. Daybreak Blue and Opus 5 are available. A different model family is required.",
+      "expected_primary_decision": [
+        "Opus",
+        "high"
+      ],
+      "before": {
+        "id": 31,
+        "invoke": true,
+        "model": "Opus 5",
+        "effort": "high",
+        "fallback": "Fable 5.1; GLM-5.3 Flash; Grok 4.6",
+        "reviewer": null,
+        "reason": "Opus fits precision security review and provides a different family from Sol.",
+        "verification": "The supplied host status confirms Opus availability. Its selected identifier and high effort control still need confirmation.",
+        "constraints": [
+          "Worker CLI: Claude",
+          "Exclude Sol as a fallback because the reviewer must use a different family.",
+          "Give the reviewer the specification and artifact in fresh context."
+        ]
+      },
+      "after": {
+        "id": 31,
+        "invoke": true,
+        "model": "Opus 5 (Claude)",
+        "effort": "high",
+        "fallback": "GLM-5.3 (OpenCode), high, for text-only input; availability unverified",
+        "reviewer": null,
+        "reason": "Opus provides the required family difference. Daybreak and Sol belong to the same family.",
+        "verification": "Supplied host status confirms Opus availability. Confirm its configured identifier and high effort before launch.",
+        "constraints": "Review the artifact and requirements in fresh context. Exclude the author reasoning from the initial context."
+      },
+      "before_pass": true,
+      "after_pass": true
+    },
+    {
+      "id": 32,
+      "prompt": "Route a Muse visual task that requires max effort. Contributor terms are accepted. Host status confirms direct Meta contributor supports xhigh only, and OpenRouter contributor supports max.",
+      "expected_primary_decision": [
+        "openrouter/meta/muse-spark-1.3-contributor",
+        "max"
+      ],
+      "before": {
+        "id": 32,
+        "invoke": true,
+        "model": "Muse Spark 1.3 (openrouter/meta/muse-spark-1.3-contributor)",
+        "effort": "max",
+        "fallback": "opencode/muse-spark-1.3-contributor-free, then full Muse identifiers, only if max is supported",
+        "reviewer": null,
+        "reason": "The direct contributor route cannot meet required max effort. The next contributor route explicitly supports max.",
+        "verification": "The supplied host status confirms OpenRouter contributor max. No refresh or worker launch occurred.",
+        "constraints": [
+          "Worker CLI: OpenCode",
+          "Contributor terms are accepted.",
+          "Policy ambiguity: the effort table ends at xhigh, but its note permits max when exposed.",
+          "This decision applies that conditional max permission."
+        ]
+      },
+      "after": {
+        "id": 32,
+        "invoke": true,
+        "model": "Muse Spark 1.3 (OpenCode; openrouter/meta/muse-spark-1.3-contributor)",
+        "effort": "max",
+        "fallback": "opencode/muse-spark-1.3-contributor-free if max is confirmed; then meta/muse-spark-1.3",
+        "reviewer": null,
+        "reason": "The direct contributor route cannot meet max. The next contributor route supports max.",
+        "verification": "Supplied host status confirms OpenRouter contributor max and direct Meta contributor xhigh only. No refresh is needed.",
+        "constraints": "Contributor terms are accepted. Require max and check each fallback identifier separately."
+      },
+      "before_pass": true,
+      "after_pass": true
+    },
+    {
+      "id": 33,
+      "prompt": "Route a Muse visual task at high. Contributor data terms are not accepted. Host status confirms full meta/muse-spark-1.3 at high.",
+      "expected_primary_decision": [
+        "meta/muse-spark-1.3",
+        "high"
+      ],
+      "before": {
+        "id": 33,
+        "invoke": true,
+        "model": "Muse Spark 1.3 (meta/muse-spark-1.3)",
+        "effort": "high",
+        "fallback": "openrouter/meta/muse-spark-1.3",
+        "reviewer": null,
+        "reason": "The full route meets high effort without unaccepted contributor terms.",
+        "verification": "The supplied host status confirms the full Meta identifier and high effort. No worker launched.",
+        "constraints": [
+          "Worker CLI: OpenCode",
+          "Do not use contributor routes without accepted terms.",
+          "Policy tension: the later note requires every contributor route to fail before full routes."
+        ]
+      },
+      "after": {
+        "id": 33,
+        "invoke": true,
+        "model": "Muse Spark 1.3 (OpenCode; meta/muse-spark-1.3)",
+        "effort": "high",
+        "fallback": "openrouter/meta/muse-spark-1.3; high support and availability unverified",
+        "reviewer": null,
+        "reason": "Contributor terms are not accepted. The full Meta route is the first eligible Muse provider.",
+        "verification": "Supplied host status confirms the exact full Meta identifier at high. No refresh is needed.",
+        "constraints": "Skip all contributor routes. Use Muse Spark 1.3."
+      },
+      "before_pass": true,
+      "after_pass": true
+    },
+    {
+      "id": 34,
+      "prompt": "Choose a Codex model for a very hard debugging task. Only one worker is allowed, with no automatic or nested delegation. Host status confirms Astra max and ultra.",
+      "expected_primary_decision": [
+        "Astra",
+        "max"
+      ],
+      "before": {
+        "id": 34,
+        "invoke": true,
+        "model": "GPT-5.6 Sol",
+        "effort": "xhigh",
+        "fallback": "none on the pinned CLI",
+        "reviewer": null,
+        "reason": "Sol is the approved Codex fallback for hard debugging. Astra is absent from the supplied fleet.",
+        "verification": "Astra availability does not establish Sol availability. Confirm Sol and xhigh before launch.",
+        "constraints": [
+          "Worker CLI: Codex",
+          "Use one worker only.",
+          "No automatic or nested delegation.",
+          "Do not launch if the host cannot enforce the delegation constraint."
+        ]
+      },
+      "after": {
+        "id": 34,
+        "invoke": true,
+        "model": "GPT-6 Astra (Codex; gpt-6-astra)",
+        "effort": "max",
+        "fallback": "GPT-5.6 Sol (Codex), max; availability unverified",
+        "reviewer": null,
+        "reason": "Astra max fits hard debugging and preserves the one-worker limit.",
+        "verification": "Supplied host status confirms Astra max and ultra. No launch occurred.",
+        "constraints": "Use exactly one worker. Do not use ultra, automatic delegation, nested delegation, or another reviewer."
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": 35,
+      "prompt": "Route the hardest Codex synthesis task. The caller permits automatic delegation within the host limits. Host status confirms Astra ultra includes delegation. A stopping budget is supplied.",
+      "expected_primary_decision": [
+        "Astra",
+        [
+          "max",
+          "ultra"
+        ]
+      ],
+      "before": {
+        "id": 35,
+        "invoke": true,
+        "model": "GPT-5.6 Sol",
+        "effort": "ultra",
+        "fallback": "none on the pinned CLI",
+        "reviewer": null,
+        "reason": "Sol is the listed Codex synthesis route. Ultra fits the hardest work with a supplied stopping budget.",
+        "verification": "The supplied Astra status does not verify Sol or its ultra control. Confirm both before launch.",
+        "constraints": [
+          "Worker CLI: Codex",
+          "Respect the supplied stopping budget and host limits.",
+          "Delegation is permitted, not required.",
+          "Astra is absent from this fleet."
+        ]
+      },
+      "after": {
+        "id": 35,
+        "invoke": true,
+        "model": "GPT-6 Astra (Codex; gpt-6-astra)",
+        "effort": "ultra",
+        "fallback": "GPT-5.6 Sol (Codex), max; availability unverified",
+        "reviewer": null,
+        "reason": "Astra fits Codex synthesis. The caller and host permit ultra automatic delegation.",
+        "verification": "Supplied host status confirms Astra ultra includes delegation. No launch or delegation occurred.",
+        "constraints": "Respect the supplied stopping budget and host delegation limits. Set explicit routes for selected workers."
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": 36,
+      "prompt": "Route a Codex worker using an API-backed configuration for a delegated Astra task. Host status confirms gpt-6-astra access. This configuration accepts low, medium, high, xhigh, and max through the Responses API. The task needs the highest supported reasoning.",
+      "expected_primary_decision": [
+        "Astra",
+        "max"
+      ],
+      "before": {
+        "id": 36,
+        "invoke": true,
+        "model": "Unrouted",
+        "effort": null,
+        "fallback": null,
+        "reviewer": null,
+        "reason": "The caller pins Astra through Codex. Astra is absent from the supplied fixed fleet.",
+        "verification": "The supplied host status confirms gpt-6-astra access and supports max as its highest effort. Fleet approval remains absent.",
+        "constraints": [
+          "Requested worker CLI: Codex",
+          "Execution uses the API-backed configuration.",
+          "Do not launch an Unrouted lane.",
+          "Return for an explicit constraint change or fleet update.",
+          "Do not substitute another model silently."
+        ]
+      },
+      "after": {
+        "id": 36,
+        "invoke": true,
+        "model": "GPT-6 Astra (Codex; gpt-6-astra)",
+        "effort": "max",
+        "fallback": null,
+        "reviewer": null,
+        "reason": "Max is the highest effort supported by this API-backed Codex configuration. The effort choice remains open.",
+        "verification": "Supplied host status confirms gpt-6-astra access and the configuration accepts max through the Responses API. No request occurred.",
+        "constraints": "Use the requested API-backed Codex configuration. Set max explicitly. Do not send ultra. The caller pins Astra."
+      },
+      "before_pass": false,
+      "after_pass": true
+    },
+    {
+      "id": 37,
+      "prompt": "Route a delegated security review. The host pins Claude and confirms Opus 5 at high. Daybreak Blue is available only through Codex.",
+      "expected_primary_decision": [
+        "Opus",
+        "high"
+      ],
+      "before": {
+        "id": 37,
+        "invoke": true,
+        "model": "Opus 5",
+        "effort": "high",
+        "fallback": "Fable 5.1",
+        "reviewer": null,
+        "reason": "Opus fits precision security review and satisfies the Claude constraint.",
+        "verification": "The supplied host status confirms Opus 5 at high. No worker launched.",
+        "constraints": [
+          "Worker CLI: Claude",
+          "Daybreak Blue is outside the fleet and the permitted CLI."
+        ]
+      },
+      "after": {
+        "id": 37,
+        "invoke": true,
+        "model": "Opus 5 (Claude)",
+        "effort": "high",
+        "fallback": null,
+        "reviewer": null,
+        "reason": "The caller pins Claude. Opus is the eligible Claude security route.",
+        "verification": "Supplied host status confirms Opus 5 at high. No launch occurred.",
+        "constraints": "Use Claude only. If Opus fails, mark the lane Unrouted unless the caller changes the constraints."
+      },
+      "before_pass": true,
+      "after_pass": true
+    },
+    {
+      "id": 38,
+      "prompt": "Assign a cheap image extraction worker from our approved fleet. Host status confirms GLM-5.3 Flash at high. Google and DeepSeek models also appear in the catalog.",
+      "expected_primary_decision": [
+        "GLM-5.3 Flash",
+        "high"
+      ],
+      "before": {
+        "id": 38,
+        "invoke": true,
+        "model": "GLM-5.3 Flash",
+        "effort": "high",
+        "fallback": "Muse Spark 1.3; Grok 4.6; GPT-5.6 Sol",
+        "reviewer": null,
+        "reason": "GLM-5.3 Flash fits cost-sensitive multimodal extraction.",
+        "verification": "The supplied host status confirms GLM-5.3 Flash at high. No worker launched.",
+        "constraints": [
+          "Worker CLI: OpenCode",
+          "Exclude Google and DeepSeek models because they are absent from the fixed fleet.",
+          "Check image support before using any fallback."
+        ]
+      },
+      "after": {
+        "id": 38,
+        "invoke": true,
+        "model": "GLM-5.3 Flash (OpenCode)",
+        "effort": "high",
+        "fallback": "Muse Spark 1.3 (OpenCode), high; provider, terms, and effort require confirmation",
+        "reviewer": null,
+        "reason": "GLM Flash supports economical multimodal work. Image input excludes the text-only extraction routes.",
+        "verification": "Supplied host status confirms GLM Flash at high. Confirm its configured provider identifier before launch.",
+        "constraints": "Use only the fixed fleet. Do not select Google or DeepSeek models from the catalog."
+      },
+      "before_pass": true,
+      "after_pass": true
+    },
+    {
+      "id": 39,
+      "prompt": "Review our service for vulnerabilities yourself. Do not delegate or select another worker.",
+      "expected_primary_decision": null,
+      "before": {
+        "id": 39,
+        "invoke": false,
+        "model": null,
+        "effort": null,
+        "fallback": null,
+        "reviewer": null,
+        "reason": "The caller prohibits delegation and worker selection. The skill explicitly excludes this case.",
+        "verification": "No routing or launch check applies.",
+        "constraints": [
+          "Perform the review in the current agent."
+        ]
+      },
+      "after": {
+        "id": 39,
+        "invoke": false,
+        "model": null,
+        "effort": null,
+        "fallback": null,
+        "reviewer": null,
+        "reason": "The caller requests a review by the current agent and forbids worker selection.",
+        "verification": "No route selection or launch occurred.",
+        "constraints": "Keep the review with the current agent. Do not delegate."
+      },
+      "before_pass": true,
+      "after_pass": true
+    },
+    {
+      "id": 8,
+      "prompt": "Review this pull request yourself and report the findings. Do not delegate the review.",
+      "expected_primary_decision": null,
+      "before": {
+        "id": 8,
+        "invoke": false,
+        "model": null,
+        "effort": null,
+        "fallback": null,
+        "reviewer": null,
+        "reason": "The caller requires the current agent to review the pull request. No delegation choice exists.",
+        "verification": "No routing or launch check applies.",
+        "constraints": [
+          "Do not delegate the review."
+        ]
+      },
+      "after": {
+        "id": 8,
+        "invoke": false,
+        "model": null,
+        "effort": null,
+        "fallback": null,
+        "reviewer": null,
+        "reason": "The caller requests the current agent to review the pull request without delegation.",
+        "verification": "No route selection or launch occurred.",
+        "constraints": "Keep the review with the current agent. Do not delegate."
+      },
+      "before_pass": true,
+      "after_pass": true
+    },
+    {
+      "id": 17,
+      "prompt": "Launch Claude with Fable 5.1 at xhigh for this already-written planning brief.",
+      "expected_primary_decision": null,
+      "before": {
+        "id": 17,
+        "invoke": false,
+        "model": "Fable 5.1",
+        "effort": "xhigh",
+        "fallback": null,
+        "reviewer": null,
+        "reason": "The caller fixes the CLI, model, and effort. The skill explicitly excludes a fully fixed route.",
+        "verification": "The prompt supplies no launch verification. This evaluation does not launch workers.",
+        "constraints": [
+          "Worker CLI: Claude",
+          "Use the existing planning brief."
+        ]
+      },
+      "after": {
+        "id": 17,
+        "invoke": false,
+        "model": "Fable 5.1 (Claude), caller-pinned",
+        "effort": "xhigh, caller-pinned",
+        "fallback": null,
+        "reviewer": null,
+        "reason": "The caller fixes the worker, model, and effort. No routing choice remains.",
+        "verification": "Launchability is unverified. The evaluation does not launch workers.",
+        "constraints": "Preserve the specified route. Return launch handling to the caller."
+      },
+      "before_pass": true,
+      "after_pass": true
+    },
+    {
+      "id": 4,
+      "prompt": "Assign a worker to read a very large text-only design archive and trace its decisions into a long-running implementation.",
+      "expected_primary_decision": [
+        "GLM-5.3",
+        "max"
+      ],
+      "before": {
+        "id": 4,
+        "invoke": true,
+        "model": "GLM-5.3",
+        "effort": "max",
+        "fallback": "Kimi K3; GPT-5.6 Sol",
+        "reviewer": null,
+        "reason": "GLM-5.3 fits text-only long-context coding and long-running implementation. Max fits complex coding.",
+        "verification": "No host evidence is supplied. Confirm the configured identifier, max effort, and required context capacity before launch.",
+        "constraints": [
+          "Worker CLI: OpenCode",
+          "Bound the implementation output and completion check before launch.",
+          "Kimi requires fresh context and complete reasoning and tool history preservation."
+        ]
+      },
+      "after": {
+        "id": 4,
+        "invoke": true,
+        "model": "GLM-5.3 (OpenCode)",
+        "effort": "max",
+        "fallback": "Kimi K3 (OpenCode), max, only with full reasoning and tool history preservation",
+        "reviewer": null,
+        "reason": "GLM fits the large text-only archive and long-running implementation. Complex coding warrants max.",
+        "verification": "No host status is supplied. Identifier, context capacity, and max support require targeted confirmation.",
+        "constraints": "Bound the implementation and completion check. Refresh a recent OpenCode identifier once before rejecting it."
+      },
+      "before_pass": true,
+      "after_pass": true
+    },
+    {
+      "id": 11,
+      "prompt": "Assign a cheap worker to extract the same five fields from thousands of small independent records. The lane needs no broad judgment.",
+      "expected_primary_decision": [
+        "Luna",
+        "high"
+      ],
+      "before": {
+        "id": 11,
+        "invoke": true,
+        "model": "GPT-5.6 Luna",
+        "effort": "high",
+        "fallback": "GPT-5.6 Terra",
+        "reviewer": null,
+        "reason": "Luna fits narrow high-volume extraction without broad judgment. High is its required starting effort.",
+        "verification": "No host evidence is supplied. Confirm the selected Luna identifier and high effort before launch.",
+        "constraints": [
+          "Worker CLI: Codex",
+          "Extract exactly the same five fields from each record.",
+          "Require a local sample before raising Luna effort."
+        ]
+      },
+      "after": {
+        "id": 11,
+        "invoke": true,
+        "model": "GPT-5.6 Luna (Codex)",
+        "effort": "high",
+        "fallback": "GPT-5.6 Terra (Codex), medium; availability unverified",
+        "reviewer": null,
+        "reason": "Luna fits cheap, repeated extraction from independent records without broad judgment.",
+        "verification": "No host status is supplied. Confirm the configured identifier and high effort before launch.",
+        "constraints": "Extract only the five requested fields. Keep each record independent and report extraction checks."
+      },
+      "before_pass": true,
+      "after_pass": true
+    }
+  ]
+}

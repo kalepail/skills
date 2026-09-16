@@ -15,10 +15,10 @@
     },
     {
       "prompt": "I need five agents to inspect separate packages and report the affected files. The parent should not consume their full transcripts. Two child orchestrators cannot load local skills.",
-      "expected_output": "Use $routing-agent-work to route the bounded repository-sweep lanes to GPT-5.6 Terra at medium or high effort. Pass explicit child routes to orchestrators that cannot load the skill, and require compact reports.",
+      "expected_output": "Route the repository sweeps to GPT-6 Astra at high, or medium for small, well-defined packages. Pass explicit child routes when skills cannot load. Require compact reports to direct parents.",
       "assertions": [
         "Does not treat the requested agent count as a routing requirement",
-        "Selects GPT-5.6 Terra at medium or high effort for the repository sweeps",
+        "Selects GPT-6 Astra at high or medium for ordinary repository sweeps",
         "Uses a sub-orchestrator only when the topology helps",
         "Passes child routes in the brief when a sub-orchestrator cannot load the skill",
         "Routes child reports to direct parents",
@@ -38,18 +38,18 @@
     },
     {
       "prompt": "Assign a worker to read a very large text-only design archive and trace its decisions into a long-running implementation.",
-      "expected_output": "Route the quality-first text-only long-context lane to GLM-5.3 at max through OpenCode, with Kimi K3 or Sol as fallback and a different-family reviewer when failure cost requires one.",
+      "expected_output": "Route the quality-first text-only long-context lane to GLM-5.3 at max through OpenCode, with Kimi K3 or Astra as fallback and a different-family reviewer when failure cost requires one.",
       "assertions": [
         "Selects full GLM-5.3 rather than GLM-5.3 Flash for hard text-only long-horizon work",
         "Uses max effort for complex coding",
-        "Names Kimi K3 or Sol as a fixed-fleet fallback",
+        "Names Kimi K3 or Astra as a fixed-fleet fallback",
         "Does not require a Kimi preserved-history contract for GLM-5.3"
       ],
       "files": []
     },
     {
       "prompt": "Pick a low-cost model for multimodal tool use and a second model to challenge its findings.",
-      "expected_output": "Route the primary lane to GLM-5.3 Flash at high or max through OpenCode, with Grok 4.6, Sol, Fable 5.1, or Opus as a capable challenger selected for the failure cost.",
+      "expected_output": "Route the primary lane to GLM-5.3 Flash at high or max through OpenCode, with Grok 4.6, Astra, Fable 5.1, or Opus as a capable challenger selected for the failure cost.",
       "assertions": [
         "Uses GLM-5.3 Flash rather than full GLM-5.3",
         "Uses at least high effort",
@@ -135,15 +135,15 @@
     },
     {
       "prompt": "Assign a worker to inspect screenshots and a PDF, then build and verify a long-running visual interface change.",
-      "expected_output": "Route the multimodal visual implementation to Muse Spark 1.3 at high or xhigh through OpenCode. Prefer contributor routes after data-term acceptance. Use full 1.3, GLM-5.3 Flash, or Sol as fallback.",
+      "expected_output": "Route the multimodal visual implementation to Muse Spark 1.3 at high, xhigh, or max when supported through OpenCode. Prefer contributor routes after data-term acceptance. Use full 1.3, GLM-5.3 Flash, or Astra as fallback.",
       "assertions": [
         "Selects Muse Spark 1.3 for visual implementation rather than GLM-5.3 Flash for multimodal review",
-        "Uses high or xhigh effort",
-        "Tries contributor identifiers before full Muse Spark 1.3 identifiers",
+        "Uses high, xhigh, or supported max effort",
+        "Tries eligible contributor identifiers before full Muse Spark 1.3 identifiers",
         "Preserves the listed contributor provider order",
         "Checks provider data terms",
         "Never selects a Muse Spark 1.2 route",
-        "Names GLM-5.3 Flash or Sol as fallback"
+        "Names GLM-5.3 Flash or Astra as fallback"
       ],
       "files": []
     },
@@ -228,10 +228,10 @@
     },
     {
       "prompt": "Assign a worker to analyze a very large set of screenshots and documents. The task does not need preserved reasoning history.",
-      "expected_output": "Route the general multimodal long-context lane to Muse Spark 1.3 at high or xhigh through OpenCode. Prefer contributor routes after data-term acceptance. Do not select Kimi only because the input is multimodal.",
+      "expected_output": "Route the general multimodal long-context lane to Muse Spark 1.3 at high, xhigh, or max when supported through OpenCode. Prefer contributor routes after data-term acceptance. Do not select Kimi only because the input is multimodal.",
       "assertions": [
         "Selects Muse Spark 1.3 for general multimodal long-context work",
-        "Tries contributor identifiers before full Muse Spark 1.3 identifiers",
+        "Tries eligible contributor identifiers before full Muse Spark 1.3 identifiers",
         "Preserves the listed contributor provider order",
         "Does not select Kimi without a preserved-history requirement",
         "Checks provider data terms and access gates",
@@ -252,6 +252,167 @@
         "Never selects a Muse Spark 1.2 route",
         "Uses contributor routes because the caller accepted their data terms",
         "Does not claim that the failed model launched"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Route a Codex worker to implement a feature and run its integration checks. The host confirms all approved Codex models and effort levels. No budget constraint applies.",
+      "expected_output": "Use GPT-6 Astra at high.",
+      "assertions": [
+        "Selects GPT-6 Astra",
+        "Uses high effort",
+        "Does not choose Sol or Terra as the ordinary default"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Pick a Codex worker for a small, well-defined file rename and import update. Existing checks cover every changed reference. Keep latency modest. Host status confirms Astra low, medium, and high.",
+      "expected_output": "Use Astra at medium before selecting Sol for lower latency.",
+      "assertions": [
+        "Selects Astra",
+        "Uses medium effort",
+        "Keeps the completion checks"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Pick a Codex worker to alphabetize ten supplied labels and verify the exact output against a provided list. This is a trivial isolated task. Host status confirms Astra low and medium.",
+      "expected_output": "Use Astra at low for the trivial, readily checked task.",
+      "assertions": [
+        "Selects Astra at low",
+        "Treats low as an Astra exception",
+        "Does not lower other model floors"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Route a Codex worker to implement a feature. Host status confirms Astra is unavailable and Sol supports high. Other CLIs are excluded.",
+      "expected_output": "Use GPT-5.6 Sol at high as the listed fallback.",
+      "assertions": [
+        "Records Astra unavailability",
+        "Selects Sol at high",
+        "Respects the Codex pin"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Route a Codex worker for cheap bounded repository sweeps under a strict budget. Host status confirms Terra medium and high. Astra exceeds this budget.",
+      "expected_output": "Use Terra at medium or high for the budget-sensitive lane.",
+      "assertions": [
+        "Retains Terra as a budget-sensitive option",
+        "Respects the explicit budget",
+        "Does not force Astra"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Select a worker to review our authentication service for vulnerabilities and validate patches. Testing stays in our isolated checkout. Host status confirms Daybreak Blue access and high effort.",
+      "expected_output": "Use Daybreak Blue at high for the authorized security lane.",
+      "assertions": [
+        "Selects gpt-daybreak-blue-latest at high",
+        "Keeps the target and testing scope",
+        "Does not infer permission for external testing"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Choose a worker to explore vulnerabilities in our owned parser and build local reproducers. Daybreak Blue access is unavailable. Host status confirms Astra high. No external targets are allowed.",
+      "expected_output": "Use Astra at high after recording Daybreak access failure.",
+      "assertions": [
+        "Uses the security route",
+        "Records unavailable Daybreak access",
+        "Falls back to Astra",
+        "Preserves local target scope"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Select an independent security reviewer for code written by GPT-5.6 Sol. Daybreak Blue and Opus 5 are available. A different model family is required.",
+      "expected_output": "Use Opus 5 with a fresh context. Daybreak Blue does not supply different-family independence from Sol.",
+      "assertions": [
+        "Selects Opus 5",
+        "Rejects Daybreak as different-family review of Sol",
+        "Requires reproducible security evidence"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Route a Muse visual task that requires max effort. Contributor terms are accepted. Host status confirms direct Meta contributor supports xhigh only, and OpenRouter contributor supports max.",
+      "expected_output": "Use openrouter/meta/muse-spark-1.3-contributor at max.",
+      "assertions": [
+        "Skips the insufficient direct contributor effort",
+        "Keeps the max requirement",
+        "Uses the next eligible contributor",
+        "Does not refresh an already confirmed catalog"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Route a Muse visual task at high. Contributor data terms are not accepted. Host status confirms full meta/muse-spark-1.3 at high.",
+      "expected_output": "Use the full direct Meta route at high.",
+      "assertions": [
+        "Skips all contributor routes",
+        "Selects meta/muse-spark-1.3",
+        "Does not request data-term changes"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Choose a Codex model for a very hard debugging task. Only one worker is allowed, with no automatic or nested delegation. Host status confirms Astra max and ultra.",
+      "expected_output": "Use Astra at max. Ultra conflicts with the delegation limit.",
+      "assertions": [
+        "Selects Astra at max",
+        "Does not use ultra",
+        "Preserves the single-worker limit"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Route the hardest Codex synthesis task. The caller permits automatic delegation within the host limits. Host status confirms Astra ultra includes delegation. A stopping budget is supplied.",
+      "expected_output": "Astra at ultra is permitted as a host mode. Max is also valid when sufficient.",
+      "assertions": [
+        "Uses Astra at max or ultra",
+        "Identifies ultra as a host mode with delegation",
+        "Keeps the caller limits and stopping budget"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Route a Codex worker using an API-backed configuration for a delegated Astra task. Host status confirms gpt-6-astra access. This configuration accepts low, medium, high, xhigh, and max through the Responses API. The task needs the highest supported reasoning.",
+      "expected_output": "Use Astra at max through the configured Codex host. Do not send ultra as an API effort.",
+      "assertions": [
+        "Uses max rather than ultra",
+        "Distinguishes API effort from host mode",
+        "Does not invent API support"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Route a delegated security review. The host pins Claude and confirms Opus 5 at high. Daybreak Blue is available only through Codex.",
+      "expected_output": "Use Opus 5 at high and respect the Claude pin.",
+      "assertions": [
+        "Respects the pinned CLI",
+        "Uses a capable approved security fallback",
+        "Does not cross to Daybreak"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Assign a cheap image extraction worker from our approved fleet. Host status confirms GLM-5.3 Flash at high. Google and DeepSeek models also appear in the catalog.",
+      "expected_output": "Use GLM-5.3 Flash at high. Catalog presence does not add models to the approved fleet.",
+      "assertions": [
+        "Uses the approved GLM-5.3 Flash route",
+        "Does not select Google or DeepSeek",
+        "Does not enumerate or score unrelated models"
+      ],
+      "files": []
+    },
+    {
+      "prompt": "Review our service for vulnerabilities yourself. Do not delegate or select another worker.",
+      "expected_output": "Do not invoke routing-agent-work because no delegation choice exists.",
+      "assertions": [
+        "Does not invoke the skill for a direct security review",
+        "Does not select Daybreak or launch workers"
       ],
       "files": []
     }
