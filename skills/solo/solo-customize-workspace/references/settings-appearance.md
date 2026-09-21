@@ -27,8 +27,7 @@ Source: [Settings overview](https://soloterm.com/docs/settings/overview).
 ## App appearance
 
 - User-facing themes documented for packaged app: **Light**, **Dark**, **System**. System follows OS.
-- Current docs explicitly say no named VS Code theme picker and no in-app/file-drop/CLI theme importer.
-- Internal compatibility palettes include twelve named VS Code-style palettes, but docs do not expose them as selectable UI.
+- Solo has no named VS Code theme picker and no in-app, file-drop, or CLI theme importer. Bundled VS Code-style palettes are not selectable UI.
 - Interface font default: **System default**.
 - Interface scale steps: 77%, 85%, 92%, 100%, 108%, 115%, 123%, 131%, 138%; 14 px base.
 - `Cmd/Ctrl+Shift+=/-` changes interface scale.

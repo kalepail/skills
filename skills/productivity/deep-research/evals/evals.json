@@ -2,6 +2,7 @@
   "skill_name": "deep-research",
   "evals": [
     {
+      "id": 1,
       "prompt": "Deeply research whether passkeys are replacing passwords in consumer finance. Cross-check the evidence and give me a cited report.",
       "expected_output": "Frame a dated research brief, create distinct primary-source, landscape, counterevidence, and independent-synthesis lanes, prefer Parallel CLI for saved artifacts with Perplexity as an independent challenge lane and Parallel MCP as fallback or final verification, then reconcile underlying sources rather than provider votes.",
       "assertions": [
@@ -15,6 +16,7 @@
       "files": []
     },
     {
+      "id": 2,
       "prompt": "Deeply research how Stellar anchors actually adopted SEP-24 versus SEP-6 over time and where new integrations are heading. I want cited history, not vibes.",
       "expected_output": "Treat this as a Stellar-ecosystem deep-research question: discover Stellar Raven's live surface and use it as the first discovery lane (scout for cited standards history, lumenloop for ecosystem content, stellarDocs for official SEP wording), treat soft-empty or merely adjacent results as inconclusive, verify consequential claims against the underlying primary sources or an independent general-web lane, and deliver a dated, cited synthesis.",
       "assertions": [
@@ -27,6 +29,7 @@
       "files": []
     },
     {
+      "id": 3,
       "prompt": "This session has no orchestrator or subagent tooling at all, but I still need deep, cross-checked research on how the EU AI Act affects open-weight model releases, with citations.",
       "expected_output": "Treat sequential as a complete vehicle: run the same independent evidence lanes one after another in this session with identical citation, source-independence, and verification discipline, and deliver the cited synthesis without installing or authenticating any orchestrator.",
       "assertions": [
@@ -38,6 +41,7 @@
       "files": []
     },
     {
+      "id": 4,
       "prompt": "Deeply research Deno versus Bun for our API workloads across independent evidence lanes and reconcile the findings into one cited recommendation.",
       "expected_output": "Discover which fan-out vehicles the session actually offers, pick the simplest that supplies isolated context, a bounded lane brief, a completion signal, and a durable result surface, delegate only the worker mechanics to it, and keep provider selection, reconciliation, adversarial cross-check, and the final verdict in the research method.",
       "assertions": [
@@ -50,6 +54,7 @@
       "files": []
     },
     {
+      "id": 5,
       "prompt": "Kick off deep research on post-quantum signature adoption. It will take a while and I need the findings to survive past this session.",
       "expected_output": "Recognize that lane duration and survival past the session are what call for a durable orchestrator, select one only if the session actually offers it, and otherwise run sequentially while persisting findings to a durable working surface. Evidence discipline is identical either way.",
       "assertions": [
@@ -60,6 +65,7 @@
       "files": []
     },
     {
+      "id": 6,
       "prompt": "$deep-research: exhaustively compare Turso, Neon, and PlanetScale for a serverless Postgres workload, with cited tradeoffs and any conflicting benchmarks reconciled.",
       "expected_output": "Use $deep-research to build distinct per-vendor and cross-cutting lanes, prefer Parallel CLI with Perplexity as an independent challenge lane, treat repeated sources as one, and deliver a cited comparison that resolves or names conflicting benchmarks.",
       "assertions": [
@@ -70,6 +76,7 @@
       "files": []
     },
     {
+      "id": 7,
       "prompt": "Deeply compare three database vendors. Parallel Task MCP is unavailable and Perplexity is rate-limited, but parallel-cli works.",
       "expected_output": "Record unavailable providers, reroute independent lanes through distinct parallel-cli search, extract, and research questions, save artifacts, preserve source independence, and avoid installing tools, authenticating, or purchasing credits.",
       "assertions": [
@@ -81,6 +88,7 @@
       "files": []
     },
     {
+      "id": 8,
       "prompt": "Research this before we plan it: replace Redis with Kafka because our notifications are occasionally delayed.",
       "expected_output": "Clarify only material ambiguity, separate delayed notifications from the proposed Redis-to-Kafka migration, frame concrete questions about the current code path, load, failure evidence, and delivery requirements, inspect code and official dependency docs, evaluate Kafka against simpler root-cause fixes, and stress-test the recommendation with specific operational and user-facing risks.",
       "assertions": [
@@ -93,6 +101,7 @@
       "files": []
     },
     {
+      "id": 9,
       "prompt": "Deeply research how we should improve onboarding.",
       "expected_output": "Recognize that audience, target outcome, and in-scope onboarding surface materially change the research; batch concise tailored choices with plain-language tradeoffs before dispatch, then use only relevant codebase, user-impact, docs, and external-pattern lanes.",
       "assertions": [
@@ -104,6 +113,7 @@
       "files": []
     },
     {
+      "id": 10,
       "prompt": "Find the current stable Rust version.",
       "expected_output": "Do not use $deep-research; treat this as a narrow lookup, use one current authoritative source, cite it, and avoid research fan-out or paid deep-research tasks.",
       "assertions": [
@@ -114,6 +124,7 @@
       "files": []
     },
     {
+      "id": 11,
       "prompt": "What is Stellar's current base reserve?",
       "expected_output": "Do not use $deep-research; this is a narrow Stellar lookup answered from one authoritative current source (official docs or a single targeted query), cited, with no evidence lanes or research fan-out.",
       "assertions": [
@@ -124,6 +135,7 @@
       "files": []
     },
     {
+      "id": 12,
       "prompt": "Check the newest published version of the @stellar/stellar-sdk package.",
       "expected_output": "Do not use $deep-research; answer with a single registry or search check, no skill and no paid deep-research tooling.",
       "assertions": [
@@ -133,6 +145,7 @@
       "files": []
     },
     {
+      "id": 13,
       "prompt": "Pull the exact signature of soroban-sdk's storage API straight from the official docs.",
       "expected_output": "Do not use $deep-research; read the one authoritative doc directly, no research fan-out.",
       "assertions": [
@@ -142,6 +155,7 @@
       "files": []
     },
     {
+      "id": 14,
       "prompt": "Break this large migration into independent implementation lanes and run several agents in parallel to build them out.",
       "expected_output": "Do not use $deep-research; route to whichever multi-agent orchestration capability the session offers, since the deliverable is built code rather than a cited research synthesis.",
       "assertions": [
@@ -151,6 +165,7 @@
       "files": []
     },
     {
+      "id": 15,
       "prompt": "Run a cross-model review of this diff across a couple of agents and reconcile their findings into one verdict.",
       "expected_output": "Do not use $deep-research; route to whichever multi-agent orchestration capability the session offers, since the deliverable is a review verdict rather than externally cited research.",
       "assertions": [
@@ -160,6 +175,7 @@
       "files": []
     },
     {
+      "id": 16,
       "prompt": "The research is already done -- just write our findings up into a clean scratchpad for the next agent to pick up.",
       "expected_output": "Do not use $deep-research; persist already-gathered findings in whatever durable working state the session has, since no new evidence gathering or synthesis is requested.",
       "assertions": [
@@ -169,6 +185,7 @@
       "files": []
     },
     {
+      "id": 17,
       "prompt": "I'm new to Solo and not sure which capability fits -- help me pick the right skill to coordinate a big multi-part task.",
       "expected_output": "Do not use $deep-research; route to $fan-solo to choose among Solo skills, since the request is capability routing rather than research synthesis.",
       "assertions": [
@@ -178,6 +195,7 @@
       "files": []
     },
     {
+      "id": 18,
       "prompt": "Deeply research this disputed architecture choice with separate official-source, practitioner, and counterevidence agents. Choose suitable models for those lanes.",
       "expected_output": "Use $deep-research for evidence and synthesis. After defining the lanes, call routing-agent-work when installed for worker CLI, model, and effort selection, then use the available orchestration vehicle only for dispatch mechanics.",
       "assertions": [

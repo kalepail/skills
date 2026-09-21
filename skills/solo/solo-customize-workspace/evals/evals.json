@@ -2,6 +2,7 @@
   "skill_name": "solo-customize-workspace",
   "evals": [
     {
+      "id": 1,
       "name": "organize-client-workspaces",
       "prompt": "Use Solo to split my current projects into Client and Personal workspaces, put Client in a second window, reorder the sidebar to Agents, Todos, Commands, Terminals, Scratchpads, and bind a shortcut for the first workspace. Keep every running process alive.",
       "expected_output": "Inspect current workspaces, projects, window ownership, running state, and live shortcut/settings availability; preview moves; create or reuse workspaces; move projects without stopping processes; move Client to a new window; apply section order and a non-conflicting workspace binding; verify resulting state and report any UI-only step.",
@@ -14,6 +15,7 @@
       "files": []
     },
     {
+      "id": 2,
       "name": "make-solo-less-noisy",
       "prompt": "Solo feels noisy and cramped. Can you make it calmer?",
       "expected_output": "Treat the request as app customization, inspect current sidebar, notification, font, and resource-threshold settings, ask only preference questions that materially affect the result, then propose or apply a small reversible set such as collapsing/hiding empty sections, using Important notifications, adjusting thresholds, and preserving unread/running visibility.",
@@ -26,6 +28,7 @@
       "files": []
     },
     {
+      "id": 3,
       "name": "route-project-process-agent-work",
       "prompt": "Add my repo, write solo.yml, start the dev server, configure Claude and Codex, then spawn two agents to implement the feature. Also make the sidebar dark.",
       "expected_output": "Handle only the explicit app appearance request if safe, and route repository/solo.yml work to solo-set-up-projects, command lifecycle to solo-run-processes, agent setup to solo-work-with-agents, and worker orchestration to solo-orchestrate-agents. Avoid starting processes, editing config, configuring agents, or spawning workers under this skill.",
@@ -38,6 +41,7 @@
       "files": []
     },
     {
+      "id": 4,
       "name": "explicit-invocation-keymaps",
       "prompt": "$solo-customize-workspace: rebind the command palette shortcut and add keymaps to jump between my three workspaces.",
       "expected_output": "Use $solo-customize-workspace to inspect live keymap and palette settings, check for shortcut conflicts, then bind the command palette and per-workspace navigation shortcuts, verifying the workspace order that numbered bindings follow.",
@@ -49,6 +53,7 @@
       "files": []
     },
     {
+      "id": 5,
       "name": "casual-tidy-sidebar",
       "prompt": "Solo's sidebar is a cluttered mess. Can you tidy it up for me?",
       "expected_output": "Use $solo-customize-workspace to inspect the current sidebar sections, then collapse or hide empty sections and reorder them into a calmer layout while preserving unread and running visibility.",
@@ -60,6 +65,7 @@
       "files": []
     },
     {
+      "id": 6,
       "name": "mixed-window-and-notifications",
       "prompt": "Put my two work repos in their own window, and while you're at it stop the constant notification pings unless a build actually fails.",
       "expected_output": "Use $solo-customize-workspace to move the two projects into a new window without stopping their processes, then route notifications to important-only so build failures still surface.",
@@ -71,6 +77,7 @@
       "files": []
     },
     {
+      "id": 7,
       "name": "dark-mode-and-terminal-font",
       "prompt": "Switch Solo to dark mode and use a monospace font in the terminal panel.",
       "expected_output": "Use $solo-customize-workspace to check live appearance settings, then set the Light/Dark/System appearance to Dark and apply the terminal font preference.",
@@ -82,28 +89,31 @@
       "files": []
     },
     {
+      "id": 8,
       "name": "quiet-notifications-except-signal",
       "prompt": "Only ping me when an agent finishes or a process crashes -- mute everything else.",
-      "expected_output": "Use $solo-customize-workspace to inspect notification settings and route them so agent-completion and crash events still notify while lower-signal notifications are muted.",
+      "expected_output": "Use $solo-customize-workspace to inspect the effective project and process notification levels, then set noisy processes to Important so crashes and auto-restart exhaustion still alert, keep All only on agent processes whose finish signal arrives as a BEL/OSC alert, and explain which signals each level suppresses.",
       "assertions": [
-        "Configures notification routing at the workspace level.",
-        "Keeps high-signal completion and crash notifications enabled.",
+        "Configures notification levels at the project and process level, using the most restrictive effective value.",
+        "Keeps crash alerts enabled and explains that Important suppresses BEL/OSC alerts.",
         "Does not disable all notifications outright."
       ],
       "files": []
     },
     {
+      "id": 9,
       "name": "favorites-and-faster-navigation",
       "prompt": "Set up favorites for the projects I use most and make jumping between them faster.",
-      "expected_output": "Use $solo-customize-workspace to add favorites for the frequently used projects and configure navigation shortcuts or palette entries that speed switching between them.",
+      "expected_output": "Use $solo-customize-workspace to explain that favorites apply to commands, terminals, and agents, not projects, then speed up project switching through sidebar order, Option/Alt+1-9, quick jump, or workspace grouping, and favorite the key processes inside those projects.",
       "assertions": [
-        "Configures favorites and navigation aids within the app shell.",
+        "Does not claim that projects can be favorites.",
         "Checks live navigation and shortcut availability before binding.",
         "Does not alter project configuration or running processes."
       ],
       "files": []
     },
     {
+      "id": 10,
       "name": "route-add-repo-and-yaml",
       "prompt": "Add my new repo to Solo and write its solo.yml command stack.",
       "expected_output": "Do not use $solo-customize-workspace; route to $solo-set-up-projects to add the repository and define its solo.yml commands. Workspace customization does not cover repository or command configuration.",
@@ -115,6 +125,7 @@
       "files": []
     },
     {
+      "id": 11,
       "name": "route-env-and-execution-profile",
       "prompt": "Configure the environment variables and execution profile for my project's commands.",
       "expected_output": "Do not use $solo-customize-workspace; route to $solo-set-up-projects for environment values and execution-profile configuration on the project's commands.",
@@ -125,6 +136,7 @@
       "files": []
     },
     {
+      "id": 12,
       "name": "route-start-and-watch-restart",
       "prompt": "Start my dev server and restart it automatically whenever a file changes.",
       "expected_output": "Do not use $solo-customize-workspace; route to $solo-run-processes to start the dev server and configure file-watch restart. Process lifecycle is out of scope for workspace customization.",
@@ -136,6 +148,7 @@
       "files": []
     },
     {
+      "id": 13,
       "name": "route-stop-and-relaunch-stack",
       "prompt": "Stop all my running commands and relaunch the whole stack.",
       "expected_output": "Do not use $solo-customize-workspace; route to $solo-run-processes for bulk stop and restart of the command stack.",
@@ -146,6 +159,7 @@
       "files": []
     },
     {
+      "id": 14,
       "name": "route-configure-agent-session",
       "prompt": "Set up my Claude and Codex CLI agents in Solo and launch a session.",
       "expected_output": "Do not use $solo-customize-workspace; route to $solo-work-with-agents to configure the CLI agents and launch a session. Agent work is out of scope for workspace customization.",
@@ -157,6 +171,7 @@
       "files": []
     },
     {
+      "id": 15,
       "name": "route-parallel-agent-orchestration",
       "prompt": "Spin up three agents to burn down my backlog in parallel and coordinate their handoffs.",
       "expected_output": "Do not use $solo-customize-workspace; route to $solo-orchestrate-agents to plan and coordinate the parallel workers and their handoffs.",
@@ -167,6 +182,7 @@
       "files": []
     },
     {
+      "id": 16,
       "name": "route-settings-wont-save",
       "prompt": "Solo's appearance settings won't save and the theme keeps reverting. Figure out what's wrong.",
       "expected_output": "Do not use $solo-customize-workspace; route to $solo-troubleshoot to diagnose why settings do not persist. This is a failure diagnosis, not a customization request.",
@@ -178,6 +194,7 @@
       "files": []
     },
     {
+      "id": 17,
       "name": "route-settings-panel-crash",
       "prompt": "Every time I open the Settings panel Solo freezes and crashes. What's broken?",
       "expected_output": "Do not use $solo-customize-workspace; route to $solo-troubleshoot to diagnose the crash when opening Settings.",
@@ -188,6 +205,7 @@
       "files": []
     },
     {
+      "id": 18,
       "name": "route-status-and-readiness-check",
       "prompt": "Show me which processes are running and whether the server is ready yet.",
       "expected_output": "Do not use $solo-customize-workspace; route to $solo-observe-services for read-only status, readiness, and running-process inspection.",

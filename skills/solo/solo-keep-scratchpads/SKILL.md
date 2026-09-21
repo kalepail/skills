@@ -1,6 +1,6 @@
 ---
 name: solo-keep-scratchpads
-description: Create and maintain project-scoped Solo scratchpads with revisions, structured Markdown, search, tags, archive, transfer, and import/export. Use for working plans, research, decisions, evidence, commands, summaries, and cross-agent handoffs — persistent across sessions but non-canonical; promote conclusions worth keeping to repository docs. Do not use for actionable owned work with status and blockers, which belongs in todos, or for reusable prompt text.
+description: Create and maintain project-scoped Solo scratchpads with revisions, structured Markdown, search, tags, archive, transfer, and import/export. Use for working plans, research, decisions, evidence, commands, summaries, and cross-agent handoffs — persistent across sessions but non-canonical; promote conclusions worth keeping to repository docs. Do not use for actionable owned work with status and blockers, which belongs in todos, for reusable prompt text, or for closing out a finished run across several state surfaces.
 ---
 
 # Keep Solo Scratchpads

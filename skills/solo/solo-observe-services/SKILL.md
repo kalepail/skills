@@ -1,6 +1,6 @@
 ---
 name: solo-observe-services
-description: Inspect Solo-managed service status, terminal output, resource use, subprocesses, bound ports, localhost URLs, and startup readiness. Use when checking what is running, whether a server is ready, recent logs, stale status, URLs, ports, CPU, or memory without changing runtime. Do not use to change process lifecycle, edit configuration, or repair failures.
+description: Inspect Solo-managed service status, terminal output, resource use, subprocesses, bound ports, localhost URLs, and startup readiness. Use when checking what is running, whether a server is ready, recent logs, stale status, URLs, ports, CPU, or memory without changing runtime. Do not use to change process lifecycle, edit configuration, diagnose or repair failures, or inspect one Solo agent session.
 ---
 
 # Observe Solo Services
@@ -58,6 +58,7 @@ Gather structured runtime evidence before interpreting logs. Treat process runni
 - Do not select another process in UI, rename it, clear its output, or deliver timers without ownership/authority.
 - Do not edit `solo.yml` or execution profile.
 - Hand remediation request to lifecycle or troubleshooting workflow after presenting evidence.
+- Hand one agent session's status, summary, or idle/blocked check to single-agent lifecycle workflow.
 - Leave Git, publishing, deployment, and integration to root/operator.
 
 ## Reference

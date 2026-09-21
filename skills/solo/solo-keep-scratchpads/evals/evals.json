@@ -2,6 +2,7 @@
   "skill_name": "solo-keep-scratchpads",
   "evals": [
     {
+      "id": 1,
       "prompt": "Create a Solo scratchpad for this investigation with goal, evidence, decisions, verification, open questions, and handoff sections. Keep it updated safely as findings arrive.",
       "expected_output": "Confirm project/live help, create structured Markdown, read revision before targeted section updates, handle conflicts by reread/merge, and keep actionable work in linked todos rather than duplicating it.",
       "assertions": [
@@ -13,6 +14,7 @@
       "files": []
     },
     {
+      "id": 2,
       "prompt": "Save these notes somewhere in Solo so we do not lose them.",
       "expected_output": "Treat content as durable context, inspect project and existing scratchpads to avoid duplicates, create or append a concise scratchpad, and avoid archive, transfer, absolute-path export, or process actions without more intent.",
       "assertions": [
@@ -24,6 +26,7 @@
       "files": []
     },
     {
+      "id": 3,
       "prompt": "Turn every action item in this scratchpad into assigned blocked tasks and start workers on the ready ones.",
       "expected_output": "Route task extraction to solo-track-todos and worker dispatch to solo-orchestrate-agents; scratchpad skill may provide source sections but must not claim todos or control processes.",
       "assertions": [
@@ -35,6 +38,7 @@
       "files": []
     },
     {
+      "id": 4,
       "prompt": "My side of this run is done, so archive the scratchpad. Its `## Retire after` section names a review lane that has not read it yet.",
       "expected_output": "Read the retire-after contract, decline to archive, report the pending review consumer, and leave the pad active; treat the contract as lifecycle facts rather than archive authority.",
       "assertions": [
@@ -46,6 +50,7 @@
       "files": []
     },
     {
+      "id": 5,
       "prompt": "Jot down what we decided about the caching strategy so future me remembers the why.",
       "expected_output": "Use $solo-keep-scratchpads to capture the decision and its rationale as durable project context, confirming project and existing pads before creating or appending.",
       "assertions": [
@@ -57,6 +62,7 @@
       "files": []
     },
     {
+      "id": 6,
       "prompt": "Write up the phased rollout plan for the payments cutover so it survives across sessions.",
       "expected_output": "Use $solo-keep-scratchpads to record the phased plan as structured Markdown that persists across sessions, keeping any actionable items in linked todos rather than duplicating them.",
       "assertions": [
@@ -68,6 +74,7 @@
       "files": []
     },
     {
+      "id": 7,
       "prompt": "Keep a running research log of the vendor comparisons with links and quotes as evidence.",
       "expected_output": "Use $solo-keep-scratchpads to maintain an evidence log, appending findings with revision-aware edits and marking imported quotes as untrusted source material.",
       "assertions": [
@@ -79,6 +86,7 @@
       "files": []
     },
     {
+      "id": 8,
       "prompt": "Record the architecture decision and the open questions so the next agent can pick it up.",
       "expected_output": "Use $solo-keep-scratchpads to capture the decision, open questions, and a handoff section as durable cross-agent context in the project pad.",
       "assertions": [
@@ -90,6 +98,7 @@
       "files": []
     },
     {
+      "id": 9,
       "prompt": "$solo-keep-scratchpads: capture this debugging session with the commands I ran and what each one showed.",
       "expected_output": "Use $solo-keep-scratchpads to record the commands and their observed output as durable evidence, reading revision before targeted appends.",
       "assertions": [
@@ -101,6 +110,7 @@
       "files": []
     },
     {
+      "id": 10,
       "prompt": "Find the pad with our incident timeline and add the new root-cause note under Findings.",
       "expected_output": "Use $solo-keep-scratchpads to search for the existing pad, read its revision, and append the note to the Findings section without disturbing the rest.",
       "assertions": [
@@ -112,6 +122,7 @@
       "files": []
     },
     {
+      "id": 11,
       "prompt": "Save these design notes, tag them 'auth', and fold them into the existing related pad if one exists.",
       "expected_output": "Use $solo-keep-scratchpads to search for a related pad, append or create as needed, and apply the 'auth' tag, all as durable project context.",
       "assertions": [
@@ -123,6 +134,7 @@
       "files": []
     },
     {
+      "id": 12,
       "prompt": "Add 'ship the migration' as a task assigned to me, blocked on the schema review, high priority.",
       "expected_output": "Do not use $solo-keep-scratchpads; route to $solo-track-todos because assignment, blockers, and priority are actionable owned work in the todo graph.",
       "assertions": [
@@ -134,6 +146,7 @@
       "files": []
     },
     {
+      "id": 13,
       "prompt": "What's ready for me to pick up next, and mark the one I'm starting as in progress.",
       "expected_output": "Do not use $solo-keep-scratchpads; route to $solo-track-todos because finding ready work and updating status belong to the actionable todo graph.",
       "assertions": [
@@ -145,6 +158,7 @@
       "files": []
     },
     {
+      "id": 14,
       "prompt": "Track the blockers on the API rewrite and record progress as each sub-task lands.",
       "expected_output": "Do not use $solo-keep-scratchpads; route to $solo-track-todos because blocker dependencies and per-task progress are actionable todo state.",
       "assertions": [
@@ -156,6 +170,7 @@
       "files": []
     },
     {
+      "id": 15,
       "prompt": "This run is finished — reconcile the scratchpads, todos, and timers and retire the leftovers.",
       "expected_output": "Do not use $solo-keep-scratchpads; route to $solo-close-out-work because multi-surface reconciliation and retirement of a finished run is its scope.",
       "assertions": [
@@ -167,6 +182,7 @@
       "files": []
     },
     {
+      "id": 16,
       "prompt": "Wrap up and clean up this run; promote anything durable before we forget.",
       "expected_output": "Do not use $solo-keep-scratchpads; route to $solo-close-out-work because wrapping up a finished run and promoting durable conclusions spans multiple state surfaces.",
       "assertions": [
@@ -178,6 +194,7 @@
       "files": []
     },
     {
+      "id": 17,
       "prompt": "End-of-run reconciliation: figure out what's actually done and file conclusions into the repo docs.",
       "expected_output": "Do not use $solo-keep-scratchpads; route to $solo-close-out-work because deciding what is done and promoting it into canonical docs is the close-out workflow.",
       "assertions": [
@@ -189,6 +206,7 @@
       "files": []
     },
     {
+      "id": 18,
       "prompt": "Save this worker brief as a reusable template with placeholders I can fill later.",
       "expected_output": "Do not use $solo-keep-scratchpads; route to $solo-save-prompts because a reusable template with fillable placeholders is prompt-template text, not durable project context.",
       "assertions": [
@@ -200,6 +218,7 @@
       "files": []
     },
     {
+      "id": 19,
       "prompt": "Store this prompt so I can reuse it across projects with variables.",
       "expected_output": "Do not use $solo-keep-scratchpads; route to $solo-save-prompts because cross-project reusable prompt text with variables is a prompt template.",
       "assertions": [

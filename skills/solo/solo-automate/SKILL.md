@@ -1,6 +1,6 @@
 ---
 name: solo-automate
-description: Automate and integrate Solo through MCP, CLI, local HTTP API, hosted API v1, documentation resources, prompts, and solo:// deep links. Use when scripting Solo, discovering live schemas, configuring MCP clients, consuming Solo docs programmatically, or choosing an integration surface. Do not use for normal interactive Solo work already owned by a focused skill.
+description: Automate and integrate Solo through MCP, CLI, local HTTP API, hosted API v1, documentation resources, prompts, and solo:// deep links. Use when scripting Solo, discovering live schemas, configuring MCP clients, consuming Solo docs programmatically, or choosing an integration surface. Do not use for normal interactive Solo work already owned by a focused skill, such as starting processes (solo-run-processes), checking status (solo-observe-services), launching agents (solo-work-with-agents), adding a repository or solo.yml stack (solo-set-up-projects), or writing scratchpads (solo-keep-scratchpads).
 ---
 
 # Automate Solo
@@ -55,12 +55,13 @@ Read [hosted API, docs, and deep links](references/hosted-docs-and-links.md) bef
 
 ## Hand Off Focused Work
 
-- Use `solo-run-processes` for straightforward start, stop, restart, spawn, input, or restart policy.
+- Use `solo-run-processes` for straightforward command or terminal start, stop, restart, input, or restart policy.
 - Use `solo-observe-services` for read-only status, output, resources, ports, URLs, and readiness.
 - Use `solo-set-up-projects` for import, `solo.yml`, execution profiles, and trust setup.
 - Use `solo-troubleshoot` for unexplained failures or diagnosis.
 - Use `solo-work-with-agents` for one agent lifecycle and `solo-orchestrate-agents` for multi-agent coordination.
-- Use `solo-track-todos`, `solo-keep-scratchpads`, or `solo-save-prompts` for feature-focused work.
+- Use `solo-track-todos`, `solo-keep-scratchpads`, or `solo-save-prompts` for feature-focused work, and `solo-close-out-work` to reconcile a finished run.
+- Use `solo-customize-workspace` for interactive workspace, navigation, appearance, and notification changes.
 - Use coding, browser, GitHub, or deployment skills when Solo only hosts process context; do not turn general work into Solo orchestration.
 
 ## Stop Conditions

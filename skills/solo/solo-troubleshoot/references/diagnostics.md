@@ -15,7 +15,7 @@ Read for symptom-to-check mappings and authoritative Solo behavior.
 | Restarts on unrelated edits | watch patterns | broad glob; Solo `*` crosses separators | narrow project-relative patterns |
 | Running but no URL | ports + child tree | still starting, binds external/non-local, no listener, wrong process | wait for port; inspect child; fix bind config |
 | Port ready but app fails | protocol health | listener initialized before dependencies/app | call health endpoint; inspect app output |
-| Output/status mismatch | short wait + status/output | independent update timing, alternate screen, stale view | poll status; select/reattach process |
+| Output/status mismatch | short wait + status/output | independent update timing, alternate screen, stale view | poll status; select/reattach owned or authorized process |
 | CLI cannot connect | `solo doctor` | app stopped, HTTP API off, stale/missing discovery, token/version mismatch | start app/enable API; reread discovery; align versions |
 
 ## Repair authority

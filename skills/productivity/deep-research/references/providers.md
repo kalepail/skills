@@ -4,10 +4,14 @@ Use current tool discovery as authority; verify provider names and commands agai
 
 ## Contents
 
-- Provider roles and preferred flow
-- Surface selection and CLI patterns
+- Provider roles
+- Preferred provider flow
+- Choose the smallest useful surface
+- Parallel CLI patterns
 - Parallel Task MCP final pass
-- Lane, citation, and recovery rules
+- Lane patterns
+- Source and citation rules
+- Recovery
 
 ## Provider roles
 

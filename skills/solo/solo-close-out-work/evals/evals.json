@@ -2,6 +2,7 @@
   "skill_name": "solo-close-out-work",
   "evals": [
     {
+      "id": 1,
       "prompt": "This run is finished. Close it out: we have three scratchpads and a batch of todos from it, plus a couple of timers still armed. Promote anything durable into the repo and clean up the rest.",
       "expected_output": "Confirm project/live help and the repo's docs convention, inventory scratchpads, all-status todos, timers, and recorded locks/KV read-only, map links, build a manifest, then per item promote durable content into the nearest existing canonical doc and verify it before archiving scratchpads and completing/backlogging todos; cancel only owned obsolete timers; surface the doc diff without committing.",
       "assertions": [
@@ -13,6 +14,7 @@
       "files": []
     },
     {
+      "id": 2,
       "prompt": "My todo list is a mess, just clean up my Solo todos.",
       "expected_output": "Recognize single-surface todo maintenance and route to solo-track-todos rather than running a full multi-surface closeout; if closeout is still wanted, stay assessment-first and read before mutating, never sweeping or deleting.",
       "assertions": [
@@ -23,6 +25,7 @@
       "files": []
     },
     {
+      "id": 3,
       "prompt": "Close out this run and archive everything that's done, then delete the leftovers so the list is empty.",
       "expected_output": "Prove the run cold by inspecting process/child status, preserve items a live child, foreign-locked todo, or linked backlog item still needs, leave any item active whose promotion write fails or whose revision changed mid-gate, refuse hard-delete in closeout by reporting suspected junk instead, and never touch the foreign lock or empty the list on request.",
       "assertions": [
@@ -34,6 +37,7 @@
       "files": []
     },
     {
+      "id": 4,
       "prompt": "Close out this finished run. One scratchpad is DONE-not-yet-captured, but its `## Retire after` names a reviewer that has not consumed the latest revision.",
       "expected_output": "Promote the scratchpad's durable content, but leave the pad active and record its consumer-gate status in the manifest; require consumption evidence that names the pad and current revision before retirement.",
       "assertions": [
@@ -45,6 +49,7 @@
       "files": []
     },
     {
+      "id": 5,
       "prompt": "The whole run's a wrap. Mind tidying it up? Save anything worth keeping into the repo, then clear out the leftover pads and tasks.",
       "expected_output": "Use $solo-close-out-work to scope the finished run, inventory its scratchpads, all-status todos, timers, locks, and run-scoped KV read-only, promote only the uncaptured durable conclusions into the nearest existing canonical doc and verify the write, then archive scratchpads and complete or backlog todos, preserving anything still incomplete and leaving Git to the operator.",
       "assertions": [
@@ -56,6 +61,7 @@
       "files": []
     },
     {
+      "id": 6,
       "prompt": "$solo-close-out-work on this run — scratchpads, todos, and the armed timers all trace back to it.",
       "expected_output": "Use $solo-close-out-work to reconcile the run across its scratchpads, todos, and timers: inventory each surface read-only, promote uncaptured durable content into the repo's canonical docs and verify it, then archive scratchpads, complete or backlog todos, and cancel only owned obsolete timers, surfacing anything ambiguous instead of retiring it.",
       "assertions": [
@@ -67,6 +73,7 @@
       "files": []
     },
     {
+      "id": 7,
       "prompt": "We shipped the indexer run. Promote the decisions we settled into the docs, archive the run's scratchpads, complete or backlog its todos, and cancel any timer that's obsolete — flag any you're unsure about.",
       "expected_output": "Use $solo-close-out-work to run the mixed closeout end to end: inventory the run's surfaces read-only, promote the settled decisions into the nearest existing canonical doc and verify each write before retiring its source, then archive scratchpads, complete or backlog todos, cancel only owned obsolete timers, and report every item you leave active because it is unclear.",
       "assertions": [
@@ -78,6 +85,7 @@
       "files": []
     },
     {
+      "id": 8,
       "prompt": "This run's done and I want to promote what we learned before we forget it, then clean up the ephemeral state behind it.",
       "expected_output": "Use $solo-close-out-work to promote the run's uncaptured durable conclusions into the existing canonical docs first and verify them, then retire the ephemeral state across its scratchpads, todos, timers, locks, and KV, keeping any genuinely incomplete item active and leaving ordinary completed-work history to Git.",
       "assertions": [
@@ -89,6 +97,7 @@
       "files": []
     },
     {
+      "id": 9,
       "prompt": "Wrap up and close out this finished run: fold the durable conclusions from its scratchpads into the canonical docs, then retire the run's ephemeral state across pads, todos, and locks without dropping anything still open.",
       "expected_output": "Use $solo-close-out-work to fold the run's durable conclusions into the repo's existing canonical docs and verify them, then retire the ephemeral copies across scratchpads, todos, and locks, releasing only owned locks and preserving on doubt so nothing still open is dropped.",
       "assertions": [
@@ -100,6 +109,7 @@
       "files": []
     },
     {
+      "id": 10,
       "prompt": "The spike is over and its residue is scattered across a couple of scratchpads and a pile of todos plus a stale lock. Reconcile it into the repo and retire the copies.",
       "expected_output": "Use $solo-close-out-work to reconcile the finished spike across its scratchpads, todos, and lock: inventory read-only, promote uncaptured durable content into the nearest existing canonical doc and verify it, then archive scratchpads, complete or backlog todos, and release the lock only if owned, preserving any ambiguous item.",
       "assertions": [
@@ -111,6 +121,7 @@
       "files": []
     },
     {
+      "id": 11,
       "prompt": "Still mid-run here — append today's findings to my research scratchpad and add a section for the next experiment.",
       "expected_output": "Do not use $solo-close-out-work; route to $solo-keep-scratchpads for the live scratchpad edit — the run is still active and this is single-surface upkeep, not a finished-run reconciliation across multiple surfaces.",
       "assertions": [
@@ -121,6 +132,7 @@
       "files": []
     },
     {
+      "id": 12,
       "prompt": "Add three todos for the auth work and mark the login one in-progress.",
       "expected_output": "Do not use $solo-close-out-work; route to $solo-track-todos for ordinary todo management — creating tasks and setting status is single-surface actionable-graph maintenance, not closeout of a finished run.",
       "assertions": [
@@ -131,6 +143,7 @@
       "files": []
     },
     {
+      "id": 13,
       "prompt": "The run wrapped, now stop all the dev servers and terminals for this project.",
       "expected_output": "Do not use $solo-close-out-work; route to $solo-run-processes for process control — stopping servers and terminals is runtime lifecycle work that closeout never performs, even when a run has just finished.",
       "assertions": [
@@ -141,6 +154,7 @@
       "files": []
     },
     {
+      "id": 14,
       "prompt": "Archive that one old planning scratchpad, I don't need it anymore.",
       "expected_output": "Do not use $solo-close-out-work; route to $solo-keep-scratchpads for the single-scratchpad archive — one pad on one surface with no promotion or cross-surface reconciliation is the owning skill's own tidying.",
       "assertions": [
@@ -151,6 +165,7 @@
       "files": []
     },
     {
+      "id": 15,
       "prompt": "Which of my todos are ready to pick up? Claim the top one for me and drop a progress comment.",
       "expected_output": "Do not use $solo-close-out-work; route to $solo-track-todos for finding ready work, claiming a todo, and commenting — this is live actionable-graph maintenance on one surface, not finished-run reconciliation.",
       "assertions": [
@@ -161,6 +176,7 @@
       "files": []
     },
     {
+      "id": 16,
       "prompt": "Start a fresh scratchpad to capture the plan and evidence for the work I'm about to begin.",
       "expected_output": "Do not use $solo-close-out-work; route to $solo-keep-scratchpads to create the new scratchpad — this is starting active work on a single surface, the opposite of retiring a finished run's residue.",
       "assertions": [
@@ -171,6 +187,7 @@
       "files": []
     },
     {
+      "id": 17,
       "prompt": "Close out that one deploy todo — it's finished.",
       "expected_output": "Do not use $solo-close-out-work; route to $solo-track-todos to complete the single todo — despite the close-out wording this is one item on one surface, not a run-scoped multi-surface reconciliation.",
       "assertions": [
@@ -181,6 +198,7 @@
       "files": []
     },
     {
+      "id": 18,
       "prompt": "Restart the API process, it's gone stale after the run.",
       "expected_output": "Do not use $solo-close-out-work; route to $solo-run-processes to restart the process — process lifecycle control stays with the run-processes skill and is never part of state closeout.",
       "assertions": [

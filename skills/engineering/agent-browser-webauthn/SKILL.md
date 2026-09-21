@@ -11,7 +11,7 @@ Use this with `$agent-browser` when a browser test must create or authenticate a
 
 1. Start a fresh `agent-browser` session for each full E2E.
 2. Open the target page before attaching WebAuthn, so the helper can bind to the correct page target.
-3. Set `WEBAUTHN_SKILL_DIR` to this skill folder, or replace it with the absolute path shown in this skill's source locator.
+3. Set `WEBAUTHN_SKILL_DIR` to the absolute path of this skill's directory, the one that contains this `SKILL.md`.
 4. Wrap the entire create -> restore -> connect -> reject -> sign driver in one helper invocation. Cleanup removes the authenticator and its credentials when the child exits, so never split ceremonies across helper runs.
 
 ```bash
@@ -62,7 +62,7 @@ agent-browser --session "$SESSION" close
 
 - Open the target before starting the helper so it attaches before the first ceremony. A reload keeps the same target; after a tab or page target is replaced, reattach by stopping and re-running the whole flow from a fresh session with the helper attached to the new target before creating a credential.
 - Headed and headless both work with this recipe. Start headed when diagnosing Chrome/WebAuthn behavior, then repeat headless after the headed flow passes.
-- The helper explicitly uses `WebAuthn.enable({enableUI:false})` and the proven CTAP2 config: `protocol: ctap2`, `transport: internal`, `hasResidentKey: true`, `hasUserVerification: true`, `isUserVerified: true`, and `automaticPresenceSimulation: true`.
+- The helper explicitly uses `WebAuthn.enable({enableUI:false})` and this CTAP2 config: `protocol: ctap2`, `transport: internal`, `hasResidentKey: true`, `hasUserVerification: true`, `isUserVerified: true`, and `automaticPresenceSimulation: true`.
 - Setup diagnostics include the target id and authenticator id. Credential events and redacted `WebAuthn.getCredentials` output go to stderr or `WEBAUTHN_EVENTS_FILE` as JSONL; private key material is never logged.
 - Set `WEBAUTHN_CONTROL_FILE` to exercise rejection: write `uv:false` before the rejected ceremony and `uv:true` before the next successful ceremony, then wait for the matching `controlApplied` event in `WEBAUTHN_EVENTS_FILE` before the next click—the helper applies directives on a 500 ms poll, so elapsed time does not prove one applied.
 - Setup, CDP calls, and the wrapped command have a 120-second timeout by default. Set `--timeout-ms` to a larger positive value for deliberately long flows.

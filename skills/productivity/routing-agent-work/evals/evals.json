@@ -2,11 +2,12 @@
   "skill_name": "routing-agent-work",
   "evals": [
     {
+      "id": 1,
       "prompt": "Split this migration into implementation, testing, and independent review lanes. I was thinking Codex for both implementation and independent review. Pick agents and reasoning levels.",
-      "expected_output": "Use $routing-agent-work to define bounded lanes, route difficult implementation to Opus 5 with explicit effort, and replace the same-family review idea with a fresh capable reviewer from another model family.",
+      "expected_output": "Use $routing-agent-work to define bounded lanes, route difficult implementation to Fable 5.1 with explicit effort, and replace the same-family review idea with a fresh capable reviewer from another model family.",
       "assertions": [
         "Invokes the skill because delegation selection affects the result",
-        "Selects Opus 5 for difficult implementation",
+        "Selects Fable 5.1 for difficult implementation",
         "Sets a supported model and effort for every lane",
         "Challenges the same-family review idea and uses a fresh different-family reviewer",
         "Returns compact route cards and report contracts"
@@ -14,6 +15,7 @@
       "files": []
     },
     {
+      "id": 2,
       "prompt": "I need five agents to inspect separate packages and report the affected files. The parent should not consume their full transcripts. Two child orchestrators cannot load local skills.",
       "expected_output": "Route the repository sweeps to GPT-6 Astra at high, or medium for small, well-defined packages. Pass explicit child routes when skills cannot load. Require compact reports to direct parents.",
       "assertions": [
@@ -27,6 +29,7 @@
       "files": []
     },
     {
+      "id": 3,
       "prompt": "Route an ambiguous planning lane. Host status says the Fable 5.1 identifier is unavailable. Opus 5 is available at high.",
       "expected_output": "Record the failed identifier check, advance to the first planning fallback, and route to Opus 5 at high. Return Unrouted if every listed fallback fails.",
       "assertions": [
@@ -37,6 +40,7 @@
       "files": []
     },
     {
+      "id": 4,
       "prompt": "Assign a worker to read a very large text-only design archive and trace its decisions into a long-running implementation.",
       "expected_output": "Route the quality-first text-only long-context lane to GLM-5.3 at max through OpenCode, with Kimi K3 or Astra as fallback and a different-family reviewer when failure cost requires one.",
       "assertions": [
@@ -48,6 +52,7 @@
       "files": []
     },
     {
+      "id": 5,
       "prompt": "Pick a low-cost model for multimodal tool use and a second model to challenge its findings.",
       "expected_output": "Route the primary lane to GLM-5.3 Flash at high or max through OpenCode, with Grok 4.7, Astra, Fable 5.1, or Opus as a capable challenger selected for the failure cost.",
       "assertions": [
@@ -60,6 +65,7 @@
       "files": []
     },
     {
+      "id": 6,
       "prompt": "The deliverable is a polished README and pull request description. The implementation owner already understands the change.",
       "expected_output": "Use Opus 5 when prose quality justifies a dedicated lane, or keep the existing capable owner. Apply ASD-STE100 to every human-readable output and avoid a separate prose agent when it adds no value.",
       "assertions": [
@@ -71,6 +77,7 @@
       "files": []
     },
     {
+      "id": 7,
       "prompt": "Use this new unlisted model I heard about for a review lane. Find its current variants and score it first.",
       "expected_output": "Do not use $routing-agent-work for live model discovery or scoring. Use a current research workflow, and treat any fleet change as a separate manual skill-maintenance task.",
       "assertions": [
@@ -82,6 +89,7 @@
       "files": []
     },
     {
+      "id": 8,
       "prompt": "Review this pull request yourself and report the findings. Do not delegate the review.",
       "expected_output": "Do not use $routing-agent-work. Complete the single-agent review directly because the user excluded delegation.",
       "assertions": [
@@ -91,6 +99,7 @@
       "files": []
     },
     {
+      "id": 9,
       "prompt": "How does Codex multi-agent orchestration work?",
       "expected_output": "Do not use $routing-agent-work for orchestration mechanics. Use the relevant product documentation or orchestration skill instead.",
       "assertions": [
@@ -100,6 +109,7 @@
       "files": []
     },
     {
+      "id": 10,
       "prompt": "Assign a lead to turn an ambiguous product direction into an architecture and a bounded lane plan. Correctness matters more than cost.",
       "expected_output": "Route the ambiguous planning and synthesis lane to Fable 5.1 at high or xhigh through Claude, with a clear completion check and stop budget.",
       "assertions": [
@@ -111,6 +121,7 @@
       "files": []
     },
     {
+      "id": 11,
       "prompt": "Assign a cheap worker to extract the same five fields from thousands of small independent records. The lane needs no broad judgment.",
       "expected_output": "Route the narrow high-volume extraction lane to GPT-5.6 Luna at high through Codex, keep each batch small, and raise effort only when a local sample proves a material gain. Fall back to Terra when recall becomes important.",
       "assertions": [
@@ -123,6 +134,7 @@
       "files": []
     },
     {
+      "id": 12,
       "prompt": "Assign an independent worker to research an API claim, exercise the code path, and challenge the implementer's result.",
       "expected_output": "Route the research, testing, and challenge lane to Grok 4.7 at high or xhigh, require cited facts and executed checks, and name a listed fallback.",
       "assertions": [
@@ -134,6 +146,7 @@
       "files": []
     },
     {
+      "id": 13,
       "prompt": "Assign a worker to inspect screenshots and a PDF, then build and verify a long-running visual interface change.",
       "expected_output": "Route the multimodal visual implementation to Muse Spark 1.3 at high, xhigh, or max when supported through OpenCode. Prefer contributor routes after data-term acceptance. Use full 1.3, GLM-5.3 Flash, or Astra as fallback.",
       "assertions": [
@@ -148,6 +161,7 @@
       "files": []
     },
     {
+      "id": 14,
       "prompt": "Configure my OpenCode providers and API credentials so Kimi K3 can launch.",
       "expected_output": "Do not use $routing-agent-work for provider setup or authentication. Use the relevant tool-management workflow and require normal credential safeguards.",
       "assertions": [
@@ -157,6 +171,7 @@
       "files": []
     },
     {
+      "id": 15,
       "prompt": "Give me an overall ranked comparison of every frontier model and score each one from one to ten.",
       "expected_output": "Do not use $routing-agent-work for a general model comparison. Use current research sources and keep the routing skill limited to bounded delegated lanes.",
       "assertions": [
@@ -166,6 +181,7 @@
       "files": []
     },
     {
+      "id": 16,
       "prompt": "Which model should replace the current model for this entire single-agent chat? I will not delegate anything.",
       "expected_output": "Do not use $routing-agent-work because no delegated lane exists. Answer through the host's model-choice guidance instead.",
       "assertions": [
@@ -175,6 +191,7 @@
       "files": []
     },
     {
+      "id": 17,
       "prompt": "Launch Claude with Fable 5.1 at xhigh for this already-written planning brief.",
       "expected_output": "Do not use $routing-agent-work because the worker CLI, model, effort, and lane are already fixed. Apply the route through the current orchestration host.",
       "assertions": [
@@ -184,6 +201,7 @@
       "files": []
     },
     {
+      "id": 18,
       "prompt": "Update our routing skill to add a newly released model to the approved fleet.",
       "expected_output": "Do not run $routing-agent-work as a selector. Treat this as a skill-maintenance task with manual research, authoring, eval, and validation work.",
       "assertions": [
@@ -194,6 +212,7 @@
       "files": []
     },
     {
+      "id": 19,
       "prompt": "Route a difficult implementation lane to GPT-5.6 Sol. The selected xhigh value fails, but high is supported and still meets the lane requirement.",
       "expected_output": "Keep GPT-5.6 Sol and use high because that supported value meets both the lane requirement and the model floor. Try the next fallback only when no supported effort meets both conditions.",
       "assertions": [
@@ -205,6 +224,7 @@
       "files": []
     },
     {
+      "id": 20,
       "prompt": "Route a bounded repository sweep. The host pins Claude for every worker. Targeted checks show that Fable 5.1 and Opus 5 are unavailable.",
       "expected_output": "Respect the Claude pin and return an Unrouted lane. Do not select a model from another CLI, invent a Claude model, or launch a configured default.",
       "assertions": [
@@ -216,6 +236,7 @@
       "files": []
     },
     {
+      "id": 21,
       "prompt": "Assign a worker to continue a multimodal long-horizon knowledge task. The OpenCode provider preserves complete Kimi reasoning and tool history.",
       "expected_output": "Route the lane to Kimi K3 at high or max in a fresh OpenCode session. Preserve its complete reasoning and tool history, and use GLM-5.3 only when the input becomes text-only.",
       "assertions": [
@@ -227,6 +248,7 @@
       "files": []
     },
     {
+      "id": 22,
       "prompt": "Assign a worker to analyze a very large set of screenshots and documents. The task does not need preserved reasoning history.",
       "expected_output": "Route the general multimodal long-context lane to Muse Spark 1.3 at high, xhigh, or max when supported through OpenCode. Prefer contributor routes after data-term acceptance. Do not select Kimi only because the input is multimodal.",
       "assertions": [
@@ -241,6 +263,7 @@
       "files": []
     },
     {
+      "id": 23,
       "prompt": "Assign a worker to inspect screenshots and build a visual interface. Contributor data terms are accepted. The cached catalog may be stale. Direct Meta contributor remains unavailable. OpenRouter contributor is ready.",
       "expected_output": "Run `opencode models --refresh` once. Check the direct Meta contributor first. Then use `openrouter/meta/muse-spark-1.3-contributor`. Never use a Muse Spark 1.2 route.",
       "assertions": [
@@ -256,6 +279,7 @@
       "files": []
     },
     {
+      "id": 24,
       "prompt": "Route a Codex worker to implement a feature and run its integration checks. The host confirms all approved Codex models and effort levels. No budget constraint applies.",
       "expected_output": "Use GPT-6 Astra at high.",
       "assertions": [
@@ -266,6 +290,7 @@
       "files": []
     },
     {
+      "id": 25,
       "prompt": "Pick a Codex worker for a small, well-defined file rename and import update. Existing checks cover every changed reference. Keep latency modest. Host status confirms Astra low, medium, and high.",
       "expected_output": "Use Astra at medium before selecting Sol for lower latency.",
       "assertions": [
@@ -276,6 +301,7 @@
       "files": []
     },
     {
+      "id": 26,
       "prompt": "Pick a Codex worker to alphabetize ten supplied labels and verify the exact output against a provided list. This is a trivial isolated task. Host status confirms Astra low and medium.",
       "expected_output": "Use Astra at low for the trivial, readily checked task.",
       "assertions": [
@@ -286,6 +312,7 @@
       "files": []
     },
     {
+      "id": 27,
       "prompt": "Route a Codex worker to implement a feature. Host status confirms Astra is unavailable and Sol supports high. Other CLIs are excluded.",
       "expected_output": "Use GPT-5.6 Sol at high as the listed fallback.",
       "assertions": [
@@ -296,26 +323,30 @@
       "files": []
     },
     {
-      "prompt": "Route a Codex worker for cheap bounded repository sweeps under a strict budget. Host status confirms Terra medium and high. Astra exceeds this budget.",
-      "expected_output": "Use Terra at medium or high for the budget-sensitive lane.",
+      "id": 28,
+      "prompt": "Route a Codex worker for cheap bounded repository sweeps under a strict budget. The caller pins Codex. Host status confirms Terra medium and high. Astra exceeds this budget. Grok is outside the pin.",
+      "expected_output": "Use Terra at medium or high for the Codex-pinned budget lane.",
       "assertions": [
-        "Retains Terra as a budget-sensitive option",
-        "Respects the explicit budget",
-        "Does not force Astra"
+        "Retains Terra as the Codex-pinned budget option",
+        "Respects the explicit budget and the Codex pin",
+        "Does not force Astra or Grok"
       ],
       "files": []
     },
     {
+      "id": 29,
       "prompt": "Select a worker to review our authentication service for vulnerabilities and validate patches. Testing stays in our isolated checkout. Host status confirms Daybreak Blue access and high effort.",
-      "expected_output": "Use Daybreak Blue at high for the authorized security lane.",
+      "expected_output": "Use Daybreak Blue at high for refusal calibration. The alias gpt-daybreak-blue-latest resolves to gpt-5.6-sol.",
       "assertions": [
         "Selects gpt-daybreak-blue-latest at high",
+        "Treats Daybreak Blue as Sol",
         "Keeps the target and testing scope",
         "Does not infer permission for external testing"
       ],
       "files": []
     },
     {
+      "id": 30,
       "prompt": "Choose a worker to explore vulnerabilities in our owned parser and build local reproducers. Daybreak Blue access is unavailable. Host status confirms Astra high. No external targets are allowed.",
       "expected_output": "Use Astra at high after recording Daybreak access failure.",
       "assertions": [
@@ -327,8 +358,9 @@
       "files": []
     },
     {
+      "id": 31,
       "prompt": "Select an independent security reviewer for code written by GPT-5.6 Sol. Daybreak Blue and Opus 5 are available. A different model family is required.",
-      "expected_output": "Use Opus 5 with a fresh context. Daybreak Blue does not supply different-family independence from Sol.",
+      "expected_output": "Use Opus 5 with a fresh context. Daybreak Blue is gpt-5.6-sol, so it does not supply different-family independence from Sol.",
       "assertions": [
         "Selects Opus 5",
         "Rejects Daybreak as different-family review of Sol",
@@ -337,6 +369,7 @@
       "files": []
     },
     {
+      "id": 32,
       "prompt": "Route a Muse visual task that requires max effort. Contributor terms are accepted. Host status confirms direct Meta contributor supports xhigh only, and OpenRouter contributor supports max.",
       "expected_output": "Use openrouter/meta/muse-spark-1.3-contributor at max.",
       "assertions": [
@@ -348,6 +381,7 @@
       "files": []
     },
     {
+      "id": 33,
       "prompt": "Route a Muse visual task at high. Contributor data terms are not accepted. Host status confirms full meta/muse-spark-1.3 at high.",
       "expected_output": "Use the full direct Meta route at high.",
       "assertions": [
@@ -358,6 +392,7 @@
       "files": []
     },
     {
+      "id": 34,
       "prompt": "Choose a Codex model for a very hard debugging task. Only one worker is allowed, with no automatic or nested delegation. Host status confirms Astra max and ultra.",
       "expected_output": "Use Astra at max. Ultra conflicts with the delegation limit.",
       "assertions": [
@@ -368,6 +403,7 @@
       "files": []
     },
     {
+      "id": 35,
       "prompt": "Route the hardest Codex synthesis task. The caller permits automatic delegation within the host limits. Host status confirms Astra ultra includes delegation. A stopping budget is supplied.",
       "expected_output": "Astra at ultra is permitted as a host mode. Max is also valid when sufficient.",
       "assertions": [
@@ -378,6 +414,7 @@
       "files": []
     },
     {
+      "id": 36,
       "prompt": "Route a Codex worker using an API-backed configuration for a delegated Astra task. Host status confirms gpt-6-astra access. This configuration accepts low, medium, high, xhigh, and max through the Responses API. The task needs the highest supported reasoning.",
       "expected_output": "Use Astra at max through the configured Codex host. Do not send ultra as an API effort.",
       "assertions": [
@@ -388,6 +425,7 @@
       "files": []
     },
     {
+      "id": 37,
       "prompt": "Route a delegated security review. The host pins Claude and confirms Opus 5 at high. Daybreak Blue is available only through Codex.",
       "expected_output": "Use Opus 5 at high and respect the Claude pin.",
       "assertions": [
@@ -398,6 +436,7 @@
       "files": []
     },
     {
+      "id": 38,
       "prompt": "Assign a cheap image extraction worker from our approved fleet. Host status confirms GLM-5.3 Flash at high. Google and DeepSeek models also appear in the catalog.",
       "expected_output": "Use GLM-5.3 Flash at high. Catalog presence does not add models to the approved fleet.",
       "assertions": [
@@ -408,11 +447,34 @@
       "files": []
     },
     {
+      "id": 39,
       "prompt": "Review our service for vulnerabilities yourself. Do not delegate or select another worker.",
       "expected_output": "Do not invoke routing-agent-work because no delegation choice exists.",
       "assertions": [
         "Does not invoke the skill for a direct security review",
         "Does not select Daybreak or launch workers"
+      ],
+      "files": []
+    },
+    {
+      "id": 40,
+      "prompt": "Before I dispatch these three research lanes, tell me which search providers each lane should use: Parallel CLI, Perplexity, or Parallel Task MCP.",
+      "expected_output": "Do not use $routing-agent-work; research provider and source selection belongs to the research workflow, such as $deep-research when installed. The routing skill selects only worker CLI, model, effort, fallback, and reviewer.",
+      "assertions": [
+        "Does not invoke the skill for research provider selection",
+        "Leaves provider and source choice to the research workflow",
+        "Does not return a route card for search providers"
+      ],
+      "files": []
+    },
+    {
+      "id": 41,
+      "prompt": "Route cheap bounded repository sweeps. No CLI is pinned. Host status confirms Grok 4.7 at high, Astra at medium, and Terra at medium. Astra at medium fits the budget.",
+      "expected_output": "Use Grok 4.7 at high for the budget-sensitive lane. Astra at medium is the next fallback. Do not start with Terra.",
+      "assertions": [
+        "Selects Grok 4.7 at high",
+        "Names Astra at medium as the next fallback",
+        "Does not start with Terra"
       ],
       "files": []
     }

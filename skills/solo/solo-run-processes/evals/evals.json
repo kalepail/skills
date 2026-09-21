@@ -2,6 +2,7 @@
   "skill_name": "solo-run-processes",
   "evals": [
     {
+      "id": 1,
       "prompt": "Start the Web and Queue commands in project 12, then verify each is running. I authorize those exact shared commands.",
       "expected_output": "Confirm project/process IDs and trust, use targeted start actions under explicit authority, poll final status, and report per-command result without touching other processes.",
       "assertions": [
@@ -13,6 +14,7 @@
       "files": []
     },
     {
+      "id": 2,
       "prompt": "Can you clean up the idle agents?",
       "expected_output": "Do not close anything from idle state alone; identify self and recorded descendants, request exact authority for parent, siblings, unrelated agents, or another agent's descendants, and report ownership uncertainty.",
       "assertions": [
@@ -24,6 +26,7 @@
       "files": []
     },
     {
+      "id": 3,
       "prompt": "What localhost URL is the dev server using, and is it ready?",
       "expected_output": "Route to solo-observe-services, use read-only service/port readiness inspection, and avoid starting, restarting, or clearing output.",
       "assertions": [
@@ -35,6 +38,7 @@
       "files": []
     },
     {
+      "id": 4,
       "prompt": "The API server is hogging my CPU, just kill it for now.",
       "expected_output": "Use $solo-run-processes to identify the exact API command and apply the smallest stop action to it alone, then confirm it is no longer running.",
       "assertions": [
@@ -45,6 +49,7 @@
       "files": []
     },
     {
+      "id": 5,
       "prompt": "I pulled new dependencies — restart the frontend process so it reloads them.",
       "expected_output": "Use $solo-run-processes to restart the targeted frontend command and report the post-restart status.",
       "assertions": [
@@ -55,6 +60,7 @@
       "files": []
     },
     {
+      "id": 6,
       "prompt": "Rename the process labeled worker-1 to billing-worker.",
       "expected_output": "Use $solo-run-processes to rename the identified process entry from worker-1 to billing-worker without altering its run state.",
       "assertions": [
@@ -65,6 +71,7 @@
       "files": []
     },
     {
+      "id": 7,
       "prompt": "Open a terminal in the api project and run the migration script there.",
       "expected_output": "Use $solo-run-processes to spawn a terminal in the api project scope and send the migration command as input.",
       "assertions": [
@@ -75,6 +82,7 @@
       "files": []
     },
     {
+      "id": 8,
       "prompt": "The dev server is sitting at a y/n prompt — send it a y.",
       "expected_output": "Use $solo-run-processes to send the y keystroke as input to the waiting dev-server process.",
       "assertions": [
@@ -85,6 +93,7 @@
       "files": []
     },
     {
+      "id": 9,
       "prompt": "Bring up the whole dev stack for project 7.",
       "expected_output": "Use $solo-run-processes to run the bulk start-all action scoped to project 7 after confirming trust, then report per-command results.",
       "assertions": [
@@ -95,6 +104,7 @@
       "files": []
     },
     {
+      "id": 10,
       "prompt": "$solo-run-processes restart all commands in the payments project.",
       "expected_output": "Use $solo-run-processes to run the bulk restart-all action scoped to the payments project and verify each command comes back up.",
       "assertions": [
@@ -105,6 +115,7 @@
       "files": []
     },
     {
+      "id": 11,
       "prompt": "Restart the api process and set it to auto-restart if it crashes.",
       "expected_output": "Use $solo-run-processes to restart the api command and configure its crash-restart behavior in one owned flow.",
       "assertions": [
@@ -115,6 +126,7 @@
       "files": []
     },
     {
+      "id": 12,
       "prompt": "Show me the last 50 lines of logs from the api server and whether it's ready.",
       "expected_output": "Do not use $solo-run-processes; route to $solo-observe-services for read-only log tail and readiness inspection without changing runtime.",
       "assertions": [
@@ -125,6 +137,7 @@
       "files": []
     },
     {
+      "id": 13,
       "prompt": "Is anything currently running in project 3, and how much memory is it using?",
       "expected_output": "Do not use $solo-run-processes; route to $solo-observe-services for read-only running-status and resource-usage inspection.",
       "assertions": [
@@ -135,6 +148,7 @@
       "files": []
     },
     {
+      "id": 14,
       "prompt": "Add a new lint command to this repo's solo.yml.",
       "expected_output": "Do not use $solo-run-processes; route to $solo-set-up-projects to define the new command in solo.yml.",
       "assertions": [
@@ -145,6 +159,7 @@
       "files": []
     },
     {
+      "id": 15,
       "prompt": "Import this repository into Solo and define its dev and build commands.",
       "expected_output": "Do not use $solo-run-processes; route to $solo-set-up-projects to import the repository and configure its command stack.",
       "assertions": [
@@ -155,6 +170,7 @@
       "files": []
     },
     {
+      "id": 16,
       "prompt": "Set the working directory and env vars for the web command.",
       "expected_output": "Do not use $solo-run-processes; route to $solo-set-up-projects to edit the web command's working directory and environment configuration.",
       "assertions": [
@@ -165,6 +181,7 @@
       "files": []
     },
     {
+      "id": 17,
       "prompt": "The web command keeps crash-looping and never becomes ready — figure out why.",
       "expected_output": "Do not use $solo-run-processes; route to $solo-troubleshoot to diagnose the crash-loop and readiness failure.",
       "assertions": [
@@ -175,6 +192,7 @@
       "files": []
     },
     {
+      "id": 18,
       "prompt": "My solo.yml changes aren't taking effect — what's wrong?",
       "expected_output": "Do not use $solo-run-processes; route to $solo-troubleshoot to diagnose the solo.yml sync failure.",
       "assertions": [
@@ -185,6 +203,7 @@
       "files": []
     },
     {
+      "id": 19,
       "prompt": "Launch a Claude agent session in this project and give it a prompt to start on.",
       "expected_output": "Do not use $solo-run-processes; route to $solo-work-with-agents to launch and prompt the agent session.",
       "assertions": [
@@ -195,6 +214,7 @@
       "files": []
     },
     {
+      "id": 20,
       "prompt": "Check whether my agent session is idle or blocked and summarize what it did.",
       "expected_output": "Do not use $solo-run-processes; route to $solo-work-with-agents to inspect the agent session status and summarize its output.",
       "assertions": [

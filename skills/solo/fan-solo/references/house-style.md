@@ -50,7 +50,7 @@ When the skill is absent, use an explicit route from the user or caller. Otherwi
 
 Fleet names are models, not Solo agent tools. Discover live launchable tools with `list_agent_tools`. Apply the route through the selected tool's saved defaults or `extra_args`.
 
-Solo's built-in tool types are Claude, Codex, Amp, Gemini, OpenCode, Copilot, and Kimi. Grok is not built in; add it as a custom Generic tool before spawning it. Discover live launchable tools with `list_agent_tools`; treat this table as intent, not proof a given tool is installed and enabled.
+Solo's built-in tool types are Claude, Codex, Amp, Gemini, OpenCode, Copilot, and Kimi. Add any other terminal agent, such as Grok, as a custom Generic tool before spawning it. This list states intent; it does not prove a given tool is installed and enabled.
 
 ### Set model and reasoning explicitly
 
@@ -75,7 +75,7 @@ All four trigger routes work headless; re-run a route live before relying on it:
 |---|---|---|
 | `claude` | Auto-delegation from agent `description`, "use the X subagent", or the Agent tool; works under `claude -p` | `.claude/agents/*.md` or `--agents '<json>'`; per-agent `model` (`sonnet`/`opus`/`haiku`/`fable`/id/`inherit`) and `effort` (`low…max`); `--forward-subagent-text` exposes child transcripts in stream-json. Source: code.claude.com/docs/en/sub-agents |
 | `codex` | Conversational only—ask explicitly ("spawn one agent per…") or name custom agents in prose ("Have `pr_explorer` map the affected paths"); `AGENTS.md` standing instructions; `spawn_agents_on_csv` for batch; works under `codex exec` | `[features] multi_agent` stable-on; built-ins `default`/`worker`/`explorer`; per-agent `model` + `model_reasoning_effort` in `~/.codex/agents/<name>.toml` or `.codex/agents/`; `[agents] max_threads=6`, `max_depth=1`. Source: developers.openai.com/codex/subagents |
-| `opencode` | Primary agent auto-delegates via the `task` tool from agent descriptions; `@name` in TUI; works under `opencode run` | Built-in subagents `general`/`explore` (this install; docs add `scout`); custom in `.opencode/agents/*.md`, `~/.config/opencode/agents/`, or `opencode.json` `agent` key; per-agent `model` and `reasoningEffort`/`variant`; gate with `permission.task`. Source: opencode.ai/docs/agents |
+| `opencode` | Primary agent auto-delegates via the `task` tool from agent descriptions; `@name` in TUI; works under `opencode run` | Built-in subagents such as `general`/`explore` (the set varies by version); custom in `.opencode/agents/*.md`, `~/.config/opencode/agents/`, or `opencode.json` `agent` key; per-agent `model` and `reasoningEffort`/`variant`; gate with `permission.task`. Source: opencode.ai/docs/agents |
 | `grok` | Model-driven `spawn_subagent`—steer by naming a type ("use the explore subagent"); `--no-subagents` disables; works under `--single` | Built-ins `general-purpose`/`explore`/`plan`; custom via `--agents '<json>'` or `--agent <file>` (Claude-compatible schema with per-subagent `model`); effort inherits session `--reasoning-effort`; `--best-of-n <N>` runs N headless attempts plus judge. Source: docs.x.ai/build CLI reference |
 
 Claude agent teams are a third topology. They provide peers with a shared task list and mailbox. Enable `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`. Always name each teammate's routed model. Teammates inherit effort but not the lead's model. Use teams only when Claude workers must communicate or claim shared tasks. Cross-CLI work stays on Solo. Source: code.claude.com/docs/en/agent-teams

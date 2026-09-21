@@ -65,7 +65,7 @@ Sources: [free tier](https://soloterm.com/docs/account/free-tier), [activation](
 - Claim links are first-come and raw URL is shown once; regeneration replaces old link.
 - Auto-grow is optional and off by default; anyone holding link can add billed seats up to configured cap.
 - Revocation invalidates member immediately and frees seat.
-- v1 lacks domain gating, SSO, assigned-seat UI, and directory sync.
+- Team licensing has no domain gating, SSO, assigned-seat UI, or directory sync.
 
 Do not generate/regenerate/share claim links, change auto-grow, revoke seats, or open billing without explicit authorization.
 

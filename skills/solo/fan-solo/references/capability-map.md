@@ -6,11 +6,11 @@ Use this map when request spans capabilities or adjacent skills could both match
 
 | Skill | Owns | Route elsewhere when |
 |---|---|---|
-| `$solo-set-up-projects` | Add/configure Solo projects; audit or write shareable `solo.yml`; define commands and safe defaults | User wants personal workspace UI/settings rather than repo setup |
-| `$solo-customize-workspace` | Workspaces, project placement, navigation, appearance, notifications, hotkeys, sidebar behavior | Change belongs in repository or `solo.yml` |
-| `$solo-run-processes` | Mutating command/terminal lifecycle: start, stop, restart, rename, close, bulk command control | Request is read-only status/readiness, failure diagnosis, or a single agent session's launch/prompt/close (→ `$solo-work-with-agents`) |
+| `$solo-set-up-projects` | Add/configure Solo projects; audit or write shareable `solo.yml`; define commands, safe defaults, and initial auto-start or restart policy | User wants personal workspace UI/settings, or changes restart behavior of existing commands (→ `$solo-run-processes`) |
+| `$solo-customize-workspace` | Workspaces, project placement, navigation, appearance, notifications, hotkeys, sidebar behavior | Change belongs in repository or `solo.yml`, or settings are broken (→ `$solo-troubleshoot`) |
+| `$solo-run-processes` | Mutating command/terminal lifecycle: start, stop, restart, rename, close, bulk command control, and restart behavior of existing commands | Request is read-only status/readiness, failure diagnosis, or a single agent session's launch/prompt/close (→ `$solo-work-with-agents`) |
 | `$solo-observe-services` | Read-only command/terminal status/output, ports, URLs, service readiness, activity evidence | User asks to change lifecycle, repair failure, or inspect one owned agent session (→ `$solo-work-with-agents`) |
-| `$solo-troubleshoot` | Diagnose MCP discovery, identity, project scope, trust, command config, API/CLI, or runtime failures | User only needs normal status view or authorized restart |
+| `$solo-troubleshoot` | Diagnose MCP discovery, identity, project scope, trust, command config, API/CLI, or runtime failures | User only needs normal status view or authorized restart, plans new configuration (→ `$solo-set-up-projects`), or checks agent setup/health (→ `$solo-work-with-agents`) |
 | `$solo-work-with-agents` | Launch, prompt, inspect, wake, hand off, and close one owned agent | Two or more independent worker lanes need lead integration |
 | `$solo-orchestrate-agents` | Decompose independent lanes—implementation, review, or evidence-gathering—spawn bounded workers, coordinate state/timers/locks, reconcile output | Work is sequential, shares same files, or needs one judgment loop |
 | `$solo-track-todos` | Actionable work records, blockers, priorities, claims, locks, comments, completion handoffs | Material is narrative context rather than owned action |

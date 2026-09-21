@@ -12,7 +12,7 @@ processes:
   Web:
     command: pnpm dev
     working_dir: apps/web
-    auto_start: true
+    auto_start: false
     auto_restart: false
     restart_when_changed:
       - apps/web/config/**

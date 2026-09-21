@@ -1,6 +1,6 @@
 ---
 name: solo-customize-workspace
-description: Customize Solo workspaces, windows, sidebar, navigation, command palette, keymaps, appearance, external tools, notifications, account display, and updates. Use when organizing or personalizing Solo's app-level workspace experience. Do not use for repository or solo.yml changes, process lifecycle, or agent work.
+description: Customize Solo workspaces, windows, sidebar, navigation, command palette, keymaps, appearance, external tools, notifications, account display, and updates. Use when organizing or personalizing Solo's app-level workspace experience. Do not use for repository or solo.yml changes (solo-set-up-projects), process lifecycle or status (solo-run-processes, solo-observe-services), agent work, or diagnosing broken settings or crashes (solo-troubleshoot).
 ---
 
 # Customize Solo Workspace
@@ -20,7 +20,9 @@ Configure Solo's application shell around existing projects and processes. Prese
 - Route project creation, directory changes, onboarding, command detection, and `solo.yml` work to `$solo-set-up-projects`.
 - Route command creation, trust, start/stop/restart, auto-start, auto-restart, output, ports, and process cleanup to `$solo-run-processes` or `$solo-observe-services` as appropriate.
 - Route agent-tool setup, health, launch, resume, and session interaction to `$solo-work-with-agents`.
-- Route multi-agent plans, todos, scratchpads, locks, timers, and worker coordination to `$solo-orchestrate-agents`.
+- Route todos to `$solo-track-todos` and scratchpads to `$solo-keep-scratchpads`.
+- Route multi-agent plans, locks, timers, and worker coordination to `$solo-orchestrate-agents`.
+- Route settings that fail to save, crashes, and other failures to `$solo-troubleshoot`.
 - Change only app/workspace preferences when request mixes domains; state which remaining work belongs elsewhere.
 
 ## Follow customization workflow

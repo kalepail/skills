@@ -1,6 +1,6 @@
 ---
 name: solo-work-with-agents
-description: Configure, health-check, launch, prompt, inspect, resume, summarize, follow up with, and close one Solo-managed agent session. Use for built-in or custom CLI agent setup, launchability, one-off flags, input, output, status, summaries, idle or blocked handling, and owned-agent cleanup. Do not use for multi-agent orchestration or non-Solo agents.
+description: Configure, health-check, launch, prompt, inspect, resume, summarize, follow up with, and close one Solo-managed agent session. Use for built-in or custom CLI agent setup, launchability, one-off flags, input, output, status, summaries, idle or blocked handling, and owned-agent cleanup. Do not use for multi-agent orchestration (use solo-orchestrate-agents), command or terminal lifecycle (use solo-run-processes), or agents that Solo does not manage.
 ---
 
 # Work With Solo Agents

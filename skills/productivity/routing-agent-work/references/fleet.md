@@ -8,7 +8,7 @@ Prefer GPT-6 Astra at `high` for most Codex work.
 Consider Astra at `medium` for small, well-defined tasks and `low` for trivial, readily checked tasks.
 Consider those settings before choosing GPT-5.6 Sol to reduce cost or latency.
 Keep Sol for explicit requests, unavailable Astra access, or a demonstrated task-specific cost or latency advantage.
-Use Terra or Luna when their bounded, budget-sensitive role fits. Do not make them the default for ordinary Codex work.
+Use Luna for narrow high-volume extraction. Use Terra when the caller pins Codex and Astra exceeds the budget. Do not make either the default for ordinary Codex work.
 
 ## Muse provider selection
 
@@ -36,15 +36,15 @@ Do not select a Muse Spark 1.2 route.
 | Primary lane | First route | Fallbacks, in order |
 |---|---|---|
 | Ambiguous planning, architecture, orchestration, or synthesis | Claude with Fable 5.1 | Claude with Opus 5; Codex with GPT-6 Astra; GPT-5.6 Sol |
-| Difficult implementation, refactoring, debugging, or test construction | Claude with Opus 5 | Codex with GPT-6 Astra; Claude with Fable 5.1; Grok 4.7; GPT-5.6 Sol |
-| Terminal workflows, primary verification, or acting on gathered evidence | Codex with GPT-6 Astra | Claude with Opus 5; Grok 4.7; GPT-5.6 Sol |
+| Difficult implementation, refactoring, debugging, or test construction | Claude with Fable 5.1 | Claude with Opus 5; Codex with GPT-6 Astra; Grok 4.7; GPT-5.6 Sol |
+| Terminal workflows, primary verification, or acting on gathered evidence | Codex with GPT-6 Astra | Claude with Fable 5.1; Claude with Opus 5; OpenCode with GLM-5.3 for text-only input; Grok 4.7; GPT-5.6 Sol |
 | Bounded implementation, repository sweep, data collection, or tool calling | Codex with GPT-6 Astra | Grok 4.7; GPT-5.6 Sol; GPT-5.6 Terra for bounded work |
-| Budget-sensitive bounded coding or repository sweeps | Codex with GPT-5.6 Terra | Grok 4.7 at high; GPT-6 Astra at medium; GPT-5.6 Sol |
+| Budget-sensitive bounded coding or repository sweeps | Grok 4.7 at high | Codex with GPT-6 Astra at medium when the budget allows it; Codex with GPT-5.6 Terra when the caller pins Codex or Grok is unavailable |
 | Narrow high-volume extraction or triage | Codex with GPT-5.6 Luna | GPT-5.6 Terra |
 | Security review, authorized vulnerability exploration, or patch validation | Codex with Daybreak Blue | GPT-6 Astra; Claude with Opus 5; OpenCode with GLM-5.3 for text-only input |
 | Precision review or quality-first technical prose | Claude with Opus 5 | Fable 5.1; GPT-6 Astra; Grok 4.7; GPT-5.6 Sol; GLM-5.3 Flash |
-| Independent research, test execution, coding, or adversarial challenge | Grok 4.7 | Kimi K3; GLM-5.3 Flash; GPT-6 Astra; GPT-5.6 Sol |
-| Text-only long-context coding, complex agent work, or long-horizon implementation | OpenCode with GLM-5.3 | Kimi K3; GPT-6 Astra; GPT-5.6 Sol |
+| Independent research, test execution, coding, or adversarial challenge | Grok 4.7 | Kimi K3 when the harness preserves full history; GLM-5.3 Flash; GPT-6 Astra; GPT-5.6 Sol |
+| Text-only long-context coding, complex agent work, or long-horizon implementation | OpenCode with GLM-5.3 | GPT-6 Astra; GPT-5.6 Sol; Kimi K3 when the harness preserves full history |
 | Preserved-reasoning multimodal sessions or long-horizon work | OpenCode with Kimi K3 | Muse Spark 1.3; GLM-5.3 when the input is text-only; GPT-6 Astra; GPT-5.6 Sol |
 | General multimodal long-context or multimodal agentic knowledge work | OpenCode with Muse Spark 1.3 | Kimi K3 when the harness preserves full history; GPT-6 Astra; GPT-5.6 Sol |
 | Cost-sensitive agentic coding, automation, multimodal review, or structured technical prose | OpenCode with GLM-5.3 Flash | Muse Spark 1.3; Grok 4.7; GPT-6 Astra; GPT-5.6 Sol |
@@ -55,15 +55,15 @@ Do not select a Muse Spark 1.2 route.
 | Model | Worker CLI | Effort | Strong clues | Limits and keep-away clues |
 |---|---|---|---|---|
 | Fable 5.1 | Claude | `high` to `max` | Ambiguous planning, architecture, orchestration, synthesis, autonomous difficult work, and agentic knowledge work | Prefer `xhigh` for quality-first work. Use `max` only when the failure cost justifies its much higher token use. Give it a clear completion check and stop budget. |
-| GPT-6 Astra (`gpt-6-astra`) | Codex | `low` to `max`; host `ultra` mode when permitted | Default Codex work, difficult coding, verification, research, computer use, and synthesis | Start at `high`. Use `medium` or `low` only for the bounded cases above. Prefer `xhigh` or `max` when difficulty warrants it. |
+| GPT-6 Astra (`gpt-6-astra`) | Codex | `low` to `max`; host `ultra` mode when the host confirms it | Default Codex work, difficult coding, verification, research, computer use, and synthesis | Start at `high`. Use `medium` or `low` only for the bounded cases above. Prefer `xhigh` or `max` when difficulty warrants it. API effort stops at `max`. Confirm `ultra` on the host before use. |
 | GPT-5.6 Sol (`gpt-5.6-sol`) | Codex | `medium` to `max`; host `ultra` mode when permitted | Retained coding, testing, and verification fallback | Prefer Astra first, including Astra at lower effort for suitable tasks. Honor an explicit Sol request. |
-| GPT-5.6 Terra | Codex | `medium` to `max`; host `ultra` mode when permitted | Budget-sensitive bounded coding, repository sweeps, data collection, tool calling, and triage | Usually use `medium` or `high`. Give consequential interpretation or final action to Astra, Opus, or Fable 5.1. |
+| GPT-5.6 Terra | Codex | `medium` to `max`; host `ultra` mode when permitted | Codex-pinned budget work, bounded sweeps, data collection, tool calling, and triage | Usually use `medium` or `high`. Prefer Grok 4.7 at high, or Astra at medium, when the budget and the caller pin allow either. Give consequential interpretation or final action to Astra, Opus, or Fable 5.1. |
 | GPT-5.6 Luna | Codex | `high` to `max` | Narrow, high-volume extraction and triage when cost matters | Start at `high`. Use `xhigh` or `max` only when a local task sample shows a material gain. Keep the lane small. Prefer Terra when recall or judgment matters. |
-| Opus 5 | Claude | `high` to `max` | Quality-first coding, debugging, precision review, computer use, and technical prose | Prefer `xhigh` for coding. Use `max` for the hardest knowledge work. It need not own a separate prose lane. |
-| Daybreak Blue (`gpt-daybreak-blue-latest`) | Codex | `medium` to `max`; host `ultra` mode when permitted | Security reviews, authorized vulnerability exploration, and patch validation | Start at `high`. Confirm access for the selected host and account. Keep the caller's target and action limits. Treat its underlying OpenAI model as the same family for review. |
-| Grok 4.7 (`grok-4.7`) | Grok | `medium` to `xhigh` | Research, tool use, coding, testing, challenge, and independent review; strong coding quality per cost | Verify factual claims and executed checks. Use Grok 4.7 only. Use `grok-4.7-build-fast` only when latency matters; it is the same model at twice the token rate. |
+| Opus 5 | Claude | `high` to `max` | Quality-first coding, debugging, precision review, computer use, and technical prose | Prefer `xhigh` for coding. Use `max` for the hardest knowledge work. It need not own a separate prose lane. Fable 5.1 and Astra lead the main coding-agent benches. Use Opus when that quality is enough at its lower token price. |
+| Daybreak Blue (`gpt-daybreak-blue-latest` → `gpt-5.6-sol`) | Codex | `medium` to `max`; host `ultra` mode when permitted | Defensive cybersecurity reviews when refusal calibration matters | It is Sol. It does not add capability over Sol, and it is not an independent reviewer of Sol, Terra, Luna, or Astra work. Select it with an approved API key. A ChatGPT-account Codex login cannot use it. Start at `high`. If access is missing, use Astra. Keep the caller's target and action limits. |
+| Grok 4.7 (`grok-4.7`) | Grok | `medium` to `xhigh` | Research, tool use, coding, testing, challenge, independent review, and budget-sensitive coding | Verify factual claims and executed checks. Use Grok 4.7 only. Published terminal scores are vendor-reported. Use `grok-4.7-build-fast` only when latency matters and the host lists it. It is the same model at twice the token rate and twice the output speed. |
 | GLM-5.3 | OpenCode | `high` or `max` | Text-only long-context coding, complex agents, long-horizon implementation, and defensive security analysis | It has no image input. Prefer `max` for complex coding. Prefer Kimi when vision or preserved reasoning history matters. |
-| Kimi K3 | OpenCode | `high` or `max` | Multimodal long context, preserved-reasoning sessions, long-horizon coding, research, and knowledge work | Start fresh. The harness must preserve its full reasoning and tool history. Prefer GLM-5.3 for text-only work when speed or cost matters. |
+| Kimi K3 | OpenCode | `high` or `max` | Multimodal long context, preserved-reasoning sessions, long-horizon knowledge work, and repository-task challenge | Start fresh. The harness must preserve its full reasoning and tool history. Prefer GLM-5.3 for text-only work when speed or cost matters. |
 | GLM-5.3 Flash | OpenCode | `high` or `max` | Efficient coding, automation, tools, multimodal work, review, and prose | Prefer full GLM-5.3 for hard text-only long-horizon work. Confirm the configured route provides high or max reasoning. |
 | Muse Spark 1.3 | OpenCode | `medium` to `max`, subject to provider support | Multimodal work, visual implementation, agentic workflows, and long-horizon coding | Follow the provider order above among routes that meet the task's effort and data requirements. Results depend strongly on the harness. |
 
@@ -91,6 +91,6 @@ Consult [OpenAI model documentation](https://developers.openai.com/api/docs/mode
 - Review Grok work with Astra, Fable 5.1, or Opus.
 - Review Kimi, either GLM route, or Muse work with Astra, Fable 5.1, or Opus.
 
-Use Daybreak for security work when it provides the required reviewer independence. Use Sol when the Codex preference permits it.
+Daybreak Blue is Sol. Use it for defensive-cyber refusal calibration on work from another family. Use Sol when the Codex preference permits it.
 
 Give the reviewer the artifact and requirements. Keep the author's reasoning out of the initial review context.

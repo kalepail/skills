@@ -1,6 +1,6 @@
 ---
 name: solo-track-todos
-description: Create and maintain project-scoped Solo todos with status, priority, tags, blockers, comments, locks, completion, and cross-project transfer. Use when turning plans into tasks, finding ready work, claiming todos, recording progress or handoffs, updating dependencies, or completing work. Do not use for narrative context, which belongs in scratchpads, or for controlling processes.
+description: Create and maintain project-scoped Solo todos with status, priority, tags, blockers, comments, locks, completion, and cross-project transfer. Use when turning plans into tasks, finding ready work, claiming todos, recording progress or handoffs, updating dependencies, or completing work. Do not use for narrative context, which belongs in scratchpads, reusable prompt templates, controlling processes, dispatching workers, or closing out a finished run across several state surfaces.
 ---
 
 # Track Solo Todos

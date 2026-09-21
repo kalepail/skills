@@ -34,7 +34,7 @@ Keep narrow lookups and simple fact checks out of this skill entirely — one se
 
 Fan out only when the question is deep, exhaustive, comparative, or independently verified, or has at least two separable evidence lanes. Prefer two to four distinct lanes; divide by research angle first (local code, official docs, primary evidence, landscape, dependencies, user impact, counterevidence, independent synthesis) and provider second. Duplicate prompts across engines only when measuring provider agreement is itself the point.
 
-After defining the lanes, load `routing-agent-work` through the current host when installed and worker selection matters. Keep provider and evidence selection here.
+After defining the lanes, load `routing-agent-work` through the current host when installed and worker selection matters. Otherwise, use the caller's explicit route or the host's configured default. Keep provider and evidence selection here.
 
 ## Choose the Vehicle
 
