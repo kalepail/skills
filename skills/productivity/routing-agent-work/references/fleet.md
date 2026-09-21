@@ -36,18 +36,18 @@ Do not select a Muse Spark 1.2 route.
 | Primary lane | First route | Fallbacks, in order |
 |---|---|---|
 | Ambiguous planning, architecture, orchestration, or synthesis | Claude with Fable 5.1 | Claude with Opus 5; Codex with GPT-6 Astra; GPT-5.6 Sol |
-| Difficult implementation, refactoring, debugging, or test construction | Claude with Opus 5 | Codex with GPT-6 Astra; Claude with Fable 5.1; GPT-5.6 Sol |
-| Terminal workflows, primary verification, or acting on gathered evidence | Codex with GPT-6 Astra | GPT-5.6 Sol; Claude with Opus 5; Grok 4.6 |
-| Bounded implementation, repository sweep, data collection, or tool calling | Codex with GPT-6 Astra | GPT-5.6 Sol; GPT-5.6 Terra for bounded work; Grok 4.6 |
-| Budget-sensitive bounded coding or repository sweeps | Codex with GPT-5.6 Terra | GPT-6 Astra at medium; GPT-5.6 Sol |
+| Difficult implementation, refactoring, debugging, or test construction | Claude with Opus 5 | Codex with GPT-6 Astra; Claude with Fable 5.1; Grok 4.7; GPT-5.6 Sol |
+| Terminal workflows, primary verification, or acting on gathered evidence | Codex with GPT-6 Astra | Claude with Opus 5; Grok 4.7; GPT-5.6 Sol |
+| Bounded implementation, repository sweep, data collection, or tool calling | Codex with GPT-6 Astra | Grok 4.7; GPT-5.6 Sol; GPT-5.6 Terra for bounded work |
+| Budget-sensitive bounded coding or repository sweeps | Codex with GPT-5.6 Terra | Grok 4.7 at high; GPT-6 Astra at medium; GPT-5.6 Sol |
 | Narrow high-volume extraction or triage | Codex with GPT-5.6 Luna | GPT-5.6 Terra |
 | Security review, authorized vulnerability exploration, or patch validation | Codex with Daybreak Blue | GPT-6 Astra; Claude with Opus 5; OpenCode with GLM-5.3 for text-only input |
-| Precision review or quality-first technical prose | Claude with Opus 5 | Fable 5.1; GPT-6 Astra; GPT-5.6 Sol; GLM-5.3 Flash; Grok 4.6 |
-| Independent research, test execution, coding, or adversarial challenge | Grok 4.6 | Kimi K3; GLM-5.3 Flash; GPT-6 Astra; GPT-5.6 Sol |
+| Precision review or quality-first technical prose | Claude with Opus 5 | Fable 5.1; GPT-6 Astra; Grok 4.7; GPT-5.6 Sol; GLM-5.3 Flash |
+| Independent research, test execution, coding, or adversarial challenge | Grok 4.7 | Kimi K3; GLM-5.3 Flash; GPT-6 Astra; GPT-5.6 Sol |
 | Text-only long-context coding, complex agent work, or long-horizon implementation | OpenCode with GLM-5.3 | Kimi K3; GPT-6 Astra; GPT-5.6 Sol |
 | Preserved-reasoning multimodal sessions or long-horizon work | OpenCode with Kimi K3 | Muse Spark 1.3; GLM-5.3 when the input is text-only; GPT-6 Astra; GPT-5.6 Sol |
 | General multimodal long-context or multimodal agentic knowledge work | OpenCode with Muse Spark 1.3 | Kimi K3 when the harness preserves full history; GPT-6 Astra; GPT-5.6 Sol |
-| Cost-sensitive agentic coding, automation, multimodal review, or structured technical prose | OpenCode with GLM-5.3 Flash | Muse Spark 1.3; Grok 4.6; GPT-6 Astra; GPT-5.6 Sol |
+| Cost-sensitive agentic coding, automation, multimodal review, or structured technical prose | OpenCode with GLM-5.3 Flash | Muse Spark 1.3; Grok 4.7; GPT-6 Astra; GPT-5.6 Sol |
 | Visual implementation from screenshots, PDFs, or designs; long-horizon multimodal creation | OpenCode with Muse Spark 1.3 | GLM-5.3 Flash; GPT-6 Astra; GPT-5.6 Sol |
 
 ## Know each route
@@ -61,7 +61,7 @@ Do not select a Muse Spark 1.2 route.
 | GPT-5.6 Luna | Codex | `high` to `max` | Narrow, high-volume extraction and triage when cost matters | Start at `high`. Use `xhigh` or `max` only when a local task sample shows a material gain. Keep the lane small. Prefer Terra when recall or judgment matters. |
 | Opus 5 | Claude | `high` to `max` | Quality-first coding, debugging, precision review, computer use, and technical prose | Prefer `xhigh` for coding. Use `max` for the hardest knowledge work. It need not own a separate prose lane. |
 | Daybreak Blue (`gpt-daybreak-blue-latest`) | Codex | `medium` to `max`; host `ultra` mode when permitted | Security reviews, authorized vulnerability exploration, and patch validation | Start at `high`. Confirm access for the selected host and account. Keep the caller's target and action limits. Treat its underlying OpenAI model as the same family for review. |
-| Grok 4.6 | Grok | `medium` to `xhigh` | Research, tool use, coding, testing, challenge, and independent review | Verify factual claims and executed checks. Use Grok 4.6 only. |
+| Grok 4.7 (`grok-4.7`) | Grok | `medium` to `xhigh` | Research, tool use, coding, testing, challenge, and independent review; strong coding quality per cost | Verify factual claims and executed checks. Use Grok 4.7 only. Use `grok-4.7-build-fast` only when latency matters; it is the same model at twice the token rate. |
 | GLM-5.3 | OpenCode | `high` or `max` | Text-only long-context coding, complex agents, long-horizon implementation, and defensive security analysis | It has no image input. Prefer `max` for complex coding. Prefer Kimi when vision or preserved reasoning history matters. |
 | Kimi K3 | OpenCode | `high` or `max` | Multimodal long context, preserved-reasoning sessions, long-horizon coding, research, and knowledge work | Start fresh. The harness must preserve its full reasoning and tool history. Prefer GLM-5.3 for text-only work when speed or cost matters. |
 | GLM-5.3 Flash | OpenCode | `high` or `max` | Efficient coding, automation, tools, multimodal work, review, and prose | Prefer full GLM-5.3 for hard text-only long-horizon work. Confirm the configured route provides high or max reasoning. |
