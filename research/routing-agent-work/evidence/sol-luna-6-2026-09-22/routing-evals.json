@@ -1,0 +1,631 @@
+{
+  "baseline_commit": "2644e12",
+  "evaluator_model": "gpt-6-astra",
+  "evaluator_effort": "high",
+  "method": "Separate fresh contexts per policy version; shared prompts without expected answers. P14 and P15 appended in the baseline context. No provider inference for selected routes.",
+  "grading": "Primary model, effort, and invocation decisions only. Terra display name normalized to identifier.",
+  "baseline": {
+    "results": [
+      {
+        "id": "P1",
+        "invoke_skill": true,
+        "model": "gpt-5.6-sol",
+        "effort": "high",
+        "fallback": null,
+        "reviewer": null,
+        "reason": "Astra is unavailable. The fixed fleet lists GPT-5.6 Sol as the eligible Codex implementation fallback.",
+        "limitations": [
+          "The prompt confirms only gpt-6-sol, which is outside the supplied fleet.",
+          "The selected gpt-5.6-sol route remains unverified. Do not launch without a targeted availability check."
+        ]
+      },
+      {
+        "id": "P2",
+        "invoke_skill": true,
+        "model": "gpt-5.6-luna",
+        "effort": "high",
+        "fallback": "GPT-5.6 Terra",
+        "reviewer": null,
+        "reason": "The fleet assigns narrow, high-volume extraction to GPT-5.6 Luna at high.",
+        "limitations": [
+          "GPT-6 Luna is outside this supplied fleet."
+        ]
+      },
+      {
+        "id": "P3",
+        "invoke_skill": true,
+        "model": "Unrouted",
+        "effort": null,
+        "fallback": null,
+        "reviewer": null,
+        "reason": "The caller pins GPT-6 Sol, which is outside the fixed fleet.",
+        "limitations": [
+          "Supported high effort cannot make an unapproved model eligible. An explicit constraint change or fleet update is required."
+        ]
+      },
+      {
+        "id": "P4",
+        "invoke_skill": true,
+        "model": "claude-opus-5-5",
+        "effort": "high",
+        "fallback": null,
+        "reviewer": "claude-opus-5-5",
+        "reason": "Opus 5.5 provides a different-family review of the caller\u2019s own code.",
+        "limitations": [
+          "The fleet does not describe GPT-6 Sol. Its independence rule excludes Daybreak from reviewing Codex-family work."
+        ]
+      },
+      {
+        "id": "P5",
+        "invoke_skill": true,
+        "model": "gpt-daybreak-blue-latest",
+        "effort": "high",
+        "fallback": "gpt-6-astra",
+        "reviewer": null,
+        "reason": "The security row selects Daybreak Blue, and the prompt confirms its access and effort.",
+        "limitations": [
+          "The alias resolves to gpt-5.6-sol. This route does not select GPT-6 Sol."
+        ]
+      },
+      {
+        "id": "P6",
+        "invoke_skill": true,
+        "model": "gpt-6-astra",
+        "effort": "high",
+        "fallback": "gpt-5.6-sol",
+        "reviewer": null,
+        "reason": "A meaningful multi-file feature requires difficult implementation. Astra is the preferred eligible Codex route.",
+        "limitations": [
+          "The caller excludes the earlier Claude and Grok routes by pinning Codex."
+        ]
+      },
+      {
+        "id": "P7",
+        "invoke_skill": true,
+        "model": "Unrouted",
+        "effort": null,
+        "fallback": null,
+        "reviewer": null,
+        "reason": "The caller pins GPT-6 Luna, which is outside the fixed fleet.",
+        "limitations": [
+          "The supplied fleet gives GPT-5.6 Luna a high floor. It does not authorize GPT-6 Luna or ultra."
+        ]
+      },
+      {
+        "id": "P8",
+        "invoke_skill": true,
+        "model": "Unrouted",
+        "effort": null,
+        "fallback": null,
+        "reviewer": null,
+        "reason": "The caller pins GPT-6 Sol, which is outside the fixed fleet.",
+        "limitations": [
+          "The delegation restriction would require max for an eligible model. Host support alone does not approve this model."
+        ]
+      },
+      {
+        "id": "P9",
+        "invoke_skill": true,
+        "model": "gpt-6-astra",
+        "effort": "high",
+        "fallback": null,
+        "reviewer": null,
+        "reason": "Astra handles consequential interpretation and synthesis. Narrow extraction routes do not fit ambiguous final judgments.",
+        "limitations": [
+          "GPT-6 Luna is also outside this supplied fleet. No eligible available fallback is stated."
+        ]
+      },
+      {
+        "id": "P10",
+        "invoke_skill": true,
+        "model": "GPT-5.6 Terra",
+        "effort": "medium",
+        "fallback": null,
+        "reviewer": null,
+        "reason": "Codex is pinned, Astra exceeds the budget, and Terra supports bounded repository sweeps.",
+        "limitations": [
+          "The supplied files do not provide Terra\u2019s exact configured model identifier. Confirm it before launch."
+        ]
+      },
+      {
+        "id": "P11",
+        "invoke_skill": false,
+        "model": null,
+        "effort": null,
+        "fallback": null,
+        "reviewer": null,
+        "reason": "General model comparisons and model discovery are explicit negative triggers.",
+        "limitations": [
+          "The routing skill does not research or update its fixed fleet."
+        ]
+      },
+      {
+        "id": "P12",
+        "invoke_skill": false,
+        "model": null,
+        "effort": null,
+        "fallback": null,
+        "reviewer": null,
+        "reason": "The caller requests single-agent work without a delegation choice.",
+        "limitations": []
+      },
+      {
+        "id": "P13",
+        "invoke_skill": true,
+        "model": "gpt-5.6-sol",
+        "effort": "high",
+        "fallback": null,
+        "reviewer": null,
+        "reason": "The supplied fleet retains gpt-5.6-sol as an implementation fallback when Astra is unavailable.",
+        "limitations": [
+          "GPT-6 Sol is outside this supplied fleet. The prompt confirms only the retained fallback is available."
+        ]
+      },
+      {
+        "id": "P14",
+        "invoke_skill": true,
+        "model": "GPT-5.6 Terra",
+        "effort": "medium",
+        "fallback": null,
+        "reviewer": null,
+        "reason": "Codex is pinned, Astra exceeds the budget, and Terra fits the bounded budget lane.",
+        "limitations": [
+          "GPT-6 Sol is outside the supplied fleet.",
+          "The supplied files do not provide Terra\u2019s exact configured identifier. Confirm it before launch."
+        ]
+      },
+      {
+        "id": "P15",
+        "invoke_skill": true,
+        "model": "gpt-5.6-luna",
+        "effort": "high",
+        "fallback": "GPT-5.6 Terra",
+        "reviewer": null,
+        "reason": "The supplied fleet assigns narrow extraction to GPT-5.6 Luna, with Terra as its fallback.",
+        "limitations": [
+          "The prompt reports GPT-6 Luna unavailable. It does not establish GPT-5.6 Luna availability.",
+          "The selected route remains unverified. Confirm it before launch, then use Terra if unavailable.",
+          "GPT-6 Sol is outside this supplied fleet."
+        ]
+      }
+    ],
+    "grades": [
+      {
+        "id": "P1",
+        "expected_model": "gpt-6-sol",
+        "expected_effort": "high",
+        "pass": false
+      },
+      {
+        "id": "P2",
+        "expected_model": "gpt-6-luna",
+        "expected_effort": "high",
+        "pass": false
+      },
+      {
+        "id": "P3",
+        "expected_model": "gpt-6-sol",
+        "expected_effort": "high",
+        "pass": false
+      },
+      {
+        "id": "P4",
+        "expected_model": "claude-opus-5-5",
+        "expected_effort": "high",
+        "pass": true
+      },
+      {
+        "id": "P5",
+        "expected_model": "gpt-daybreak-blue-latest",
+        "expected_effort": "high",
+        "pass": true
+      },
+      {
+        "id": "P6",
+        "expected_model": "gpt-6-astra",
+        "expected_effort": "high",
+        "pass": true
+      },
+      {
+        "id": "P7",
+        "expected_model": "gpt-6-luna",
+        "expected_effort": "high",
+        "pass": false
+      },
+      {
+        "id": "P8",
+        "expected_model": "gpt-6-sol",
+        "expected_effort": "max",
+        "pass": false
+      },
+      {
+        "id": "P9",
+        "expected_model": "gpt-6-astra",
+        "expected_effort": "high",
+        "pass": true
+      },
+      {
+        "id": "P10",
+        "expected_model": "gpt-5.6-terra",
+        "expected_effort": "medium",
+        "pass": true
+      },
+      {
+        "id": "P11",
+        "expected_model": null,
+        "expected_effort": null,
+        "pass": true
+      },
+      {
+        "id": "P12",
+        "expected_model": null,
+        "expected_effort": null,
+        "pass": true
+      },
+      {
+        "id": "P13",
+        "expected_model": "Unrouted",
+        "expected_effort": null,
+        "pass": false
+      },
+      {
+        "id": "P14",
+        "expected_model": "gpt-6-sol",
+        "expected_effort": "medium",
+        "pass": false
+      },
+      {
+        "id": "P15",
+        "expected_model": "gpt-6-sol",
+        "expected_effort": "high",
+        "pass": false
+      }
+    ],
+    "pass_count": 7
+  },
+  "updated": {
+    "results": [
+      {
+        "id": "P1",
+        "invoke_skill": true,
+        "model": "gpt-6-sol",
+        "effort": "high",
+        "fallback": null,
+        "reviewer": null,
+        "reason": "Codex is required. Astra is unavailable. Sol is the available difficult implementation fallback.",
+        "limitations": [
+          "The prompt confirms the selected identifier and effort. No worker launches in this evaluation."
+        ]
+      },
+      {
+        "id": "P2",
+        "invoke_skill": true,
+        "model": "gpt-6-luna",
+        "effort": "high",
+        "fallback": "gpt-6-sol",
+        "reviewer": null,
+        "reason": "GPT-6 Luna is the first route for narrow, high-volume extraction. GPT-5.6 Luna is outside the fixed fleet.",
+        "limitations": [
+          "The prompt confirms Luna at high. Sol fallback availability is unspecified."
+        ]
+      },
+      {
+        "id": "P3",
+        "invoke_skill": true,
+        "model": "gpt-6-sol",
+        "effort": "high",
+        "fallback": null,
+        "reviewer": null,
+        "reason": "The caller explicitly requests Sol. High meets the requirement and replaces the unsupported xhigh setting.",
+        "limitations": [
+          "The prompt confirms high support. No model change is necessary."
+        ]
+      },
+      {
+        "id": "P4",
+        "invoke_skill": true,
+        "model": "claude-opus-5-5",
+        "effort": "high",
+        "fallback": null,
+        "reviewer": null,
+        "reason": "Opus provides the required different-family review. Daybreak and Sol belong to the same model family.",
+        "limitations": [
+          "The selected worker is the reviewer. Opus effort support still requires confirmation before launch."
+        ]
+      },
+      {
+        "id": "P5",
+        "invoke_skill": true,
+        "model": "gpt-daybreak-blue-latest",
+        "effort": "high",
+        "fallback": "gpt-6-astra",
+        "reviewer": null,
+        "reason": "Daybreak is the first security review route. Its alias resolves to gpt-5.6-sol, independently of GPT-6 Sol.",
+        "limitations": [
+          "The prompt confirms Daybreak access and high effort. Astra fallback availability is unspecified."
+        ]
+      },
+      {
+        "id": "P6",
+        "invoke_skill": true,
+        "model": "gpt-6-astra",
+        "effort": "high",
+        "fallback": "gpt-6-sol",
+        "reviewer": null,
+        "reason": "Astra is the default Codex route. A multi-file feature requires meaningful implementation effort.",
+        "limitations": [
+          "The prompt confirms model availability. The selected effort still requires host confirmation before launch."
+        ]
+      },
+      {
+        "id": "P7",
+        "invoke_skill": true,
+        "model": "gpt-6-luna",
+        "effort": "high",
+        "fallback": "gpt-6-sol",
+        "reviewer": null,
+        "reason": "Luna starts at high. No local sample justifies higher effort. Luna does not support ultra in this policy.",
+        "limitations": [
+          "Sol fallback availability is unspecified."
+        ]
+      },
+      {
+        "id": "P8",
+        "invoke_skill": true,
+        "model": "gpt-6-sol",
+        "effort": "max",
+        "fallback": null,
+        "reviewer": null,
+        "reason": "The caller requests Sol for the hardest debugging task. Max respects the one-worker limit; ultra permits automatic delegation.",
+        "limitations": [
+          "The lane still needs a clear completion check and stopping condition. No additional reviewer worker is permitted."
+        ]
+      },
+      {
+        "id": "P9",
+        "invoke_skill": true,
+        "model": "gpt-6-astra",
+        "effort": "high",
+        "fallback": null,
+        "reviewer": null,
+        "reason": "Astra handles consequential interpretation. Luna remains limited to narrow extraction and triage.",
+        "limitations": [
+          "Only Astra and Luna availability is supplied. The caller pins Codex."
+        ]
+      },
+      {
+        "id": "P10",
+        "invoke_skill": true,
+        "model": "gpt-5.6-terra",
+        "effort": "medium",
+        "fallback": null,
+        "reviewer": null,
+        "reason": "Terra is the Codex budget fallback. Astra exceeds the budget, and no earlier route meets it.",
+        "limitations": [
+          "Keep the sweeps bounded and readily checked. Send consequential interpretation to a stronger permitted route."
+        ]
+      },
+      {
+        "id": "P11",
+        "invoke_skill": false,
+        "model": null,
+        "effort": null,
+        "fallback": null,
+        "reviewer": null,
+        "reason": "General model comparisons and fleet research are outside this skill. No bounded delegation selection is requested.",
+        "limitations": [
+          "This evaluation does not research models or revise the fixed fleet."
+        ]
+      },
+      {
+        "id": "P12",
+        "invoke_skill": false,
+        "model": null,
+        "effort": null,
+        "fallback": null,
+        "reviewer": null,
+        "reason": "The caller requests review by the current agent and prohibits delegation. No routing choice exists.",
+        "limitations": [
+          "The current agent retains the review task. This evaluation does not perform the review."
+        ]
+      },
+      {
+        "id": "P13",
+        "invoke_skill": true,
+        "model": "Unrouted",
+        "effort": null,
+        "fallback": null,
+        "reviewer": null,
+        "reason": "GPT-5.6 Sol is not a standalone feature route in this fleet. Daybreak's base-model alias does not add that route.",
+        "limitations": [
+          "Astra and GPT-6 Sol are unavailable. No approved available route fits. Do not launch a worker."
+        ]
+      },
+      {
+        "id": "P14",
+        "invoke_skill": true,
+        "model": "gpt-6-sol",
+        "effort": "medium",
+        "fallback": "gpt-5.6-terra",
+        "reviewer": null,
+        "reason": "Codex is pinned and Astra exceeds the budget. Measured estimates support Sol before Terra.",
+        "limitations": [
+          "Keep the sweeps bounded and readily checked. The prompt confirms medium support."
+        ]
+      },
+      {
+        "id": "P15",
+        "invoke_skill": true,
+        "model": "gpt-6-sol",
+        "effort": "high",
+        "fallback": "gpt-5.6-terra",
+        "reviewer": null,
+        "reason": "Luna is unavailable. The extraction row lists Sol before Terra, and both meet the budget.",
+        "limitations": [
+          "The prompt confirms high effort support."
+        ]
+      }
+    ],
+    "grades": [
+      {
+        "id": "P1",
+        "expected_model": "gpt-6-sol",
+        "expected_effort": "high",
+        "pass": true
+      },
+      {
+        "id": "P2",
+        "expected_model": "gpt-6-luna",
+        "expected_effort": "high",
+        "pass": true
+      },
+      {
+        "id": "P3",
+        "expected_model": "gpt-6-sol",
+        "expected_effort": "high",
+        "pass": true
+      },
+      {
+        "id": "P4",
+        "expected_model": "claude-opus-5-5",
+        "expected_effort": "high",
+        "pass": true
+      },
+      {
+        "id": "P5",
+        "expected_model": "gpt-daybreak-blue-latest",
+        "expected_effort": "high",
+        "pass": true
+      },
+      {
+        "id": "P6",
+        "expected_model": "gpt-6-astra",
+        "expected_effort": "high",
+        "pass": true
+      },
+      {
+        "id": "P7",
+        "expected_model": "gpt-6-luna",
+        "expected_effort": "high",
+        "pass": true
+      },
+      {
+        "id": "P8",
+        "expected_model": "gpt-6-sol",
+        "expected_effort": "max",
+        "pass": true
+      },
+      {
+        "id": "P9",
+        "expected_model": "gpt-6-astra",
+        "expected_effort": "high",
+        "pass": true
+      },
+      {
+        "id": "P10",
+        "expected_model": "gpt-5.6-terra",
+        "expected_effort": "medium",
+        "pass": true
+      },
+      {
+        "id": "P11",
+        "expected_model": null,
+        "expected_effort": null,
+        "pass": true
+      },
+      {
+        "id": "P12",
+        "expected_model": null,
+        "expected_effort": null,
+        "pass": true
+      },
+      {
+        "id": "P13",
+        "expected_model": "Unrouted",
+        "expected_effort": null,
+        "pass": true
+      },
+      {
+        "id": "P14",
+        "expected_model": "gpt-6-sol",
+        "expected_effort": "medium",
+        "pass": true
+      },
+      {
+        "id": "P15",
+        "expected_model": "gpt-6-sol",
+        "expected_effort": "high",
+        "pass": true
+      }
+    ],
+    "pass_count": 15
+  },
+  "prompts": [
+    {
+      "id": "P1",
+      "prompt": "Route a Codex worker to implement a feature. Astra is unavailable. Host status confirms gpt-6-sol at high. Other CLIs are excluded."
+    },
+    {
+      "id": "P2",
+      "prompt": "Assign a cheap worker to extract five fields from thousands of independent records. No broad judgment is needed. Host status confirms gpt-6-luna and gpt-5.6-luna at high. Both meet the budget."
+    },
+    {
+      "id": "P3",
+      "prompt": "Route a difficult implementation lane to GPT-6 Sol. The selected xhigh value fails, but high is supported and meets the requirement."
+    },
+    {
+      "id": "P4",
+      "prompt": "Select an independent reviewer for GPT-6 Sol code. Daybreak Blue and Opus 5.5 are available. A different model family is required. This is defensive review of our own code."
+    },
+    {
+      "id": "P5",
+      "prompt": "Select a worker to review our authentication service and validate patches in our isolated checkout. Host status confirms Daybreak Blue access at high. The provider says gpt-daybreak-blue-latest resolves to gpt-5.6-sol. GPT-6 Sol is also available."
+    },
+    {
+      "id": "P6",
+      "prompt": "Route a Codex worker for a meaningful multi-file feature with integration checks. All approved Codex models are available. No budget constraint applies."
+    },
+    {
+      "id": "P7",
+      "prompt": "Choose an effort for a GPT-6 Luna extraction worker. The task is narrow. Only high, xhigh, and max are supported. A colleague suggests ultra. No local sample supports higher effort."
+    },
+    {
+      "id": "P8",
+      "prompt": "Route the hardest GPT-6 Sol debugging task with one worker and no nested or automatic delegation. The host confirms max and ultra. Correctness matters more than speed."
+    },
+    {
+      "id": "P9",
+      "prompt": "Assign a worker to perform final consequential interpretation of ambiguous extracted records. Codex is pinned. Astra and GPT-6 Luna are available at high. Accuracy matters more than cost."
+    },
+    {
+      "id": "P10",
+      "prompt": "Route cheap bounded repository sweeps under a strict budget. Codex is pinned. Astra exceeds the budget. Host status confirms Terra medium and high; no other model meets the budget."
+    },
+    {
+      "id": "P11",
+      "prompt": "Give me an overall ranked comparison of frontier models and research whether GPT-6 Sol and Luna belong in our fleet."
+    },
+    {
+      "id": "P12",
+      "prompt": "Review this pull request yourself. Do not delegate or select another worker."
+    },
+    {
+      "id": "P13",
+      "prompt": "Route a Codex feature worker. Astra and GPT-6 Sol are unavailable. The only available model is gpt-5.6-sol. Do not change the approved fleet."
+    },
+    {
+      "id": "P14",
+      "prompt": "Route cheap bounded repository sweeps. Codex is pinned. Astra exceeds the budget. Host status confirms GPT-6 Sol and Terra at medium. Measured task estimates fit both models within the budget."
+    },
+    {
+      "id": "P15",
+      "prompt": "Route a narrow extraction lane. GPT-6 Luna is unavailable. GPT-6 Sol and Terra support high and meet the budget."
+    }
+  ],
+  "policy_sha256": {
+    "baseline-skill.md": "1ff24bb5b52f5ca986751e96493df8df2e5c196761db2209bb1e2dad527b27fe",
+    "baseline-fleet.md": "49e80de3e054395dba6bbcd08ce856d38f44b34e4103774eb1eaff40187221e3",
+    "updated-skill.md": "1ff24bb5b52f5ca986751e96493df8df2e5c196761db2209bb1e2dad527b27fe",
+    "updated-fleet.md": "1ac35aaa643c6ef5a08038c109fd1e23eec473ff05eec553e65032414d281add"
+  }
+}

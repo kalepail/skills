@@ -1,0 +1,114 @@
+[
+  {
+    "file": "aa-index.html.gz",
+    "raw_bytes": 1769529,
+    "raw_sha256": "815723df11e696a99eb85998d4de30507f33bfe84f6deff46722049993c212ef",
+    "compressed_bytes": 188281,
+    "external_raw_path": "/tmp/sol-luna-6-research-2026-09-22-raw/aa-index.html.gz"
+  },
+  {
+    "file": "aa-gpt-6-astra.html.gz",
+    "raw_bytes": 3977281,
+    "raw_sha256": "aa7f4da816ec12edf278742da75a130610dc877a3a0dc69f2e99113e872abd56",
+    "compressed_bytes": 550197,
+    "external_raw_path": "/tmp/sol-luna-6-research-2026-09-22-raw/aa-gpt-6-astra.html.gz"
+  },
+  {
+    "file": "aa-luna-6.html.gz",
+    "raw_bytes": 3793053,
+    "raw_sha256": "f5ebea3b68b855fe98711c0363e649fedf87f8cb0add8808629d21e6c07554db",
+    "compressed_bytes": 542396,
+    "external_raw_path": "/tmp/sol-luna-6-research-2026-09-22-raw/aa-luna-6.html.gz"
+  },
+  {
+    "file": "dev-blog.html.gz",
+    "raw_bytes": 325565,
+    "raw_sha256": "f05d925402c761e500e56c83d9f05023fdfe41b3a52643b6b080f5cc02d06f16",
+    "compressed_bytes": 44552,
+    "external_raw_path": "/tmp/sol-luna-6-research-2026-09-22-raw/dev-blog.html.gz"
+  },
+  {
+    "file": "aa-gpt-5-6-sol.html.gz",
+    "raw_bytes": 3975151,
+    "raw_sha256": "21a31d51f2ff4ea7a438c613592592115feab87e63cf8dca7a81d75dfad164cb",
+    "compressed_bytes": 550276,
+    "external_raw_path": "/tmp/sol-luna-6-research-2026-09-22-raw/aa-gpt-5-6-sol.html.gz"
+  },
+  {
+    "file": "openai-sol-luna.html.gz",
+    "raw_bytes": 9755,
+    "raw_sha256": "7f785212b5ba4200ad82d9cd22c21d6cacd8732e2308e27d778d5eca55223978",
+    "compressed_bytes": 5465,
+    "external_raw_path": "/tmp/sol-luna-6-research-2026-09-22-raw/openai-sol-luna.html.gz"
+  },
+  {
+    "file": "aa-sol-6.html.gz",
+    "raw_bytes": 3794780,
+    "raw_sha256": "589b19cf54a55762d8722dc868d4af4b17cf8da7260c1c2c0c88a0d5d395f5f8",
+    "compressed_bytes": 542323,
+    "external_raw_path": "/tmp/sol-luna-6-research-2026-09-22-raw/aa-sol-6.html.gz"
+  },
+  {
+    "file": "aa-gpt-5-6-luna.html.gz",
+    "raw_bytes": 3974146,
+    "raw_sha256": "b550281dda3feb7dd71647395c10ef7fda957524d28d92b672640be3a0c646b1",
+    "compressed_bytes": 550287,
+    "external_raw_path": "/tmp/sol-luna-6-research-2026-09-22-raw/aa-gpt-5-6-luna.html.gz"
+  },
+  {
+    "file": "cursor-blog.html.gz",
+    "raw_bytes": 413424,
+    "raw_sha256": "c82b2368db66e78a5e6d5e8c8b5099449e8e53bfe21a87180fa6f0cb18550607",
+    "compressed_bytes": 63905,
+    "external_raw_path": "/tmp/sol-luna-6-research-2026-09-22-raw/cursor-blog.html.gz"
+  },
+  {
+    "file": "aa-gpt-6-sol-high.html.gz",
+    "raw_bytes": 3793327,
+    "raw_sha256": "bad911b430d79227315d09ac16aaade151813f268829ada482778f0dfed24d1c",
+    "compressed_bytes": 542116,
+    "external_raw_path": "/tmp/sol-luna-6-research-2026-09-22-raw/aa-gpt-6-sol-high.html.gz"
+  },
+  {
+    "file": "aa-gpt-5-6-terra.html.gz",
+    "raw_bytes": 3975660,
+    "raw_sha256": "c4cbda3a3da0bdfd95e95ac538f27fad90479d092d7b0f2eef48bdd7d91c5307",
+    "compressed_bytes": 550311,
+    "external_raw_path": "/tmp/sol-luna-6-research-2026-09-22-raw/aa-gpt-5-6-terra.html.gz"
+  },
+  {
+    "file": "aa-gpt-6-luna-high.html.gz",
+    "raw_bytes": 3793166,
+    "raw_sha256": "9035d16593329d5666b9ec38c282d369d59225685372a08952f72fdeffd4efe4",
+    "compressed_bytes": 542545,
+    "external_raw_path": "/tmp/sol-luna-6-research-2026-09-22-raw/aa-gpt-6-luna-high.html.gz"
+  },
+  {
+    "file": "benchmark-terminal.html.gz",
+    "raw_bytes": 135508,
+    "raw_sha256": "6e73c056d2ae18c1c7ce83ca8b81600336b66cd2cfe679547699e4f5f1fb82cc",
+    "compressed_bytes": 16464,
+    "external_raw_path": "/tmp/sol-luna-6-research-2026-09-22-raw/benchmark-terminal.html.gz"
+  },
+  {
+    "file": "openai-blog.html.gz",
+    "raw_bytes": 9652,
+    "raw_sha256": "5f3236d8ffea230e603a8894adfbb6499df1fc35b1192f1660ca0836508f21fd",
+    "compressed_bytes": 5411,
+    "external_raw_path": "/tmp/sol-luna-6-research-2026-09-22-raw/openai-blog.html.gz"
+  },
+  {
+    "file": "openai-introducing-sol-luna.html.gz",
+    "raw_bytes": 9791,
+    "raw_sha256": "758146c55c3d6d914c9ab2551db64475a425c7f78c04c0c0e75b9a8c066236c5",
+    "compressed_bytes": 5475,
+    "external_raw_path": "/tmp/sol-luna-6-research-2026-09-22-raw/openai-introducing-sol-luna.html.gz"
+  },
+  {
+    "file": "aa-gpt-6-sol-xhigh.html.gz",
+    "raw_bytes": 3794127,
+    "raw_sha256": "aedaa48db1b6833164b7a72c407a6a4ee9f7e9bb141976353880587e517bddce",
+    "compressed_bytes": 542455,
+    "external_raw_path": "/tmp/sol-luna-6-research-2026-09-22-raw/aa-gpt-6-sol-xhigh.html.gz"
+  }
+]

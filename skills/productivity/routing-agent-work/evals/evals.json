@@ -124,13 +124,13 @@
     {
       "id": 11,
       "prompt": "Assign a cheap worker to extract the same five fields from thousands of small independent records. The lane needs no broad judgment.",
-      "expected_output": "Route the narrow high-volume extraction lane to GPT-5.6 Luna at high through Codex, keep each batch small, and raise effort only when a local sample proves a material gain. Fall back to Terra when recall becomes important.",
+      "expected_output": "Route narrow high-volume extraction to GPT-6 Luna (gpt-6-luna) at high through Codex. Keep batches small. Raise effort only when a local sample proves a material gain. Escalate to GPT-6 Sol, then Terra, when recall is inadequate.",
       "assertions": [
-        "Selects GPT-5.6 Luna only for narrow high-volume extraction",
+        "Selects GPT-6 Luna only for narrow high-volume extraction",
         "Starts at high effort",
         "Requires local task evidence before using xhigh or max",
         "Keeps the lane small",
-        "Names Terra as the safer recall fallback"
+        "Names GPT-6 Sol before Terra as the recall fallback"
       ],
       "files": []
     },
@@ -214,8 +214,8 @@
     },
     {
       "id": 19,
-      "prompt": "Route a difficult implementation lane to GPT-5.6 Sol. The selected xhigh value fails, but high is supported and still meets the lane requirement.",
-      "expected_output": "Keep GPT-5.6 Sol and use high because that supported value meets both the lane requirement and the model floor. Try the next fallback only when no supported effort meets both conditions.",
+      "prompt": "Route a difficult implementation lane to GPT-6 Sol. The selected xhigh value fails, but high is supported and still meets the lane requirement.",
+      "expected_output": "Keep GPT-6 Sol and use high because that supported value meets both the lane requirement and the model floor. Try the next fallback only when no supported effort meets both conditions.",
       "assertions": [
         "Distinguishes an effort-value failure from an identifier failure",
         "Uses a supported effort that still meets the lane requirement",
@@ -316,10 +316,10 @@
     {
       "id": 27,
       "prompt": "Route a Codex worker to implement a feature. Host status confirms Astra is unavailable and Sol supports high. Other CLIs are excluded.",
-      "expected_output": "Use GPT-5.6 Sol at high as the listed fallback.",
+      "expected_output": "Use GPT-6 Sol at high as the listed fallback.",
       "assertions": [
         "Records Astra unavailability",
-        "Selects Sol at high",
+        "Selects GPT-6 Sol (gpt-6-sol) at high",
         "Respects the Codex pin"
       ],
       "files": []
@@ -338,10 +338,10 @@
     {
       "id": 29,
       "prompt": "Select a worker to review our authentication service for vulnerabilities and validate patches. Testing stays in our isolated checkout. Host status confirms Daybreak Blue access and high effort.",
-      "expected_output": "Use Daybreak Blue at high for refusal calibration. The alias gpt-daybreak-blue-latest resolves to gpt-5.6-sol.",
+      "expected_output": "Use Daybreak Blue at high for refusal calibration. Its documented alias gpt-daybreak-blue-latest resolves to gpt-5.6-sol. Do not infer a GPT-6 Sol alias upgrade.",
       "assertions": [
         "Selects gpt-daybreak-blue-latest at high",
-        "Treats Daybreak Blue as Sol",
+        "Checks the Daybreak alias separately from the GPT-6 Sol route",
         "Keeps the target and testing scope",
         "Does not infer permission for external testing"
       ],
@@ -361,8 +361,8 @@
     },
     {
       "id": 31,
-      "prompt": "Select an independent security reviewer for code written by GPT-5.6 Sol. Daybreak Blue and Opus 5.5 are available. A different model family is required.",
-      "expected_output": "Use Opus 5.5 with a fresh context for defensive review of the caller's code. Daybreak Blue is gpt-5.6-sol, so it does not supply different-family independence from Sol.",
+      "prompt": "Select an independent security reviewer for code written by GPT-6 Sol. Daybreak Blue and Opus 5.5 are available. A different model family is required.",
+      "expected_output": "Use Opus 5.5 in a fresh context for defensive review of the caller's code. Daybreak Blue uses GPT-5.6 Sol. It does not supply different-family independence from GPT-6 Sol.",
       "assertions": [
         "Selects Opus 5.5",
         "Rejects Daybreak as different-family review of Sol",
@@ -525,6 +525,70 @@
         "Requires a completion check",
         "Treats a text-only turn end as a progress report",
         "Adds a stop budget"
+      ],
+      "files": []
+    },
+    {
+      "id": 46,
+      "prompt": "Route cheap bounded repository sweeps. Codex is pinned. Astra exceeds the budget. Host status confirms GPT-6 Sol and Terra at medium. Measured task estimates fit both models within the budget.",
+      "expected_output": "Use GPT-6 Sol at medium before Terra. Keep Astra as the ordinary Codex default.",
+      "assertions": [
+        "Selects gpt-6-sol at medium",
+        "Places Sol before Terra for eligible budget work",
+        "Uses task estimates rather than equating token price with task cost"
+      ],
+      "files": []
+    },
+    {
+      "id": 47,
+      "prompt": "Choose an effort for a GPT-6 Luna extraction worker. The task is narrow. The host confirms high, xhigh, and max. A colleague suggests ultra. No local sample supports higher effort.",
+      "expected_output": "Use GPT-6 Luna at high. Do not use unsupported ultra or raise effort without local task evidence.",
+      "assertions": [
+        "Selects gpt-6-luna at high",
+        "Does not use ultra",
+        "Requires a local sample before higher effort"
+      ],
+      "files": []
+    },
+    {
+      "id": 48,
+      "prompt": "Route a Codex feature worker. Astra and GPT-6 Sol are unavailable. The only available model is gpt-5.6-sol. Do not change the approved fleet.",
+      "expected_output": "Return Unrouted. A catalog entry for an older model does not add it to the fixed fleet. Daybreak remains a separate security alias.",
+      "assertions": [
+        "Does not select gpt-5.6-sol as a general route",
+        "Does not substitute Daybreak for ordinary feature work",
+        "Returns Unrouted"
+      ],
+      "files": []
+    },
+    {
+      "id": 49,
+      "prompt": "Route an ordinary Codex feature worker. Both GPT-6 Sol and Astra are available at high. Sol has a lower token price. No budget constraint or measured task advantage applies.",
+      "expected_output": "Use GPT-6 Astra at high. A lower token price alone does not replace the ordinary Codex default.",
+      "assertions": [
+        "Selects Astra at high",
+        "Does not infer measured task cost or latency from token rates"
+      ],
+      "files": []
+    },
+    {
+      "id": 50,
+      "prompt": "Route a narrow extraction lane. GPT-6 Luna is unavailable. GPT-6 Sol and Terra support high and meet the budget.",
+      "expected_output": "Record Luna unavailability and use GPT-6 Sol at high before Terra.",
+      "assertions": [
+        "Records unavailable gpt-6-luna",
+        "Selects gpt-6-sol at high",
+        "Keeps Terra as the next fallback"
+      ],
+      "files": []
+    },
+    {
+      "id": 51,
+      "prompt": "Select a worker to perform final consequential interpretation of ambiguous extracted records. Codex is pinned. GPT-6 Luna and Astra are available at high.",
+      "expected_output": "Use GPT-6 Astra at high for consequential interpretation. Keep Luna for narrow extraction.",
+      "assertions": [
+        "Selects Astra at high",
+        "Does not broaden Luna into final consequential judgment"
       ],
       "files": []
     }

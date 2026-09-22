@@ -1,0 +1,83 @@
+[
+  {
+    "model": "gpt-6-sol-high",
+    "source_url": "https://artificialanalysis.ai/models/gpt-6-sol-high",
+    "index_version": "Artificial Analysis Intelligence Index v4.3.2",
+    "rounded_index": 43,
+    "rounded_usd_per_index_task": 0.37,
+    "source_text_file": "aa-gpt-6-sol-high.txt",
+    "text_sha256": "4fe4f71d99b7997222de6b0dcbf24406d2c5b286536e1cfe4688020ba8ef5ba3"
+  },
+  {
+    "model": "gpt-6-sol-xhigh",
+    "source_url": "https://artificialanalysis.ai/models/gpt-6-sol-xhigh",
+    "index_version": "Artificial Analysis Intelligence Index v4.3.2",
+    "rounded_index": 44,
+    "rounded_usd_per_index_task": 0.53,
+    "source_text_file": "aa-gpt-6-sol-xhigh.txt",
+    "text_sha256": "c83cea48434081f54d11d3446ebedd2f9717c6ecfdb0af28a29840e774d23d72"
+  },
+  {
+    "model": "gpt-5-6-terra",
+    "source_url": "https://artificialanalysis.ai/models/gpt-5-6-terra",
+    "index_version": "Artificial Analysis Intelligence Index v4.3.2",
+    "rounded_index": 42,
+    "rounded_usd_per_index_task": 1.4,
+    "source_text_file": "aa-gpt-5-6-terra.txt",
+    "text_sha256": "a2c7ab8dccce53174bce0e26aa9db2f717c081de0f4e56ee82c5521da3291844"
+  },
+  {
+    "model": "gpt-6-luna",
+    "source_url": "https://artificialanalysis.ai/models/gpt-6-luna",
+    "index_version": "Artificial Analysis Intelligence Index v4.3.2",
+    "rounded_index": 37,
+    "rounded_usd_per_index_task": 0.07,
+    "source_text_file": "aa-luna-6.txt",
+    "text_sha256": "23c1ea494365ec5ffd9b07494c6928e7a0059a91b9a651e4c37e21bfa859e16f"
+  },
+  {
+    "model": "gpt-6-sol",
+    "source_url": "https://artificialanalysis.ai/models/gpt-6-sol",
+    "index_version": "Artificial Analysis Intelligence Index v4.3.2",
+    "rounded_index": 48,
+    "rounded_usd_per_index_task": 1.06,
+    "source_text_file": "aa-sol-6.txt",
+    "text_sha256": "76b938b52072685ab0e1f34c1b6b405febbff0ff2de7cc36e9c6ba90c21ff1fd"
+  },
+  {
+    "model": "gpt-6-astra",
+    "source_url": "https://artificialanalysis.ai/models/gpt-6-astra",
+    "index_version": "Artificial Analysis Intelligence Index v4.3.2",
+    "rounded_index": 53,
+    "rounded_usd_per_index_task": 3.26,
+    "source_text_file": "aa-gpt-6-astra.txt",
+    "text_sha256": "211219e8a97c19c835a0af3b4235bb32ffa12342b0378b5eb826b2154f4179bb"
+  },
+  {
+    "model": "gpt-5-6-sol",
+    "source_url": "https://artificialanalysis.ai/models/gpt-5-6-sol",
+    "index_version": "Artificial Analysis Intelligence Index v4.3.2",
+    "rounded_index": 47,
+    "rounded_usd_per_index_task": 1.99,
+    "source_text_file": "aa-gpt-5-6-sol.txt",
+    "text_sha256": "001832724b943decad2a158298eb8d859ea35914dd5dfdd6b105c625a3d4695e"
+  },
+  {
+    "model": "gpt-6-luna-high",
+    "source_url": "https://artificialanalysis.ai/models/gpt-6-luna-high",
+    "index_version": "Artificial Analysis Intelligence Index v4.3.2",
+    "rounded_index": 32,
+    "rounded_usd_per_index_task": 0.03,
+    "source_text_file": "aa-gpt-6-luna-high.txt",
+    "text_sha256": "4bf18120a1f4e5bfd5f47743b59a957fc57d1b72cf8e069d270d76362c553654"
+  },
+  {
+    "model": "gpt-5-6-luna",
+    "source_url": "https://artificialanalysis.ai/models/gpt-5-6-luna",
+    "index_version": "Artificial Analysis Intelligence Index v4.3.2",
+    "rounded_index": 37,
+    "rounded_usd_per_index_task": 0.18,
+    "source_text_file": "aa-gpt-5-6-luna.txt",
+    "text_sha256": "e72b99eef6720a4538ba0bf0360a2f4025d62247801fa97761c73d04e6eccee1"
+  }
+]

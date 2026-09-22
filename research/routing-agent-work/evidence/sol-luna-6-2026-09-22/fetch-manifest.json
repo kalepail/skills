@@ -1,0 +1,94 @@
+[
+  {
+    "name": "sol-6",
+    "url": "https://developers.openai.com/api/docs/models/gpt-6-sol.md",
+    "exit": 0,
+    "bytes": 3991,
+    "error": ""
+  },
+  {
+    "name": "luna-6",
+    "url": "https://developers.openai.com/api/docs/models/gpt-6-luna.md",
+    "exit": 0,
+    "bytes": 4019,
+    "error": ""
+  },
+  {
+    "name": "sol-5.6",
+    "url": "https://developers.openai.com/api/docs/models/gpt-5.6-sol.md",
+    "exit": 0,
+    "bytes": 3991,
+    "error": ""
+  },
+  {
+    "name": "luna-5.6",
+    "url": "https://developers.openai.com/api/docs/models/gpt-5.6-luna.md",
+    "exit": 0,
+    "bytes": 3744,
+    "error": ""
+  },
+  {
+    "name": "astra-6",
+    "url": "https://developers.openai.com/api/docs/models/gpt-6-astra.md",
+    "exit": 0,
+    "bytes": 3812,
+    "error": ""
+  },
+  {
+    "name": "latest-model",
+    "url": "https://developers.openai.com/api/docs/guides/latest-model.md",
+    "exit": 0,
+    "bytes": 17456,
+    "error": ""
+  },
+  {
+    "name": "pricing-api",
+    "url": "https://developers.openai.com/api/docs/pricing.md",
+    "exit": 0,
+    "bytes": 23950,
+    "error": "",
+    "fetched_sha256": "3046f29bd4b5081fa53706e544bb56032bc85426ad77eab9f35872bcaedf5561",
+    "stored_sha256": "90defad5086b863fb154b6e4684eba6e473faa2cfd8f5fea7e4eee642501c9a9",
+    "stored_bytes": 23673,
+    "normalization": "Removed trailing whitespace and extra blank lines at EOF; bytes records original response size."
+  },
+  {
+    "name": "models-codex",
+    "url": "https://learn.chatgpt.com/docs/models.md",
+    "exit": 0,
+    "bytes": 18274,
+    "error": "",
+    "fetched_sha256": "0f29d677c26b6f8f5e9f4e59321e3dc9912de6453ff609886c616f2af6d8c675",
+    "stored_sha256": "dc5dbaf4cb6278ae42133adbaa9bcc7a36520eff442d2229d4b338c34482f9db",
+    "stored_bytes": 18255,
+    "normalization": "Removed trailing whitespace and extra blank lines at EOF; bytes records original response size."
+  },
+  {
+    "name": "pricing-codex",
+    "url": "https://learn.chatgpt.com/docs/pricing.md",
+    "exit": 0,
+    "bytes": 46512,
+    "error": ""
+  },
+  {
+    "name": "changelog-api",
+    "url": "https://developers.openai.com/api/docs/changelog.md",
+    "exit": 0,
+    "bytes": 70255,
+    "error": ""
+  },
+  {
+    "name": "daybreak-blue",
+    "url": "https://developers.openai.com/api/docs/models/gpt-daybreak-blue-latest.md",
+    "exit": 0,
+    "bytes": 3134,
+    "error": ""
+  },
+  {
+    "name": "cybersecurity",
+    "url": "https://developers.openai.com/api/docs/guides/safety-checks/cybersecurity.md",
+    "exit": 0,
+    "bytes": 4954,
+    "error": ""
+  }
+]
