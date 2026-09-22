@@ -4,10 +4,10 @@
     {
       "id": 1,
       "prompt": "Split this migration into implementation, testing, and independent review lanes. I was thinking Codex for both implementation and independent review. Pick agents and reasoning levels.",
-      "expected_output": "Use $routing-agent-work to define bounded lanes, route difficult implementation to Fable 5.1 with explicit effort, and replace the same-family review idea with a fresh capable reviewer from another model family.",
+      "expected_output": "Use $routing-agent-work to define bounded lanes, route difficult implementation to Opus 5.5 with explicit effort, and replace the same-family review idea with a fresh capable reviewer from another model family.",
       "assertions": [
         "Invokes the skill because delegation selection affects the result",
-        "Selects Fable 5.1 for difficult implementation",
+        "Selects Opus 5.5 for difficult implementation",
         "Sets a supported model and effort for every lane",
         "Challenges the same-family review idea and uses a fresh different-family reviewer",
         "Returns compact route cards and report contracts"
@@ -30,8 +30,8 @@
     },
     {
       "id": 3,
-      "prompt": "Route an ambiguous planning lane. Host status says the Fable 5.1 identifier is unavailable. Opus 5 is available at high.",
-      "expected_output": "Record the failed identifier check, advance to the first planning fallback, and route to Opus 5 at high. Return Unrouted if every listed fallback fails.",
+      "prompt": "Route an ambiguous planning lane. Host status says the Opus 5.5 identifier is unavailable. Fable 5.1 is available at xhigh.",
+      "expected_output": "Record the failed identifier check, advance to the first planning fallback, and route to Fable 5.1 at xhigh. Return Unrouted if every listed fallback fails.",
       "assertions": [
         "Records verification evidence for the unavailable identifier",
         "Advances through listed fallbacks in order",
@@ -54,7 +54,7 @@
     {
       "id": 5,
       "prompt": "Pick a low-cost model for multimodal tool use and a second model to challenge its findings.",
-      "expected_output": "Route the primary lane to GLM-5.3 Flash at high or max through OpenCode, with Grok 4.7, Astra, Fable 5.1, or Opus as a capable challenger selected for the failure cost.",
+      "expected_output": "Route the primary lane to GLM-5.3 Flash at high or max through OpenCode, with Opus 5.5, Grok 4.7, Astra, or Fable 5.1 as a capable challenger selected for the failure cost.",
       "assertions": [
         "Uses GLM-5.3 Flash rather than full GLM-5.3",
         "Uses at least high effort",
@@ -67,10 +67,10 @@
     {
       "id": 6,
       "prompt": "The deliverable is a polished README and pull request description. The implementation owner already understands the change.",
-      "expected_output": "Use Opus 5 when prose quality justifies a dedicated lane, or keep the existing capable owner. Apply ASD-STE100 to every human-readable output and avoid a separate prose agent when it adds no value.",
+      "expected_output": "Use Opus 5.5 when prose quality justifies a dedicated lane, or keep the existing capable owner. Apply ASD-STE100 to every human-readable output and avoid a separate prose agent when it adds no value.",
       "assertions": [
         "Routes by the type of writing",
-        "Uses Opus 5 as the quality-first technical prose clue",
+        "Uses Opus 5.5 as the quality-first technical prose clue",
         "Applies ASD-STE100",
         "Does not require a separate prose lane"
       ],
@@ -111,11 +111,12 @@
     {
       "id": 10,
       "prompt": "Assign a lead to turn an ambiguous product direction into an architecture and a bounded lane plan. Correctness matters more than cost.",
-      "expected_output": "Route the ambiguous planning and synthesis lane to Fable 5.1 at high or xhigh through Claude, with a clear completion check and stop budget.",
+      "expected_output": "Route the ambiguous planning and synthesis lane to Opus 5.5 at high or xhigh through Claude, with a clear completion check and stop budget. Name Fable 5.1 as the escalation fallback.",
       "assertions": [
-        "Selects Fable 5.1 for ambiguous planning and synthesis",
+        "Selects Opus 5.5 for ambiguous planning and synthesis",
         "Uses high or xhigh effort",
         "Adds a completion check and stop budget",
+        "Names Fable 5.1 as the first fallback",
         "Does not assign a fixed worker count before defining lanes"
       ],
       "files": []
@@ -225,12 +226,13 @@
     },
     {
       "id": 20,
-      "prompt": "Route a bounded repository sweep. The host pins Claude for every worker. Targeted checks show that Fable 5.1 and Opus 5 are unavailable.",
-      "expected_output": "Respect the Claude pin and return an Unrouted lane. Do not select a model from another CLI, invent a Claude model, or launch a configured default.",
+      "prompt": "Route a bounded repository sweep. The host pins Claude for every worker. Targeted checks show that Opus 5.5 and Fable 5.1 are unavailable. Opus 5 still appears in the host catalog.",
+      "expected_output": "Respect the Claude pin and return an Unrouted lane. Do not select Opus 5, a model from another CLI, an invented Claude model, or a configured default.",
       "assertions": [
         "Respects the pinned worker CLI",
         "Does not cross to Codex, Grok, or OpenCode",
         "Does not invent an unlisted Claude model",
+        "Does not select Opus 5",
         "Returns Unrouted and does not launch the lane"
       ],
       "files": []
@@ -359,10 +361,10 @@
     },
     {
       "id": 31,
-      "prompt": "Select an independent security reviewer for code written by GPT-5.6 Sol. Daybreak Blue and Opus 5 are available. A different model family is required.",
-      "expected_output": "Use Opus 5 with a fresh context. Daybreak Blue is gpt-5.6-sol, so it does not supply different-family independence from Sol.",
+      "prompt": "Select an independent security reviewer for code written by GPT-5.6 Sol. Daybreak Blue and Opus 5.5 are available. A different model family is required.",
+      "expected_output": "Use Opus 5.5 with a fresh context for defensive review of the caller's code. Daybreak Blue is gpt-5.6-sol, so it does not supply different-family independence from Sol.",
       "assertions": [
-        "Selects Opus 5",
+        "Selects Opus 5.5",
         "Rejects Daybreak as different-family review of Sol",
         "Requires reproducible security evidence"
       ],
@@ -426,12 +428,13 @@
     },
     {
       "id": 37,
-      "prompt": "Route a delegated security review. The host pins Claude and confirms Opus 5 at high. Daybreak Blue is available only through Codex.",
-      "expected_output": "Use Opus 5 at high and respect the Claude pin.",
+      "prompt": "Route a delegated security review of our own service code. The host pins Claude and confirms Opus 5.5 at high. Daybreak Blue is available only through Codex.",
+      "expected_output": "Use Opus 5.5 at high and respect the Claude pin. Note that cyber safeguards can hand security work to Opus 4.8.",
       "assertions": [
         "Respects the pinned CLI",
         "Uses a capable approved security fallback",
-        "Does not cross to Daybreak"
+        "Does not cross to Daybreak",
+        "Notes the Opus 4.8 safeguard handoff risk"
       ],
       "files": []
     },
@@ -469,12 +472,59 @@
     },
     {
       "id": 41,
-      "prompt": "Route cheap bounded repository sweeps. No CLI is pinned. Host status confirms Grok 4.7 at high, Astra at medium, and Terra at medium. Astra at medium fits the budget.",
-      "expected_output": "Use Grok 4.7 at high for the budget-sensitive lane. Astra at medium is the next fallback. Do not start with Terra.",
+      "prompt": "Route cheap bounded repository sweeps. No CLI is pinned. Host status confirms Opus 5.5 at medium, Grok 4.7 at high, Astra at medium, and Terra at medium.",
+      "expected_output": "Use Opus 5.5 at medium for the budget-sensitive lane. Grok 4.7 at high is the next fallback. Do not start with Terra.",
       "assertions": [
-        "Selects Grok 4.7 at high",
-        "Names Astra at medium as the next fallback",
+        "Selects Opus 5.5 at medium",
+        "Names Grok 4.7 at high as the next fallback",
         "Does not start with Terra"
+      ],
+      "files": []
+    },
+    {
+      "id": 42,
+      "prompt": "Route a Claude worker for a hard debugging lane in a large repository. Host status confirms Opus 5.5 and Opus 5 at every effort level.",
+      "expected_output": "Select Opus 5.5 with explicit high or xhigh effort. Do not select Opus 5. Add a different-family reviewer when the failure cost justifies it.",
+      "assertions": [
+        "Selects Opus 5.5",
+        "Does not select Opus 5",
+        "Sets high or xhigh effort explicitly",
+        "Names a fixed-fleet fallback"
+      ],
+      "files": []
+    },
+    {
+      "id": 43,
+      "prompt": "Route a meaningful implementation lane to Opus 5.5. The host worker configuration omits an effort value.",
+      "expected_output": "Set high effort explicitly. Do not rely on the unverified default, which is medium for Opus 5.5 on the API.",
+      "assertions": [
+        "Sets effort explicitly",
+        "Selects high for meaningful implementation",
+        "Does not rely on the provider default"
+      ],
+      "files": []
+    },
+    {
+      "id": 44,
+      "prompt": "Choose a worker to explore vulnerabilities in our owned parser and build local exploit reproducers. The host pins Claude. Host status confirms Opus 5.5 at high. No external targets are allowed.",
+      "expected_output": "Return Unrouted to the caller. Opus 5.5 fits only defensive review of the caller's own code, and cyber safeguards can hand vulnerability work to Opus 4.8. Name Daybreak Blue, Astra, or GLM-5.3 as options if the caller lifts the Claude pin.",
+      "assertions": [
+        "Respects the pinned CLI",
+        "Does not route vulnerability exploration to Opus 5.5",
+        "Explains the safeguard handoff to Opus 4.8",
+        "Returns Unrouted rather than launching"
+      ],
+      "files": []
+    },
+    {
+      "id": 45,
+      "prompt": "Assign an Opus 5.5 worker to run a multi-part code base migration overnight without supervision. Route the lane and state its report contract.",
+      "expected_output": "Route Opus 5.5 at high or xhigh with a checklist of parts and a completion check. Treat a turn that ends in text as a progress report, not completion. Add a stop budget and a different-family reviewer.",
+      "assertions": [
+        "Selects Opus 5.5 with explicit effort",
+        "Requires a completion check",
+        "Treats a text-only turn end as a progress report",
+        "Adds a stop budget"
       ],
       "files": []
     }

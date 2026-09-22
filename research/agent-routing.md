@@ -2,7 +2,7 @@
 
 This research supports `routing-agent-work`. The shipped skill keeps only durable routing clues.
 
-Read [the current fleet update](routing-agent-work/model-fleet-update-2026-09-03.md) for measured scores, costs, latency, and runtime checks.
+Read [the current fleet update](routing-agent-work/model-fleet-update-2026-09-22.md) for measured scores, costs, latency, and runtime checks.
 
 ## Research method
 
@@ -30,10 +30,11 @@ OpenAI documents Sol, Terra, and Luna as separate GPT-5.6 operating points. The 
 - [OpenAI model guidance](https://developers.openai.com/api/docs/guides/latest-model)
 - [OpenAI reasoning guide](https://developers.openai.com/api/docs/guides/reasoning)
 
-Anthropic documents Fable 5.1 and Opus 5 as high-capability models. Its effort documentation shows that effort is a provider-specific control. The research supports Fable 5.1 for ambiguous planning and autonomy. It supports Opus for quality-first coding, precision work, and technical prose.
+Anthropic tells users to start with Opus 5.5 for most workloads. It keeps Fable 5.1 for demanding reasoning and long-horizon agentic work. Its effort documentation shows that effort is a provider-specific control. The research supports Opus 5.5 as the default Claude route for planning, coding, review, and technical prose. It supports Fable 5.1 as the escalation route. Opus 5.5 safeguards send most cybersecurity tasks to Opus 4.8.
 
+- [Introducing Claude Opus 5.5](https://www.anthropic.com/claude-opus-5-5)
+- [Claude models overview](https://platform.claude.com/docs/en/models/overview)
 - [Claude Fable 5.1 and Claude Mythos 5.1](https://www.anthropic.com/claude-fable-and-mythos-5-1)
-- [Introducing Claude Opus 5](https://www.anthropic.com/news/claude-opus-5)
 - [Anthropic effort documentation](https://platform.claude.com/docs/en/build-with-claude/effort)
 
 xAI documents Grok 4.6 as a reasoning and agentic model. The research supports Grok for coding, testing, research, and independent challenge. The routing skill still requires reproducible evidence for its factual findings.

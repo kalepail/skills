@@ -53,7 +53,7 @@ Then use `opencode models <provider>` to check only the selected provider. Treat
 Set the model and effort explicitly for each worker and nested worker. Never rely on an unverified default.
 
 - Use the fleet's Codex preference: Astra at `high` for most Codex work.
-- Use `medium` for bounded, clear, low-risk work. Astra also permits `low` for trivial, readily checked tasks.
+- Use `medium` for bounded, clear, low-risk work. Astra and Opus 5.5 also permit `low` for trivial, readily checked tasks.
 - Use `high` for meaningful implementation, research, review, and synthesis.
 - Use `xhigh` for hard planning, debugging, synthesis, and adversarial review.
 - Use `max` for the hardest quality-first work with a clear stopping condition.
@@ -86,7 +86,7 @@ Require reproducible evidence. Ask for tests, paths, commands, or cited sources 
 
 Treat prose as a separate lane only when prose is a meaningful deliverable. Keep the existing worker when it can write the required text well.
 
-Use ASD-STE100 for comments, documentation, reviews, pull request text, and user-facing explanations. Opus 5 is the quality-first default for technical prose.
+Use ASD-STE100 for comments, documentation, reviews, pull request text, and user-facing explanations. Opus 5.5 is the quality-first default for technical prose. It follows supplied writing rules closely.
 
 ## Return a route card
 
