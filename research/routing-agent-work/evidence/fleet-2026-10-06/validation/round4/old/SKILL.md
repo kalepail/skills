@@ -1,13 +1,13 @@
 ---
 name: routing-agent-work
-description: Select an agent CLI, model, and reasoning effort for delegated work. Use when an orchestrator, parent agent, or user must assign implementation, security review, authorized vulnerability exploration, research, review, second-opinion or edge-case confirmation, synthesis, multimodal, long-context, high-volume extraction, or prose lanes across Claude, Codex, Grok, or OpenCode. Also use it to check that a headless OpenCode worker finished. Do not use for other orchestration mechanics, research provider or source selection, live model discovery, provider setup, general model comparisons, single-agent work with no delegation choice, or a lane whose worker, model, and effort are already fixed.
+description: Select an agent CLI, model, and reasoning effort for delegated work. Use when an orchestrator, parent agent, or user must assign implementation, security review, authorized vulnerability exploration, research, review, second-opinion or edge-case confirmation, synthesis, multimodal, long-context, high-volume extraction, or prose lanes across Claude, Codex, Grok, or OpenCode. Do not use for orchestration mechanics, research provider or source selection, live model discovery, provider setup, general model comparisons, single-agent work with no delegation choice, or a lane whose worker, model, and effort are already fixed.
 ---
 
 # Route Agent Work
 
 Route only when the selection can change the result. Continue with the current agent when no delegation choice exists.
 
-The caller owns orchestration mechanics, except the completion check for a headless OpenCode worker. Orchestration hosts include Herdr, Orca, Conductor, and Solo. Worker CLIs are Claude, Codex, Grok, and OpenCode.
+The caller owns orchestration mechanics. Orchestration hosts include Herdr, Orca, Conductor, and Solo. Worker CLIs are Claude, Codex, Grok, and OpenCode.
 
 ## Define the lane
 
@@ -36,20 +36,21 @@ Use only the fixed fleet. Try listed fallbacks in order. If every listed route i
 
 Fallbacks handle an unavailable route. Escalation handles failure cost. Escalate to a stronger route or a higher effort when errors are expensive or the first attempt falls short.
 
-When the caller pins only the worker CLI, apply the pinned-CLI rule in the fleet reference.
+When the caller pins only the worker CLI, use a fleet route on that CLI that fits the lane. Use the CLI's default route only when its strong clues fit the lane and no keep-away clue applies. Mark the lane `Unrouted` when no route on that CLI fits.
 
 An `Unrouted` lane does not launch. Return it to the caller for an explicit constraint change or fleet update.
 
 Treat a safeguard handoff to a model outside the fleet as an unavailable route. Use the next listed fallback.
 
-Before launch, check only the selected route. Do not enumerate or score unrelated models.
+Before launch, confirm only the selected configured identifier and effort control through host status or a targeted CLI check. When a route needs a harness property, such as preserved reasoning history, confirm it through host documentation or the caller. Skip the route when nobody can confirm it. If the identifier fails, try the next fallback. If only the effort value fails, use a supported value that meets the lane requirement and model floor. If none fits, try the next fallback. When the fleet lists a provider order for the model, try each listed provider before the next model fallback. Do not enumerate or score unrelated models.
 
-1. Confirm the configured identifier and effort control through host status or a targeted CLI check.
-2. If the identifier fails, try each provider the fleet lists for that model, then the next fallback.
-3. If only the effort value fails, use a supported value that meets the lane requirement and the model's range. Otherwise, use the next fallback.
-4. When a route needs a harness property, such as preserved reasoning history, confirm it through host documentation or the caller. Skip the route when nobody can confirm it.
+Before rejecting a new or recently updated OpenCode identifier, refresh its model catalog once:
 
-For OpenCode routes, read [references/opencode.md](references/opencode.md). It covers the catalog refresh and the completion check. An OpenCode exit code alone does not prove that the worker finished.
+```bash
+opencode models --refresh
+```
+
+Then use `opencode models <provider>` to check only the selected provider. Treat an identifier absent after refresh as unavailable, then use the listed fallback. Skip the refresh when host status already confirms the identifier.
 
 ## Set effort
 
@@ -88,13 +89,13 @@ Prefer a capable reviewer from a different model family. Treat model diversity a
 
 Require reproducible evidence. Ask for tests, paths, commands, or cited sources instead of an unsupported verdict.
 
-Use lower-cost models from other families as extra challengers. The fleet reference explains how to treat their findings.
+Use lower-cost models from other families to find edge cases and confirm results. Treat their findings as leads. Reproduce each finding before a stronger route acts on it.
 
 ## Handle prose
 
 Treat prose as a separate lane only when prose is a meaningful deliverable. Keep the existing worker when it can write the required text well.
 
-Pass the caller's writing standard into the worker brief. Opus 5.5 is the quality-first default for technical prose. It follows supplied writing rules closely.
+Use ASD-STE100 for comments, documentation, reviews, pull request text, and user-facing explanations. Opus 5.5 is the quality-first default for technical prose. It follows supplied writing rules closely.
 
 ## Return a route card
 

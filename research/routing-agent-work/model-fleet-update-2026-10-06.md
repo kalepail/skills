@@ -250,7 +250,33 @@ Harness events during this review:
 - A second parallel start failed for two models with `database is locked`.
 - Sequential runs with a 10-minute limit succeeded.
 
-The fleet now requires a time limit, an output check, and one retry after a lock error.
+A later investigation found the causes. See [OpenCode reliability](#opencode-reliability).
+
+## OpenCode reliability
+
+A follow-up test found a cause for each OpenCode failure in this update.
+See the [test results](evidence/fleet-2026-10-06/opencode/results.md).
+
+| Failure seen | Cause | Control |
+|---|---|---|
+| Three runs hung for 1h44m after `init` | `opencode run` waits for the end of stdin, and the launching shell kept stdin open | Close stdin |
+| GLM-5.3 at `max` ended twice with no text and exit code 0 | OpenCode's default output cap of 32000 tokens. GLM-5.3 at `max` used 28,505 to 38,323 reasoning tokens on one prompt, so the cap fails at random | Set `OPENCODE_EXPERIMENTAL_OUTPUT_TOKEN_MAX` to 128000 |
+| About 108K input tokens on the first step | `--pure` keeps the 13 global MCP servers; they add about 85K tokens | Turn the servers off through `OPENCODE_CONFIG_CONTENT`; a short run drops from 106,383 to 17,067 input tokens |
+| `database is locked` at start | About nine processes started together on a 2.8 GB database; no later test reproduced it | Retry once and stagger large batches |
+
+The test also found two more silent failures:
+
+- A headless run rejects each permission request that needs approval. It then exits 0 with no text.
+- An attached `run --attach` client stops its output after the first event, but the server finishes the session.
+
+The routing skill now has a [headless OpenCode reference](../../skills/productivity/routing-agent-work/references/opencode.md) and a tested launcher, `scripts/opencode_worker.py`.
+The launcher applies these controls and reports `complete`, `truncated`, `incomplete`, `empty`, `timeout`, or `error`.
+It passed its offline self-test and live checks on GLM-5.3, GLM-5.3 Flash, Kimi K3, and Muse Spark 1.3.
+
+These causes change the reading of two earlier results:
+
+- The GLM-5.3 probe failure and the empty GLM-5.3 edge review were harness truncation, not model refusals.
+- The Kimi K3 and Muse Spark 1.3 probe costs include about 85K tokens of MCP tool definitions on each step. Isolated runs cost much less.
 
 ## Validation
 
@@ -277,8 +303,7 @@ Structural checks:
 
 - The Skill Creator validator passes for all 16 skills.
 - Every eval file is valid JSON, and `git diff --check` passes.
-- The routing eval file contains 63 cases.
-- `SKILL.md` has 116 lines, and the fleet reference has 118 lines.
+- After the audit below, the routing eval file contains 40 cases: 28 positive and 12 hard-negative trigger cases, each marked with `should_trigger`.
 - The project and global installation links resolve to the edited sources.
 
 Limits:
@@ -286,4 +311,33 @@ Limits:
 - The evaluation tests routing instructions, not model performance.
 - Each evaluator answered all prompts in one context.
 - The key grades the primary model and effort, not every assertion in all 63 cases.
+
+## Skill audit
+
+Three fresh-context auditors reviewed the changed skills for overfitting and cleanliness.
+The auditors applied the skill-creator principles: generalize from incidents, keep the text lean, explain the reason, and avoid drift-prone facts.
+
+Changes to `routing-agent-work`:
+
+- Removed facts that drift: provider effort defaults, price ratios, named safeguard targets, speed-tier aliases, and one account's provider effort support.
+- Kept one copy of the pinned-CLI rule, the weaker-model rule, and the Daybreak family note.
+- Turned the launch check into a numbered list and moved the OpenCode catalog refresh into `references/opencode.md`.
+- Replaced the hard-coded ASD-STE100 rule with "pass the caller's writing standard into the worker brief".
+- Stated in the description that the skill also checks whether a headless OpenCode worker finished.
+- Fixed the launcher: it sends the prompt on stdin, reads only the final step's text, sums tokens across steps, adds `filtered` and `unconfirmed` statuses, checks MCP servers in the work directory, and returns a JSON error instead of a traceback. It passed 11 offline cases, a 180 KB prompt, and a live two-step tool run.
+- Cut the evals from 65 to 40. The cut removed near-duplicates and cases that restated one sentence, and it added three hard negatives and two casual-phrasing positives.
+
+A regression round on the 40 cases compared the committed version with the audited version.
+See [round 4](evidence/fleet-2026-10-06/validation/round4/).
+
+| Evaluator | Committed version | Audited version |
+|---|---:|---:|
+| Claude Sonnet 5.5 at `high` | 39/40 | 40/40 |
+| GPT-6.1 Sol at `high` | 38/40 | 39/40 |
+
+The committed version missed the headless OpenCode case, because it had no launch guidance.
+The remaining miss is eval 7: the evaluator rejected the unlisted model but offered a fleet reviewer.
+
+The deep-research, agent-browser-webauthn, and Solo audits removed version-specific lists, hard-coded shortcuts and limits, duplicated rules, and evals fitted to one incident.
+They kept every safety rule. Each Solo skill still states its own ownership and trust gates, because each skill must work when installed alone.
 

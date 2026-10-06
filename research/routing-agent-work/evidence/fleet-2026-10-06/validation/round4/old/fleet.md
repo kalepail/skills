@@ -16,7 +16,7 @@ When the caller pins a worker CLI, use the lane row's first route on that CLI. I
 ## Route by lane
 
 The bounded rows are the bounded implementation, budget, and extraction rows. Use them only for narrow work with readily checked output. Treat migrations and multi-file features as difficult implementation. Use the budget row only when the caller states a cost limit.
-For difficult implementation under a stated cost limit, use GPT-6.1 Sol at `high` or `xhigh`, then Sonnet 5.5 at `high`. Give the lane a stop budget.
+For difficult implementation under a stated cost limit, use GPT-6.1 Sol at `high` or `xhigh`, then Sonnet 5.5 at `high`. Give the lane a stop budget. Under a pinned CLI, use the first route in this chain on that CLI.
 Security lanes keep the caller's target and action limits on every route and fallback.
 
 | Primary lane | First route | Fallbacks, in order |
@@ -33,7 +33,7 @@ Security lanes keep the caller's target and action limits on every route and fal
 | Edge-case discovery and confirmation across model families | OpenCode with Muse Spark 1.3 | GLM-5.3 for text-only input; Kimi K3 when the harness preserves full history; Grok 4.7; GLM-5.3 Flash |
 | General multimodal, visual implementation, or long-context documents and screenshots | OpenCode with Muse Spark 1.3 | Opus 5.5; GPT-6.1 Sol; Kimi K3 when the harness preserves full history |
 | Text-only long-context work that needs an open-weight model | OpenCode with GLM-5.3 | Kimi K3 when the harness preserves full history; GLM-5.3 Flash |
-| Lowest-cost or open-weight automation, multimodal review, or structured prose | OpenCode with GLM-5.3 Flash | GPT-6.1 Sol at `medium`; Sonnet 5.5 at `medium`; Muse Spark 1.3 |
+| Cost-sensitive agentic coding, automation, multimodal review, or structured technical prose | OpenCode with GLM-5.3 Flash | GPT-6.1 Sol at `medium`; Sonnet 5.5 at `medium`; Muse Spark 1.3 |
 
 ## Treat weaker-model findings as leads
 
@@ -42,7 +42,9 @@ Use them for cost, modality, open weights, or a different model family.
 Treat their findings as leads, not verdicts.
 Reproduce a finding with a test, command, or cited source before a stronger route acts on it.
 Run two or three of them in parallel when the lane needs diverse edge cases. For one run, follow the order in the edge-case row.
-Launch headless OpenCode runs as [opencode.md](opencode.md) describes. A run can end with no answer and exit code 0.
+Give each run a time limit. OpenCode runs on these models sometimes stop without a completion record.
+Check that each expected output file exists and is not empty. A run can end with an empty message and exit code 0.
+Parallel OpenCode runs can fail at start with `database is locked`. Retry such a run once; it is a harness failure, not a model result.
 Discard a finding that no check reproduces.
 When one of these models owns a lane, accept its result only after the lane's completion check passes.
 
@@ -50,16 +52,16 @@ When one of these models owns a lane, accept its result only after the lane's co
 
 | Model | Worker CLI | Effort | Strong clues | Limits and keep-away clues |
 |---|---|---|---|---|
-| Opus 5.5 (`claude-opus-5-5`) | Claude | `low` to `max` | Default Claude route. Planning, orchestration, synthesis, difficult coding, debugging, long unattended migrations, code review, knowledge work, computer use, screenshots, and technical prose | Use `max` only with a clear stop budget. Give unattended runs a completion check and a stop budget. A turn that ends in text is a progress report, not proof of completion. Cyber safeguards can hand security work to a model outside the fleet. Use Opus 5.5 only for defensive review of the caller's own code. |
-| Sonnet 5.5 (`claude-sonnet-5-5`) | Claude | `low` to `high`; `xhigh` only as a fallback | Fast Claude route for well-scoped coding, bug fixes, bounded sweeps, documents, and design-sensitive work | Above `high`, Opus 5.5 gives better results at a similar task cost. Use Sonnet 5.5 above `high` only when Opus 5.5 is unavailable. Avoid `max`; it produces very high output-token counts. Cyber safeguards can hand security work to a model outside the fleet. Do not route vulnerability exploration to it. |
-| Fable 5.1 (`claude-fable-5-1`) | Claude | `high` to `max` | Escalation for demanding reasoning and long-horizon autonomy when Opus 5.5 at `xhigh` falls short; planning fallback when Opus 5.5 is unavailable | It costs more per token than Opus 5.5 and runs slower. Prefer `xhigh`. Give it a clear completion check and stop budget. |
-| GPT-6.1 Sol (`gpt-6.1-sol`) | Codex | `low` to `max`; host `ultra` mode when permitted | Default Codex route. Complex coding, terminal work, verification, agent workflows, computer use, and repeated long-running work | Prefer `xhigh` over `max` for coding unless a local sample shows a gain. Escalate to Astra when it falls short on the hardest end-to-end work. |
-| GPT-6 Astra (`gpt-6-astra`) | Codex | `low` to `max`; host `ultra` mode when the host confirms it | Escalation for the hardest end-to-end Codex work, difficult research, and final consequential interpretation | It costs much more per task than GPT-6.1 Sol. Use `high` or `xhigh`. Use `max`, or host `ultra`, only for the hardest lanes with a stop budget. |
+| Opus 5.5 (`claude-opus-5-5`) | Claude | `low` to `max` | Default Claude route. Planning, orchestration, synthesis, difficult coding, debugging, long unattended migrations, code review, knowledge work, computer use, screenshots, and technical prose | Its API default is `medium`; set effort explicitly. Use `medium` for bounded work, `high` for meaningful work, and `xhigh` for the hardest lanes. Use `max` only with a clear stop budget. Use `low` only for trivial, readily checked tasks. Give unattended runs a completion check and a stop budget. A turn that ends in text is a progress report, not proof of completion. Cyber safeguards send most security work to Opus 4.8, which is outside this fleet. Use Opus 5.5 only for defensive review of the caller's own code. |
+| Sonnet 5.5 (`claude-sonnet-5-5`) | Claude | `low` to `high`; `xhigh` only as a fallback | Fast Claude route for well-scoped coding, bug fixes, bounded sweeps, documents, and design-sensitive work | Its Claude Code default is `medium` and its API default is `high`; set effort explicitly. Above `high`, it costs about as much as Opus 5.5 at lower quality. Use it above `high` only as a fallback when Opus 5.5 is unavailable. Avoid `max`; it produces very high output-token counts. Cyber safeguards send flagged security work to Sonnet 5. Do not route vulnerability exploration to it. |
+| Fable 5.1 (`claude-fable-5-1`) | Claude | `high` to `max` | Escalation for demanding reasoning and long-horizon autonomy when Opus 5.5 at `xhigh` falls short; planning fallback when Opus 5.5 is unavailable | It costs 2.5 times Opus 5.5 per token and runs slower. Prefer `xhigh`. Give it a clear completion check and stop budget. |
+| GPT-6.1 Sol (`gpt-6.1-sol`) | Codex | `low` to `max`; host `ultra` mode when permitted | Default Codex route. Complex coding, terminal work, verification, agent workflows, computer use, and repeated long-running work | Its Codex default is `low`; set effort explicitly. Use `high` for meaningful work, `xhigh` for hard coding, and `medium` for bounded work. Prefer `xhigh` over `max` for coding unless a local sample shows a gain. Escalate to Astra when it falls short on the hardest end-to-end work. |
+| GPT-6 Astra (`gpt-6-astra`) | Codex | `low` to `max`; host `ultra` mode when the host confirms it | Escalation for the hardest end-to-end Codex work, difficult research, and final consequential interpretation | It costs about five times GPT-6.1 Sol per token. Use `high` or `xhigh`. API effort stops at `max`. Confirm `ultra` on the host before use. |
 | GPT-6 Luna (`gpt-6-luna`) | Codex | `high` to `max` | Narrow, high-volume extraction and triage when cost matters | Start at `high`. Use `xhigh` or `max` only when a local task sample shows a material gain. Keep the lane small. Give consequential interpretation to GPT-6.1 Sol, Astra, or Opus 5.5. |
 | Daybreak Blue (`gpt-daybreak-blue-latest` → `gpt-5.6-sol`) | Codex | `medium` to `max`; host `ultra` mode when permitted | Defensive cybersecurity reviews when refusal calibration matters | Check the alias through the [Daybreak model page](https://developers.openai.com/api/docs/models/gpt-daybreak-blue-latest). Its base is not a general route. It is not a different-family reviewer of other OpenAI work. Select it with an approved API key; a ChatGPT-account Codex login cannot use it. Start at `high`. If access is missing, use Astra. Keep the caller's target and action limits. |
-| Grok 4.7 (`grok-4.7`) | Grok | `medium` to `xhigh` | Independent challenge from another family, research with live web and X context, and second opinions | It trails the default routes on independent coding and terminal evaluations at a higher task cost. Do not use it as a coding fallback. Verify its factual claims and executed checks. |
-| GLM-5.3 | OpenCode | `high` or `max` | Open-weight text-only long-context work, defensive security analysis, and different-family challenge | It has no image input. Prefer `max`. At `max`, its reasoning can exceed OpenCode's output cap; [opencode.md](opencode.md) shows how to raise it. It is slow and verbose. |
-| GLM-5.3 Flash | OpenCode | `high` or `max` | Very low-cost coding, automation, tools, multimodal review, and prose | Use `max` for coding. Confirm the configured route provides high or max reasoning. |
+| Grok 4.7 (`grok-4.7`) | Grok | `medium` to `xhigh` | Independent challenge from another family, research with live web and X context, and second opinions | It trails the default routes on independent coding and terminal evaluations at a higher task cost. Do not use it as a coding fallback. Verify its factual claims and executed checks. Use `grok-4.7-build-fast` only when latency matters and the host lists it. |
+| GLM-5.3 | OpenCode | `high` or `max` | Open-weight text-only long-context work, defensive security analysis, and different-family challenge | It has no image input. Prefer `max`. It is slow and verbose. GLM-5.3 Prime is the same model on a faster, more expensive tier. |
+| GLM-5.3 Flash | OpenCode | `high` or `max` | Very low-cost coding, automation, tools, multimodal review, and prose | Use `max` for coding. Confirm the configured route provides high or max reasoning. GLM-5.3 FlashX is the same model on a faster tier. |
 | Kimi K3 | OpenCode | `high` or `max` | Preserved-reasoning multimodal sessions and different-family challenge | Start each new lane in a fresh session. The harness must preserve its full reasoning and tool history; generic harnesses score poorly. Keep a session that Kimi K3 started on Kimi K3, because a model switch loses that history. It is slow and expensive for its quality. |
 | Muse Spark 1.3 | OpenCode | `medium` to `max`, subject to provider support | Multimodal work, visual implementation, knowledge work, and different-family challenge | It trails on terminal-heavy agent work. Follow the provider order below among routes that meet the task's effort and data requirements. Results depend strongly on the harness. |
 
@@ -83,6 +85,7 @@ Try these identifiers in order:
 Skip contributor routes when their data terms are not accepted.
 Check effort support for the selected identifier, not only the model family.
 If no supported effort meets the task requirement, advance through the provider list before changing models.
+Full Meta 1.3 and OpenRouter 1.3 routes expose `max`; confirm the selected contributor route separately.
 
 ## Map effort to the worker CLI
 
@@ -109,5 +112,7 @@ The Codex host's `ultra` mode includes automatic delegation; it is not a portabl
 - Add Grok 4.7, Muse Spark 1.3, GLM-5.3, or Kimi K3 as extra challengers. They do not replace a capable reviewer, and their findings need reproduction.
 
 When no listed reviewer is available, mark the review lane `Unrouted`. Do not promote an extra challenger to reviewer.
+
+Daybreak Blue belongs to the same model family as the other OpenAI routes.
 
 Give the reviewer the artifact and requirements. Keep the author's reasoning out of the initial review context.

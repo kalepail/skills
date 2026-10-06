@@ -1,0 +1,29 @@
+**Request 64**
+
+Run this command:
+
+```bash
+python3 scripts/opencode_worker.py \
+  --model <provider/model> --variant max \
+  --dir <work-dir> --prompt-file <brief.md> \
+  --text-out <answer.md> --timeout 900
+```
+
+Replace `<provider/model>` with the configured GLM-5.3 Flash identifier. Confirm the identifier first. If it is absent, run `opencode models --refresh` once. Then run `opencode models <provider>`.
+
+Accept the answer only when all of these checks pass:
+- The launcher exits with code 0 and the JSON status is `complete`.
+- The file `<answer.md>` exists and is not empty.
+- The lane's own completion check passes.
+
+Treat each finding as a lead. Reproduce it with a test, a command, or a cited source. Discard a finding that no check reproduces. Do not accept exit code 0 alone.
+
+**Request 65**
+
+No. Do not report that GLM found no issues.
+
+The last `step_finish` reason is `length`. The output cap stopped the model. At `max`, the model likely used all of its tokens on reasoning. The run produced no answer. It did not finish.
+
+Run the lane again with `OPENCODE_EXPERIMENTAL_OUTPUT_TOKEN_MAX` set to 128000. The launcher sets this value. Accept the new result only when the status is `complete` and the answer file has text.
+
+Report this lane as incomplete until then.

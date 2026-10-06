@@ -1,0 +1,402 @@
+[
+  {
+    "id": 1,
+    "invoke_skill": true,
+    "worker_cli": "Claude",
+    "model": "Opus 5.5",
+    "effort": "high",
+    "fallback": "Sonnet 5.5 at xhigh",
+    "reviewer": "GPT-6.1 Sol",
+    "note": "Use Opus 5.5 high for implementation and tests. Use GPT-6.1 Sol high for independent review with fresh context."
+  },
+  {
+    "id": 2,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6.1 Sol",
+    "effort": "medium",
+    "fallback": "Sonnet 5.5 at medium",
+    "reviewer": "none",
+    "note": "Use five package workers. Give both orchestrators explicit child routes. Return affected paths and compact reports to direct parents."
+  },
+  {
+    "id": 3,
+    "invoke_skill": true,
+    "worker_cli": "Claude",
+    "model": "Fable 5.1",
+    "effort": "xhigh",
+    "fallback": "GPT-6 Astra at high",
+    "reviewer": "none",
+    "note": "Opus 5.5 is unavailable. Fable 5.1 xhigh is confirmed. Give the lane a completion check and stop budget."
+  },
+  {
+    "id": 4,
+    "invoke_skill": true,
+    "worker_cli": "Claude",
+    "model": "Opus 5.5",
+    "effort": "xhigh",
+    "fallback": "Sonnet 5.5 at xhigh",
+    "reviewer": "none",
+    "note": "The primary output is difficult implementation. Check the host context limit. Require decision traces, tests, and a stop budget."
+  },
+  {
+    "id": 5,
+    "invoke_skill": true,
+    "worker_cli": "OpenCode",
+    "model": "GLM-5.3 Flash",
+    "effort": "high",
+    "fallback": "GPT-6.1 Sol at medium",
+    "reviewer": "none",
+    "note": "Use Muse Spark 1.3 high as the challenger. Skip contributor providers without accepted terms. Reproduce findings before action."
+  },
+  {
+    "id": 6,
+    "invoke_skill": true,
+    "worker_cli": "Claude",
+    "model": "Opus 5.5",
+    "effort": "high",
+    "fallback": "Sonnet 5.5 at high",
+    "reviewer": "none",
+    "note": "Opus 5.5 fits technical prose. Keep the implementation owner when that worker can meet the supplied writing rules."
+  },
+  {
+    "id": 7,
+    "invoke_skill": true,
+    "worker_cli": "none",
+    "model": "Unrouted",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "The requested model is outside the fixed fleet. This policy excludes live model discovery and model scoring."
+  },
+  {
+    "id": 8,
+    "invoke_skill": false,
+    "worker_cli": "none",
+    "model": "none",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "The caller requires a review by the current agent. No delegation choice exists."
+  },
+  {
+    "id": 9,
+    "invoke_skill": false,
+    "worker_cli": "none",
+    "model": "none",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "The request concerns orchestration mechanics, not worker selection."
+  },
+  {
+    "id": 11,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6 Luna",
+    "effort": "high",
+    "fallback": "GPT-6.1 Sol at low",
+    "reviewer": "none",
+    "note": "Use narrow extraction contracts and field checks. GPT-6 Luna starts at high. The lane requires no consequential interpretation."
+  },
+  {
+    "id": 13,
+    "invoke_skill": true,
+    "worker_cli": "OpenCode",
+    "model": "Muse Spark 1.3",
+    "effort": "high",
+    "fallback": "Opus 5.5 at high",
+    "reviewer": "none",
+    "note": "Use a full Muse provider without accepted contributor terms. Confirm context and effort support. Require interface checks and completion evidence."
+  },
+  {
+    "id": 14,
+    "invoke_skill": false,
+    "worker_cli": "none",
+    "model": "none",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "Provider setup and API credentials are outside this routing policy."
+  },
+  {
+    "id": 15,
+    "invoke_skill": false,
+    "worker_cli": "none",
+    "model": "none",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "General model rankings and comparisons are outside this routing policy."
+  },
+  {
+    "id": 16,
+    "invoke_skill": false,
+    "worker_cli": "none",
+    "model": "none",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "The caller excludes delegation. Selecting a model for the entire chat is outside this policy."
+  },
+  {
+    "id": 17,
+    "invoke_skill": false,
+    "worker_cli": "none",
+    "model": "none",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "The worker CLI, model, and effort are already fixed."
+  },
+  {
+    "id": 18,
+    "invoke_skill": false,
+    "worker_cli": "none",
+    "model": "none",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "The request changes the fleet policy. It does not select a worker from the current fleet."
+  },
+  {
+    "id": 21,
+    "invoke_skill": true,
+    "worker_cli": "OpenCode",
+    "model": "Kimi K3",
+    "effort": "high",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "Continue the existing Kimi session. The host confirms preserved reasoning and tool history. A model switch loses that history."
+  },
+  {
+    "id": 29,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "Daybreak Blue",
+    "effort": "high",
+    "fallback": "GPT-6 Astra at high",
+    "reviewer": "Opus 5.5",
+    "note": "The host confirms access and effort. Keep all tests in the isolated checkout. Require reproducible findings and patch checks."
+  },
+  {
+    "id": 31,
+    "invoke_skill": true,
+    "worker_cli": "Claude",
+    "model": "Opus 5.5",
+    "effort": "high",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "Opus 5.5 provides a different family for defensive review of owned code. Daybreak Blue shares the author's model family."
+  },
+  {
+    "id": 34,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6.1 Sol",
+    "effort": "xhigh",
+    "fallback": "GPT-6 Astra at max",
+    "reviewer": "none",
+    "note": "Use the first fitting Codex debugging route. Confirm Sol before launch. Astra max is confirmed. The one-worker limit excludes ultra."
+  },
+  {
+    "id": 40,
+    "invoke_skill": false,
+    "worker_cli": "none",
+    "model": "none",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "Research provider and source selection are outside this routing policy."
+  },
+  {
+    "id": 41,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6.1 Sol",
+    "effort": "medium",
+    "fallback": "Sonnet 5.5 at medium",
+    "reviewer": "none",
+    "note": "The budget row selects Sol medium first. The host confirms it. Grok is not a coding fallback."
+  },
+  {
+    "id": 44,
+    "invoke_skill": true,
+    "worker_cli": "Claude",
+    "model": "Unrouted",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "Claude has no fleet route for vulnerability exploration and exploit construction. Opus 5.5 permits only defensive review of owned code."
+  },
+  {
+    "id": 45,
+    "invoke_skill": true,
+    "worker_cli": "Claude",
+    "model": "Opus 5.5",
+    "effort": "xhigh",
+    "fallback": "Sonnet 5.5 at xhigh",
+    "reviewer": "GPT-6.1 Sol",
+    "note": "Require completion checks and a stop budget. Report results, artifact paths, checks, risks, and blockers. Text alone does not prove completion."
+  },
+  {
+    "id": 46,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "Unrouted",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "Sol is unavailable. No budget-fitting fleet route remains on Codex. The older models are outside the fleet."
+  },
+  {
+    "id": 49,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6.1 Sol",
+    "effort": "high",
+    "fallback": "GPT-6 Astra at high",
+    "reviewer": "none",
+    "note": "Sol fits ordinary Codex implementation. No failure-cost signal justifies Astra's higher cost."
+  },
+  {
+    "id": 52,
+    "invoke_skill": true,
+    "worker_cli": "Claude",
+    "model": "Sonnet 5.5",
+    "effort": "medium",
+    "fallback": "Opus 5.5 at medium",
+    "reviewer": "none",
+    "note": "Sonnet is the first bounded implementation route on Claude. Medium meets the narrow bug-fix lane."
+  },
+  {
+    "id": 54,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6.1 Sol",
+    "effort": "xhigh",
+    "fallback": "GPT-6 Astra at xhigh",
+    "reviewer": "none",
+    "note": "Use xhigh for hard coding. Prefer it over max unless a local sample shows a gain."
+  },
+  {
+    "id": 55,
+    "invoke_skill": true,
+    "worker_cli": "OpenCode",
+    "model": "Muse Spark 1.3",
+    "effort": "high",
+    "fallback": "GLM-5.3 at max",
+    "reviewer": "GPT-6.1 Sol",
+    "note": "Also use GLM-5.3 max. Use Kimi K3 high only with confirmed preserved history. Require time limits and reproducible findings."
+  },
+  {
+    "id": 58,
+    "invoke_skill": true,
+    "worker_cli": "Grok",
+    "model": "Unrouted",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "The pinned Grok CLI has no coding route in the fixed fleet."
+  },
+  {
+    "id": 59,
+    "invoke_skill": true,
+    "worker_cli": "OpenCode",
+    "model": "GLM-5.3",
+    "effort": "max",
+    "fallback": "none",
+    "reviewer": "GPT-6.1 Sol",
+    "note": "The safeguard route is unavailable. GLM-5.3 is the next security fallback for text-only code. Keep the defensive limits."
+  },
+  {
+    "id": 61,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6.1 Sol",
+    "effort": "high",
+    "fallback": "Sonnet 5.5 at high",
+    "reviewer": "none",
+    "note": "A migration needs the difficult implementation budget chain. Give Sol a stop budget and completion checks."
+  },
+  {
+    "id": 62,
+    "invoke_skill": true,
+    "worker_cli": "none",
+    "model": "Unrouted",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "All listed different-family reviewers are unavailable. Grok and GLM are extra challengers. They cannot replace a capable reviewer."
+  },
+  {
+    "id": 64,
+    "invoke_skill": false,
+    "worker_cli": "none",
+    "model": "none",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "The model is selected. Launching a headless run and collecting its answer are orchestration mechanics."
+  },
+  {
+    "id": 65,
+    "invoke_skill": false,
+    "worker_cli": "none",
+    "model": "none",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "Check output files. Retry Kimi once. Reproduce Muse findings. An empty successful exit does not prove completion."
+  },
+  {
+    "id": 66,
+    "invoke_skill": false,
+    "worker_cli": "none",
+    "model": "none",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "The request concerns OpenCode troubleshooting. It makes no delegation choice."
+  },
+  {
+    "id": 67,
+    "invoke_skill": false,
+    "worker_cli": "none",
+    "model": "none",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "All worker CLIs, models, and efforts are fixed. Creating Herdr panes is orchestration mechanics."
+  },
+  {
+    "id": 68,
+    "invoke_skill": false,
+    "worker_cli": "none",
+    "model": "none",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "The request concerns live local model discovery, not delegated worker selection."
+  },
+  {
+    "id": 69,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "Daybreak Blue",
+    "effort": "high",
+    "fallback": "GPT-6 Astra at high",
+    "reviewer": "none",
+    "note": "Use a different-family security reviewer for the Opus patch. Confirm Daybreak API access. Give the reviewer the artifact and requirements."
+  },
+  {
+    "id": 70,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6.1 Sol",
+    "effort": "medium",
+    "fallback": "Sonnet 5.5 at medium",
+    "reviewer": "none",
+    "note": "The bounded repository sweep row selects Sol medium. Require affected paths and a compact report."
+  }
+]

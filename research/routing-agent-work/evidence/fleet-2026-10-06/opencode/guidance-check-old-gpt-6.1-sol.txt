@@ -1,0 +1,15 @@
+**64:** The supplied skill does not specify an exact headless launch command or answer collection command. The caller owns orchestration mechanics. The text also supplies no configured GLM-5.3 Flash identifier.
+
+It specifies these OpenCode controls:
+
+```text
+-m <provider/model> --variant <provider-supported-value>
+```
+
+Confirm the selected identifier and effort through host status or a targeted CLI check. Use an explicit supported effort: `high` or `max`. Give the run a time limit.
+
+Accept the answer only after the lane’s completion check passes. Check that each expected output file exists and contains content. Require the result, evidence paths, completed checks, unresolved risks, and blockers. Treat findings as leads. Reproduce each finding before a stronger route acts on it.
+
+**65:** No. Report that the run produced no usable result. Exit code `0` does not prove completion. The missing findings fail the output check. The final `length` reason does not establish a completed review.
+
+Retry or escalate with a clear completion check and stopping condition. Do not report “GLM found no issues.”

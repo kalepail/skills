@@ -18,7 +18,8 @@ Raw event streams: `kimi-k3.jsonl`, `muse-1.3.jsonl`, `glm-5.3-max-empty.jsonl`,
 - The first attempt ran all three models at once. It hung for 1h44m with no output, and the lead stopped it.
 - A second parallel attempt failed at start for two models with `database is locked`.
 - The direct `meta/muse-spark-1.3` route returns HTTP 402 for this account. The OpenRouter route works.
-- GLM-5.3 at `max` produced an empty result. The capability probes saw the same failure once.
+- GLM-5.3 at `max` produced an empty result. The capability probes saw the same failure once. Both runs hit OpenCode's default 32000-token output cap; see [the OpenCode tests](../opencode/results.md).
+- The hung runs waited for the end of stdin, which the launching shell kept open.
 
 ## Confirmed findings and fixes
 

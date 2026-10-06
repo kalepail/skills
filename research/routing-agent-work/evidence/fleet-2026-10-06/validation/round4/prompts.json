@@ -1,0 +1,162 @@
+[
+ {
+  "id": 1,
+  "prompt": "Split this migration into implementation, testing, and independent review lanes. I was thinking Codex for both implementation and independent review. Pick agents and reasoning levels."
+ },
+ {
+  "id": 2,
+  "prompt": "I need five agents to inspect separate packages and report the affected files. The parent should not consume their full transcripts. Two child orchestrators cannot load local skills."
+ },
+ {
+  "id": 3,
+  "prompt": "Route an ambiguous planning lane. Host status says the Opus 5.5 identifier is unavailable. Fable 5.1 is available at xhigh."
+ },
+ {
+  "id": 4,
+  "prompt": "Assign a worker to read a very large text-only design archive and trace its decisions into a long-running implementation."
+ },
+ {
+  "id": 5,
+  "prompt": "Pick a low-cost model for multimodal tool use and a second model to challenge its findings."
+ },
+ {
+  "id": 6,
+  "prompt": "The deliverable is a polished README and pull request description. The implementation owner already understands the change."
+ },
+ {
+  "id": 7,
+  "prompt": "Use this new unlisted model I heard about for a review lane. Find its current variants and score it first."
+ },
+ {
+  "id": 8,
+  "prompt": "Review this pull request yourself and report the findings. Do not delegate the review."
+ },
+ {
+  "id": 9,
+  "prompt": "How does Codex multi-agent orchestration work?"
+ },
+ {
+  "id": 11,
+  "prompt": "Assign a cheap worker to extract the same five fields from thousands of small independent records. The lane needs no broad judgment."
+ },
+ {
+  "id": 13,
+  "prompt": "Assign a worker to inspect screenshots and a PDF, then build and verify a long-running visual interface change."
+ },
+ {
+  "id": 14,
+  "prompt": "Configure my OpenCode providers and API credentials so Kimi K3 can launch."
+ },
+ {
+  "id": 15,
+  "prompt": "Give me an overall ranked comparison of every frontier model and score each one from one to ten."
+ },
+ {
+  "id": 16,
+  "prompt": "Which model should replace the current model for this entire single-agent chat? I will not delegate anything."
+ },
+ {
+  "id": 17,
+  "prompt": "Launch Claude with Fable 5.1 at xhigh for this already-written planning brief."
+ },
+ {
+  "id": 18,
+  "prompt": "Update our routing skill to add a newly released model to the approved fleet."
+ },
+ {
+  "id": 21,
+  "prompt": "Assign a worker to continue a multimodal long-horizon knowledge task that Kimi K3 started. The OpenCode provider preserves complete Kimi reasoning and tool history."
+ },
+ {
+  "id": 29,
+  "prompt": "Select a worker to review our authentication service for vulnerabilities and validate patches. Testing stays in our isolated checkout. Host status confirms Daybreak Blue access and high effort."
+ },
+ {
+  "id": 31,
+  "prompt": "Select an independent security reviewer for code written by GPT-6.1 Sol. Daybreak Blue and Opus 5.5 are available. A different model family is required."
+ },
+ {
+  "id": 34,
+  "prompt": "Choose a Codex model for a very hard debugging task. Only one worker is allowed, with no automatic or nested delegation. Host status confirms Astra max and ultra."
+ },
+ {
+  "id": 40,
+  "prompt": "Before I dispatch these three research lanes, tell me which search providers each lane should use: Parallel CLI, Perplexity, or Parallel Task MCP."
+ },
+ {
+  "id": 41,
+  "prompt": "Route cheap bounded repository sweeps. No CLI is pinned. Host status confirms GPT-6.1 Sol at medium, Sonnet 5.5 at medium, Opus 5.5 at medium, and Grok 4.7 at high."
+ },
+ {
+  "id": 44,
+  "prompt": "Choose a worker to explore vulnerabilities in our owned parser and build local exploit reproducers. The host pins Claude. Host status confirms Opus 5.5 at high. No external targets are allowed."
+ },
+ {
+  "id": 45,
+  "prompt": "Assign an Opus 5.5 worker to run a multi-part code base migration overnight without supervision. Route the lane and state its report contract."
+ },
+ {
+  "id": 46,
+  "prompt": "Route cheap bounded repository sweeps. Codex is pinned. GPT-6.1 Sol is unavailable and Astra exceeds the budget. Host status lists two older Codex models that are not in the fleet, both at medium."
+ },
+ {
+  "id": 49,
+  "prompt": "Route an ordinary Codex feature worker. GPT-6.1 Sol and Astra are both available at high. A teammate says Astra is always safer because it is the flagship. No failure-cost signal applies."
+ },
+ {
+  "id": 52,
+  "prompt": "Route a bounded bug-fix lane through Claude. The caller wants it fast and cheap. Host status confirms Sonnet 5.5 and Opus 5.5 at every effort level."
+ },
+ {
+  "id": 54,
+  "prompt": "Route a hard multi-file Codex refactor. Host status confirms GPT-6.1 Sol at high, xhigh, and max. The caller asks for the best effort setting."
+ },
+ {
+  "id": 55,
+  "prompt": "Route a lane that asks Kimi K3, GLM-5.3, and Muse Spark 1.3 to find edge cases in our new rate limiter. The implementer is Opus 5.5."
+ },
+ {
+  "id": 58,
+  "prompt": "The caller pins the Grok CLI for every worker. Route a multi-file implementation lane."
+ },
+ {
+  "id": 59,
+  "prompt": "Route a defensive review of our own service code to Opus 5.5. Host status shows that a cyber safeguard handed the request to a model outside the fleet."
+ },
+ {
+  "id": 61,
+  "prompt": "Route a multi-file migration under a strict, stated cost limit. No CLI is pinned."
+ },
+ {
+  "id": 62,
+  "prompt": "Add an independent reviewer for a finished GPT-6.1 Sol migration. The Claude provider is down, so Opus 5.5, Sonnet 5.5, and Fable 5.1 cannot run. Grok 4.7 and GLM-5.3 are available."
+ },
+ {
+  "id": 64,
+  "prompt": "Launch the selected GLM-5.3 Flash challenger as a headless OpenCode run from this orchestrator script, then collect its answer."
+ },
+ {
+  "id": 65,
+  "prompt": "I ran Muse Spark 1.3, GLM-5.3, and Kimi K3 as parallel headless challengers on our rate limiter. Muse returned three findings. GLM exited 0 with no text and reason length. Kimi failed at start with database is locked. What now?"
+ },
+ {
+  "id": 66,
+  "prompt": "my opencode tui won't start after the upgrade, it just shows a blank screen. can you figure out what broke?"
+ },
+ {
+  "id": 67,
+  "prompt": "Spawn three Herdr panes for these lanes: Codex gpt-6.1-sol high for the API, Claude claude-opus-5-5 high for the docs, OpenCode GLM-5.3 Flash max for tests."
+ },
+ {
+  "id": 68,
+  "prompt": "What is Codex's default model right now on my machine?"
+ },
+ {
+  "id": 69,
+  "prompt": "who should i hand this review to? opus wrote the patch and it touches auth"
+ },
+ {
+  "id": 70,
+  "prompt": "which model should the subagent use for a quick grep-and-report across the monorepo? nothing gets edited"
+ }
+]
