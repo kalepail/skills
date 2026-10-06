@@ -41,7 +41,7 @@ Crash restart:
 
 - Set `auto_restart: true` for persistent commands.
 - Preserve crash output and add restart banner.
-- Pause after 10 restarts in 60 seconds.
+- Pause after the documented restart limit; read the current limit in the auto-restart docs.
 - Disable during app shutdown.
 
 File-watch restart:

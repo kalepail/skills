@@ -195,13 +195,12 @@
     },
     {
       "id": 17,
-      "prompt": "End-of-run reconciliation: figure out what's actually done and file conclusions into the repo docs.",
-      "expected_output": "Do not use $solo-keep-scratchpads; route to $solo-close-out-work because deciding what is done and promoting it into canonical docs is the close-out workflow.",
+      "prompt": "Save these meeting notes to my Notion workspace under the Projects page.",
+      "expected_output": "Do not use $solo-keep-scratchpads; the user named Notion as the destination, not a Solo scratchpad. Use the Notion integration.",
       "assertions": [
-        "Recognizes done-versus-open reconciliation",
-        "Routes to solo-close-out-work",
-        "Does not decide run completion from within the pad skill",
-        "Leaves canonical promotion to the close-out flow"
+        "Recognizes a non-Solo notes destination",
+        "Does not create or edit a Solo scratchpad",
+        "Routes to the named external tool"
       ],
       "files": []
     },

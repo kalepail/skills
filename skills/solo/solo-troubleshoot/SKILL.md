@@ -1,6 +1,6 @@
 ---
 name: solo-troubleshoot
-description: Diagnose Solo project, command, terminal, service, CLI, shell, version-manager, trust, solo.yml sync, working-directory, execution-profile, WSL, restart-loop, output, port, and readiness failures. Use when tooling is missing, commands fail, YAML changes do not apply, status disagrees, or services never become ready. Do not use for routine status views (solo-observe-services), authorized routine start, stop, and restart (solo-run-processes), planned new configuration (solo-set-up-projects), or agent setup and health checks (solo-work-with-agents).
+description: Diagnose Solo project, command, terminal, service, CLI, shell, version-manager, trust, solo.yml sync, working-directory, execution-profile, WSL, restart-loop, output, port, readiness, and app UI or settings failures. Use when tooling is missing, commands fail, YAML changes do not apply, status disagrees, services never become ready, settings will not save, or the Solo window freezes. Do not use for routine status views (solo-observe-services), authorized routine start, stop, and restart (solo-run-processes), planned new configuration (solo-set-up-projects), working preference changes (solo-customize-workspace), or agent setup and health checks (solo-work-with-agents).
 ---
 
 # Troubleshoot Solo

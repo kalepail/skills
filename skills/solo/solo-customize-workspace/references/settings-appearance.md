@@ -26,25 +26,17 @@ Source: [Settings overview](https://soloterm.com/docs/settings/overview).
 
 ## App appearance
 
-- User-facing themes documented for packaged app: **Light**, **Dark**, **System**. System follows OS.
-- Settings exposes no picker for named VS Code-style color themes.
-- Interface font default: **System default**.
-- Interface scale steps: 77%, 85%, 92%, 100%, 108%, 115%, 123%, 131%, 138%; 14 px base.
-- `Cmd/Ctrl+Shift+=/-` changes interface scale.
+- Offer only the themes the Appearance tab lists. A System option follows the OS.
+- Interface font and interface scale are separate controls. Scale moves in fixed steps; a keyboard shortcut also changes it.
 
 Sources: [themes](https://soloterm.com/docs/appearance/themes), [interface font/scale](https://soloterm.com/docs/appearance/font-scale).
 
 ## Terminal display
 
-- Bundled fonts: JetBrains Mono, Geist Mono, MonoLisa, Input Mono.
-- Default: Geist Mono, regular weight 300, bold 700.
-- Terminal size 10–18 px on 13 px base; `Cmd/Ctrl+=/-` adjusts.
-- Letter spacing labels 0.5–1.3, default 1.0.
-- Line-height labels 1.0–1.8, default display 1.2.
-- Top and bottom focus borders default on.
-- Copy on select defaults off.
-- Both macOS Option keys default to Meta and can be changed independently.
-- TUI scroll multiplier ranges 1x–6x and does not affect normal scrollback.
+- Solo bundles several monospace terminal fonts. Read the current list, defaults, and size range in the Terminal tab.
+- Terminal font, weight, size, letter spacing, and line height are separate from interface scale.
+- Focus borders, copy on select, and macOS Option-as-Meta are independent toggles.
+- The TUI scroll multiplier does not affect normal scrollback.
 
 Preserve terminal punctuation coverage warnings and renderer warnings. Keep terminal typography separate from app UI scale.
 

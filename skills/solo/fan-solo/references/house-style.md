@@ -50,7 +50,7 @@ When the skill is absent, use an explicit route from the user or caller. Otherwi
 
 Fleet names are models, not Solo agent tools. Discover live launchable tools with `list_agent_tools`. Apply the route through the selected tool's saved defaults or `extra_args`.
 
-Solo's built-in tool types include Claude, Codex, Amp, Gemini, OpenCode, Copilot, Kimi, and Antigravity. Add any other terminal agent, such as Grok, as a custom Generic tool before spawning it. This list does not prove that a tool is installed and enabled. `list_agent_tools` is the live list. Pass the returned `agent_tool_installation_id` when a project has environment-specific installations.
+`list_agent_tools` is the live list of launchable tools. Add a terminal agent that Solo does not list as a custom Generic tool before spawning it. Pass the returned `agent_tool_installation_id` when a project has environment-specific installations.
 
 ### Set model and reasoning explicitly
 
@@ -67,18 +67,16 @@ When `routing-agent-work` is installed, its fleet reference owns flag syntax and
 
 ### Built-in subagents vs Solo workers
 
-Prefer a CLI's built-in subagents when every lane stays within one CLI. Use Solo workers when lanes cross CLIs or require settings the parent cannot pin.
+Prefer a CLI's built-in subagents when every lane stays within one CLI and that CLI can pin each lane's model and effort. Use Solo workers when lanes cross CLIs or need settings the parent cannot pin. Solo workers also give the lead durable IDs, timers, and output it can inspect.
 
-All four trigger routes work headless; re-run a route live before relying on it:
+Claude agent teams are a third topology: peers with a shared task list and mailbox. Use them only when Claude workers must communicate or claim shared tasks. Name each teammate's routed model explicitly. Cross-CLI work stays on Solo.
 
-| CLI | How to trigger | Definitions and per-subagent settings |
-|---|---|---|
-| `claude` | Auto-delegation from agent `description`, "use the X subagent", or the Agent tool; works under `claude -p` | `.claude/agents/*.md` or `--agents '<json>'`; per-agent `model` (alias, ID, or `inherit`) and `effort`; `--forward-subagent-text` exposes child transcripts in stream-json. Source: code.claude.com/docs/en/sub-agents |
-| `codex` | Conversational only—ask explicitly ("spawn one agent per…") or name custom agents in prose ("Have `pr_explorer` map the affected paths"); `AGENTS.md` standing instructions; `spawn_agents_on_csv` for batch; works under `codex exec` | `[features] multi_agent` stable-on; built-ins `default`/`worker`/`explorer`; per-agent `model` + `model_reasoning_effort` in `~/.codex/agents/<name>.toml` or `.codex/agents/`; `[agents] max_threads=6`, `max_depth=1`. Source: developers.openai.com/codex/subagents |
-| `opencode` | Primary agent auto-delegates via the `task` tool from agent descriptions; `@name` in TUI; works under `opencode run` | Built-in subagents such as `general`/`explore` (the set varies by version); custom in `.opencode/agents/*.md`, `~/.config/opencode/agents/`, or `opencode.json` `agent` key; per-agent `model` and `reasoningEffort`/`variant`; gate with `permission.task`. Source: opencode.ai/docs/agents |
-| `grok` | Model-driven `spawn_subagent`—steer by naming a type ("use the explore subagent"); `--no-subagents` disables; works under `--single` | Built-ins `general-purpose`/`explore`/`plan`; custom via `--agents '<json>'` or `--agent <file>` (Claude-compatible schema with per-subagent `model`); effort inherits session `--reasoning-effort`; `--best-of-n <N>` runs N headless attempts plus judge. Source: docs.x.ai/build CLI reference |
+Subagent and team mechanics change often. Read the CLI's current docs or `--help` before relying on a trigger phrase, config key, or limit:
 
-Claude agent teams are a third topology. They provide peers with a shared task list and mailbox. Enable `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`. Always name each teammate's routed model. Teammates inherit effort but not the lead's model. Use teams only when Claude workers must communicate or claim shared tasks. Cross-CLI work stays on Solo. Source: code.claude.com/docs/en/agent-teams
+- Claude: code.claude.com/docs/en/sub-agents and code.claude.com/docs/en/agent-teams
+- Codex: developers.openai.com/codex/subagents
+- OpenCode: opencode.ai/docs/agents
+- Grok: `grok --help` and the docs.x.ai CLI reference
 
 ## Respect recursive process ownership
 
@@ -103,7 +101,7 @@ This gate applies to input, stop/restart/close, rename, clear output, UI selecti
 
 Do not duplicate scratchpad narrative into todos. Point todo to relevant scratchpad section. KV has no compare-and-swap; protect competing read-modify-write or avoid it. Scratchpad edits use revision and smallest targeted mutation.
 
-Complete or backlog todos, promote durable conclusions as evidence lands, and cancel obsolete timers and locks. Retirement—archive or delete—waits for consumption at the current revision under the item's `## Retire after` contract. Backlog is for real future work, not finished or abandoned state; reach the small honest live set late and certain, never eagerly.
+Complete or backlog todos, promote durable conclusions as evidence lands, and cancel obsolete timers and locks. Archive or delete a record only after its consumers read the current revision, as its `## Retire after` contract records. Use backlog for real future work, not for finished or abandoned state. Shrink the live set late and with certainty, never eagerly.
 
 ## Monitor without guessing
 
@@ -138,4 +136,8 @@ Require evidence at actual boundary:
 
 Before closing an owned child, capture context, reconcile output, complete/release owned todo/locks, and cancel timers. Closing process never undoes filesystem edits.
 
-Harvest and closure travel together: once an owned worker's lane is complete—quiet with final output, acceptance evidence reviewed—persist the handoff and close or retask it in the same pass. Unreviewed or partial results keep a worker open; closing never substitutes for consumption. Terminal-only results (research findings, citations, excerpts) exist nowhere but the session: capture them claim-level in the durable handoff before close, and that record stays consumer-gated for upstream consumers per retirement conventions even after the process closes. An owned worker left live or idle after harvest is cruft. This holds at every depth, one generation at a time: each parent settles only the direct children it spawned, confirms a child's own subtree is settled before closing it, and never settles anyone else's.
+Harvest and closure travel together. When an owned worker's lane is complete and its evidence is reviewed, persist the handoff. Then close or retask the worker in the same pass. An idle worker left open after harvest is cruft.
+
+- Keep a worker open while its results are unreviewed or partial. Closing never substitutes for consumption.
+- Capture terminal-only results, such as research findings and citations, claim-level in the durable handoff before close. Closing destroys the only copy.
+- Settle one generation at a time. Each parent settles only its direct children. It confirms a child's own subtree is settled before it closes that child.

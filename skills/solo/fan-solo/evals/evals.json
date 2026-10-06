@@ -276,7 +276,7 @@
       "assertions": [
         "Uses live help before bundled references",
         "Searches current docs with help(query=...) or the hosted docs index",
-        "Does not cite a separate Solo Docs MCP server"
+        "Does not answer timer semantics from bundled references alone"
       ],
       "files": []
     }

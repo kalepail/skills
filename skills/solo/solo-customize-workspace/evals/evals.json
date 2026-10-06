@@ -219,14 +219,26 @@
       "id": 19,
       "name": "workspace-cycling-and-project-move",
       "prompt": "Give me a keyboard way to flip between the workspaces I have open in this window, and move the billing project into the Client workspace.",
-      "expected_output": "Use $solo-customize-workspace. Explain Ctrl+Tab and Ctrl+Shift+Tab for workspaces open in the current window and the unbound Switch to workspace 1–9 actions. Move the billing project with Move to workspace or move_project_to_workspace after confirming the destination. State that the move does not stop its processes.",
+      "expected_output": "Use $solo-customize-workspace. Read the current workspace-switching bindings from live Settings or current docs, explain the cycle and numbered switch actions they expose, and offer to bind an unbound action. Move the billing project through the context menu or move_project_to_workspace after confirming the destination, and state that the move does not stop its processes.",
       "assertions": [
-        "Uses Ctrl+Tab and Ctrl+Shift+Tab or bindable Switch to workspace 1–9 actions",
-        "Does not cite a separate workspace launcher shortcut",
+        "Reads current bindings from live Settings or docs instead of quoting remembered shortcuts",
+        "Offers to bind an unbound switch action after checking collisions",
         "Moves the project through the context menu or workspace MCP tool after confirming the destination",
         "States that moving a project does not stop its processes"
       ],
       "files": []
+    },
+    {
+      "id": 20,
+      "prompt": "Switch VS Code to a dark theme and rebind its command palette to Ctrl+Shift+Space.",
+      "expected_output": "Do not use $solo-customize-workspace; this is VS Code editor configuration, not Solo. Handle it as ordinary editor settings work.",
+      "assertions": [
+        "Recognizes a non-Solo application's preferences",
+        "Does not trigger any Solo skill",
+        "Does not inspect or change Solo settings"
+      ],
+      "files": [],
+      "name": "non-solo-editor-theme"
     }
   ]
 }

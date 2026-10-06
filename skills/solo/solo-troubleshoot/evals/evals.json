@@ -227,6 +227,17 @@
         "Does not reset app data, delete state, or restart processes"
       ],
       "files": []
+    },
+    {
+      "id": 20,
+      "prompt": "My Express server crashes with EADDRINUSE when I run npm start in a plain terminal. Solo is not involved.",
+      "expected_output": "Do not use $solo-troubleshoot; the failure happens outside Solo. Diagnose it as an ordinary port conflict.",
+      "assertions": [
+        "Recognizes a failure outside Solo",
+        "Does not call Solo diagnostic tools or solo doctor",
+        "Diagnoses the port conflict directly"
+      ],
+      "files": []
     }
   ]
 }

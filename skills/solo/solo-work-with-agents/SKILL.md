@@ -34,12 +34,12 @@ Read [agent-lifecycle.md](references/agent-lifecycle.md) before spawning, routin
 
 ## Launch One Agent
 
-1. Inventory current project processes and capacity. Route the task first; then prefer retasking an owned idle agent that finished its previous task and already matches the routed tool, model, and effort (`send_input` a fresh bounded prompt). Never reuse when the task needs a fresh session or a different family.
+1. Inventory current project processes and capacity. Route the task first. Retask an owned idle agent with a fresh bounded prompt only when it finished its previous task and matches the routed tool, model, and effort. Spawn fresh when the task needs a fresh session or a different model family.
 2. Call `list_agent_tools`; choose current configured, enabled, launchable installation by task fit.
 3. Call `spawn_agent`; prefer returned installation IDs and live options over remembered schemas.
 4. Record returned child ID before any later action.
 5. Prepend returned `agent_instructions` to first prompt.
-6. Send one self-contained prompt with objective, authoritative inputs, owned scope, forbidden work, acceptance checks, and handoff destination. While the child owns that scope, stay read-only on it—route rework back through `send_input` rather than co-editing.
+6. Send one self-contained prompt with objective, authoritative inputs, owned scope, forbidden work, acceptance checks, and handoff destination. While the child owns that scope, stay read-only on it. Send rework back through `send_input` instead of co-editing, so two writers never collide.
 
 Load `routing-agent-work` through the current host when installed and a lane needs model selection. Use [agent-lifecycle.md](references/agent-lifecycle.md) to apply the route.
 
@@ -65,7 +65,7 @@ Do not spawn when work is tiny, sequential, or shares same edit surface with cur
 2. Inspect output, files, diff, and checks at relevant layer.
 3. Leave Git/integration decision to root/operator.
 4. Cancel stale timers and release owned locks.
-5. Close or retask owned child in the same pass its task completes, its evidence is reviewed, and its handoff is durable—capture terminal-only findings claim-level first. Unreviewed or partial results keep it open; a finished agent left live or idle after moving on is cruft.
+5. Close or retask the owned child in the same pass that its evidence is reviewed and its handoff is durable. Capture terminal-only findings claim-level first. Keep the child open while results are unreviewed or partial. A finished agent left idle after you move on is cruft.
 
 ## Stop Conditions
 

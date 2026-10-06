@@ -86,9 +86,9 @@
       "prompt": "Split the search and payments work into separate lanes, dispatch a bounded worker per lane, and reconcile their handoffs one lane at a time.",
       "expected_output": "Use $solo-orchestrate-agents to define disjoint lanes, dispatch one bounded worker per lane, and integrate handoffs one lane at a time after evidence review.",
       "assertions": [
-        "Keeps orchestration as the primary owner of the mixed request",
-        "Delegates the reusable template save to solo-save-prompts",
-        "Launches workers only after lanes, ownership, and checks are defined"
+        "Defines disjoint lanes with owned scope and acceptance checks before dispatch",
+        "Dispatches one bounded worker per lane and records each child ID",
+        "Integrates handoffs one lane at a time after evidence review"
       ],
       "files": []
     },
@@ -227,7 +227,7 @@
     },
     {
       "id": 21,
-      "prompt": "The Sol implementation worker just finished and I merged its diff. The next queued lane is the independent adversarial review of that same change, and the Sol worker is sitting idle—reuse it for the review?",
+      "prompt": "The implementation worker just finished and I merged its diff. The next queued lane is the independent adversarial review of that same change, and the implementer is sitting idle. Reuse it for the review?",
       "expected_output": "No. Invoke routing-agent-work when installed for the review route, require a fresh capable reviewer from another model family, and close the harvested implementer after its handoff is durable.",
       "assertions": [
         "Refuses to reuse the implementer worker to review its own change",
@@ -258,6 +258,17 @@
         "Recognizes a route-only selection request",
         "Routes to routing-agent-work",
         "Does not spawn, retask, or time any Solo worker"
+      ],
+      "files": []
+    },
+    {
+      "id": 24,
+      "prompt": "Use Claude Code's built-in subagents to explore these three directories in parallel. Solo is not involved.",
+      "expected_output": "Do not use $solo-orchestrate-agents; the fan-out stays inside one CLI's built-in subagents and Solo is not involved. Use the host's native subagent tool.",
+      "assertions": [
+        "Recognizes a same-CLI built-in subagent fan-out outside Solo",
+        "Does not spawn Solo workers or create Solo todos, timers, or locks",
+        "Uses the host's native subagent mechanism"
       ],
       "files": []
     }

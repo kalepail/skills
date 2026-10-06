@@ -11,7 +11,7 @@ Store reusable prompt shape, not current orchestration state.
 
 1. Call `whoami`; confirm effective project before project-scoped template work.
 2. Call `mcp_tools_summary` or live tool discovery for prompt-template tools. Use `help(query="prompt templates")` when current docs matter.
-3. If tools are absent, report that the **Prompt template MCP tools** toggle in Settings → MCP is off by default. Do not guess schemas or enable settings without authority.
+3. If tools are absent, report that the prompt-template MCP feature toggle in Settings → MCP is likely off. Do not guess schemas or enable settings without authority.
 4. Read existing template before update; preserve omitted fields.
 
 Read [prompt-templates.md](references/prompt-templates.md) before choosing scope, designing placeholders, updating/deleting, exporting, or creating templates that mention orchestration.

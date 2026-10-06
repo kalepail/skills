@@ -192,6 +192,17 @@
         "Leaves the prompt-template catalog unchanged"
       ],
       "files": []
+    },
+    {
+      "id": 17,
+      "prompt": "Save this review brief as a Claude Code slash command in .claude/commands so I can reuse it.",
+      "expected_output": "Do not use $solo-save-prompts; the user asked for a Claude Code slash command file, not a Solo prompt template. Write the command file as ordinary repository work.",
+      "assertions": [
+        "Recognizes a non-Solo reusable prompt destination",
+        "Does not create a Solo prompt template",
+        "Writes the requested slash command file instead"
+      ],
+      "files": []
     }
   ]
 }

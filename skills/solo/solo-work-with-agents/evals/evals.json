@@ -256,12 +256,12 @@
     {
       "id": 22,
       "prompt": "Launch the Antigravity agent in this project and have it summarize the README.",
-      "expected_output": "Use $solo-work-with-agents. Call list_agent_tools, select the enabled Antigravity installation (passing agent_tool_installation_id when returned), spawn one owned agent, record its process ID, prepend agent_instructions, and send one bounded prompt.",
+      "expected_output": "Use $solo-work-with-agents. Call list_agent_tools and select the enabled installation for the named tool, passing agent_tool_installation_id when returned. If the tool is absent, report that and offer a custom Generic tool instead of substituting another agent. Spawn one owned agent, record its process ID, prepend agent_instructions, and send one bounded prompt.",
       "assertions": [
-        "Treats Antigravity as a built-in Solo agent tool type found through list_agent_tools",
+        "Finds the tool through list_agent_tools instead of a remembered built-in list",
+        "Reports an absent tool instead of silently substituting another agent",
         "Passes the returned installation ID when discovery returns environment-specific installations",
-        "Records the returned child process ID before follow-up",
-        "Sends one bounded prompt and inspects actual output before reporting"
+        "Records the returned child process ID and inspects actual output before reporting"
       ],
       "files": []
     }

@@ -53,7 +53,8 @@ When parentage or authority is uncertain, inspect only and ask user before mutat
 - Cancel owned timers.
 - Release owned locks.
 - Close only recorded descendants.
-- Close or retask each finished worker in the same pass its evidence is reviewed and handoff persisted; unreviewed or partial results keep a worker open, terminal-only findings (research, citations) need claim-level capture before close, and a finished worker left live or idle is cruft—at every depth, one generation at a time: each parent settles only the direct children it spawned, confirms a child's subtree is settled before closing it, and never settles anyone else's.
+- Follow the close-or-retask rule in `SKILL.md`. Capture terminal-only findings, such as research and citations, claim-level before close.
+- Settle only direct children you spawned. Never settle another actor's children.
 - Leave shared/YAML-backed processes alone unless exact cleanup authority exists.
 - Return evidence and integration decision to root/operator.
 

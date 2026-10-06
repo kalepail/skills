@@ -76,12 +76,12 @@
     {
       "id": 7,
       "prompt": "Create Solo todos for the Postgres migration steps with the schema task blocking the data-copy task, and capture the decision context in a comment on the lead todo.",
-      "expected_output": "Use $solo-track-todos for the migration todos, the schema-blocks-data-copy edge, and the decision context as a todo comment.",
+      "expected_output": "Use $solo-track-todos for the migration todos, the schema-blocks-data-copy edge, and a task-local decision comment on the lead todo. Point to a scratchpad section if the decision narrative is broad, instead of copying it into the todo.",
       "assertions": [
         "Owns the actionable todo portion of the mixed request",
         "Models the schema-to-data-copy blocker explicitly",
-        "Redirects the decision narrative to scratchpads",
-        "Does not store decision prose inside todos"
+        "Records task-local decision context as a todo comment",
+        "Links a scratchpad for broad narrative instead of duplicating it"
       ],
       "files": []
     },
@@ -226,6 +226,17 @@
         "Routes to solo-orchestrate-agents",
         "May surface ready work but does not spawn agents",
         "Does not use todo locks as worker control"
+      ],
+      "files": []
+    },
+    {
+      "id": 20,
+      "prompt": "Add these three follow-ups to my Linear project with high priority.",
+      "expected_output": "Do not use $solo-track-todos; the user asked for Linear issues, not Solo todos. Use the Linear integration.",
+      "assertions": [
+        "Recognizes a non-Solo task tracker",
+        "Does not create Solo todos",
+        "Routes to the named external tracker"
       ],
       "files": []
     }

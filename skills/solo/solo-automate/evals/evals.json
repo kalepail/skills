@@ -202,9 +202,9 @@
     {
       "id": 19,
       "prompt": "Write a CI step that type-checks our Solo routine sources without writing generated files.",
-      "expected_output": "Use $solo-automate. Use `solo routine bundle --check` with the needed `--scope` or `--root`, add `--json`, and branch on exit codes. Note that routine bundling works without the running app.",
+      "expected_output": "Use $solo-automate. Confirm the routine-bundling command and its check flag with `solo help routine`, then run it with `--json` and branch on exit codes. Note that routine bundling works without the running app.",
       "assertions": [
-        "Uses the exact `solo routine bundle --check` command",
+        "Uses `solo routine bundle` in check mode, confirmed against live CLI help",
         "Adds --json and exit-code handling",
         "Does not require the running Solo app for bundling"
       ],

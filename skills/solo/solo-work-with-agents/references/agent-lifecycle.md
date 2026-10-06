@@ -14,21 +14,13 @@ Solo-managed agents normally auto-identify. If detection fails, assert only call
 
 ## Process authority
 
-Apply recursive, non-transferable ownership:
-
-- Control self and descendants this actor spawned.
-- Record returned child IDs because later process reads do not reliably prove parentage.
-- Treat parent, sibling, unrelated, YAML-backed shared process, and another actor's descendants as unauthorized unless user/runbook explicitly names target and action.
-- Apply same gate to input, stop, restart, close, rename, output clearing, UI selection, and timer delivery.
-- Do not infer authority from idle, stopped, completed, failed, or apparently abandoned state.
-
-When authority is unclear, inspect only. Ask user before mutation.
+Apply the ownership gate in `SKILL.md` to input, stop, restart, close, rename, output clearing, UI selection, and timer delivery. Record returned child IDs because later process reads do not reliably prove parentage. When authority is unclear, inspect only and ask the user before mutation.
 
 ## Spawn contract
 
 ### Tool setup and health
 
-- Built-in tool types include Claude, Codex, Amp, Gemini, OpenCode, Copilot, Kimi, and Antigravity. Custom Generic tools can host other terminal agents. `list_agent_tools` is the live list.
+- `list_agent_tools` is the live list of tool types and installations. A custom Generic tool can host a terminal agent that Solo does not list.
 - Solo stores command/default arguments and optional generic prompt/summarizer behavior but does not install agent CLIs.
 - Health is environment-specific. Ready is launchable; Not checked remains launchable but inconclusive; Missing and Broken are not launchable; Disabled is separate.
 - Refresh health explicitly. Runtime Doctor explains tool/environment launchability; MCP connection count/repair is a different diagnostic.
@@ -37,14 +29,7 @@ When authority is unclear, inspect only. Ask user before mutation.
 - Fleet names are models, not agent tools. `list_agent_tools` returns CLI installations. Apply the route through saved defaults or `extra_args`.
 - `setup_agent_integration` adds a `## Solo Integration` section to `CLAUDE.md` or `AGENTS.md` and leaves an existing section unchanged. Treat this as repository edit: require request, preserve local instructions, and review diff.
 
-| CLI | Model flag | Reasoning flag | Canonical source |
-|---|---|---|---|
-| `claude` | `--model <alias\|id>` | `--effort <level>` | `claude --help` |
-| `codex` | `-m <id>` | `-c model_reasoning_effort="<level>"` | `codex --help`, `codex exec --help` |
-| `opencode` | `-m provider/model` | `--variant <provider-specific-level>` | `opencode run --help` |
-| `grok` | `-m <id>` | `--reasoning-effort <level>` | `grok --help` |
-
-When `routing-agent-work` is installed, its fleet reference owns flag syntax; use this table only as the fallback. Verify the route's flags against live `--help` before launch. Do not use Solo to discover or score unknown models.
+Set the routed model and effort explicitly on every routed spawn. When `routing-agent-work` is installed, its fleet reference owns the flag syntax. Otherwise, read the flags from the CLI's live `--help`. Do not use Solo to discover or score unknown models.
 
 Prefer a CLI's built-in subagents when every lane stays within one CLI and that CLI can pin each lane's settings. Use Solo agents when lanes cross CLIs or need settings the CLI cannot pin. Headless `opencode run` lanes reject file access outside their working directory, so keep briefs and outputs inside the project. When `fan-solo` is installed, its house-style reference has the per-CLI subagent and Claude agent-team detail.
 
@@ -91,7 +76,7 @@ Handoff: <destination plus changed files, tests, blockers, risk, next action>
 - Inspect partial changes before closing mid-task child.
 - Cancel owned stale timers and release owned locks.
 - Close only owned descendant. Self-close requires explicit user request and current live confirmation semantics.
-- Close or retask each owned child in the same pass its task completes, its evidence is reviewed, and its handoff is durable—capture terminal-only findings (research, citations, excerpts) claim-level first, since closing destroys the only copy. Unreviewed or partial results keep it open; a finished agent left live or idle after the parent moves on is cruft—at every depth, one generation at a time: each parent settles only the direct children it spawned and confirms a child's subtree is settled before closing it.
+- Follow the close-or-retask rule in `SKILL.md`. Capture terminal-only findings, such as research and citations, claim-level first, because closing destroys the only copy. Settle only direct children, and confirm a child's own subtree is settled before closing it.
 - Leave Git index, commits, pushes, PRs, publishing, deployment, and final integration to root/operator unless explicitly delegated.
 
 ## Sources

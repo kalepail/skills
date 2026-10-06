@@ -46,7 +46,7 @@ Control existing process entries with smallest lifecycle action that achieves re
 ## Runtime policy
 
 - Treat `auto_start` as eligibility, not immediate launch. Project Auto Start, command flag, trust, and limits all gate startup.
-- Use crash `auto_restart` only for commands expected to remain alive. Expect pause after 10 restarts in 60 seconds.
+- Use crash `auto_restart` only for commands expected to remain alive. Crash restart pauses after a documented restart limit, so a crash loop does not run forever.
 - Use `restart_when_changed` only when native watcher is insufficient. Keep globs narrow and project-root-relative.
 - Keep crash restart and file-watch restart conceptually separate.
 - Restart after shell environment or saved command configuration changes; existing child environment never updates in place.

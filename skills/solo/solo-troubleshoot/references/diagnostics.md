@@ -41,7 +41,7 @@ Solo injects `SOLO_PROCESS_ID`, `SOLO_PROJECT_ID`, and `SOLO_PROCESS_KIND`; thes
 
 ## Restart and readiness
 
-Crash auto-restart pauses after 10 restarts within 60 seconds. File-watch restart is separate, recursive, debounced, and create/modify driven. Preserve crash output before manual restart.
+Crash auto-restart pauses after its documented restart limit; read the current limit in the auto-restart docs. File-watch restart is separate, recursive, debounced, and create/modify driven. Preserve crash output before manual restart.
 
 Solo readiness proves tracked process or descendant has listening localhost port. Timeout means no detected listener before deadline, not necessarily crash. Use application health request to prove dependency/migration/protocol readiness.
 

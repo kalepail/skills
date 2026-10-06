@@ -42,20 +42,21 @@ Configure Solo's application shell around existing projects and processes. Prese
 - Reorder workspaces when numbered bindings or rail order matter.
 - Move workspace to new window for multi-monitor layout; remember one workspace can be open in only one window.
 - Before deleting populated workspace, require destination for contained projects. Never imply disk files are deleted.
-- Use workspace MCP tools for scripted moves. In the UI, use the project context menu **Move to workspace** and the palette **All workspaces** scope.
+- Use workspace MCP tools for scripted moves. Otherwise, guide the user to the current UI action named in live Solo or docs.
 
 ## Tune sidebar and navigation
 
 - Reorder Todos, Agents, Terminals, Commands, and Scratchpads per project or change default subgroup order when request is global.
 - Use collapse state, per-section empty visibility, filter input, favorites, and resource thresholds to reduce noise before hiding useful signals.
 - Preserve unread and running visibility. Running lesser-used commands remain visible by design.
+- Read current bindings from live Settings or current docs before naming a shortcut. Defaults and labels change between releases.
 - Remap configurable hotkeys only after checking collisions and fixed shortcuts.
-- Distinguish palette scopes: All, Actions, Context, Go to, Focus, Templates, and New. Do not overload one shortcut with another scope's job.
+- Keep each command-palette scope on its own shortcut. Do not overload one shortcut with another scope's job.
 
 ## Tune settings and appearance
 
 - Keep interface and terminal typography separate.
-- Use Light, Dark, or System unless live Settings proves a named theme picker exists.
+- Offer only the themes and controls that live Settings exposes. Do not promise a theme from memory or from another app.
 - Preserve readable focus indicators and terminal font coverage.
 - Test custom editor/terminal entries before making them defaults. Do not promise system fallback when no tool is configured.
 - Keep device-local preferences out of `solo.yml`.

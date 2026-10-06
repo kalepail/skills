@@ -1,6 +1,6 @@
 ---
 name: solo-orchestrate-agents
-description: Plan and coordinate multi-agent work through Solo with bounded workers, durable state, locks, timers, evidence review, and handoffs. Use for parallel research, disjoint implementation lanes, cross-model review, cross-project cohorts, or delegation through several Solo agents. Do not use solely because research is deep or cited—citation and synthesis discipline come from a research method, not from orchestration—nor for single-agent, sequential, or shared-file work (use solo-work-with-agents), nor for choosing a model, effort, or reviewer by itself (use routing-agent-work).
+description: Plan and coordinate multi-agent work through Solo with bounded workers, durable state, locks, timers, evidence review, and handoffs. Use for parallel research, disjoint implementation lanes, cross-model review, cross-project cohorts, or delegation through several Solo agents. Do not use only because research is deep or cited, since synthesis belongs to a research method. Do not use for single-agent, sequential, or shared-file work (solo-work-with-agents), a CLI's own built-in subagents outside Solo, or choosing a model, effort, or reviewer alone (routing-agent-work).
 ---
 
 # Orchestrate Solo Agents
@@ -31,7 +31,7 @@ Fan out only when lanes are independent, have disjoint write scopes or read-only
 - Interview for goal, constraints, non-goals, authoritative inputs, risks, and verification.
 - Write concise plan to Solo scratchpad with stable sections.
 - Make lead responsible for user conversation, synthesis, integration, and final evidence.
-- Keep lead writes to coordination state, final synthesis, and mechanical integration seams—a no-code lead delegates even those; assign separable artifact changes and rework to worker lanes, and require concise evidence plus artifact paths back, not whole pasted deliverables.
+- Limit lead writes to coordination state, final synthesis, and mechanical integration seams. A no-code lead delegates even those. Assign separable artifact changes and rework to worker lanes. Require concise evidence and artifact paths back, not whole pasted deliverables, so the lead keeps context for judgment.
 
 ### 2. Build Work Graph
 
@@ -44,7 +44,7 @@ Fan out only when lanes are independent, have disjoint write scopes or read-only
 - Discover available agent tools live; choose by lane fit.
 - Load `routing-agent-work` through the current host when installed and a lane needs model selection. Apply its route through [orchestration.md](references/orchestration.md).
 - Prefer Solo's maintained `worker_bootstrap` MCP prompt when the host exposes it, then layer lane specifics, instead of hand-rewriting the whole identity/lock/state contract.
-- Spawn one worker per independent lane. Route the lane first; then prefer retasking an owned idle worker that finished its lane and already matches the routed tool, model, and effort (`send_input` a fresh bounded contract). Never reuse for fresh-session or cross-family lanes.
+- Spawn one worker per independent lane. Route the lane first. Retask an owned idle worker with a fresh bounded contract only when it finished its lane and matches the routed tool, model, and effort. Spawn fresh for fresh-session or cross-family lanes, such as independent review.
 - Record every returned child `process_id` with todo and project immediately.
 - Prepend returned `agent_instructions` to self-contained worker prompt.
 - Require worker to lock its todo and relevant shared edit area, preserve unrelated changes, avoid Git/publishing/integration, and report exact evidence.
@@ -76,7 +76,8 @@ Fan out only when lanes are independent, have disjoint write scopes or read-only
 
 - Cancel stale timers and release owned locks.
 - Capture handoff before closing any worker.
-- Close or retask each owned worker in the same pass its lane completes and its evidence is reviewed. Unreviewed or partial results keep a worker open; a finished worker left live or idle while lead moves on is cruft—at every depth, one generation at a time, confirming a child's subtree is settled before closing it.
+- Close or retask each owned worker in the same pass that its evidence is reviewed. Keep a worker open while results are unreviewed or partial. A finished worker left idle while the lead moves on is cruft.
+- Settle one generation at a time. Confirm a child's own subtree is settled before closing that child.
 - Close only descendants current actor spawned; never clean parent, sibling, unrelated, YAML-backed, or another actor's descendants without explicit authority.
 - Leave Git, commits, pushes, PRs, publishing, deployment, and final integration to root/operator unless expressly delegated.
 

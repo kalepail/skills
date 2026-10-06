@@ -52,7 +52,7 @@ Do not encode status, priority, or blockers in tags. Prefer add/remove tag helpe
 
 ## Locks and process ownership
 
-Todo lock is advisory active-work signal, not authorization or file lock. Current MCP schema defaults todo lease to 300 seconds; verify live help before relying on duration. Process-owned locks are released when bound process closes.
+Todo lock is advisory active-work signal, not authorization or file lock. Take the default lease duration from the live schema or `help(topic="todos")`. Process-owned locks are released when bound process closes.
 
 - Lock only unclaimed/assigned work current actor is authorized to take; never steal active foreign lock.
 - Inspect holder before editing locked todo.

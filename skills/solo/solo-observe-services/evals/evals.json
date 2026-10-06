@@ -224,6 +224,17 @@
         "Does not clear output or mutate the process"
       ],
       "files": []
+    },
+    {
+      "id": 21,
+      "prompt": "Check whether port 5432 is open on the staging database host.",
+      "expected_output": "Do not use $solo-observe-services; the target is a remote host that Solo does not manage. Use ordinary network diagnostics.",
+      "assertions": [
+        "Recognizes a remote service outside Solo",
+        "Does not call Solo readiness or port tools",
+        "Uses ordinary network checks instead"
+      ],
+      "files": []
     }
   ]
 }

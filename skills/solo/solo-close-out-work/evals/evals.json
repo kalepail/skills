@@ -98,13 +98,12 @@
     },
     {
       "id": 9,
-      "prompt": "Wrap up and close out this finished run: fold the durable conclusions from its scratchpads into the canonical docs, then retire the run's ephemeral state across pads, todos, and locks without dropping anything still open.",
-      "expected_output": "Use $solo-close-out-work to fold the run's durable conclusions into the repo's existing canonical docs and verify them, then retire the ephemeral copies across scratchpads, todos, and locks, releasing only owned locks and preserving on doubt so nothing still open is dropped.",
+      "prompt": "Close out the sprint in Linear and archive the finished issues.",
+      "expected_output": "Do not use $solo-close-out-work; this is sprint closeout in Linear, not reconciliation of Solo scratchpads, todos, timers, or locks. Use the Linear integration.",
       "assertions": [
-        "Scopes the finished run and spans scratchpads, todos, and locks",
-        "Promotes and verifies durable content before retiring copies",
-        "Releases only owned locks and fails closed on foreign ones",
-        "Preserves anything still open"
+        "Recognizes a non-Solo closeout despite the close-out wording",
+        "Does not inventory or retire Solo state",
+        "Routes to the named external tracker"
       ],
       "files": []
     },

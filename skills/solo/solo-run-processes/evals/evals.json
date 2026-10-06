@@ -223,6 +223,17 @@
         "Does not apply process lifecycle actions to the agent"
       ],
       "files": []
+    },
+    {
+      "id": 21,
+      "prompt": "Restart the nginx service on my Linux server with systemctl.",
+      "expected_output": "Do not use $solo-run-processes; a systemd service on a remote server is not a Solo-managed process. Handle it with ordinary server administration.",
+      "assertions": [
+        "Recognizes a process that Solo does not manage",
+        "Does not call Solo lifecycle tools",
+        "Handles the restart outside Solo"
+      ],
+      "files": []
     }
   ]
 }

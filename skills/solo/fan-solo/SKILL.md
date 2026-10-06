@@ -46,9 +46,9 @@ For ambiguous or multi-surface requests, read [capability map](references/capabi
 
 Default to one agent for sequential work, shared-state edits, or one coherent judgment loop. Use `$solo-work-with-agents` for that lifecycle.
 
-Use `$solo-orchestrate-agents` only when at least two lanes are independent enough to own separately. Lead owns decomposition, boundaries, integration, and final verification. Workers own bounded lanes—not whole goal. A parenting agent writes coordination state, final synthesis, and at most mechanical integration-seam glue—a no-code lead delegates even that: assign every separable artifact change—including rework—to a worker lane, and take back concise evidence and artifact paths, not whole pasted output.
+Use `$solo-orchestrate-agents` only when at least two lanes are independent enough to own separately. The lead owns decomposition, integration, and final verification. Each worker owns one bounded lane. [House style](references/house-style.md) defines what a parenting agent may write itself.
 
-Evidence-gathering lanes are ordinary orchestration: `$solo-orchestrate-agents` supplies the worker mechanics, timers, and handoffs. Provider selection, citation discipline, and research synthesis are not Solo capabilities—they come from whatever research method or skill the session already carries.
+Evidence-gathering lanes are ordinary orchestration. `$solo-orchestrate-agents` supplies the worker mechanics, timers, and handoffs. Provider selection, citation discipline, and research synthesis are not Solo capabilities. They come from the session's research method or skill.
 
 Load `routing-agent-work` through the current host when installed and a lane needs model selection. Use [house style](references/house-style.md) for Solo mechanics.
 
@@ -63,13 +63,13 @@ Load `routing-agent-work` through the current host when installed and a lane nee
 - Prompt template: reusable dispatch text, never current project truth.
 - Repository docs: reconciled durable project behavior and decisions.
 
-Keep the live set ephemeral. Complete or backlog todos, promote durable conclusions as evidence lands, and cancel obsolete timers and locks; archive a scratchpad or delete a record only after its recorded consumers have consumed it at the current revision. An unconsumed handoff outlives its producing lane, though stale todos and orphaned scratchpads remain noise once safe to retire. When a whole run ends with residue across several surfaces, route reconciliation to `$solo-close-out-work`—it promotes durable content first, then retires the ephemeral copy without losing incomplete work.
+Keep the live set ephemeral, but retire a record only after its recorded consumers have read the current revision. A lost handoff costs more than a stale list entry. When a whole run ends with residue across several surfaces, route reconciliation to `$solo-close-out-work`.
 
 Read [house style](references/house-style.md) before spawning agents, mutating shared state, or controlling processes.
 
 ## Protect ownership and safety
 
-- Control only the current process and its recorded descendants. Idle, stopped, or cleanup state never grants authority over another process.
+- Apply the process-authority gate above to every control action.
 - Use explicit project and process IDs when scope is ambiguous. Record returned child IDs.
 - Treat command trust, locks, and identity as separate gates. Never bypass trust or treat lock as permission.
 - Ask before destructive or externally visible action unless user already authorized exact target and effect.

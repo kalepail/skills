@@ -25,10 +25,10 @@ Project and process levels combine using more restrictive value:
 
 - Unread clears by selecting process, dismissing linked alert, row dismiss, or title-bar Clear all.
 - Project dot persists until each child unread is handled.
-- App/workspace badges cap at `99+`; app badge clears when Solo regains focus.
-- Bell default is **Ping**. macOS can use system or `~/Library/Sounds`; None mutes. Windows uses standard notification sound.
-- Terminal notification rate limit: 5 per 10 seconds per process reader.
-- Crash auto-restart pauses after 10 restarts in 60 seconds and alerts only on exhaustion, not every retry.
+- The app badge clears when Solo regains focus.
+- The bell sound is configurable, and None mutes it. macOS can also use custom sounds.
+- Solo rate-limits terminal notifications for each process. Check the current limit in the docs before calling delivery broken.
+- Crash auto-restart alerts only when its restart limit is exhausted, not on every retry.
 
 Sources: [indicators](https://soloterm.com/docs/notifications/indicators), [bell](https://soloterm.com/docs/notifications/bell-sounds), [script notifications](https://soloterm.com/docs/notifications/triggering-from-scripts), [auto-restart alerts](https://soloterm.com/docs/notifications/auto-restart-notifications), [troubleshooting](https://soloterm.com/docs/troubleshooting/notifications).
 
@@ -49,11 +49,11 @@ Avoid changing process-level settings when request is only OS permission diagnos
 
 ## Account and license facts
 
-- Free tier: 4 projects and 20 total commands/agents/terminals; all features and updates included.
-- Reaching limit opens license prompt. Unlicensed over-limit state blocks process starts.
-- Deactivating while over free limits returns app to Free and stops running managed processes.
-- Activation contacts `soloterm.com` with key, app version, device ID/name, platform, and OS version; signed token is stored locally.
-- Licensed offline grace is 14 days after successful check-in.
+- The free tier limits project and process counts. Read the current limits on the free-tier docs page; do not quote them from memory.
+- Reaching a limit opens the license prompt. An unlicensed over-limit state blocks process starts.
+- Deactivating while over free limits returns the app to Free and stops running managed processes.
+- Activation sends the key and device metadata to `soloterm.com` and stores a signed token locally.
+- A licensed device has a limited offline grace period after its last successful check-in.
 - Move license by deactivating old device and activating new; project/settings data does not move.
 - Never reveal license key or local HTTP/MCP bearer token.
 
@@ -73,9 +73,9 @@ Source: [Team licenses](https://soloterm.com/docs/account/team-licenses).
 
 ## Updates and relaunch
 
-- Check via app menu, Settings → Account, title badge, or `Cmd/Ctrl+Shift+U`.
-- Signed updater downloads/stages update; applying requires relaunch. Staged update can wait.
-- Quit/relaunch stops running commands, agents, and terminals. Solo confirms when any run and lists up to six names.
+- Check for updates through the app menu, Settings → Account, or the title badge.
+- The signed updater downloads and stages an update; applying it requires relaunch. A staged update can wait.
+- Quit or relaunch stops running commands, agents, and terminals. Solo asks for confirmation when any are running.
 - Relaunch reloads projects; eligible trusted auto-start commands may start again.
 - Never apply update, quit, or relaunch from an informational request.
 - Read the installed Solo version and the current [changelog](https://soloterm.com/changelog) before version-sensitive advice.

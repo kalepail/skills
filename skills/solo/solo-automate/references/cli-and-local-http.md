@@ -61,7 +61,7 @@ List payloads include `totalCount`, `offset`, `limit`, `hasMore`, `nextOffset`. 
 
 ## Local HTTP discovery and authentication
 
-Server binds `127.0.0.1` only. Default port is 24678, but Solo chooses free random port on collision. Read discovery every session and again after 401, restart, or version failure.
+Server binds `127.0.0.1` only. The port can change when the default is taken, so never hard-code it. Read discovery every session and again after 401, restart, or version failure.
 
 Default discovery file:
 

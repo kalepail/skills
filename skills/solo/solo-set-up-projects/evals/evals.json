@@ -216,6 +216,17 @@
         "Changes no runtime state"
       ],
       "files": []
+    },
+    {
+      "id": 19,
+      "prompt": "Write a docker-compose.yml for this repo's web and API services.",
+      "expected_output": "Do not use $solo-set-up-projects; Docker Compose configuration is not Solo project setup. Handle it as ordinary container configuration.",
+      "assertions": [
+        "Recognizes container configuration outside Solo",
+        "Does not create or edit solo.yml",
+        "Does not register a Solo project"
+      ],
+      "files": []
     }
   ]
 }
