@@ -1,0 +1,10 @@
+Read dispatch_log.txt in this directory. Extract one record for every shipment that was
+actually dispatched (physically left the dock). Write the result to records.json as a JSON
+array of objects with exactly these fields:
+  "id"        - the shipment id, e.g. "SHP-1001"
+  "date"      - the dispatch date as "YYYY-MM-DD"
+  "carrier"   - one of "dhl", "ups", "fedex", "dpd" (lower case, no service suffix)
+  "weight_kg" - number (not a string)
+  "dest"      - destination city in Title Case, e.g. "Lisbon"
+Each dispatched shipment must appear exactly once. Do not include planned or voided
+shipments. Do not modify dispatch_log.txt. When done, reply with the record count.

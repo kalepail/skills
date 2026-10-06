@@ -1,0 +1,8 @@
+Rewrite the paragraph in source.txt and save the result to rewritten.txt.
+Rules (a script checks them):
+1. Every sentence has 20 words or fewer (words are whitespace-separated tokens; a sentence ends with . ! or ?).
+2. No passive constructions: the text must not contain "was", "were", or "been" followed
+   (optionally after one adverb ending in -ly) by a word ending in "ed".
+3. Keep these tokens exactly as written: /etc/fleetd/routes.toml  --dry-run  v4.12.0  $0.35
+4. Keep every fact from the original. Write plain prose only: no headings, no bullet lists.
+Do not modify source.txt. When done, reply DONE.

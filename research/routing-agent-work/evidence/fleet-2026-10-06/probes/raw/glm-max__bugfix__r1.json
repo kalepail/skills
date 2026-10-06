@@ -1,0 +1,51 @@
+{
+ "run_id": "glm-max__bugfix__r1",
+ "config": "glm-max",
+ "cli": "opencode",
+ "model": "openrouter/z-ai/glm-5.3",
+ "effort": "max",
+ "task": "bugfix",
+ "rep": 1,
+ "workdir": "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/glm-max__bugfix__r1__1791296736/work",
+ "exit_code": 0,
+ "timed_out": false,
+ "wall_s": 139.8,
+ "pass": true,
+ "score": 1.0,
+ "grade": {
+  "visible_pass": true,
+  "hidden_pass": true,
+  "tests_untouched": true,
+  "extra_test_files": [],
+  "hidden_summary": "5/5 passed",
+  "hidden_fail_lines": [],
+  "pass": true,
+  "score": 1.0
+ },
+ "final_message": "6/6 tests pass, and all documented edge cases verified (negative formats like `-$0.05`, `'0.5'` \u2192 50, month/day ordering, tie-breaks, default `n=3`).\n\nBugs fixed:\n\n1. `ledger/money.py` \u2014 `format_cents` broke on negatives: floor division/modulo on negative cents gave `-$-4.90` for `-310`. Now it uses `abs()` before dividing.\n2. `ledger/parse.py` \u2014 `parse_date` returned `(year, day, month)` with month and day swapped. Now it returns `(year, month, day)`.\n3. `ledger/report.py` \u2014 `top_items` sorted totals ascending and returned the n smallest, and ignored the tie rule. Now it sorts by total descending, ties by item name ascending.",
+ "usage": {
+  "input_tokens": 1125118,
+  "output_tokens": 2542,
+  "cached_tokens": 1015104,
+  "reasoning_tokens": 7174,
+  "cost_usd": 0.141695,
+  "api_error": null
+ },
+ "stderr_tail": "",
+ "cmd": [
+  "opencode",
+  "run",
+  "--pure",
+  "-m",
+  "openrouter/z-ai/glm-5.3",
+  "--variant",
+  "max",
+  "--format",
+  "json",
+  "--dir",
+  "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/glm-max__bugfix__r1__1791296736/work",
+  "--auto",
+  "<prompt.txt>"
+ ],
+ "finished_at": "2026-10-06T10:27:56-0400"
+}

@@ -1,0 +1,47 @@
+{
+ "run_id": "dsflash-max__routing__r1",
+ "config": "dsflash-max",
+ "cli": "opencode",
+ "model": "openrouter/deepseek/deepseek-v4.1-flash",
+ "effort": "max",
+ "task": "routing",
+ "rep": 1,
+ "workdir": "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/dsflash-max__routing__r1__1791296580/work",
+ "exit_code": 0,
+ "timed_out": false,
+ "wall_s": 12.5,
+ "pass": true,
+ "score": 1.0,
+ "grade": {
+  "pass": true,
+  "score": 1.0,
+  "correct": 6,
+  "traps_correct": 3
+ },
+ "final_message": "DONE",
+ "usage": {
+  "input_tokens": 443724,
+  "output_tokens": 619,
+  "cached_tokens": 334592,
+  "reasoning_tokens": 830,
+  "cost_usd": 0.012835,
+  "api_error": null
+ },
+ "stderr_tail": "",
+ "cmd": [
+  "opencode",
+  "run",
+  "--pure",
+  "-m",
+  "openrouter/deepseek/deepseek-v4.1-flash",
+  "--variant",
+  "max",
+  "--format",
+  "json",
+  "--dir",
+  "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/dsflash-max__routing__r1__1791296580/work",
+  "--auto",
+  "<prompt.txt>"
+ ],
+ "finished_at": "2026-10-06T10:23:13-0400"
+}

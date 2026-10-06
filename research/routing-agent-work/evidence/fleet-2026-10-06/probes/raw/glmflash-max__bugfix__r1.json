@@ -1,0 +1,51 @@
+{
+ "run_id": "glmflash-max__bugfix__r1",
+ "config": "glmflash-max",
+ "cli": "opencode",
+ "model": "openrouter/z-ai/glm-5.3-flash",
+ "effort": "max",
+ "task": "bugfix",
+ "rep": 1,
+ "workdir": "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/glmflash-max__bugfix__r1__1791296811/work",
+ "exit_code": 0,
+ "timed_out": false,
+ "wall_s": 68.9,
+ "pass": true,
+ "score": 1.0,
+ "grade": {
+  "visible_pass": true,
+  "hidden_pass": true,
+  "tests_untouched": true,
+  "extra_test_files": [],
+  "hidden_summary": "5/5 passed",
+  "hidden_fail_lines": [],
+  "pass": true,
+  "score": 1.0
+ },
+ "final_message": "All visible tests pass and documented edge cases check out. Bugs fixed:\n\n1. **`ledger/money.py` \u2013 `format_cents`**: negative cents used floor division/modulo, so `format_cents(-310)` produced `-$-4.90` instead of `-$3.10`; now formats from `abs(cents)` with the sign prefixed (`-$0.05` style).\n2. **`ledger/parse.py` \u2013 `parse_date`**: returned `(y, d, m)` \u2014 month and day were swapped; now returns `(year, month, day)`.\n3. **`ledger/report.py` \u2013 `top_items`**: sorted totals ascending and returned the smallest n, with no tie-break; now sorts by total descending with ties broken by item name ascending, as documented (`summary_line` inherits the fix).",
+ "usage": {
+  "input_tokens": 891271,
+  "output_tokens": 1998,
+  "cached_tokens": 552320,
+  "reasoning_tokens": 4806,
+  "cost_usd": 0.070814,
+  "api_error": null
+ },
+ "stderr_tail": "",
+ "cmd": [
+  "opencode",
+  "run",
+  "--pure",
+  "-m",
+  "openrouter/z-ai/glm-5.3-flash",
+  "--variant",
+  "max",
+  "--format",
+  "json",
+  "--dir",
+  "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/glmflash-max__bugfix__r1__1791296811/work",
+  "--auto",
+  "<prompt.txt>"
+ ],
+ "finished_at": "2026-10-06T10:28:00-0400"
+}

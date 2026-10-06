@@ -1,0 +1,106 @@
+{
+  "search_id": "search_779fb63fb3f78eb33b93fbd9cd21c601",
+  "session_id": "session_779fb63fb3f78eb33b93fbd9cd21c601",
+  "status": "ok",
+  "results": [
+    {
+      "url": "https://www.tbench.ai/",
+      "title": "TERMINAL-BENCH",
+      "publish_date": "2026-09-03",
+      "excerpts": [
+        "# TERMINAL-BENCH 0 9 8 7 6 5 4 3 2 1 0 . 0 9 8 7 6 5 4 3 2 1 0\n| RANK | MODEL | AGENT | RESOLUTION RATE | RELEASE DATE | TOKENS | COST |\n| 1 | [GPT-6 Astra](https://developers.openai.com/api/docs/models/gpt-6-astra) (max) | [Codex](https://openai.com/codex/) | **58.2%** \u00b1 2.8% | Sep 3, 2026 | 1.5B | $3.3k |\n\n...\n\n| RANK | MODEL | AGENT | RESOLUTION RATE | RELEASE DATE | TOKENS | COST |\n| 1 | [GPT-6 Astra](https://developers.openai.com/api/docs/models/gpt-6-astra) (max) | [Codex](https://openai.com/codex/) | **58.2%** \u00b1 2.8% | Sep 3, 2026 | 1.5B | $3.3k |\n\n...\n\n| RANK | MODEL | AGENT | RESOLUTION RATE | RELEASE DATE | TOKENS | COST |\n| 1 | [GPT-6 Astra](https://developers.openai.com/api/docs/models/gpt-6-astra) (max) | [Codex](https://openai.com/codex/) | **58.2%** \u00b1 2.8% | Sep 3, 2026 | 1.5B | $3.3k |"
+      ]
+    },
+    {
+      "url": "https://www.tbench.ai/news/terminal-bench-4-0",
+      "title": "Terminal-Bench 4.0",
+      "publish_date": null,
+      "excerpts": [
+        "# Terminal-Bench 4.0\nCalibrating task resources, fixing tasks, and removing saturated tasks\nWe've pushed a version update to the Terminal-Bench dataset and leaderboard. Terminal-Bench 4.0 calibrates task resources (time, CPU, memory), implements task fixes, and removes saturated tasks.\n\n...\n\n## Removing and fixing tasks\nWe fixed 19 tasks, updating instructions, environments, and verifiers to address flakiness or misspecification reported by users or found in our leaderboard runs.\n\n...\n\n## Acknowledgements\nThe leaderboard experiments are supported with grants from OpenAI, Anthropic, Z.ai, SpaceX AI, and Laude Institute.\nSpecial thanks to Gian Segato, who devised the resource calibration methodology and ran the calibration experiments.\nEverything in this blog post is derived from [Terminal-Bench 4.0 data](https://hub.harborframework.com/datasets/terminal-bench/terminal-bench/latest?tab=leaderboard&leaderboard=4-0-0) stored on the Harbor Hub\nWritten by\n[Ryan Marten](https://github.com/ryanmarten)"
+      ]
+    },
+    {
+      "url": "https://codingfleet.com/blog/terminal-bench-4-leaderboard-2026",
+      "title": "Terminal-Bench 4.0 Leaderboard: Updated Public Ranks & New Runs \u00b7 CodingFleet Blog",
+      "publish_date": "2026-09-08",
+      "excerpts": [
+        "# Terminal-Bench 4.0 Leaderboard\nUpdated October 2, 2026 66 Curated Tasks Harbor Hub Verified Codex & Claude Code & Grok Build\n58.2%\nTop Public-Board Rate\nGPT-6 Astra (Codex max)\n41.8%\nTop Open-Weight\nGLM-5.3 (Z.AI)\n$0.3k\nLowest Run Cost\nGPT-5.6 Luna ($6/1M API)\n25\nTracked Configurations\nAcross 21 Distinct Models\n**Source distinction (checked Oct 2):** The public tbench.ai leaderboard remains led by GPT-6 Astra at 58.2%; Grok 4.7 is listed at 37.6% \u00b13.5 ($3.7k run cost, 5.5B tokens). Separately reported runs outside that public board include Anthropic\u2019s Opus 5.5 (66.4% \u00b12.6) and Sonnet 5.5 (70.6%), Artificial Analysis\u2019s GPT-6 Sol (44%) / Luna (13%) Codex runs, and Cognition\u2019s SWE-2 (27.3%).\nThese are provider/independent runs, not public-board submissions, and are not like-for-like placements. Run costs, tokens, and confidence intervals are shown only where the source publishes them.\n\n...\n\n## What Changed in Terminal-Bench 4.0?\n**Reading the expanded table:** The 58.2% top-stat remains the highest public tbench.ai submission. Public-board Opus 5 now scores 53.9% \u00b13.2 at xhigh (rank #3; 6.9B tokens, $6.1k run cost). Grok 4.7 is a public-board row at #6 (37.6% \u00b13.5).\nAnthropic\u2019s Opus 5.5 (66.4%) and Sonnet 5.5 (70.6%), SWE-2 (27.3%), and Artificial Analysis\u2019s GPT-6 Sol (44%) / Luna (13%) runs are supplemental, unranked, and not controlled head-to-heads.\n\n...\n\n# Terminal-Bench 4.0 Leaderboard\n## What Changed in Terminal-Bench 4.0?\n### 4. Open-Weight Breakthrough: GLM-5.3\nZ.AI's GLM-5.3 achieved 41.8% resolution rate inside Claude Code harness\u2014surpassing GPT-5.6 Sol (37.3%) and Opus 4.8 (23.6%) while running at an accessible $4.40 per 1M output tokens.\n\n## Official Verification Sources & Links\n### Chat with the latest AI models\n#### Navigation\n[Home](https://codingfleet.com/) [About Us](https://codingfleet.com/doc/about) [Contact Us](https://codingfleet.com/contact) [Privacy Policy](https://codingfleet.com/privacy-policy) [Terms](https://codingfleet.com/terms)\n\n##### Useful Links\n[Blog](https://codingfleet.com/blog/) [Data Privacy Guide](https://codingfleet.com/doc/data-privacy-guide) [Release Notes](https://codingfleet.com/doc/release-notes) [AI Models](https://codingfleet.com/models) [AI Visibility Tracker](https://rankbits.com/)\n\n##### Company\n**CodingFleet LLC**\n701 Tillery Street Unit 12-3376\nAustin, TX 78702\nUnited States"
+      ]
+    },
+    {
+      "url": "https://artificialanalysis.ai/evaluations/terminalbench-4-0",
+      "title": "Terminal-Bench 4.0 Benchmark Leaderboard - Artificial Analysis",
+      "publish_date": null,
+      "excerpts": [
+        "# Terminal-Bench 4.0 Benchmark Leaderboard\n## Background\n### Related Links\n#### Terminal-Bench 4.0\nClaude Sonnet 5.5 (Max, Default Fallback) scores the highest on Terminal-Bench 4.0 with a score of 63.6%, followed by Claude Opus 5.5 (Max, Default Fallback) with a score of 59.6% and Claude Opus 5.5 (Xhigh, Default Fallback) with a score of 59.6%\n\n## Example Tasks\nIt then checks that PostgreSQL holds the full dataset with intact foreign keys and receives new API writes, that each endpoint's p95 latency stays within its MySQL baseline budget, and that analytics, review search and case- and accent-insensitive name lookup return correct results from PostgreSQL.\n**Instruction:** Route the photonic waveguides described in `/app/layout_spec.json` and write the waypoint result to `/app/routing_result_1.json` . Use the layout geometry, physical constraints, and cost weights from the specification file.\nThe result must contain `net_00` through `net_08` . Each net is a centerline waypoint path from its exact start coordinate to its exact target coordinate:\nSection: Terminal-Bench 4.0 Benchmark Leaderboard > Explore Evaluations"
+      ]
+    },
+    {
+      "url": "https://benchlm.ai/benchmarks/terminal-bench-4",
+      "title": "Terminal-Bench 4.0 Leaderboard & Scores \u2014 September 2026",
+      "publish_date": null,
+      "excerpts": [
+        "# Terminal-Bench 4.0\n- Category: [Agentic](/agentic)\n- Last updated: October 5, 2026 snapshot\n\n## Leaderboard (27 models)\n| Rank | Model | Configuration | Creator | Score |\n| 1 | [GPT-6 Astra](/models/gpt-6-astra) | Codex \u00b7 max reasoning | OpenAI | 58.18% |\n| 2 | [Claude Fable 5.1](/models/claude-fable-5-1) | Claude Code \u00b7 max reasoning | Anthropic | 57.88% |\n| 3 | [GPT-6 Astra](/models/gpt-6-astra) | Codex \u00b7 xhigh reasoning | OpenAI | 57.88% |\n| 4 | [GPT-6 Astra](/models/gpt-6-astra) | Codex \u00b7 high reasoning | OpenAI | 57.88% |\n\n...\n\n| Rank | Model | Configuration | Creator | Score |\n| 1 | [GPT-6 Astra](/models/gpt-6-astra) | Codex \u00b7 max reasoning | OpenAI | 58.18% |\n| 2 | [Claude Fable 5.1](/models/claude-fable-5-1) | Claude Code \u00b7 max reasoning | Anthropic | 57.88% |\n| 3 | [GPT-6 Astra](/models/gpt-6-astra) | Codex \u00b7 xhigh reasoning | OpenAI | 57.88% |\n| 4 | [GPT-6 Astra](/models/gpt-6-astra) | Codex \u00b7 high reasoning | OpenAI | 57.88% |\n| 10 | [Claude Opus 5](/models/claude-opus-5) | Claude Code \u00b7 max reasoning | Anthropic | 51.82% |\n| 11 | [GPT-6 Astra](/models/gpt-6-astra) | Codex \u00b7 low reasoning | OpenAI | 50.61% |\n| 12 | [Claude Opus 5](/models/claude-opus-5) | Claude Code \u00b7 high reasoning | Anthropic | 50.30% |\n| 13 | [Claude Opus 5](/models/claude-opus-5) | Claude Code \u00b7 medium reasoning | Anthropic | 44.85% |\n| 14 | [Claude Fable 5](/models/claude-fable) | Claude Code \u00b7 max reasoning | Anthropic | 44.55% |\n\n# Terminal-Bench 4.0\n## Leaderboard (27 models)\n| Rank | Model | Configuration | Creator | Score |\n| 1 | [GPT-6 Astra](/models/gpt-6-astra) | Codex \u00b7 max reasoning | OpenAI | 58.18% |\n| 2 | [Claude Fable 5.1](/models/claude-fable-5-1) | Claude Code \u00b7 max reasoning | Anthropic | 57.88% |\n| 3 | [GPT-6 Astra](/models/gpt-6-astra) | Codex \u00b7 xhigh reasoning | OpenAI | 57.88% |\n| 4 | [GPT-6 Astra](/models/gpt-6-astra) | Codex \u00b7 high reasoning | OpenAI | 57.88% |\n\n...\n\n| Rank | Model | Configuration | Creator | Score |\n| 1 | [GPT-6 Astra](/models/gpt-6-astra) | Codex \u00b7 max reasoning | OpenAI | 58.18% |\n| 2 | [Claude Fable 5.1](/models/claude-fable-5-1) | Claude Code \u00b7 max reasoning | Anthropic | 57.88% |\n| 3 | [GPT-6 Astra](/models/gpt-6-astra) | Codex \u00b7 xhigh reasoning | OpenAI | 57.88% |\n| 4 | [GPT-6 Astra](/models/gpt-6-astra) | Codex \u00b7 high reasoning | OpenAI | 57.88% |\n\n...\n\n| 25 | [Grok 4.5](/models/grok-4-5) | Grok Build \u00b7 high reasoning | xAI | 12.42% |"
+      ]
+    },
+    {
+      "url": "https://www.tbench.ai/news",
+      "title": "Blog",
+      "publish_date": null,
+      "excerpts": [
+        "# Blog\nUpdates and announcements from the Terminal-Bench team\n[## Terminal-Bench 4.0 Fri Aug 28 2026 Calibrating task resources, fixing tasks, and removing saturated tasks](https://www.tbench.ai/news/terminal-bench-4-0)\n\n...\n\n[## Terminal-Bench 3.0 Thu Jul 30 2026 Terminal-Bench 3.0 measures agent abilities at the frontier](https://www.tbench.ai/news/terminal-bench-3-0)\n\n...\n\n[## Terminal-Bench 2.1 Wed May 06 2026 A revision of Terminal-Bench 2.0 that fixes 28 tasks](https://www.tbench.ai/news/terminal-bench-2-1)\n[## Leaderboard Integrity Update Sun Apr 19 2026 New policies to address cheating and reward hacking](https://www.tbench.ai/news/leaderboard-integrity-update)\n[## Leaderboard Integrity and Timeouts Tue Sep 09 2025 A clarification on our leaderboard time constraints](https://www.tbench.ai/news/leaderboard-integrity-and-timeouts)"
+      ]
+    },
+    {
+      "url": "https://www.tbench.ai/?version=2.0",
+      "title": "2.0",
+      "publish_date": null,
+      "excerpts": [
+        "# TERMINAL-BENCH 0 9 8 7 6 5 4 3 2 1 0 . 0 9 8 7 6 5 4 3 2 1 0\n[Run the benchmark](https://www.tbench.ai/run?version=2.0) [View the tasks](https://hub.harborframework.com/datasets/terminal-bench/terminal-bench-2/latest?tab=tasks)\n2.0\nTABLE PARETO WAFFLE\n| RANK | MODEL | AGENT | RESOLUTION RATE | RELEASE DATE | TOKENS | COST |\n| 1 | GPT-5.5 | [NexAU-AHE](https://github.com/china-qijizhifeng/agentic-harness-engineering.git) | **84.7%** \u00b1 2.1 | Apr 23, 2026 | \u2014 | \u2014 |\n| 2 | Multiple | [LemonHarness](https://github.com/Open-Lemon/LemonAgent) | **84.5%** \u00b1 2.6 | May 14, 2026 | \u2014 | \u2014 |\n| 3 | GPT-5.5 | [Capy](https://capy.ai/) | **83.1%** \u00b1 2.1 | Apr 23, 2026 | \u2014 | \u2014 |\n\n...\n\n| RANK | MODEL | AGENT | RESOLUTION RATE | RELEASE DATE | TOKENS | COST |\n| 1 | GPT-5.5 | [NexAU-AHE](https://github.com/china-qijizhifeng/agentic-harness-engineering.git) | **84.7%** \u00b1 2.1 | Apr 23, 2026 | \u2014 | \u2014 |\n| 2 | Multiple | [LemonHarness](https://github.com/Open-Lemon/LemonAgent) | **84.5%** \u00b1 2.6 | May 14, 2026 | \u2014 | \u2014 |\n| 3 | GPT-5.5 | [Capy](https://capy.ai/) | **83.1%** \u00b1 2.1 | Apr 23, 2026 | \u2014 | \u2014 |"
+      ]
+    },
+    {
+      "url": "https://www.tbench.ai/?version=2.1",
+      "title": "2.1",
+      "publish_date": "2026-09-03",
+      "excerpts": [
+        "# TERMINAL-BENCH 0 9 8 7 6 5 4 3 2 1 0 . 0 9 8 7 6 5 4 3 2 1 0\n[Run the benchmark](https://www.tbench.ai/run?version=2.1) [View the tasks](https://hub.harborframework.com/datasets/terminal-bench/terminal-bench-2-1/latest?tab=tasks)\n2.1\nTABLE PARETO WAFFLE\n| RANK | MODEL | AGENT | RESOLUTION RATE | RELEASE DATE | TOKENS | COST |\n| 1 | [GPT-6 Astra](https://developers.openai.com/api/docs/models/gpt-6-astra) (high) | [Codex](https://openai.com/codex/) | **87.4%** \u00b1 1.8% | Sep 3, 2026 | 0.4B | $0.8k |\n| 2 | [Fable 5](https://www.anthropic.com/news/claude-fable-5-mythos-5) (xhigh) | [Claude Code](https://claude.com/claude-code) | **83.8%** \u00b1 2.3% | Jun 9, 2026 | 0.2B | $0.6k |\n| 3 | [GPT-5.5](https://openai.com/index/introducing-gpt-5-5/) (xhigh) | [Codex](https://openai.com/codex/) | **83.2%** \u00b1 2.2% | Apr 23, 2026 | 0.7B | $2.1k |\n| 4 | [Fable 5](https://www.anthropic.com/news/claude-fable-5-mythos-5) (high) | [Terminus 2](https://www.tbench.ai/news/terminus) | **80.5%** \u00b1 2.3% | Jun 9, 2026 | 0.1B | $0.4k |\n\n# TERMINAL-BENCH 0 9 8 7 6 5 4 3 2 1 0 . 0 9 8 7 6 5 4 3 2 1 0\n| RANK | MODEL | AGENT | RESOLUTION RATE | RELEASE DATE | TOKENS | COST |\n| 1 | [GPT-6 Astra](https://developers.openai.com/api/docs/models/gpt-6-astra) (high) | [Codex](https://openai.com/codex/) | **87.4%** \u00b1 1.8% | Sep 3, 2026 | 0.4B | $0.8k |\n| 2 | [Fable 5](https://www.anthropic.com/news/claude-fable-5-mythos-5) (xhigh) | [Claude Code](https://claude.com/claude-code) | **83.8%** \u00b1 2.3% | Jun 9, 2026 | 0.2B | $0.6k |\n\n...\n\n| 3 | [GPT-5.5](https://openai.com/index/introducing-gpt-5-5/) (xhigh) | [Codex](https://openai.com/codex/) | **83.2%** \u00b1 2.2% | Apr 23, 2026 | 0.7B | $2.1k |\n| 7 | [GPT-5.6 Terra](https://developers.openai.com/api/docs/models/gpt-5.6-terra) (max) | [Codex](https://openai.com/codex/) | **78.4%** \u00b1 2.5% | Jun 26, 2026 | 0.9B | $0.4k |"
+      ]
+    },
+    {
+      "url": "https://benchmarklist.com/benchmarks/terminal_bench_4",
+      "title": "Terminal-Bench 4.0 Benchmark Scores & AI Model Leaderboard | BenchmarkList",
+      "publish_date": null,
+      "excerpts": [
+        "# Terminal-Bench 4.0\n[Website](https://www.tbench.ai/leaderboard/terminal-bench/4.0 \"Benchmark definition\") [Launch post](https://openai.com/index/gpt-6-astra/ \"Result snapshot - Launch post - sampled 2026-09-03 - openai.com\")\nTerminal-Bench 4.0 evaluates AI agents on practical terminal-based tasks in isolated environments. It measures the percentage of tasks an agent resolves successfully under a defined model and harness configuration.\n\n## Results\nResults updated Sep 3, 2026\nScore colors: Gold = #1 Silver = #2 Bronze = #3\nAll configurations (14) Best per model\n\n...\n\n* [**Arena AI WebDev Arena** Coding \u00b7 Sep 2, 2026 Crowdsourced Arena AI human-preference leaderboard for front-end and full-stack web development, including agentic coding workflows.](https://benchmarklist.com/benchmarks/arena_ai_code/ \"Crowdsourced Arena AI human-preference leaderboard for front-end and full-stack web development, including agentic coding workflows.\")"
+      ]
+    },
+    {
+      "url": "https://www.vals.ai/benchmarks/terminal-bench-4",
+      "title": "Terminal-Bench 4.0 Leaderboard and Methodology",
+      "publish_date": null,
+      "excerpts": [
+        "# Terminal-Bench 4.0\nAs of October 1, 2026, [Claude Opus 5.5 (Mini-SWE-agent)](https://www.vals.ai/models/anthropic_claude-opus-5-5) ranks first on Terminal-Bench 4.0 with 65.15%, followed by [Claude Sonnet 5.5 (Mini-SWE-agent)](https://www.vals.ai/models/anthropic_claude-sonnet-5-5) at 64.14% and [GPT-6 Astra (Mini-SWE-agent)](https://www.vals.ai/models/openai_gpt-6-astra) at 59.60%.\n\n## Terminal-Bench 4.0 leaderboard\n| Rank | Model | Harness | Score | Cost / Test | Input / Output Cost | Duration |\n| 1 | [Claude Opus 5.5](https://www.vals.ai/models/anthropic_claude-opus-5-5) | Mini-SWE-agent | 65.15% | $13.20 | $4 / $20 | 1h04m |\n| 2 | [Claude Sonnet 5.5](https://www.vals.ai/models/anthropic_claude-sonnet-5-5) | Mini-SWE-agent | 64.14% | $16.51 | $2 / $10 | 1h22m |\n| 3 | [GPT-6 Astra](https://www.vals.ai/models/openai_gpt-6-astra) | Mini-SWE-agent | 59.60% | $9.58 | $10 / $50 | 35m42s |\n| 4 | [Claude Fable 5.1](https://www.vals.ai/models/anthropic_claude-fable-5-1) | Mini-SWE-agent | 58.08% | $17.18 | $10 / $50 | 1h00m |\n| 5 | [Gemini 4 Argon](https://www.vals.ai/models/google_gemini-4-argon) | Mini-SWE-agent | 57.58% | $17.64 | $4 / $20 | 53m35s |\n| 6 | [GPT-6.1 Sol](https://www.vals.ai/models/openai_gpt-6.1-sol) | Mini-SWE-agent | 55.05% | $1.72 | $2 / $10 | 45m12s |\n\n# Terminal-Bench 4.0\n## Terminal-Bench 4.0 leaderboard\n| Rank | Model | Harness | Score | Cost / Test | Input / Output Cost | Duration |\n| 1 | [Claude Opus 5.5](https://www.vals.ai/models/anthropic_claude-opus-5-5) | Mini-SWE-agent | 65.15% | $13.20 | $4 / $20 | 1h04m |\n| 2 | [Claude Sonnet 5.5](https://www.vals.ai/models/anthropic_claude-sonnet-5-5) | Mini-SWE-agent | 64.14% | $16.51 | $2 / $10 | 1h22m |\n\n...\n\n| 38 | [GPT 5.4 Mini](https://www.vals.ai/models/openai_gpt-5.4-mini-2026-03-17) | Mini-SWE-agent | 2.52% | $1.43 | $0.75 / $4.5 | 29m41s |\n\n# Terminal-Bench 4.0\n## Terminal-Bench 4.0 leaderboard\n| Rank | Model | Harness | Score | Cost / Test | Input / Output Cost | Duration |\n| 1 | [Claude Opus 5.5](https://www.vals.ai/models/anthropic_claude-opus-5-5) | Mini-SWE-agent | 65.15% | $13.20 | $4 / $20 | 1h04m |\n| 2 | [Claude Sonnet 5.5](https://www.vals.ai/models/anthropic_claude-sonnet-5-5) | Mini-SWE-agent | 64.14% | $16.51 | $2 / $10 | 1h22m |\n\n...\n\n| 40 | [Inkling](https://www.vals.ai/models/thinkingmachines_inkling) | Mini-SWE-agent | 0.51% | $2.51 | $1 / $4.05 | 22m52s |"
+      ]
+    },
+    {
+      "url": "https://llm-stats.com/benchmarks/terminal-bench",
+      "title": "Terminal-Bench Leaderboard - llm-stats.com",
+      "publish_date": null,
+      "excerpts": [
+        "# Terminal-Bench\n## Sub-benchmarks\n### Verification\nVerified 0\nSelf-reported 25\nStatus Unverified\nLast updated October 2, 2026\nAbout this benchmark\n\n## Current leaders\nClaude Sonnet 4.5 from Anthropic currently leads the Terminal-Bench leaderboard with a score of 0.500 across 25 evaluated AI models.\n1 [Claude Sonnet 4.5](https://llm-stats.com/models/claude-sonnet-4-5-20250929) Anthropic 50.0%\n\n## FAQ\n### What is the Terminal-Bench benchmark?\nThe Terminal-Bench leaderboard was last updated in October 2026 and currently includes 25 evaluated models."
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "name": "sku_search",
+      "count": 1
+    },
+    {
+      "name": "sku_extract_excerpts",
+      "count": 1
+    }
+  ],
+  "warnings": []
+}

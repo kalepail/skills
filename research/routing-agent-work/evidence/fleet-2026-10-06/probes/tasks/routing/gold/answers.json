@@ -1,0 +1,8 @@
+[
+ {"id": "q1", "model": "atlas-pro", "effort": "high"},
+ {"id": "q2", "model": "atlas-pro", "effort": "high"},
+ {"id": "q3", "model": "Unrouted", "effort": null},
+ {"id": "q4", "model": "atlas-lite", "effort": "high"},
+ {"id": "q5", "model": "corvid-mini", "effort": "medium"},
+ {"id": "q6", "model": "pellet-2", "effort": "high"}
+]

@@ -1,0 +1,86 @@
+{
+  "search_id": "search_ad84b0310473648fede968049e40e8e4",
+  "session_id": "session_ad84b0310473648fede968049e40e8e4",
+  "status": "ok",
+  "results": [
+    {
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "title": "Introducing Claude Opus 5.5",
+      "publish_date": null,
+      "excerpts": [
+        "# Claude Opus 5.5\nWe\u2019re introducing Claude Opus 5.5, the first model in our new Claude 5.5 family. It performs at the level of Claude Fable 5.1 on most work and costs 40% less to run than Opus 5.\n\n...\n\nBecause Opus 5.5 is comparable to Claude Mythos 5.1 in biology and cybersecurity, we\u2019re deploying it with safeguards similar to those on Claude Fable 5.1. Vetted organizations can apply today to our [Life Sciences Verification Program](https://www.anthropic.com/news/life-sciences-verification-program) to use Opus 5.5 for biology research.\nIn the coming weeks we will also be expanding access to our [Cyber Verification Program](https://support.claude.com/en/articles/14604842-real-time-cyber-safeguards-on-claude-opus-and-sonnet) , and verified cybersecurity practitioners will be able to use Opus 5.5 for their work.\n\n...\n\n## Safety\n### Safeguards\nFor cyberdefenders, we\u2019ll soon be expanding our [Cyber Verification Program](https://support.claude.com/en/articles/14604842-real-time-cyber-safeguards-on-claude-opus-and-sonnet) to include Opus 5.5. The new program will include three tiers for increasingly permissive trusted access, including access to Claude Mythos models. [Claude Security](https://www.anthropic.com/news/claude-code-security) is already available with access to Claude Mythos 5.1.\nFor this reason, Opus 5.5 uses the same biology safeguards as Fable 5.1. To use Opus 5.5 for research and development work impeded by these safeguards, users can apply to our new [Life Sciences Verification Program](https://www.anthropic.com/news/life-sciences-verification-program) , which gives vetted organizations like academic labs, startups, and pharmaceutical companies access to safeguards designed for the full breadth of biology-related work.\n\n## Availability\nClaude Opus 5.5 is now available on all platforms, including Amazon Web Services, Google Cloud, and Microsoft Azure. On the Claude Platform, developers can [get started](https://platform.claude.com/docs/en/models/overview) with `claude-opus-5-5` . See our [migration guide for details.](https://platform.claude.com/docs/en/models/opus-5-5/migration-guide)"
+      ]
+    },
+    {
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude/cyber-verification-program",
+      "title": "Cyber Verification Program for Claude",
+      "publish_date": "2026-09-28",
+      "excerpts": [
+        "* **Claude Opus 4.7, Claude Opus 4.8, and Claude Sonnet 5** : Requires\n  enabling advanced AI features ( `advancedAiEnabled: true` ).\n* **Claude Opus 5 and Claude Opus 5.5** : Requires enabling both advanced AI\n  features ( `advancedAiEnabled: true` ) and data sharing with Anthropic\n  ( `dataSharingEnabledProvider: ANTHROPIC` ).\n\n...\n\n* **Data sharing understanding (Claude Opus 5 and Claude Opus 5.5 only)** : For\n  Claude Opus 5 and Claude Opus 5.5 with CVP, Anthropic requires that data\n\n...\n\n1. Accept the Advanced AI Safety Addendum in the\n  Google Cloud console.\n2. Complete Anthropic's Cyber Use Case application form .\n3. Enable advanced AI on each target model and location using the `setPublisherModelConfig` API, and if using Claude Opus 5 or\n  Claude Opus 5.5, enable data sharing.\n\n...\n\n# Cyber Verification Program for Claude Stay organized with collections Save and categorize content based on your preferences.\n## How to enroll\n### Verify model configuration\nIf advanced AI is enabled for Claude Opus 4.7, Claude Opus 4.8, and\nClaude Sonnet 5, the response is as follows:\n\n...\n\nIf advanced AI is enabled for Claude Opus 5 or Claude Opus 5.5, the response is\nas follows:\n```\n{ \"claudeFeatureConfig\" : { \"advancedAiEnabled\" : true }, \"dataSharingEnabledProvider\" : \"ANTHROPIC\" }\n```\n\n...\n\n**Confirm model-level configuration** : Call `fetchPublisherModelConfig` on the exact model ID and region you are calling to confirm `advancedAiEnabled: true` is active (and `dataSharingEnabledProvider: ANTHROPIC` for Claude Opus 5 and Claude Opus"
+      ]
+    },
+    {
+      "url": "https://openai.com/index/path-to-astra/",
+      "title": "Path to Astra: critical capabilities and frontier safeguards",
+      "publish_date": null,
+      "excerpts": [
+        "# Path to Astra: critical capabilities and frontier safeguards\nWe plan to make Astra available soon, but access to its most advanced cybersecurity capabilities will be more limited. Advanced cybersecurity work will initially be available to a group of testers, with access through Daybreak Blue following to expand defensive use.\nWe will share more details about our safety, security and alignment testing and evaluations in the model\u2019s system card at launch. Ahead of release, we want to provide an update on some of the work we have been doing to prepare to safely release a model with this level of cybersecurity capabilities\u2014and be transparent about what risks remain.\n\n## Assessing Astra\u2019s cybersecurity capabilities\n_Astra results shown reflect capabilities with Daybreak Blue access, not the default production configuration._\n\n...\n\nAccess to Astra for advanced cybersecurity workflows will initially be available to a small group of alpha testers, with access through Daybreak Blue expanding afterward to support defensive use.\n\n# Path to Astra: critical capabilities and frontier safeguards\n## Alignment & monitoring\nWhile GPT\u20115.6 Sol indicated higher likelihood for cheating in these scenarios, Astra did not attempt to use those shortcuts, and it was still able to legitimately solve some tasks._\n\n...\n\n## What this will mean for users\nIf the misalignment monitor pauses a task, users in ChatGPT or Codex may be asked to review the action before continuing. When using other surfaces like the API, the task will stop. We plan to keep calibrating these safeguards to reduce unnecessary interruptions and expand access to frontier capabilities through programs like Daybreak."
+      ]
+    },
+    {
+      "url": "https://developers.openai.com/api/docs/models/gpt-daybreak-blue-latest",
+      "title": "Daybreak Blue Model | OpenAI API",
+      "publish_date": null,
+      "excerpts": [
+        "# Daybreak Blue\nModel ID: `gpt-daybreak-blue-latest`\nAn alias for our flagship general-purpose models, with safeguards calibrated\nfor defensive cybersecurity work.\nThis model requires separate approval and provisioning, you can apply to join the Daybreak program [here](https://openai.com/daybreak/). More details on pricing [here](https://developers.openai.com/api/docs/pricing).\n\n## Model details\n- Default snapshot: `gpt-5.6-sol`\n- Input modalities: text, image\n- Output modalities: text\n- 1,050,000 context window\n- Maximum input tokens: 922,000\n- 128,000 max output tokens\n- Feb 16, 2026 knowledge cutoff\n- Reasoning token support\n\n## Snapshots\nSnapshots let you lock in a specific version of the model so that performance and behavior remain consistent. Below is a list of all available snapshots and aliases for Daybreak Blue.\n- `gpt-5.6-sol`"
+      ]
+    },
+    {
+      "url": "https://cloudprice.net/models/openai-daybreak-blue",
+      "title": "Daybreak Blue pricing & specs \u2014 OpenAI | CloudPrice",
+      "publish_date": null,
+      "excerpts": [
+        "1. AI Models /\n2. OpenAI /\n3. Daybreak Blue\n  Data updated at: September 16, 2026 at 12:00 AM UTC\n  OpenAI logo\nDaybreak Blue\nPricing & Specs API Free REST API for prices, specs and benchmarks\nDaybreak Blue is OpenAI 's language model with a 1.1M context window and up to 128K output tokens, starting at $4.00 / 1M input and $20.00 / 1M output.A frontier general-purpose LLM alias from OpenAI with safeguards calibrated for defensive cybersecurity work.\n* Specifications API GET /api/v1/models/openai-daybreak-blue\n* Canonical ID | openai-daybreak-blue\n* Type | Language\n* Status | Active\n* Creator | OpenAI OpenAI\n* Providers | OpenAI OpenAI\n* Context Window | 1.1M tokens\n* Max Output | 128K tokens\n* Input Modalities | Image PDF Text\n* Output Modalities | Text\n* Reasoning Efforts | default\n* Knowledge Cutoff | 2026-02 \u00b7 8 months ago\nCapabilities API GET /api/v1/models/openai-daybreak-blue\nInput 3/5\nText \u2713\nImage \u2713\nAudio \u00b7\nVideo \u00b7\nPDF \u2713\nOutput 1/5\nText \u2713\nImage \u00b7\nAudio \u00b7\nVideo \u00b7\nEmbedding \u00b7\nCapabilities 8/13\nReasoning \u2713\nAdaptive Reasoning \u00b7\nFunction Calling \u2713\nParallel Function Calling \u2713\nStructured Outputs \u2713\nNative JSON Schema \u2713\nWeb Search \u2713\nURL Context \u00b7\nComputer Use \u2713\nCode Execution \u00b7\nFile Search \u00b7\nPrompt Caching \u2713\nAssistant Prefill \u00b7\nPricing by Provider API GET /api/v1/models/openai-daybreak-blue/pricing\nUS Dollar ($)\nPer 1M tokens\n* Table\n* Chart\n* Provider | Standard\n* Input\n  $ / 1M |Output\n  $ / 1M |Cache Read\n  $ / 1M |Cache Write 5m\n* $ / 1M\n* OpenAI logo\n  OpenAI\n  daybreak-blue-latest |$4.00 |$20.00 |$0.4 |$5.00 |\nCost Calculator API GET /api/v1/models/openai-daybreak-blue/pricing/calculate?input_tokens=1000000&output_tokens=500000\nUS Dollar ($)\nPreset: Small chat RAG answer Long doc Code agent\nInput tokens\nOutput tokens\nCache write tokens\nCache read tokens\nNumber of calls\nCalculate cost Reset\nVersions API GET /api/v1/models?family=daybreak\n* Version | Released | Context | Input / 1M | Output / 1M | Status\n* Daybreak Blue | \u2014 | 1.1M | $4.00 | $20.00 | Current\n* Daybreak Red | \u2014 | 400K | $12.50 | $75.00 | Available\nModel IDs API GET /api/v1/models/openai-daybreak-blue\ndaybreak-blue-latest\nopenai-daybreak-blue\nBack to top\nCompare instances: AWS EC2 \u00b7 Azure VMs \u00b7 Google Compute\n\u00a9 2017\u20132026 CloudPrice.net \u00b7 About \u00b7 Privacy Policy \u00b7 Terms of Service \u00b7 Cookie Policy\nFeedback"
+      ]
+    },
+    {
+      "url": "https://www.mitiga.io/blog/mitiga-joins-anthropic-cyber-verification-program",
+      "title": "Mitiga Joins Anthropic's Cyber Verification Program",
+      "publish_date": "2026-09-22",
+      "excerpts": [
+        "# We Joined Anthropic\u2019s Cyber Verification Program. Here\u2019s Why It Matters in the Post-Mythos Era.\n## What the Cyber Verification Program is, in plain terms\nFrontier AI models \u2013 the largest, most capable general-purpose AI systems, like Claude or GPT \u2013 are extraordinary at cybersecurity reasoning. That\u2019s both a problem and an opportunity because the same skill that helps a defender find a flaw helps an attacker weaponize it. So Anthropic does something sensible.\n\n...\n\nAsk Claude or GPT out of the box to reason through that, and it will often refuse, since it can't tell your intent from an attacker's."
+      ]
+    },
+    {
+      "url": "https://openai.com/daybreak",
+      "title": "Daybreak | OpenAI for cybersecurity",
+      "publish_date": null,
+      "excerpts": [
+        "Through [Daybreak Access](https://openai.com/form/enterprise-trusted-access-for-cyber/) , verified defenders can access more capable and permissive defensive tools paired with stronger verification, scope controls, and oversight.\n\n...\n\n# Daybreak\n## Built with leading defenders\n### Work with a Daybreak partner\nDeploy GPT Cyber into the tools and services your organization already uses.\n[Explore Daybreak partners](https://openai.com/daybreak/partners/)\nGrid of logos for partners in OpenAI's Daybreak program"
+      ]
+    },
+    {
+      "url": "https://help.openai.com/en/articles/20001259-openai-daybreak-common-issues-and-troubleshooting",
+      "title": "OpenAI Daybreak - Common Issues and Troubleshooting | OpenAI Help Center",
+      "publish_date": null,
+      "excerpts": [
+        "# OpenAI Daybreak - Common Issues and Troubleshooting\nTroubleshoot individual account-security requirements, verification, API project controls, model access, and cyber safety messages for OpenAI Daybreak.\nUpdated: 6 hours ago\n\n# Overview\nDaybreak Access is OpenAI\u2019s Trusted Access for Cyber program. Daybreak Blue and Daybreak Red are access tiers within Daybreak levels. This article covers individual account-security requirements, verification, workspace and API project controls, model access, legacy GPT-5.5-Cyber access, and unexpected cyber safety messages.\n\n...\n\n* If you are approved for Daybreak as an individual, you have checked Your eligibility at [chatgpt.com/cyber](https://chatgpt.com/cyber) , including your plan, Advanced Account Security, hardware security keys, and identity-verification status.\n* You are using the approved OpenAI organization or workspace and the intended API project.\n* For legacy GPT-5.5-Cyber access, you are using the exact model name gpt-5.5-cyber-preview.\n\n# Verification issues\n## If you received a Daybreak Blue reverification email\nWe corrected a technical issue in our verification process and removed access from affected individual Daybreak Blue accounts. This was our error, and we're sorry for the disruption.\n\n# Daybreak model and project access issues\nThe available project controls depend on organization eligibility:\n* Daybreak Blue appears for organizations eligible for Daybreak Blue or Daybreak Red.\n* Daybreak Red appears only for organizations eligible for Daybreak Red.\n\n...\n\n## Contacting Support\nIf you still cannot complete verification, access Daybreak Blue, Daybreak Red, or legacy GPT-5.5-Cyber, or resolve a cyber safety message after working through the steps above, contact Support and include as much of the following as you can:\n\n...\n\n# FAQ\n## Is Daybreak available through AWS Bedrock, Azure, or another cloud provider?\nDaybreak is available via AWS Bedrock, though it still requires OpenAI approval via the standard Daybreak route - reach out to your AWS account team for access."
+      ]
+    },
+    {
+      "url": "https://openai.com/index/gpt-5-6/",
+      "title": "GPT-5.6: Frontier intelligence that scales with your ambition | OpenAI",
+      "publish_date": null,
+      "excerpts": [
+        "# GPT\u20115.6: Frontier intelligence that scales with your ambition\n## This post introduced GPT-5.6 in 2026.\nAgents' Last Exam Artificial Analysis Intelligence Index v4.1\nAgents' Last Exam\nCost Latency Output tokens Cost\nGPT-5.6 Sol\nGPT-5.6 Terra\nGPT-5.6 Luna\nGPT-5.5\nClaude Fable 5\nClaude Opus 4.8\nGemini 3.1 Pro Preview\n\n...\n\n## Pushing the frontier on cyber and science\nGPT\u20115.6 supports important defensive tasks such as secure code review, patching, threat modeling, and blue teaming.\nQualified individuals and organizations in [OpenAI Daybreak\u2019s Trusted Access for Cyber \u2060](https://openai.com/index/daybreak-securing-the-world/) program can access more of its defensive capability through more precise safeguards for verified work in authorized environments, including vulnerability triage and validation, malware analysis, detection engineering, and patch validation.\n\n## Availability and pricing\n### Professional\n| **Eval** | **GPT\u20115.6 Sol** | **GPT\u20115.6 Terra** | **GPT\u20115.6 Luna** | **GPT\u20115.5** | **Claude Fable 5** | **Claude Opus 4.8** | **Gemini 3.1 Pro Preview** | **Gemini 3.5 Flash** |\n| Agents' Last Exam | 52.7% | 50.4% | 50.3% | 46.9% | 40.5% | 45.2% | 32.1% | \u2014 |\n| GDPval-AA v2 | 1,747.8 Elo | 1,593 Elo | 1,591.8 Elo | 1,493.7 Elo | 1,759.6 Elo | 1,600.1 Elo | 962.3 Elo | 1,348.8 Elo |\n\n...\n\n1. 1\n  Cyber capabilities are evaluated with reduced safeguards. Users can join [OpenAI Daybreak\u2019s Trusted Access for Cyber program \u2060](https://openai.com/index/daybreak-securing-the-world/) for increased access to defensive cyber capabilities.\n2. 2\n  All models are evaluated using the ExploitBench API harness with 5 seeds and reasoning continuity.\n3. 3\n  We ran ExploitGym on our alpha API, which outputs responses faster than our public API, and then rescaled to match our public API."
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "name": "sku_search",
+      "count": 1
+    }
+  ],
+  "warnings": []
+}

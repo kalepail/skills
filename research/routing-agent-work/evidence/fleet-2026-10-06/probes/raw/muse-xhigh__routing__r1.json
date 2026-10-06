@@ -1,0 +1,47 @@
+{
+ "run_id": "muse-xhigh__routing__r1",
+ "config": "muse-xhigh",
+ "cli": "opencode",
+ "model": "openrouter/meta/muse-spark-1.3",
+ "effort": "xhigh",
+ "task": "routing",
+ "rep": 1,
+ "workdir": "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/muse-xhigh__routing__r1__1791296685/work",
+ "exit_code": 0,
+ "timed_out": false,
+ "wall_s": 44.9,
+ "pass": true,
+ "score": 1.0,
+ "grade": {
+  "pass": true,
+  "score": 1.0,
+  "correct": 6,
+  "traps_correct": 3
+ },
+ "final_message": "DONE",
+ "usage": {
+  "input_tokens": 538100,
+  "output_tokens": 1120,
+  "cached_tokens": 214709,
+  "reasoning_tokens": 3957,
+  "cost_usd": 0.458022,
+  "api_error": null
+ },
+ "stderr_tail": "",
+ "cmd": [
+  "opencode",
+  "run",
+  "--pure",
+  "-m",
+  "openrouter/meta/muse-spark-1.3",
+  "--variant",
+  "xhigh",
+  "--format",
+  "json",
+  "--dir",
+  "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/muse-xhigh__routing__r1__1791296685/work",
+  "--auto",
+  "<prompt.txt>"
+ ],
+ "finished_at": "2026-10-06T10:25:30-0400"
+}

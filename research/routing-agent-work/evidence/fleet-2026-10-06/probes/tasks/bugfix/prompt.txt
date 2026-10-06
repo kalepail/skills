@@ -1,0 +1,6 @@
+This directory holds a small stdlib-only Python package, `ledger/`, and a test script.
+`python3 run_tests.py` currently fails. Find and fix the bugs in the package so the
+behaviour matches the docstrings. Do not modify run_tests.py or add new test files.
+Do not install anything. Fix the root causes; extra hidden tests will check the
+documented behaviour beyond the visible tests. When you finish, reply with a short
+list of the bugs you fixed.

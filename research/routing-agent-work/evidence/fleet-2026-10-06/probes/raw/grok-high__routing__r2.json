@@ -1,0 +1,48 @@
+{
+ "run_id": "grok-high__routing__r2",
+ "config": "grok-high",
+ "cli": "grok",
+ "model": "grok-4.7",
+ "effort": "high",
+ "task": "routing",
+ "rep": 2,
+ "workdir": "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/grok-high__routing__r2__1791297582/work",
+ "exit_code": 0,
+ "timed_out": false,
+ "wall_s": 22.0,
+ "pass": true,
+ "score": 1.0,
+ "grade": {
+  "pass": true,
+  "score": 1.0,
+  "correct": 6,
+  "traps_correct": 3
+ },
+ "final_message": "I'll read the routing policy and the request list, then write `answers.json` in the format the policy requires.The policy selects the first eligible model on each lane, then clamps effort to that model's floor and ceiling. I'll write `answers.json` in request order.DONE",
+ "usage": {
+  "input_tokens": 84065,
+  "output_tokens": 2010,
+  "cached_tokens": 38912,
+  "reasoning_tokens": 1556,
+  "cost_usd": 0.04141948,
+  "api_error": null
+ },
+ "stderr_tail": "",
+ "cmd": [
+  "grok",
+  "-p",
+  "<prompt.txt>",
+  "--cwd",
+  "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/grok-high__routing__r2__1791297582/work",
+  "-m",
+  "grok-4.7",
+  "--reasoning-effort",
+  "high",
+  "--output-format",
+  "json",
+  "--always-approve",
+  "--disable-web-search",
+  "--no-subagents"
+ ],
+ "finished_at": "2026-10-06T10:40:04-0400"
+}

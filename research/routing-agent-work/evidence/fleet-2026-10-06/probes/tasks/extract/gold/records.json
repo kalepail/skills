@@ -1,0 +1,282 @@
+[
+ {
+  "id": "SHP-1001",
+  "date": "2026-09-14",
+  "carrier": "fedex",
+  "weight_kg": 19.2,
+  "dest": "Madrid"
+ },
+ {
+  "id": "SHP-1002",
+  "date": "2026-09-14",
+  "carrier": "dhl",
+  "weight_kg": 28.1,
+  "dest": "Porto"
+ },
+ {
+  "id": "SHP-1003",
+  "date": "2026-09-14",
+  "carrier": "dhl",
+  "weight_kg": 20.3,
+  "dest": "Madrid"
+ },
+ {
+  "id": "SHP-1004",
+  "date": "2026-09-14",
+  "carrier": "ups",
+  "weight_kg": 39.8,
+  "dest": "Ghent"
+ },
+ {
+  "id": "SHP-1005",
+  "date": "2026-09-15",
+  "carrier": "dhl",
+  "weight_kg": 28.3,
+  "dest": "Ghent"
+ },
+ {
+  "id": "SHP-1006",
+  "date": "2026-09-15",
+  "carrier": "dhl",
+  "weight_kg": 41.26,
+  "dest": "Krakow"
+ },
+ {
+  "id": "SHP-1007",
+  "date": "2026-09-15",
+  "carrier": "dpd",
+  "weight_kg": 27.6,
+  "dest": "Seville"
+ },
+ {
+  "id": "SHP-1008",
+  "date": "2026-09-15",
+  "carrier": "dpd",
+  "weight_kg": 5.0,
+  "dest": "Porto"
+ },
+ {
+  "id": "SHP-1009",
+  "date": "2026-09-16",
+  "carrier": "dpd",
+  "weight_kg": 32.79,
+  "dest": "Leipzig"
+ },
+ {
+  "id": "SHP-1010",
+  "date": "2026-09-16",
+  "carrier": "ups",
+  "weight_kg": 17.6,
+  "dest": "Lyon"
+ },
+ {
+  "id": "SHP-1011",
+  "date": "2026-09-16",
+  "carrier": "dpd",
+  "weight_kg": 27.74,
+  "dest": "Leipzig"
+ },
+ {
+  "id": "SHP-1012",
+  "date": "2026-09-16",
+  "carrier": "ups",
+  "weight_kg": 29.4,
+  "dest": "Seville"
+ },
+ {
+  "id": "SHP-1013",
+  "date": "2026-09-17",
+  "carrier": "ups",
+  "weight_kg": 36.4,
+  "dest": "Graz"
+ },
+ {
+  "id": "SHP-1014",
+  "date": "2026-09-17",
+  "carrier": "ups",
+  "weight_kg": 46.2,
+  "dest": "Leipzig"
+ },
+ {
+  "id": "SHP-1015",
+  "date": "2026-09-17",
+  "carrier": "fedex",
+  "weight_kg": 17.07,
+  "dest": "Brno"
+ },
+ {
+  "id": "SHP-1016",
+  "date": "2026-09-17",
+  "carrier": "dhl",
+  "weight_kg": 45.37,
+  "dest": "Madrid"
+ },
+ {
+  "id": "SHP-1017",
+  "date": "2026-09-18",
+  "carrier": "dhl",
+  "weight_kg": 33.79,
+  "dest": "Bremen"
+ },
+ {
+  "id": "SHP-1018",
+  "date": "2026-09-18",
+  "carrier": "ups",
+  "weight_kg": 1.47,
+  "dest": "Turin"
+ },
+ {
+  "id": "SHP-1019",
+  "date": "2026-09-18",
+  "carrier": "dpd",
+  "weight_kg": 23.9,
+  "dest": "Bremen"
+ },
+ {
+  "id": "SHP-1020",
+  "date": "2026-09-18",
+  "carrier": "dpd",
+  "weight_kg": 19.34,
+  "dest": "Madrid"
+ },
+ {
+  "id": "SHP-1021",
+  "date": "2026-09-19",
+  "carrier": "dpd",
+  "weight_kg": 19.52,
+  "dest": "Valencia"
+ },
+ {
+  "id": "SHP-1022",
+  "date": "2026-09-19",
+  "carrier": "ups",
+  "weight_kg": 34.02,
+  "dest": "Bologna"
+ },
+ {
+  "id": "SHP-1023",
+  "date": "2026-09-19",
+  "carrier": "dpd",
+  "weight_kg": 4.4,
+  "dest": "Ghent"
+ },
+ {
+  "id": "SHP-1024",
+  "date": "2026-09-19",
+  "carrier": "dpd",
+  "weight_kg": 23.5,
+  "dest": "Utrecht"
+ },
+ {
+  "id": "SHP-1025",
+  "date": "2026-09-20",
+  "carrier": "fedex",
+  "weight_kg": 7.33,
+  "dest": "Leipzig"
+ },
+ {
+  "id": "SHP-1026",
+  "date": "2026-09-20",
+  "carrier": "dpd",
+  "weight_kg": 22.14,
+  "dest": "Bologna"
+ },
+ {
+  "id": "SHP-1027",
+  "date": "2026-09-20",
+  "carrier": "ups",
+  "weight_kg": 5.33,
+  "dest": "Porto"
+ },
+ {
+  "id": "SHP-1028",
+  "date": "2026-09-20",
+  "carrier": "dpd",
+  "weight_kg": 47.27,
+  "dest": "Lyon"
+ },
+ {
+  "id": "SHP-1029",
+  "date": "2026-09-21",
+  "carrier": "dhl",
+  "weight_kg": 29.0,
+  "dest": "Lisbon"
+ },
+ {
+  "id": "SHP-1030",
+  "date": "2026-09-21",
+  "carrier": "dpd",
+  "weight_kg": 45.6,
+  "dest": "Madrid"
+ },
+ {
+  "id": "SHP-1031",
+  "date": "2026-09-21",
+  "carrier": "dpd",
+  "weight_kg": 7.47,
+  "dest": "Turin"
+ },
+ {
+  "id": "SHP-1032",
+  "date": "2026-09-21",
+  "carrier": "fedex",
+  "weight_kg": 6.25,
+  "dest": "Brno"
+ },
+ {
+  "id": "SHP-1033",
+  "date": "2026-09-22",
+  "carrier": "ups",
+  "weight_kg": 15.2,
+  "dest": "Seville"
+ },
+ {
+  "id": "SHP-1034",
+  "date": "2026-09-22",
+  "carrier": "fedex",
+  "weight_kg": 13.0,
+  "dest": "Lisbon"
+ },
+ {
+  "id": "SHP-1035",
+  "date": "2026-09-22",
+  "carrier": "dpd",
+  "weight_kg": 7.4,
+  "dest": "Bremen"
+ },
+ {
+  "id": "SHP-1036",
+  "date": "2026-09-22",
+  "carrier": "dhl",
+  "weight_kg": 40.64,
+  "dest": "Lyon"
+ },
+ {
+  "id": "SHP-1037",
+  "date": "2026-09-23",
+  "carrier": "fedex",
+  "weight_kg": 25.75,
+  "dest": "Ghent"
+ },
+ {
+  "id": "SHP-1038",
+  "date": "2026-09-23",
+  "carrier": "dpd",
+  "weight_kg": 1250.5,
+  "dest": "Nantes"
+ },
+ {
+  "id": "SHP-1039",
+  "date": "2026-09-23",
+  "carrier": "ups",
+  "weight_kg": 35.2,
+  "dest": "Utrecht"
+ },
+ {
+  "id": "SHP-1040",
+  "date": "2026-09-23",
+  "carrier": "ups",
+  "weight_kg": 9.62,
+  "dest": "Brno"
+ }
+]

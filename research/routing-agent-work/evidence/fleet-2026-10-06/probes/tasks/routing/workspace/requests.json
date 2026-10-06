@@ -1,0 +1,8 @@
+[
+ {"id": "q1", "lane": "implement", "effort": "medium"},
+ {"id": "q2", "lane": "review", "effort": "high", "author_family": "Corvid"},
+ {"id": "q3", "lane": "extract", "effort": "low", "pinned_cli": "pl"},
+ {"id": "q4", "lane": "prose", "effort": "max", "unavailable": ["pellet-2"]},
+ {"id": "q5", "lane": "extract", "effort": "max"},
+ {"id": "q6", "lane": "research", "effort": "high", "pinned_cli": "pl"}
+]

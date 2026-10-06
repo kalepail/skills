@@ -1,0 +1,3 @@
+Apply the routing policy in policy.md to each request in requests.json. Use only those two
+files. Write answers.json in the exact format the policy specifies, one object per request,
+in request order. Do not modify policy.md or requests.json. When done, reply DONE.

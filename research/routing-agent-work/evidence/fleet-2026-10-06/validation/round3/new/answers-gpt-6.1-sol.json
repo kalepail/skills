@@ -1,0 +1,342 @@
+[
+  {
+    "id": 2,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6.1 Sol",
+    "effort": "medium",
+    "fallback": "Claude with Sonnet 5.5 at medium",
+    "reviewer": "none",
+    "note": "Pass explicit child routes to both orchestrators. Require affected-file paths and compact reports to each direct parent."
+  },
+  {
+    "id": 3,
+    "invoke_skill": true,
+    "worker_cli": "Claude",
+    "model": "Fable 5.1",
+    "effort": "xhigh",
+    "fallback": "Codex with GPT-6 Astra at xhigh",
+    "reviewer": "none",
+    "note": "Opus 5.5 is unavailable. Fable 5.1 is the first planning fallback. Set a completion check and stop budget."
+  },
+  {
+    "id": 4,
+    "invoke_skill": true,
+    "worker_cli": "Claude",
+    "model": "Opus 5.5",
+    "effort": "xhigh",
+    "fallback": "Claude with Sonnet 5.5 at xhigh",
+    "reviewer": "GPT-6.1 Sol",
+    "note": "The primary output is a long-running implementation. Confirm the archive fits the host context. Set decision evidence, completion checks, and a stop budget."
+  },
+  {
+    "id": 5,
+    "invoke_skill": true,
+    "worker_cli": "OpenCode",
+    "model": "GLM-5.3 Flash",
+    "effort": "max",
+    "fallback": "Codex with GPT-6.1 Sol at medium",
+    "reviewer": "none",
+    "note": "Use Grok 4.7 at high as the second challenger. Reproduce its findings. Confirm the Flash route supports max reasoning."
+  },
+  {
+    "id": 11,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6 Luna",
+    "effort": "high",
+    "fallback": "Codex with GPT-6.1 Sol at low",
+    "reviewer": "none",
+    "note": "Use small extraction batches and check all five fields. Luna starts at high for narrow, high-volume extraction."
+  },
+  {
+    "id": 12,
+    "invoke_skill": true,
+    "worker_cli": "Grok",
+    "model": "Grok 4.7",
+    "effort": "high",
+    "fallback": "OpenCode with GLM-5.3 at max",
+    "reviewer": "none",
+    "note": "Use the independent challenge route. Require primary sources and executed checks. Reproduce each finding before a stronger route acts."
+  },
+  {
+    "id": 20,
+    "invoke_skill": true,
+    "worker_cli": "Claude",
+    "model": "Unrouted",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "Every fleet route on the pinned Claude CLI is unavailable. Opus 5 is outside the fleet."
+  },
+  {
+    "id": 21,
+    "invoke_skill": true,
+    "worker_cli": "OpenCode",
+    "model": "Kimi K3",
+    "effort": "high",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "Continue the existing Kimi K3 session. The host preserves its complete reasoning and tool history. A model switch loses that history."
+  },
+  {
+    "id": 22,
+    "invoke_skill": true,
+    "worker_cli": "OpenCode",
+    "model": "Muse Spark 1.3",
+    "effort": "high",
+    "fallback": "Claude with Opus 5.5 at high",
+    "reviewer": "none",
+    "note": "Use meta/muse-spark-1.3 before openrouter/meta/muse-spark-1.3. Skip contributor routes because the caller did not accept their data terms. Confirm the context limit."
+  },
+  {
+    "id": 24,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6.1 Sol",
+    "effort": "high",
+    "fallback": "Codex with GPT-6 Astra at high",
+    "reviewer": "none",
+    "note": "Use the default Codex implementation route. Require the feature and passing integration checks. The host confirms the identifier and effort."
+  },
+  {
+    "id": 25,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6.1 Sol",
+    "effort": "medium",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "The bounded implementation row sets medium. Existing checks cover the changed references. Its listed fallbacks use other CLIs."
+  },
+  {
+    "id": 26,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6.1 Sol",
+    "effort": "low",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "Low fits this trivial, readily checked task. Compare the exact output with the supplied list."
+  },
+  {
+    "id": 27,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6 Astra",
+    "effort": "high",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "GPT-6.1 Sol is unavailable. Astra supports high and remains within the Codex constraint."
+  },
+  {
+    "id": 28,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6.1 Sol",
+    "effort": "medium",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "Use the budget-sensitive bounded route. No listed fallback meets the Codex constraint. GPT-5.6 Terra is outside the fleet."
+  },
+  {
+    "id": 29,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "Daybreak Blue",
+    "effort": "high",
+    "fallback": "Codex with GPT-6 Astra at high",
+    "reviewer": "Opus 5.5",
+    "note": "The host confirms Daybreak access and high effort. Keep all testing in the isolated checkout. Require vulnerability evidence and patch checks."
+  },
+  {
+    "id": 31,
+    "invoke_skill": true,
+    "worker_cli": "Claude",
+    "model": "Opus 5.5",
+    "effort": "high",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "Opus supplies the required different-family defensive review of the caller's code. Daybreak belongs to the author's OpenAI family."
+  },
+  {
+    "id": 41,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6.1 Sol",
+    "effort": "medium",
+    "fallback": "Claude with Sonnet 5.5 at medium",
+    "reviewer": "none",
+    "note": "The budget-sensitive bounded row selects Sol at medium. Sonnet at medium is the next available fallback."
+  },
+  {
+    "id": 44,
+    "invoke_skill": true,
+    "worker_cli": "Claude",
+    "model": "Unrouted",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "The pinned Claude CLI has no permitted vulnerability exploration route. Opus supports defensive review only. Keep the owned-parser and local-testing limits."
+  },
+  {
+    "id": 46,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "Unrouted",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "Sol is unavailable. No listed fallback meets the CLI and budget limits. GPT-6 Sol and GPT-5.6 Terra are outside the fleet."
+  },
+  {
+    "id": 47,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6 Luna",
+    "effort": "high",
+    "fallback": "Codex with GPT-6.1 Sol at low",
+    "reviewer": "none",
+    "note": "Luna starts at high. No local sample supports higher effort. Ultra is outside Luna's supported effort range."
+  },
+  {
+    "id": 49,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6.1 Sol",
+    "effort": "high",
+    "fallback": "Codex with GPT-6 Astra at high",
+    "reviewer": "none",
+    "note": "Use the default Codex route for meaningful implementation. The prompt supplies no reason to escalate to Astra."
+  },
+  {
+    "id": 50,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6.1 Sol",
+    "effort": "low",
+    "fallback": "OpenCode with GLM-5.3 Flash at high",
+    "reviewer": "none",
+    "note": "Luna is unavailable. Sol at low is the listed narrow-extraction fallback. GPT-5.6 Terra is outside the fleet."
+  },
+  {
+    "id": 52,
+    "invoke_skill": true,
+    "worker_cli": "Claude",
+    "model": "Sonnet 5.5",
+    "effort": "medium",
+    "fallback": "Claude with Opus 5.5 at low",
+    "reviewer": "none",
+    "note": "The budget-sensitive bounded row selects Sonnet first on Claude. Require a readily checked fix. Use Opus at low only for trivial work."
+  },
+  {
+    "id": 53,
+    "invoke_skill": true,
+    "worker_cli": "Claude",
+    "model": "Opus 5.5",
+    "effort": "xhigh",
+    "fallback": "Claude with Sonnet 5.5 at xhigh",
+    "reviewer": "none",
+    "note": "Hard debugging requires xhigh. Opus is available. Sonnet at max violates the fleet policy."
+  },
+  {
+    "id": 54,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6 Astra",
+    "effort": "xhigh",
+    "fallback": "Codex with GPT-6.1 Sol at xhigh",
+    "reviewer": "none",
+    "note": "The difficult implementation row selects Astra first on Codex. Confirm Astra's host controls. The host confirms Sol at xhigh as the fallback."
+  },
+  {
+    "id": 55,
+    "invoke_skill": true,
+    "worker_cli": "OpenCode",
+    "model": "Muse Spark 1.3",
+    "effort": "xhigh",
+    "fallback": "OpenCode with GLM-5.3 at max",
+    "reviewer": "GPT-6.1 Sol",
+    "note": "Other challengers: GLM-5.3 at max; Kimi K3 at max only with confirmed preserved history. Set time limits and reproduce findings. Skip Muse contributor routes."
+  },
+  {
+    "id": 56,
+    "invoke_skill": true,
+    "worker_cli": "Claude",
+    "model": "Sonnet 5.5",
+    "effort": "xhigh",
+    "fallback": "Codex with GPT-6 Astra at high",
+    "reviewer": "none",
+    "note": "Opus is unavailable. Sonnet at xhigh is the first difficult-implementation fallback. Grok has no coding fallback route."
+  },
+  {
+    "id": 57,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "Daybreak Blue",
+    "effort": "high",
+    "fallback": "Codex with GPT-6 Astra at high",
+    "reviewer": "Opus 5.5",
+    "note": "Use gpt-daybreak-blue-latest with the approved key. Confirm high effort before launch. Keep the caller's target and action limits."
+  },
+  {
+    "id": 58,
+    "invoke_skill": true,
+    "worker_cli": "Grok",
+    "model": "Unrouted",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "The pinned Grok CLI has no coding route. Return the lane for an explicit constraint change."
+  },
+  {
+    "id": 59,
+    "invoke_skill": true,
+    "worker_cli": "OpenCode",
+    "model": "GLM-5.3",
+    "effort": "max",
+    "fallback": "none",
+    "reviewer": "GPT-6.1 Sol",
+    "note": "Opus 4.8 is outside the fleet. Skip the unavailable Opus route. GLM-5.3 is the next security fallback for text-only input."
+  },
+  {
+    "id": 60,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6.1 Sol",
+    "effort": "medium",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "Use one direct worker at the bounded implementation row's medium effort. Ultra violates the caller's delegation limit."
+  },
+  {
+    "id": 61,
+    "invoke_skill": true,
+    "worker_cli": "Codex",
+    "model": "GPT-6.1 Sol",
+    "effort": "high",
+    "fallback": "Claude with Sonnet 5.5 at high",
+    "reviewer": "none",
+    "note": "A multi-file migration is difficult implementation. Use the stated-cost-limit chain and set a stop budget with migration checks."
+  },
+  {
+    "id": 62,
+    "invoke_skill": true,
+    "worker_cli": "none",
+    "model": "Unrouted",
+    "effort": "none",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "Every listed different-family reviewer for Sol is unavailable. Grok and GLM can supply extra challenges, but cannot replace a capable reviewer."
+  },
+  {
+    "id": 63,
+    "invoke_skill": true,
+    "worker_cli": "Claude",
+    "model": "Sonnet 5.5",
+    "effort": "high",
+    "fallback": "none",
+    "reviewer": "none",
+    "note": "Use the first Claude route in the cost-limited difficult-implementation chain. Set a stop budget and require migration checks."
+  }
+]

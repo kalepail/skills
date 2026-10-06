@@ -1,0 +1,51 @@
+{
+ "run_id": "muse-xhigh__bugfix__r1",
+ "config": "muse-xhigh",
+ "cli": "opencode",
+ "model": "openrouter/meta/muse-spark-1.3",
+ "effort": "xhigh",
+ "task": "bugfix",
+ "rep": 1,
+ "workdir": "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/muse-xhigh__bugfix__r1__1791296736/work",
+ "exit_code": 0,
+ "timed_out": false,
+ "wall_s": 377.7,
+ "pass": true,
+ "score": 1.0,
+ "grade": {
+  "visible_pass": true,
+  "hidden_pass": true,
+  "tests_untouched": true,
+  "extra_test_files": [],
+  "hidden_summary": "5/5 passed",
+  "hidden_fail_lines": [],
+  "pass": true,
+  "score": 1.0
+ },
+ "final_message": "- Fixed `format_cents` to use the absolute value for negative amounts.\n- Fixed `parse_date` to return year, month, and day in the correct order.\n- Fixed `top_items` to sort by total descending and name ascending.\n- Fixed `parse_amount` to accept `$` and `-` in any order.",
+ "usage": {
+  "input_tokens": 1682997,
+  "output_tokens": 5624,
+  "cached_tokens": 1506207,
+  "reasoning_tokens": 43170,
+  "cost_usd": 0.654293,
+  "api_error": null
+ },
+ "stderr_tail": "",
+ "cmd": [
+  "opencode",
+  "run",
+  "--pure",
+  "-m",
+  "openrouter/meta/muse-spark-1.3",
+  "--variant",
+  "xhigh",
+  "--format",
+  "json",
+  "--dir",
+  "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/muse-xhigh__bugfix__r1__1791296736/work",
+  "--auto",
+  "<prompt.txt>"
+ ],
+ "finished_at": "2026-10-06T10:31:54-0400"
+}

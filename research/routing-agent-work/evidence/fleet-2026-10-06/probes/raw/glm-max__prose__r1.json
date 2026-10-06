@@ -1,0 +1,46 @@
+{
+ "run_id": "glm-max__prose__r1",
+ "config": "glm-max",
+ "cli": "opencode",
+ "model": "openrouter/z-ai/glm-5.3",
+ "effort": "max",
+ "task": "prose",
+ "rep": 1,
+ "workdir": "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/glm-max__prose__r1__1791297213/work",
+ "exit_code": 0,
+ "timed_out": false,
+ "wall_s": 369.0,
+ "pass": false,
+ "score": 0.0,
+ "grade": {
+  "pass": false,
+  "score": 0.0,
+  "error": "rewritten.txt missing"
+ },
+ "final_message": "",
+ "usage": {
+  "input_tokens": 213355,
+  "output_tokens": 82,
+  "cached_tokens": 196224,
+  "reasoning_tokens": 32018,
+  "cost_usd": 0.238654,
+  "api_error": null
+ },
+ "stderr_tail": "",
+ "cmd": [
+  "opencode",
+  "run",
+  "--pure",
+  "-m",
+  "openrouter/z-ai/glm-5.3",
+  "--variant",
+  "max",
+  "--format",
+  "json",
+  "--dir",
+  "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/glm-max__prose__r1__1791297213/work",
+  "--auto",
+  "<prompt.txt>"
+ ],
+ "finished_at": "2026-10-06T10:39:42-0400"
+}

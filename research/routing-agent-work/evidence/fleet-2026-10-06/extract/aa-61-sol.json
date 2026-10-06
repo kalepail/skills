@@ -1,0 +1,23 @@
+{
+  "extract_id": "extract_2f218f2bd7800ec8250025243775a7ec",
+  "session_id": "session_2f218f2bd7800ec8250025243775a7ec",
+  "status": "ok",
+  "results": [
+    {
+      "url": "https://artificialanalysis.ai/articles/gpt-6-1-sol-replaces-gpt-6-sol-after-just-7-days-with-near-astra-intelligence",
+      "title": "GPT-6.1 Sol replaces GPT-6 Sol after just 7 days, with near-Astra intelligence | Artificial Analysis",
+      "publish_date": "2026-09-29",
+      "excerpts": [
+        "# GPT-6.1 Sol replaces GPT-6 Sol after just 7 days, with near-Astra intelligence\n**GPT-6.1 Sol replaces GPT-6 Sol after just 7 days. It scores 1 point below GPT-6 Astra in the Intelligence Index at less than one quarter of the Cost per Task.**\n\n...\n\n**\u27a4 Achieves near-Astra Intelligence:** GPT-6.1 Sol gains 4 points in the Intelligence Index vs GPT-6 Sol, and 5 points vs GPT-5.6 Sol - landing 1 point below GPT-6 Astra. It makes significant gains in agentic knowledge work, improving 4 points and 5 points in AA-Briefcase v1.1 and GDPval-AA v2.1 respectively.\n\n...\n\n**\u27a4 Pushes cost efficiency frontier:** At max effort, GPT-6.1 Sol costs less than a quarter of GPT-6 Astra per Intelligence Index task ($0.72 vs $3.26). It also costs 31% less per task than GPT-6 Sol ($1.05) and 64% less than GPT-5.6 Sol ($1.99). All effort levels of GPT-6.1 Sol push out the cost efficiency Pareto frontier: for a given level of intelligence, there is no cheaper model.\n**\u27a4 Pushes token efficiency frontier, but uses slightly more output tokens than GPT-6 Sol:** GPT-6.1 Sol uses ~10-30% more output tokens than GPT-6 Sol across effort levels. However, due to the increase in Intelligence Index score, its low and medium effort levels are Pareto optimal for token efficiency.\n**\u27a4 Gains in Coding Agent Index:** GPT-6.1 Sol gains 3 points on GPT-6 Sol at max effort in the Artificial Analysis Coding Agent Index, and sits 2 points below GPT-6 Astra.\n\n## Coding Agent Index\nGPT-6.1 Sol dominates the lower-price range of the Pareto frontier for Artificial Analysis Coding Agent Index vs Cost per Task. GPT-6.1 Sol (xhigh) scores 1 point above GPT-6 Astra for less than 15% of the Cost per Task. This represents a 6 point gain from GPT-6 Sol (max). We observed the xhigh effort setting to outperform the max effort setting by 3 points.\n\n...\n\n## AA-Briefcase\nGPT-6.1 Sol improves by ~80 Elo in AA-Briefcase. This is driven by increases in its rubric score and Analytical Quality Elo, while Presentation Elo falls slightly.\n\n## Results by evaluation\nBreakdown of the individual evaluations in the Artificial Analysis Intelligence Index v4.3.2.\nCompare GPT-6.1 Sol with other leading models at: [artificialanalysis.ai/models/releases/gpt-6-1-sol](https://artificialanalysis.ai/models/releases/gpt-6-1-sol)\n\n### Read the latest\n[### Korean AI Lab Upstage releases Solar Mini 4 Korean AI Lab Upstage has released Solar Mini 4 which scores 24 on the Artificial Analysis Intelligence Index, but costs ~5x as much per task as GPT-6 Luna (max) despite similar per-token prices September 30, 2026](https://artificialanalysis.ai/articles/korean-ai-lab-upstage-releases-solar-mini-4) [### Gemini 4 Argon: Google is back as one of the top three labs in intelligence achieved Google\u2019s new Gemini 4 Argon equals\nGPT-6 Astra on the Artificial Analysis Intelligence Index at 60% of the Cost per Task with discounted prices."
+      ]
+    }
+  ],
+  "errors": [],
+  "usage": [
+    {
+      "name": "sku_extract_excerpts",
+      "count": 1
+    }
+  ],
+  "warnings": []
+}

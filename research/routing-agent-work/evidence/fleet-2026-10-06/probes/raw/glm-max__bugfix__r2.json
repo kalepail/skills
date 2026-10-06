@@ -1,0 +1,51 @@
+{
+ "run_id": "glm-max__bugfix__r2",
+ "config": "glm-max",
+ "cli": "opencode",
+ "model": "openrouter/z-ai/glm-5.3",
+ "effort": "max",
+ "task": "bugfix",
+ "rep": 2,
+ "workdir": "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/glm-max__bugfix__r2__1791297374/work",
+ "exit_code": 0,
+ "timed_out": false,
+ "wall_s": 109.9,
+ "pass": true,
+ "score": 1.0,
+ "grade": {
+  "visible_pass": true,
+  "hidden_pass": true,
+  "tests_untouched": true,
+  "extra_test_files": [],
+  "hidden_summary": "5/5 passed",
+  "hidden_fail_lines": [],
+  "pass": true,
+  "score": 1.0
+ },
+ "final_message": "All tests pass, including edge cases (negative sub-dollar amounts, tie-breaking, comment/blank-line skipping, default `n`).\n\nBugs fixed:\n1. **`parse_date`** (ledger/parse.py:9) \u2014 returned `(year, day, month)`; swapped month/day to match the documented `(year, month, day)`.\n2. **`format_cents`** (ledger/money.py:20) \u2014 floor division/modulo on negative cents produced `-$-4.90` for `-310`; now takes `abs()` before splitting dollars/cents so negatives render as `-$3.10`.\n3. **`top_items`** (ledger/report.py:23) \u2014 sorted totals ascending with no tie-break; now sorts by `(-total, item)` for descending totals with ties broken by item name ascending.",
+ "usage": {
+  "input_tokens": 771889,
+  "output_tokens": 1490,
+  "cached_tokens": 649216,
+  "reasoning_tokens": 2370,
+  "cost_usd": 0.077806,
+  "api_error": null
+ },
+ "stderr_tail": "",
+ "cmd": [
+  "opencode",
+  "run",
+  "--pure",
+  "-m",
+  "openrouter/z-ai/glm-5.3",
+  "--variant",
+  "max",
+  "--format",
+  "json",
+  "--dir",
+  "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/glm-max__bugfix__r2__1791297374/work",
+  "--auto",
+  "<prompt.txt>"
+ ],
+ "finished_at": "2026-10-06T10:38:04-0400"
+}

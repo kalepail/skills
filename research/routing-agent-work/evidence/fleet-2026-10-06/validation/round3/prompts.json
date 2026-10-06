@@ -1,0 +1,138 @@
+[
+ {
+  "id": 2,
+  "prompt": "I need five agents to inspect separate packages and report the affected files. The parent should not consume their full transcripts. Two child orchestrators cannot load local skills."
+ },
+ {
+  "id": 3,
+  "prompt": "Route an ambiguous planning lane. Host status says the Opus 5.5 identifier is unavailable. Fable 5.1 is available at xhigh."
+ },
+ {
+  "id": 4,
+  "prompt": "Assign a worker to read a very large text-only design archive and trace its decisions into a long-running implementation."
+ },
+ {
+  "id": 5,
+  "prompt": "Pick a low-cost model for multimodal tool use and a second model to challenge its findings."
+ },
+ {
+  "id": 11,
+  "prompt": "Assign a cheap worker to extract the same five fields from thousands of small independent records. The lane needs no broad judgment."
+ },
+ {
+  "id": 12,
+  "prompt": "Assign an independent worker to research an API claim, exercise the code path, and challenge the implementer's result."
+ },
+ {
+  "id": 20,
+  "prompt": "Route a bounded repository sweep. The host pins Claude for every worker. Targeted checks show that Opus 5.5, Sonnet 5.5, and Fable 5.1 are unavailable. Opus 5 still appears in the host catalog."
+ },
+ {
+  "id": 21,
+  "prompt": "Assign a worker to continue a multimodal long-horizon knowledge task that Kimi K3 started. The OpenCode provider preserves complete Kimi reasoning and tool history."
+ },
+ {
+  "id": 22,
+  "prompt": "Assign a worker to analyze a very large set of screenshots and documents. The task does not need preserved reasoning history."
+ },
+ {
+  "id": 24,
+  "prompt": "Route a Codex worker to implement a feature and run its integration checks. The host confirms all approved Codex models and effort levels. No budget constraint applies."
+ },
+ {
+  "id": 25,
+  "prompt": "Pick a Codex worker for a small, well-defined file rename and import update. Existing checks cover every changed reference. Keep latency modest. Host status confirms GPT-6.1 Sol and Astra at low, medium, and high."
+ },
+ {
+  "id": 26,
+  "prompt": "Pick a Codex worker to alphabetize ten supplied labels and verify the exact output against a provided list. This is a trivial isolated task. Host status confirms GPT-6.1 Sol at low and medium."
+ },
+ {
+  "id": 27,
+  "prompt": "Route a Codex worker to implement a feature. Host status confirms GPT-6.1 Sol is unavailable and Astra supports high. Other CLIs are excluded."
+ },
+ {
+  "id": 28,
+  "prompt": "Route a Codex worker for cheap bounded repository sweeps under a strict budget. The caller pins Codex. Host status confirms GPT-6.1 Sol and GPT-5.6 Terra at medium. Astra exceeds this budget. Grok is outside the pin."
+ },
+ {
+  "id": 29,
+  "prompt": "Select a worker to review our authentication service for vulnerabilities and validate patches. Testing stays in our isolated checkout. Host status confirms Daybreak Blue access and high effort."
+ },
+ {
+  "id": 31,
+  "prompt": "Select an independent security reviewer for code written by GPT-6.1 Sol. Daybreak Blue and Opus 5.5 are available. A different model family is required."
+ },
+ {
+  "id": 41,
+  "prompt": "Route cheap bounded repository sweeps. No CLI is pinned. Host status confirms GPT-6.1 Sol at medium, Sonnet 5.5 at medium, Opus 5.5 at medium, and Grok 4.7 at high."
+ },
+ {
+  "id": 44,
+  "prompt": "Choose a worker to explore vulnerabilities in our owned parser and build local exploit reproducers. The host pins Claude. Host status confirms Opus 5.5 at high. No external targets are allowed."
+ },
+ {
+  "id": 46,
+  "prompt": "Route cheap bounded repository sweeps. Codex is pinned. GPT-6.1 Sol is unavailable and Astra exceeds the budget. Host status confirms GPT-6 Sol and GPT-5.6 Terra at medium."
+ },
+ {
+  "id": 47,
+  "prompt": "Choose an effort for a GPT-6 Luna extraction worker. The task is narrow. The host confirms high, xhigh, and max. A colleague suggests ultra. No local sample supports higher effort."
+ },
+ {
+  "id": 49,
+  "prompt": "Route an ordinary Codex feature worker. GPT-6.1 Sol and Astra are both available at high. A teammate says Astra is always safer because it is the flagship. No failure-cost signal applies."
+ },
+ {
+  "id": 50,
+  "prompt": "Route a narrow extraction lane. GPT-6 Luna is unavailable. GPT-6.1 Sol and GPT-5.6 Terra support low and medium and meet the budget."
+ },
+ {
+  "id": 52,
+  "prompt": "Route a bounded bug-fix lane through Claude. The caller wants it fast and cheap. Host status confirms Sonnet 5.5 and Opus 5.5 at every effort level."
+ },
+ {
+  "id": 53,
+  "prompt": "Route a very hard Claude debugging lane. A colleague suggests Sonnet 5.5 at max because it is cheaper per token. Opus 5.5 is available at xhigh."
+ },
+ {
+  "id": 54,
+  "prompt": "Route a hard multi-file Codex refactor. Host status confirms GPT-6.1 Sol at high, xhigh, and max. The caller asks for the best effort setting."
+ },
+ {
+  "id": 55,
+  "prompt": "Route a lane that asks Kimi K3, GLM-5.3, and Muse Spark 1.3 to find edge cases in our new rate limiter. The implementer is Opus 5.5."
+ },
+ {
+  "id": 56,
+  "prompt": "Use Grok 4.7 as the fallback for a difficult implementation lane because Opus 5.5 is unavailable."
+ },
+ {
+  "id": 57,
+  "prompt": "Route a Codex worker to review authentication code for vulnerabilities. Host status lists gpt-6.1-sol, gpt-6-astra, and gpt-daybreak-blue-latest. The Daybreak key is approved."
+ },
+ {
+  "id": 58,
+  "prompt": "The caller pins the Grok CLI for every worker. Route a multi-file implementation lane."
+ },
+ {
+  "id": 59,
+  "prompt": "Route a defensive review of our own service code to Opus 5.5. Host status shows the cyber safeguard handed the request to Opus 4.8."
+ },
+ {
+  "id": 60,
+  "prompt": "The caller requires exactly one worker with no delegation. Route a small, well-defined Codex rename."
+ },
+ {
+  "id": 61,
+  "prompt": "Route a multi-file migration under a strict, stated cost limit. No CLI is pinned."
+ },
+ {
+  "id": 62,
+  "prompt": "Add an independent reviewer for a finished GPT-6.1 Sol migration. The Claude provider is down, so Opus 5.5, Sonnet 5.5, and Fable 5.1 cannot run. Grok 4.7 and GLM-5.3 are available."
+ },
+ {
+  "id": 63,
+  "prompt": "The caller pins the Claude CLI and states a strict cost limit. Route a multi-file migration."
+ }
+]

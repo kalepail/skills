@@ -1,0 +1,23 @@
+{
+  "extract_id": "extract_2d5f0dd3a2fa18ee75b147c8199fca0b",
+  "session_id": "session_2d5f0dd3a2fa18ee75b147c8199fca0b",
+  "status": "ok",
+  "results": [
+    {
+      "url": "https://cursor.com/cursorbench",
+      "title": "Cursor \u00b7 CursorBench",
+      "publish_date": null,
+      "excerpts": [
+        "# CursorBench 4.0\n|  | Model | Score | Cost Cost / task | Tokens Tokens / task | Steps Steps / task |\n| 1 | Opus 5.5 Max | 57.8% | $13.43 | 218,363 | 185 |\n| 2 | Opus 5.5 Extra High | 56.0% | $6.98 | 101,083 | 109 |\n| 3 | Opus 5.5 High | 56.0% | $3.97 | 53,078 | 68 |\n| 4 | Sonnet 5.5 Max | 55.5% | $9.67 | 271,920 | 170 |\n| 5 | Sonnet 5.5 Extra High | 53.1% | $3.88 | 100,158 | 78 |\n| 6 | Opus 5.5 Medium | 52.5% | $2.91 | 37,954 | 54 |\n| 7 | Fable 5.1 Max | 51.8% | $17.28 | 117,236 | 128 |\n| 8 | Fable 5.1 Extra High | 51.6% | $13.01 | 87,294 | 101 |\n| 9 | Fable 5.1 High | 49.2% | $9.08 | 58,438 | 77 |\n| 10 | Sonnet 5.5 High | 47.8% | $1.67 | 37,391 | 41 |\n| 11 | Fable 5.1 Medium | 46.8% | $7.05 | 45,411 | 63 |\n| 12 | Opus 5 Max | 46.6% | $11.95 | 85,384 | 106 |\n| 13 | Grok 4.7 Extra High | 46.3% | $6.01 | 70,141 | 88 |\n| 14 | Opus 5 Extra High | 46.1% | $11.43 | 80,094 | 103 |\n| 15 | Fable 5.1 Low | 45.1% | $5.44 | 34,795 | 51 |\n| 16 | Opus 5 High | 44.7% | $9.00 | 61,405 | 86 |\n\n...\n\n|  | Model | Score | Cost Cost / task | Tokens Tokens / task | Steps Steps / task |\n| 1 | Opus 5.5 Max | 57.8% | $13.43 | 218,363 | 185 |\n| 2 | Opus 5.5 Extra High | 56.0% | $6.98 | 101,083 | 109 |\n| 3 | Opus 5.5 High | 56.0% | $3.97 | 53,078 | 68 |\n| 4 | Sonnet 5.5 Max | 55.5% | $9.67 | 271,920 | 170 |\n| 29 | Sonnet 5.5 Medium | 39.2% | $0.70 | 16,036 | 22 |\n| 30 | GLM 5.3 High | 38.0% | $3.24 | 60,031 | 114 |\n| 31 | GPT-5.6 Sol Extra High | 37.7% | $4.40 | 24,729 | 55 |\n| 32 | Muse Spark 1.3 Extra High | 37.5% | $2.10 | 40,891 | 83 |\n| 33 | Gemini 3.8 Flash Medium | 37.3% | $4.06 | 128,364 | 290 |\n| 34 | GLM 5.3 Flash Max | 36.8% | $0.39 | 56,410 | 118 |\n| 35 | Grok 4.6 Medium | 36.1% | $3.48 | 24,893 | 40 |\n| 36 | GPT-5.6 Luna Max | 35.9% | $1.03 | 87,284 | 208 |\n| 37 | Sonnet 5.5 Low | 35.8% | $0.50 | 11,668 | 18 |\n| 38 | GPT-5.6 Sol High | 35.7% | $2.85 | 16,174 | 41 |\n| 39 | Sonnet 5 Max | 34.1% | $7.17 | 149,257 | 140 |\n| 40 | GPT-5.6 Terra Extra High | 33.6% | $1.81 | 23,436 | 43 |\n| 41 | Grok 4.6 Low | 33.4% | $2.25 | 16,307 | 32 |\n| 42 | Muse Spark 1.3 High | 33.4% | $1.66 | 30,654 | 69 |\n| 43 | GLM 5.3 Low | 33.3% | $2.04 | 31,983 | 81 |\n| 44 | Grok 4.7 Low | 33.1% | $1.58 | 15,677 | 40 |\n| 45 | GPT-5.6 Luna Extra High | 33.0% | $0.44 | 40,598 | 98 |\n| 46 | Muse Spark 1.3 Medium | 32.6% | $1.49 | 27,255 | 64 |\n| 47 | Sonnet 5 Extra High | 32.0% | $4.55 | 83,373 | 102 |\n| 48 | GPT-5.6 Sol Medium | 31.1% | $1.77 | 10,111 | 32 |\n| 49 | GLM 5.3 Flash High | 31.1% | $0.25 | 35,104 | 84 |\n| 50 | Sonnet 5 High | 30.8% | $3.48 | 61,146 | 85 |\n| 51 | GPT-5.6 Terra High | 30.7% | $1.11 | 13,162 | 33 |\n| 52 | GPT-5.6 Luna High | 29.4% | $0.25 | 23,368 | 64 |\n| 53 | Muse Spark 1.3 Low | 29.3% | $0.93 | 17,483 | 47 |\n| 54 | Sonnet 5 Medium | 28.0% | $2.31 | 39,114 | 65 |\n| 55 | Composer 2.5 | 27.7% | $0.68 | 17,347 | 41 |\n| 56 | GPT-5.6 Terra Medium | 27.6% | $0.64 | 7,307 | 25 |\n| 57 | GLM 5.3 Flash Low | 26.9% | $0.15 | 17,831 | 58 |\n| 58 | GPT-5.6 Terra Low | 25.2% | $0.52 | 5,914 | 23 |\n| 59 | GPT-5.6 Sol Low | 24.6% | $0.87 | 4,885 | 21 |\n| 60 | Muse Spark 1.3 Minimal | 24.3% | $0.56 | 10,620 | 34 |\n| 61 | Sonnet 5 Low | 24.1% | $1.39 | 23,772 | 46 |\n| 62 | GPT-5.6 Luna Medium | 22.2% | $0.08 | 7,642 | 32 |\n| 63 | GPT-5.6 Luna Low | 16.0% | $0.03 | 3,288 | 18 |"
+      ]
+    }
+  ],
+  "errors": [],
+  "usage": [
+    {
+      "name": "sku_extract_excerpts",
+      "count": 1
+    }
+  ],
+  "warnings": []
+}

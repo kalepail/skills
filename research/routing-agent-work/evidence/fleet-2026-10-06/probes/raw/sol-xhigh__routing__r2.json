@@ -1,0 +1,51 @@
+{
+ "run_id": "sol-xhigh__routing__r2",
+ "config": "sol-xhigh",
+ "cli": "codex",
+ "model": "gpt-6.1-sol",
+ "effort": "xhigh",
+ "task": "routing",
+ "rep": 2,
+ "workdir": "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/sol-xhigh__routing__r2__1791297620/work",
+ "exit_code": 0,
+ "timed_out": false,
+ "wall_s": 28.4,
+ "pass": true,
+ "score": 1.0,
+ "grade": {
+  "pass": true,
+  "score": 1.0,
+  "correct": 6,
+  "traps_correct": 3
+ },
+ "final_message": "DONE",
+ "usage": {
+  "input_tokens": 61405,
+  "output_tokens": 497,
+  "cached_tokens": 44928,
+  "reasoning_tokens": 227,
+  "cost_usd": null,
+  "api_error": null
+ },
+ "stderr_tail": "",
+ "cmd": [
+  "codex",
+  "exec",
+  "--ignore-user-config",
+  "--ephemeral",
+  "--skip-git-repo-check",
+  "-s",
+  "workspace-write",
+  "-C",
+  "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/sol-xhigh__routing__r2__1791297620/work",
+  "-m",
+  "gpt-6.1-sol",
+  "-c",
+  "model_reasoning_effort=\"xhigh\"",
+  "--json",
+  "-o",
+  "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/sol-xhigh__routing__r2__1791297620/last_message.txt",
+  "<prompt.txt>"
+ ],
+ "finished_at": "2026-10-06T10:40:49-0400"
+}

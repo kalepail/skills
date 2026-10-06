@@ -1,0 +1,48 @@
+{
+ "run_id": "grok-high__routing__r1",
+ "config": "grok-high",
+ "cli": "grok",
+ "model": "grok-4.7",
+ "effort": "high",
+ "task": "routing",
+ "rep": 1,
+ "workdir": "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/grok-high__routing__r1__1791296580/work",
+ "exit_code": 0,
+ "timed_out": false,
+ "wall_s": 20.8,
+ "pass": true,
+ "score": 1.0,
+ "grade": {
+  "pass": true,
+  "score": 1.0,
+  "correct": 6,
+  "traps_correct": 3
+ },
+ "final_message": "I'll read the routing policy and the request list, then write `answers.json` in the format the policy requires.The policy is clear. I will route each request and write `answers.json`.DONE",
+ "usage": {
+  "input_tokens": 83489,
+  "output_tokens": 1655,
+  "cached_tokens": 30720,
+  "reasoning_tokens": 1216,
+  "cost_usd": 0.04448152,
+  "api_error": null
+ },
+ "stderr_tail": "",
+ "cmd": [
+  "grok",
+  "-p",
+  "<prompt.txt>",
+  "--cwd",
+  "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/grok-high__routing__r1__1791296580/work",
+  "-m",
+  "grok-4.7",
+  "--reasoning-effort",
+  "high",
+  "--output-format",
+  "json",
+  "--always-approve",
+  "--disable-web-search",
+  "--no-subagents"
+ ],
+ "finished_at": "2026-10-06T10:23:21-0400"
+}

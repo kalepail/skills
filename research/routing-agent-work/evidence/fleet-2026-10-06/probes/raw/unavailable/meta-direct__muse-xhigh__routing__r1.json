@@ -1,0 +1,46 @@
+{
+ "run_id": "muse-xhigh__routing__r1",
+ "config": "muse-xhigh",
+ "cli": "opencode",
+ "model": "meta/muse-spark-1.3",
+ "effort": "xhigh",
+ "task": "routing",
+ "rep": 1,
+ "workdir": "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/muse-xhigh__routing__r1__1791296628/work",
+ "exit_code": 1,
+ "timed_out": false,
+ "wall_s": 4.8,
+ "pass": false,
+ "score": 0.0,
+ "grade": {
+  "pass": false,
+  "score": 0.0,
+  "error": "answers.json missing or invalid: [Errno 2] No such file or directory: '/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/muse-xhigh__routing__r1__1791296628/work/answers.json'"
+ },
+ "final_message": "",
+ "usage": {
+  "input_tokens": null,
+  "output_tokens": null,
+  "cached_tokens": null,
+  "reasoning_tokens": null,
+  "cost_usd": null,
+  "api_error": "{\"name\": \"APIError\", \"data\": {\"message\": \"Billing verification failed. Please check your payment method.\", \"statusCode\": 402, \"isRetryable\": false, \"responseHeaders\": {\"access-control-allow-origin\": \"*\", \"connection\": \"keep-alive\", \"content-length\": \"154\", \"content-type\": \"application/json\", \"date\": \"Tue, 06 Oct 2026 14:23:53 GMT\", \"proxy-status\": \"http_request_error; e_proxy=\\\"AcTMJBvSh5-XKFqE6ix2xDIzR5jJVj86tZk9vVXa9UArt8wBsFKy8bdQ3cNPTi-a7Epfg6QygNh_5weHm1-kBw\\\"; e_fb_twtaskhandle=\\\"AcQ5Q5Fz7"
+ },
+ "stderr_tail": "",
+ "cmd": [
+  "opencode",
+  "run",
+  "--pure",
+  "-m",
+  "meta/muse-spark-1.3",
+  "--variant",
+  "xhigh",
+  "--format",
+  "json",
+  "--dir",
+  "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/muse-xhigh__routing__r1__1791296628/work",
+  "--auto",
+  "<prompt.txt>"
+ ],
+ "finished_at": "2026-10-06T10:23:53-0400"
+}

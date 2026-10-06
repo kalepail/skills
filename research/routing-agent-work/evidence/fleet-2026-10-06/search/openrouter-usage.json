@@ -1,0 +1,106 @@
+{
+  "search_id": "search_523c66f3ae2804ed98577d269d5d56ef",
+  "session_id": "session_523c66f3ae2804ed98577d269d5d56ef",
+  "status": "ok",
+  "results": [
+    {
+      "url": "https://openrouter.ai/blog/insights/",
+      "title": "Insights \u2014 OpenRouter Blog",
+      "publish_date": null,
+      "excerpts": [
+        "# Insights\nSeptember 22, 2026](https://openrouter.ai/blog/insights/jev-vs-claude-opus-5-classification/) [What Is Nemotron 3.5 Lightning ## What Is Nemotron 3.5 Lightning Nemotron 3.5 Lightning is NVIDIA's open-weight 30B mixture-of-experts model with about 3B active parameters per token, built for the high-volume execution calls in an agent run.\nOn OpenRouter every modality runs through one base URL: you change the model string and the content type, and the same routing controls carry across. July 16, 2026](https://openrouter.ai/blog/insights/every-modality-one-api/) [Why Use OpenRouter for DeepSeek ## Why Use OpenRouter for DeepSeek DeepSeek is one model served by 16 providers, at prices that vary by about 4x and throughput from 4 to 57 tokens per second.\nThe lever that reliably cuts cost is reasoning effort. July 7, 2026](https://openrouter.ai/blog/insights/image-detail-low-cost/) [DeepSeek V4 Is Earning Agentic Token Share ## DeepSeek V4 Is Earning Agentic Token Share DeepSeek doubled its token share on OpenRouter in six months. V4 Flash is the model that made it happen, and agentic workloads are driving the surge.\n\n...\n\nA 30-game battle royale across eleven LLMs, $482 of inference, and one finding that should change how you read model benchmarks. June 4, 2026](https://openrouter.ai/blog/insights/royale-last-agent-standing/) [GPT-5.5 Price Increase: What It Actually Costs ## GPT-5.5 Price Increase: What It Actually Costs OpenAI doubled per-token prices with GPT-5.5 but the model is less verbose. We measured real usage to see the net cost impact.\nMay 4, 2026](https://openrouter.ai/blog/insights/gpt55-cost-analysis/) [Opus 4.7's New Tokenizer: What It Actually Costs ## Opus 4.7's New Tokenizer: What It Actually Costs Anthropic changed the tokenizer in Opus 4.7. We looked at usage that shifted from 4.6 to 4.7 to measure exactly how it affects costs."
+      ]
+    },
+    {
+      "url": "https://openrouter.ai/rankings?view=leaderboard&period=week",
+      "title": "LLM Rankings | OpenRouter",
+      "publish_date": null,
+      "excerpts": [
+        "Top Models Leaderboard Top models by task Cost per session Market Share Benchmarks Fastest models Languages Programming Context Length Tool Calls Images Top Apps Top Models Rankings data by OpenRouter is licensed under CC BY 4.0 . Reuse and republish it with attribution. The Data API docs cover the citation format and JSON access to these datasets. OpenRouter OpenRouter \u00a9 2026 OpenRouter, Inc\nProduct\nChat\nRankings\nBenchmarks\nApps\nDiscover\nModels\nCollections\nProviders\nTools\nPricing\nBusiness\nEnterprise\nLabs\nCompany\nAbout\nBlog\nCareers Hiring\nPrivacy\nTerms of Service\nTrust Center\nSupport\nWorks With OR\nData\nBrand\nDeveloper\nDocumentation\nAPI Reference\nDeveloper Platform\nStatus\nAI Site Map\nConnect\nDiscord\nGitHub\nLinkedIn\nX\nYouTube"
+      ]
+    },
+    {
+      "url": "https://platform.tracxn.com/a/d/company/665db13a4c22736c26eb7483/openrouter?utm_source=parallel&utm_medium=ai#a:about",
+      "title": "OpenRouter",
+      "publish_date": null,
+      "excerpts": [
+        "All Locations: United States  \nSpecial Flags: Tech YES Enterprise YES SaaS YES Software YES\nName: OpenRouter\nWebsite Url: https://openrouter.dev\nFounded Year: 2024\nShort Description: AI model aggregator providing API and chat interface\nDetailed Description: AI model aggregator providing API and chat interface.\nIt allows users to connect from Python and offers models designed for applications.\nStage: Unfunded\nLocation Country: United States\nAll Locations: [{\"country\":\"United States\"}]\nCountries Count: 1\nSubsidiary Count: 0"
+      ]
+    },
+    {
+      "url": "https://openrouter.ai/rankings?view=market-share",
+      "title": "LLM Rankings | OpenRouter",
+      "publish_date": null,
+      "excerpts": [
+        "Top Models Leaderboard Top models by task Cost per session Market Share Benchmarks Fastest models Languages Programming Context Length Tool Calls Images Top Apps\nTop Models"
+      ]
+    },
+    {
+      "url": "https://openrouter.ai/rankings",
+      "title": "LLM Rankings",
+      "publish_date": null,
+      "excerpts": [
+        "Top Models Leaderboard Top models by task Cost per session Market Share Benchmarks Fastest models Languages Programming Context Length Tool Calls Images Top Apps\nTop Models"
+      ]
+    },
+    {
+      "url": "https://openrouter.ai/rankings?stream=top",
+      "title": "LLM Rankings | OpenRouter",
+      "publish_date": null,
+      "excerpts": [
+        "Top Models Leaderboard Top models by task Cost per session Market Share Benchmarks Fastest models Languages Programming Context Length Tool Calls Images Top Apps\nTop Models\n\n...\n\n* [Chat](https://openrouter.ai/chat)\n* [Rankings](https://openrouter.ai/rankings)\n* [Benchmarks](https://openrouter.ai/benchmarks)\n* [Apps](https://openrouter.ai/apps)\n* [Discover](https://openrouter.ai/discover)\n* [Models](https://openrouter.ai/models)\n* [Collections](https://openrouter.ai/collections)\n* [Providers](https://openrouter.ai/providers)\n* [Tools](https://openrouter.ai/tools)\n* [Pricing](https://openrouter.ai/pricing)\n* [Business](https://openrouter.ai/business)"
+      ]
+    },
+    {
+      "url": "https://openrouter.ai/rankings?sort=top-weekly",
+      "title": "LLM Rankings | OpenRouter",
+      "publish_date": null,
+      "excerpts": [
+        "Top Models Leaderboard Top models by task Cost per session Market Share Benchmarks Fastest models Languages Programming Context Length Tool Calls Images Top Apps\nTop Models\n\n...\n\n* [Chat](https://openrouter.ai/chat)\n* [Rankings](https://openrouter.ai/rankings)\n* [Benchmarks](https://openrouter.ai/benchmarks)\n* [Apps](https://openrouter.ai/apps)\n* [Discover](https://openrouter.ai/discover)\n* [Models](https://openrouter.ai/models)\n* [Collections](https://openrouter.ai/collections)\n* [Providers](https://openrouter.ai/providers)\n* [Tools](https://openrouter.ai/tools)\n* [Pricing](https://openrouter.ai/pricing)\n* [Business](https://openrouter.ai/business)"
+      ]
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=8BD6w5wELRo",
+      "title": "OpenRouter State Of Models: Jev, Open-Weights, and Tokenomics - YouTube",
+      "publish_date": "2026-10-05",
+      "excerpts": [
+        "# OpenRouter State Of Models: Jev, Open-Weights, and Tokenomics\n1,768 views \u2022 Oct 5, 2026 \u2022 #agenticengineering #openrouter #agenticcoding There is NO AI bubble. OpenRouter just pushed 146 TRILLION tokens in a single week. One year ago? 4.5 trillion. Meanwhile Anthropic is targeting a $2 TRILLION IPO while losing almost $50 billion. If token usage keeps climbing, the bulls win. If it stalls, the house of cards starts falling, and OpenAI likely f \u2026 ...more\n\n## Comments 17 ## In this video\n5:06](https://www.youtube.com/watch?v=8BD6w5wELRo&t=306s) [### Trend #3: An Old New Model Class: Jev System One 10:27](https://www.youtube.com/watch?v=8BD6w5wELRo&t=627s) [### Trend #4: \"Free Tokens\" 15:22](https://www.youtube.com/watch?v=8BD6w5wELRo&t=922s&pp=0gcJCSoDDuyUWbzu) [### Trend #5: Top Apps: Pi Agent And Harness Control 19:15](https://www.youtube.com/watch?v=8BD6w5wELRo&t=1155s)\n133 Likes 1,768 Views 2h Ago There is NO AI bubble. OpenRouter just pushed 146 TRILLION tokens in a single week. One year ago? 4.5 trillion. Meanwhile Anthropic is targeting a $2 TRILLION IPO while losing almost $50 billion. If token usage keeps climbing, the bulls win. If it stalls, the house of cards starts falling, and OpenAI likely follows.\n\n...\n\nSelf-Compact PI Agent: [\u2022 Self-Compact Pi Agent: ZERO HYPE Agentic C...](https://www.youtube.com/watch?v=3b0U4_02bAE) \u2022 FUSION Pi Agent: [\u2022 Intelligence EXPLOSION: Harness Engineerin...](https://www.youtube.com/watch?v=rqZHR-hRllI) \ud83d\udd17 RESOURCES \u2022 OpenRouter rankings:\n\n...\n\nDeepSeek, OpenAI, and Google have held the top three OpenRouter market share spots almost all year.\n\n# OpenRouter State Of Models: Jev, Open-Weights, and Tokenomics\n## Comments 17 ## In this video\nWhat's old is new again. Jev by TypeSafe brings zero-shot classifier models back, and it's already 12th on OpenRouter despite using a fraction of the tokens agents burn. OpenRouter even added a new decisions category for it. Think a Jev open source clone or a fine-tuned scikit-learn model replaces it? Not across dozens of use cases, and not with Jev's uptime."
+      ]
+    },
+    {
+      "url": "https://www.teamday.ai/blog/best-free-ai-models-openrouter-2026",
+      "title": "OpenRouter Free Models: 20 Picks, Limits & Uses (2026)",
+      "publish_date": null,
+      "excerpts": [
+        "# OpenRouter Free Models: 17 Picks for October 2026\n**Verified October 5, 2026:** OpenRouter's public API lists **17 `:free` model IDs** with text output and zero input and output token prices. Below are their exact IDs, context limits, and input types, followed by a practical test for choosing one.\n\n## Live Free Catalog: October 5, 2026\nContext values below are exact token counts reported by the API for the **free endpoint** . They can differ from a paid version of the same model. Input types describe supported modalities; every entry below produces text.\n| Free model ID | Context tokens | Input types |\n| `apodex/apodex-1.1-mini:free` | 262,144 | text |\n| `cohere/north-mini-code:free` | 256,000 | text |\n| `dots-studio/dots-3-note-preview:free` | 512,000 | text, image |\n| `google/gemma-4-26b-a4b-it:free` | 262,144 | image, text, video |\n| `google/gemma-4-31b-it:free` | 262,144 | image, text, video |\n| `inclusionai/ling-3.0-flash-sante:free` | 262,144 | text |\n| `liquid/lfm-2.5-2.6b:free` | 65,536 | text |\n| `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free` | 256,000 | text, audio, image, video |\n| `nvidia/nemotron-3-super-120b-a12b:free` | 262,144 | text |\n| `nvidia/nemotron-3-ultra-550b-a55b:free` | 1,000,000 | text |\n| `nvidia/nemotron-3.5-content-safety:free` | 128,000 | text, image |\n| `nvidia/nemotron-3.5-lightning:free` | 1,000,000 | text |\n| `poolside/laguna-s-2.1:free` | 262,144 | text |\n| `poolside/laguna-xs-2.1:free` | 262,144 | text |\n\n# OpenRouter Free Models: 17 Picks for October 2026\n## Live Free Catalog: October 5, 2026\n| Free model ID | Context tokens | Input types |\n| `apodex/apodex-1.1-mini:free` | 262,144 | text |\n| `cohere/north-mini-code:free` | 256,000 | text |\n| `dots-studio/dots-3-note-preview:free` | 512,000 | text, image |\n| `google/gemma-4-26b-a4b-it:free` | 262,144 | image, text, video |\n| `qwen/qwen3.8-27b:free` | 262,144 | text, image, video |\n| `thinkingmachines/inkling-small:free` | 1,048,576 | text, image, audio |\n| `thinkingmachines/inkling:free` | 1,048,576 | text, image, audio |\n\n# OpenRouter Free Models: 17 Picks for October 2026\n## Live Free Catalog: October 5, 2026\n**What changed since September 17:** the catalog shrank from 20 to 17 qualifying endpoints. Five free variants were withdrawn: Ling 3.0 Flash Fin and Flash VL, Nex-N2.5 Mini and Pro, and GLM-5.2. Their paid versions remain listed at non-zero prices.\n\n...\n\nA concrete trap: the API reports **262,144 tokens for `qwen/qwen3.8-27b:free`** , while the paid `qwen/qwen3.8-27b` endpoint lists 1,000,000. Use the free endpoint's limit when sizing your request."
+      ]
+    },
+    {
+      "url": "https://openrouter.ai/benchmarks",
+      "title": "AI Model Benchmarks | OpenRouter",
+      "publish_date": null,
+      "excerpts": [
+        "* [Chat](https://openrouter.ai/chat)\n* [Rankings](https://openrouter.ai/rankings)\n* [Benchmarks](https://openrouter.ai/benchmarks)\n* [Apps](https://openrouter.ai/apps)\n* [Discover](https://openrouter.ai/discover)\n* [Models](https://openrouter.ai/models)\n* [Collections](https://openrouter.ai/collections)\n* [Providers](https://openrouter.ai/providers)\n* [Tools](https://openrouter.ai/tools)\n* [Pricing](https://openrouter.ai/pricing)\n* [Business](https://openrouter.ai/business)"
+      ]
+    },
+    {
+      "url": "https://tokenmaxxing.com/openrouter-rankings",
+      "title": "OpenRouter Rankings: Most-Used AI Models (October 2026) | Tokenmaxxing",
+      "publish_date": null,
+      "excerpts": [
+        "# OpenRouter rankings: the most-used AI models\n## Token volume by model, ranked\n**OpenRouter rankings: live** Token usage from OpenRouter's live model rankings, through 2026-10-04. Daily tokens are the source-day total; the 30-day column is a real measured total across the trailing 30 days from OpenRouter's data. Last checked 10/5/2026\n| Rank | Model | Source day | Tokens/day | 30-day total (measured) |\n| #1 | [Space Bunny Alpha](https://openrouter.ai/stealth/space-bunny-alpha) Stealth | 2026-10-04 | 6.7T | 52.5T |\n| #2 | [Deepseek V4.1 Flash](https://openrouter.ai/deepseek/deepseek-v4.1-flash-20260910) Deepseek | 2026-10-04 | 3.4T | 65.9T |\n\n...\n\n| #7 | [Gpt 6 Luna](https://openrouter.ai/openai/gpt-6-luna-20260922) Openai | 2026-10-04 | 771.1B | 9.1T |\n\n# OpenRouter rankings: the most-used AI models\n## Token volume by model, ranked\n| Rank | Model | Source day | Tokens/day | 30-day total (measured) |\n| #1 | [Space Bunny Alpha](https://openrouter.ai/stealth/space-bunny-alpha) Stealth | 2026-10-04 | 6.7T | 52.5T |\n| #2 | [Deepseek V4.1 Flash](https://openrouter.ai/deepseek/deepseek-v4.1-flash-20260910) Deepseek | 2026-10-04 | 3.4T | 65.9T |\n\n...\n\n| Rank | Model | Source day | Tokens/day | 30-day total (measured) |\n| #1 | [Space Bunny Alpha](https://openrouter.ai/stealth/space-bunny-alpha) Stealth | 2026-10-04 | 6.7T | 52.5T |\n| #2 | [Deepseek V4.1 Flash](https://openrouter.ai/deepseek/deepseek-v4.1-flash-20260910) Deepseek | 2026-10-04 | 3.4T | 65.9T |\n\n...\n\n#1\n[Space Bunny Alpha](https://openrouter.ai/stealth/space-bunny-alpha) Stealth\nSource day\n2026-10-04\nDay\n6.7T\n30d total\n52.5T\n#2\n[Deepseek V4.1 Flash](https://openrouter.ai/deepseek/deepseek-v4.1-flash-20260910) Deepseek\nSource day\n2026-10-04\nDay\n3.4T\n30d total\n65.9T\n#3\n[Mimo V2.6 Flash](https://openrouter.ai/xiaomi/mimo-v2.6-flash-20260921) Xiaomi\nSource day\n2026-10-04\nDay\n1.3T\n30d total\n15.1T\n#4\n[Glm 5.3 Flash](https://openrouter.ai/z-ai/glm-5.3-flash-20260826) Z Ai\nSource day\n2026-10-04\nDay\n1.2T"
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "name": "sku_search",
+      "count": 1
+    },
+    {
+      "name": "sku_extract_excerpts",
+      "count": 1
+    }
+  ],
+  "warnings": []
+}

@@ -2,7 +2,7 @@
 
 This research supports `routing-agent-work`. The shipped skill keeps only durable routing clues.
 
-Read [the current fleet update](routing-agent-work/model-fleet-update-2026-09-22.md) for measured scores, costs, latency, and runtime checks.
+Read [the current fleet update](routing-agent-work/model-fleet-update-2026-10-06.md) for measured scores, costs, latency, local probes, and runtime checks.
 
 ## Research method
 
@@ -25,24 +25,26 @@ The review rejected one overall model ranking. Benchmark results changed with th
 
 ## Evidence by model family
 
-OpenAI documents Sol, Terra, and Luna as separate GPT-5.6 operating points. The model guidance also describes explicit reasoning controls. These sources support different Codex routes for quality-first implementation, bounded work, and high-volume narrow work. They do not support a universal quality order across every task.
+OpenAI documents GPT-6 Astra, GPT-6.1 Sol, and GPT-6 Luna as separate operating points. Its Codex guidance recommends GPT-6.1 Sol for complex coding and agentic work. It keeps Astra for the hardest end-to-end work and Luna for clear, repeatable tasks. Independent measurements put GPT-6.1 Sol near Astra at about one fifth of its task cost. The routing skill therefore uses GPT-6.1 Sol as the Codex default and Astra as escalation.
 
-- [OpenAI model guidance](https://developers.openai.com/api/docs/guides/latest-model)
+- [Codex models](https://learn.chatgpt.com/docs/models)
+- [GPT-6.1 Sol model page](https://developers.openai.com/api/docs/models/gpt-6.1-sol)
 - [OpenAI reasoning guide](https://developers.openai.com/api/docs/guides/reasoning)
 
-Anthropic tells users to start with Opus 5.5 for most workloads. It keeps Fable 5.1 for demanding reasoning and long-horizon agentic work. Its effort documentation shows that effort is a provider-specific control. The research supports Opus 5.5 as the default Claude route for planning, coding, review, and technical prose. It supports Fable 5.1 as the escalation route. Opus 5.5 safeguards send most cybersecurity tasks to Opus 4.8.
+Anthropic tells users to start with Opus 5.5 for most workloads. It keeps Fable 5.1 for demanding reasoning and long-horizon agentic work. It positions Sonnet 5.5 as the faster, lower-cost complement for well-scoped work. Its effort documentation shows that effort is a provider-specific control. The research supports Opus 5.5 as the default Claude route for planning, coding, review, and technical prose. It supports Sonnet 5.5 for bounded work at `low` to `high` and Fable 5.1 as the escalation route. Opus 5.5 safeguards send most cybersecurity tasks to Opus 4.8. Sonnet 5.5 safeguards send flagged requests to Sonnet 5.
 
 - [Introducing Claude Opus 5.5](https://www.anthropic.com/claude-opus-5-5)
+- [Introducing Claude Sonnet 5.5](https://www.anthropic.com/claude-sonnet-5-5)
 - [Claude models overview](https://platform.claude.com/docs/en/models/overview)
 - [Claude Fable 5.1 and Claude Mythos 5.1](https://www.anthropic.com/claude-fable-and-mythos-5-1)
 - [Anthropic effort documentation](https://platform.claude.com/docs/en/build-with-claude/effort)
 
-xAI documents Grok 4.6 as a reasoning and agentic model. The research supports Grok for coding, testing, research, and independent challenge. The routing skill still requires reproducible evidence for its factual findings.
+xAI documents Grok 4.7 as its model for coding, agentic tasks, and knowledge work. Independent terminal and coding evaluations put it below the Claude and Codex default routes at a higher task cost. The routing skill therefore uses Grok for independent challenge and live web and X research, not as a coding fallback. It requires reproducible evidence for its findings.
 
-- [Introducing Grok 4.6](https://x.ai/news/grok-4-6)
-- [Grok 4.6 documentation](https://docs.x.ai/developers/grok-4-6)
+- [Introducing Grok 4.7](https://x.ai/news/grok-4-7)
+- [Grok 4.7 documentation](https://docs.x.ai/developers/grok-4-7)
 
-Z.ai positions full GLM-5.3 as its text-only flagship for complex coding and long-horizon agents. It supports a 1M-token context, 128K output, and `low`, `high`, or `max` reasoning. Z.ai recommends `max` for complex coding. Artificial Analysis gives full GLM-5.3 and Kimi K3 the same rounded Intelligence Index score. Its measurements show lower cost and latency for GLM-5.3, while Kimi retains multimodal input and a preserved-reasoning contract. The route therefore uses full GLM-5.3 for quality-first text-only long-horizon work and Kimi for multimodal preserved-reasoning work.
+Z.ai positions full GLM-5.3 as its text-only flagship for complex coding and long-horizon agents. It supports a 1M-token context, 128K output, and `low`, `high`, or `max` reasoning. Z.ai recommends `max` for complex coding. Independent evaluations put GLM-5.3 and Kimi K3 below GPT-6.1 Sol at a higher task cost. Kimi K3 scores poorly in generic harnesses that drop its reasoning history. The routing skill therefore uses GLM-5.3 for open-weight text-only long-context work and both models as different-family challengers. It treats their findings as leads that a check must reproduce.
 
 Z.ai identifies GLM-5.3 Flash as the former `ox-alpha`. Its official material emphasizes efficient agentic coding, tool use, automation, multimodal input, and low cost. It shares the 1M-token context and 128K output limits. The route uses high or max reasoning and prefers full GLM-5.3 for harder text-only long-horizon work.
 
@@ -59,7 +61,7 @@ Moonshot documents Kimi K3 for multimodal long-context and agentic work. The mod
 - [Kimi K3 model card](https://huggingface.co/moonshotai/Kimi-K3)
 - [Kimi Code model configuration](https://www.kimi.com/code/docs/en/kimi-code/models.html)
 
-Meta documents Muse Spark 1.3 for multimodal and long-horizon coding work. The routing skill permits only version 1.3. It prefers contributor routes after data-term acceptance. It tries direct Meta contributor first and OpenRouter contributor second.
+Meta documents Muse Spark 1.3 for multimodal and long-horizon coding work. Independent evaluations rank it highest of the three open challengers on knowledge work, and low on terminal-heavy work. The routing skill permits only version 1.3. It prefers contributor routes after data-term acceptance. It tries direct Meta contributor first and OpenRouter contributor second.
 
 - [Introducing Muse Spark 1.3](https://research.meta.ai/blog/introducing-muse-spark-1-3)
 

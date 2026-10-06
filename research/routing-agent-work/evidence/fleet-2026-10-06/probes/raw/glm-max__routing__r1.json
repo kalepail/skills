@@ -1,0 +1,47 @@
+{
+ "run_id": "glm-max__routing__r1",
+ "config": "glm-max",
+ "cli": "opencode",
+ "model": "openrouter/z-ai/glm-5.3",
+ "effort": "max",
+ "task": "routing",
+ "rep": 1,
+ "workdir": "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/glm-max__routing__r1__1791296633/work",
+ "exit_code": 0,
+ "timed_out": false,
+ "wall_s": 42.6,
+ "pass": true,
+ "score": 1.0,
+ "grade": {
+  "pass": true,
+  "score": 1.0,
+  "correct": 6,
+  "traps_correct": 3
+ },
+ "final_message": "DONE",
+ "usage": {
+  "input_tokens": 322431,
+  "output_tokens": 385,
+  "cached_tokens": 107264,
+  "reasoning_tokens": 1203,
+  "cost_usd": 0.03315,
+  "api_error": null
+ },
+ "stderr_tail": "",
+ "cmd": [
+  "opencode",
+  "run",
+  "--pure",
+  "-m",
+  "openrouter/z-ai/glm-5.3",
+  "--variant",
+  "max",
+  "--format",
+  "json",
+  "--dir",
+  "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/glm-max__routing__r1__1791296633/work",
+  "--auto",
+  "<prompt.txt>"
+ ],
+ "finished_at": "2026-10-06T10:24:36-0400"
+}

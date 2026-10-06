@@ -1,0 +1,4779 @@
+{
+ "generated_at": "2026-10-06T14:27:19+00:00",
+ "since_utc": "2026-09-01T00:00:00+00:00",
+ "definitions": {
+  "turn": "codex: task_started/turn_context turn_id (deduped across forked files); claude: non-tool-result, non-meta user entry with >=1 model API call before the next such entry; opencode: user message with >=1 assistant reply; grok: events.jsonl turn_started",
+  "input_tokens_total": "all prompt tokens incl. cache reads and cache writes (codex input_tokens; claude input+cache_read+cache_creation; opencode input+cache.read+cache.write; grok inputTokens)",
+  "cache_hit_ratio": "cached_input_tokens / input_tokens_total",
+  "turn_wall_s": "completed turns only; codex task_complete.duration_ms; claude prompt ts -> last assistant entry ts; opencode user created -> last assistant completed; grok turn_started -> turn_ended",
+  "aborted": "codex turn_aborted; claude '[Request interrupted by user' marker; opencode MessageAbortedError; grok turn_ended outcome=cancelled",
+  "error": "claude assistant isApiErrorMessage/error; opencode assistant error other than abort; grok turn_ended outcome=error; codex has no error event type in these logs",
+  "tool_failure_rate": "codex item_completed status=failed over CommandExecution/McpToolCall/FileChange/DynamicToolCall/CollabAgentToolCall items; claude tool_result is_error; grok tool_completed outcome!=success; not computed for opencode",
+  "no_terminal_event": "turn start seen but no completion/abort record (crash, kill, still running, or log truncation)",
+  "week": "ISO week starting Monday, UTC"
+ },
+ "source_notes": {
+  "codex": {
+   "files": 1038,
+   "threads": 1038,
+   "token_records_without_owned_turn": {}
+  },
+  "claude": {
+   "files": 686,
+   "turns_with_no_model_call_by_origin": {
+    "other": 47,
+    "sdk": 2,
+    "human": 2,
+    "task-notification": 1
+   },
+   "api_error_messages_outside_turn": 2,
+   "api_error_retry": 1
+  },
+  "opencode": {
+   "user_messages": 305,
+   "assistant_messages_without_user_in_window": 0
+  },
+  "grok": {
+   "session_dirs": 3366,
+   "sessions_usage_turncount_mismatch": 10,
+   "session_cwd_class": {
+    "experiment_work_dir": 823,
+    "other": 625,
+    "tmp_or_scratchpad": 1918
+   }
+  }
+ },
+ "by_cli_model": [
+  {
+   "cli": "grok",
+   "model": "grok-4.7",
+   "effort": "*",
+   "threads": 3258,
+   "threads_by_kind": {
+    "primary": 3258
+   },
+   "turns": 3610,
+   "turns_by_kind": {
+    "primary": 3610
+   },
+   "api_calls": 14250,
+   "input_tokens_total": 1363603573,
+   "cached_input_tokens": 1126885760,
+   "cache_write_tokens": 0,
+   "output_tokens": 30410029,
+   "reasoning_output_tokens": 25652549,
+   "cache_hit_ratio": 0.8264,
+   "turn_wall_s_median": 81.5,
+   "turn_wall_s_p90": 251.5,
+   "wall_samples": 3551,
+   "outcomes": {
+    "completed": 3551,
+    "no_terminal_event": 48,
+    "aborted": 10,
+    "error": 1
+   },
+   "tool_calls": 19178,
+   "tool_failure_rate": 0.0734,
+   "aborted_rate": 0.0028,
+   "error_rate": 0.0003,
+   "no_terminal_rate": 0.0133,
+   "first_seen": "2026-09-21",
+   "last_seen": "2026-10-06",
+   "cost_usd_ticks_logged": 6528512905200
+  },
+  {
+   "cli": "codex",
+   "model": "codex-auto-review",
+   "effort": "*",
+   "threads": 303,
+   "threads_by_kind": {
+    "guardian": 303
+   },
+   "turns": 2954,
+   "turns_by_kind": {
+    "guardian": 2954
+   },
+   "api_calls": 2938,
+   "input_tokens_total": 216791498,
+   "cached_input_tokens": 189857536,
+   "cache_write_tokens": 0,
+   "output_tokens": 269681,
+   "reasoning_output_tokens": 115473,
+   "cache_hit_ratio": 0.8758,
+   "turn_wall_s_median": 3.3,
+   "turn_wall_s_p90": 5.7,
+   "wall_samples": 2948,
+   "outcomes": {
+    "completed": 2950,
+    "no_terminal_event": 2,
+    "aborted": 2
+   },
+   "tool_calls": 0,
+   "tool_failure_rate": 0.0,
+   "aborted_rate": 0.0007,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0007,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-10-06"
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-6-astra",
+   "effort": "*",
+   "threads": 301,
+   "threads_by_kind": {
+    "primary": 200,
+    "subagent": 101
+   },
+   "turns": 1592,
+   "turns_by_kind": {
+    "subagent": 514,
+    "primary": 1078
+   },
+   "api_calls": 38180,
+   "input_tokens_total": 4874503363,
+   "cached_input_tokens": 4730878080,
+   "cache_write_tokens": 0,
+   "output_tokens": 21325422,
+   "reasoning_output_tokens": 6718637,
+   "cache_hit_ratio": 0.9705,
+   "turn_wall_s_median": 235.6,
+   "turn_wall_s_p90": 1324.3,
+   "wall_samples": 1581,
+   "outcomes": {
+    "completed": 1581,
+    "no_terminal_event": 1,
+    "aborted": 10
+   },
+   "tool_calls": 46916,
+   "tool_failure_rate": 0.0783,
+   "aborted_rate": 0.0063,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0006,
+   "first_seen": "2026-09-04",
+   "last_seen": "2026-10-06"
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-5.6-sol",
+   "effort": "*",
+   "threads": 243,
+   "threads_by_kind": {
+    "primary": 122,
+    "subagent": 121
+   },
+   "turns": 734,
+   "turns_by_kind": {
+    "primary": 501,
+    "subagent": 233
+   },
+   "api_calls": 36993,
+   "input_tokens_total": 4783366331,
+   "cached_input_tokens": 4673273856,
+   "cache_write_tokens": 0,
+   "output_tokens": 15050480,
+   "reasoning_output_tokens": 6100510,
+   "cache_hit_ratio": 0.977,
+   "turn_wall_s_median": 371.9,
+   "turn_wall_s_p90": 1480.3,
+   "wall_samples": 722,
+   "outcomes": {
+    "completed": 722,
+    "no_terminal_event": 6,
+    "aborted": 6
+   },
+   "tool_calls": 38905,
+   "tool_failure_rate": 0.0873,
+   "aborted_rate": 0.0082,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0082,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-09-21"
+  },
+  {
+   "cli": "claude",
+   "model": "claude-opus-5-5",
+   "effort": "*",
+   "threads": 80,
+   "threads_by_kind": {
+    "primary": 51,
+    "subagent": 29
+   },
+   "turns": 599,
+   "turns_by_kind": {
+    "primary": 564,
+    "subagent": 35
+   },
+   "api_calls": 11482,
+   "input_tokens_total": 4005823705,
+   "cached_input_tokens": 3965478369,
+   "cache_write_tokens": 40321788,
+   "output_tokens": 9918305,
+   "reasoning_output_tokens": null,
+   "cache_hit_ratio": 0.9899,
+   "turn_wall_s_median": 106.5,
+   "turn_wall_s_p90": 809.4,
+   "wall_samples": 597,
+   "outcomes": {
+    "completed": 597,
+    "aborted": 2
+   },
+   "tool_calls": 12196,
+   "tool_failure_rate": 0.0289,
+   "aborted_rate": 0.0033,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-29",
+   "last_seen": "2026-10-06",
+   "api_error_messages": 0,
+   "api_retry_events": 0,
+   "turns_by_origin": {
+    "human": 277,
+    "task-notification": 264,
+    "other": 23,
+    "subagent_task": 35
+   }
+  },
+  {
+   "cli": "claude",
+   "model": "claude-sonnet-5",
+   "effort": "*",
+   "threads": 407,
+   "threads_by_kind": {
+    "primary": 407
+   },
+   "turns": 407,
+   "turns_by_kind": {
+    "primary": 407
+   },
+   "api_calls": 722,
+   "input_tokens_total": 27912198,
+   "cached_input_tokens": 21383218,
+   "cache_write_tokens": 6527536,
+   "output_tokens": 735708,
+   "reasoning_output_tokens": null,
+   "cache_hit_ratio": 0.7661,
+   "turn_wall_s_median": 15.8,
+   "turn_wall_s_p90": 43.3,
+   "wall_samples": 407,
+   "outcomes": {
+    "completed": 407
+   },
+   "tool_calls": 395,
+   "tool_failure_rate": 0.0101,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-10-01",
+   "last_seen": "2026-10-02",
+   "api_error_messages": 0,
+   "api_retry_events": 0,
+   "turns_by_origin": {
+    "sdk": 407
+   }
+  },
+  {
+   "cli": "grok",
+   "model": "grok-4.6",
+   "effort": "*",
+   "threads": 94,
+   "threads_by_kind": {
+    "primary": 94
+   },
+   "turns": 324,
+   "turns_by_kind": {
+    "primary": 324
+   },
+   "api_calls": 2137,
+   "input_tokens_total": 450016131,
+   "cached_input_tokens": 418530816,
+   "cache_write_tokens": 0,
+   "output_tokens": 2429606,
+   "reasoning_output_tokens": 1784858,
+   "cache_hit_ratio": 0.93,
+   "turn_wall_s_median": 188.5,
+   "turn_wall_s_p90": 717.2,
+   "wall_samples": 297,
+   "outcomes": {
+    "no_terminal_event": 15,
+    "completed": 297,
+    "aborted": 10,
+    "error": 2
+   },
+   "tool_calls": 9809,
+   "tool_failure_rate": 0.0201,
+   "aborted_rate": 0.0309,
+   "error_rate": 0.0062,
+   "no_terminal_rate": 0.0463,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-09-21",
+   "cost_usd_ticks_logged": 1217700151840
+  },
+  {
+   "cli": "claude",
+   "model": "claude-fable-5-1",
+   "effort": "*",
+   "threads": 186,
+   "threads_by_kind": {
+    "primary": 14,
+    "subagent": 172
+   },
+   "turns": 281,
+   "turns_by_kind": {
+    "primary": 109,
+    "subagent": 172
+   },
+   "api_calls": 3586,
+   "input_tokens_total": 793964632,
+   "cached_input_tokens": 770532181,
+   "cache_write_tokens": 23352979,
+   "output_tokens": 5387036,
+   "reasoning_output_tokens": null,
+   "cache_hit_ratio": 0.9705,
+   "turn_wall_s_median": 156.6,
+   "turn_wall_s_p90": 608.1,
+   "wall_samples": 278,
+   "outcomes": {
+    "completed": 278,
+    "api_error": 2,
+    "aborted": 1
+   },
+   "tool_calls": 5469,
+   "tool_failure_rate": 0.0254,
+   "aborted_rate": 0.0036,
+   "error_rate": 0.0071,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-06",
+   "last_seen": "2026-10-06",
+   "api_error_messages": 2,
+   "api_retry_events": 1,
+   "turns_by_origin": {
+    "human": 52,
+    "task-notification": 57,
+    "subagent_task": 172
+   }
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-5.6-terra",
+   "effort": "*",
+   "threads": 55,
+   "threads_by_kind": {
+    "primary": 36,
+    "subagent": 19
+   },
+   "turns": 165,
+   "turns_by_kind": {
+    "primary": 122,
+    "subagent": 43
+   },
+   "api_calls": 5819,
+   "input_tokens_total": 654186095,
+   "cached_input_tokens": 636091904,
+   "cache_write_tokens": 0,
+   "output_tokens": 1827520,
+   "reasoning_output_tokens": 607928,
+   "cache_hit_ratio": 0.9723,
+   "turn_wall_s_median": 195.7,
+   "turn_wall_s_p90": 632.3,
+   "wall_samples": 160,
+   "outcomes": {
+    "completed": 160,
+    "no_terminal_event": 5
+   },
+   "tool_calls": 4286,
+   "tool_failure_rate": 0.0733,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0303,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-09-19"
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-6.1-sol",
+   "effort": "*",
+   "threads": 52,
+   "threads_by_kind": {
+    "primary": 44,
+    "subagent": 8
+   },
+   "turns": 152,
+   "turns_by_kind": {
+    "primary": 116,
+    "subagent": 36
+   },
+   "api_calls": 2397,
+   "input_tokens_total": 276954225,
+   "cached_input_tokens": 263185280,
+   "cache_write_tokens": 0,
+   "output_tokens": 1379576,
+   "reasoning_output_tokens": 415633,
+   "cache_hit_ratio": 0.9503,
+   "turn_wall_s_median": 247.2,
+   "turn_wall_s_p90": 1304.6,
+   "wall_samples": 150,
+   "outcomes": {
+    "completed": 150,
+    "aborted": 1,
+    "no_terminal_event": 1
+   },
+   "tool_calls": 3507,
+   "tool_failure_rate": 0.0679,
+   "aborted_rate": 0.0066,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0066,
+   "first_seen": "2026-09-29",
+   "last_seen": "2026-10-06"
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-6-sol",
+   "effort": "*",
+   "threads": 38,
+   "threads_by_kind": {
+    "primary": 36,
+    "subagent": 2
+   },
+   "turns": 106,
+   "turns_by_kind": {
+    "primary": 102,
+    "subagent": 4
+   },
+   "api_calls": 2884,
+   "input_tokens_total": 343091182,
+   "cached_input_tokens": 335389056,
+   "cache_write_tokens": 0,
+   "output_tokens": 1203913,
+   "reasoning_output_tokens": 440963,
+   "cache_hit_ratio": 0.9776,
+   "turn_wall_s_median": 193.1,
+   "turn_wall_s_p90": 1000.7,
+   "wall_samples": 102,
+   "outcomes": {
+    "completed": 102,
+    "aborted": 3,
+    "no_terminal_event": 1
+   },
+   "tool_calls": 3958,
+   "tool_failure_rate": 0.0616,
+   "aborted_rate": 0.0283,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0094,
+   "first_seen": "2026-09-22",
+   "last_seen": "2026-09-29"
+  },
+  {
+   "cli": "opencode",
+   "model": "meta/muse-spark-1.3-contributor",
+   "effort": "*",
+   "threads": 34,
+   "threads_by_kind": {
+    "primary": 29,
+    "subagent": 5
+   },
+   "turns": 95,
+   "turns_by_kind": {
+    "primary": 90,
+    "subagent": 5
+   },
+   "api_calls": 2725,
+   "input_tokens_total": 611013641,
+   "cached_input_tokens": 536031391,
+   "cache_write_tokens": 0,
+   "output_tokens": 730529,
+   "reasoning_output_tokens": 1605115,
+   "cache_hit_ratio": 0.8773,
+   "turn_wall_s_median": 164.3,
+   "turn_wall_s_p90": 1893.2,
+   "wall_samples": 91,
+   "outcomes": {
+    "error": 3,
+    "completed": 91,
+    "aborted": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0105,
+   "error_rate": 0.0316,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-03",
+   "last_seen": "2026-10-02",
+   "cost_usd_logged": 9.04,
+   "providers": {
+    "openrouter": 95
+   },
+   "error_events": 4
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-daybreak-blue-latest",
+   "effort": "*",
+   "threads": 31,
+   "threads_by_kind": {
+    "primary": 31
+   },
+   "turns": 39,
+   "turns_by_kind": {
+    "primary": 39
+   },
+   "api_calls": 1225,
+   "input_tokens_total": 128677628,
+   "cached_input_tokens": 123613406,
+   "cache_write_tokens": 384165,
+   "output_tokens": 795513,
+   "reasoning_output_tokens": 367038,
+   "cache_hit_ratio": 0.9606,
+   "turn_wall_s_median": 394.9,
+   "turn_wall_s_p90": 974.0,
+   "wall_samples": 38,
+   "outcomes": {
+    "completed": 38,
+    "aborted": 1
+   },
+   "tool_calls": 1377,
+   "tool_failure_rate": 0.0668,
+   "aborted_rate": 0.0256,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-14",
+   "last_seen": "2026-09-27"
+  },
+  {
+   "cli": "opencode",
+   "model": "muse-spark-1.3",
+   "effort": "*",
+   "threads": 35,
+   "threads_by_kind": {
+    "primary": 35
+   },
+   "turns": 39,
+   "turns_by_kind": {
+    "primary": 39
+   },
+   "api_calls": 270,
+   "input_tokens_total": 28126558,
+   "cached_input_tokens": 25021062,
+   "cache_write_tokens": 0,
+   "output_tokens": 84391,
+   "reasoning_output_tokens": 186774,
+   "cache_hit_ratio": 0.8896,
+   "turn_wall_s_median": 27.5,
+   "turn_wall_s_p90": 456.7,
+   "wall_samples": 38,
+   "outcomes": {
+    "completed": 38,
+    "error": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0256,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-04",
+   "last_seen": "2026-10-06",
+   "cost_usd_logged": 8.79,
+   "providers": {
+    "meta": 39
+   },
+   "error_events": 1
+  },
+  {
+   "cli": "claude",
+   "model": "claude-sonnet-5-5",
+   "effort": "*",
+   "threads": 8,
+   "threads_by_kind": {
+    "primary": 8
+   },
+   "turns": 35,
+   "turns_by_kind": {
+    "primary": 35
+   },
+   "api_calls": 450,
+   "input_tokens_total": 108904286,
+   "cached_input_tokens": 107496078,
+   "cache_write_tokens": 1407294,
+   "output_tokens": 410299,
+   "reasoning_output_tokens": null,
+   "cache_hit_ratio": 0.9871,
+   "turn_wall_s_median": 55.2,
+   "turn_wall_s_p90": 416.7,
+   "wall_samples": 35,
+   "outcomes": {
+    "completed": 35
+   },
+   "tool_calls": 470,
+   "tool_failure_rate": 0.0404,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-29",
+   "last_seen": "2026-10-06",
+   "api_error_messages": 0,
+   "api_retry_events": 0,
+   "turns_by_origin": {
+    "human": 28,
+    "task-notification": 7
+   }
+  },
+  {
+   "cli": "opencode",
+   "model": "z-ai/glm-5.3-flash",
+   "effort": "*",
+   "threads": 6,
+   "threads_by_kind": {
+    "primary": 6
+   },
+   "turns": 34,
+   "turns_by_kind": {
+    "primary": 34
+   },
+   "api_calls": 422,
+   "input_tokens_total": 81618465,
+   "cached_input_tokens": 77789504,
+   "cache_write_tokens": 0,
+   "output_tokens": 106838,
+   "reasoning_output_tokens": 254430,
+   "cache_hit_ratio": 0.9531,
+   "turn_wall_s_median": 311.1,
+   "turn_wall_s_p90": 822.5,
+   "wall_samples": 33,
+   "outcomes": {
+    "completed": 33,
+    "no_terminal_event": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0294,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-10-06",
+   "cost_usd_logged": 2.03,
+   "providers": {
+    "openrouter": 34
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "muse-spark-1.2",
+   "effort": "*",
+   "threads": 19,
+   "threads_by_kind": {
+    "primary": 19
+   },
+   "turns": 24,
+   "turns_by_kind": {
+    "primary": 24
+   },
+   "api_calls": 593,
+   "input_tokens_total": 65645913,
+   "cached_input_tokens": 60490442,
+   "cache_write_tokens": 0,
+   "output_tokens": 154012,
+   "reasoning_output_tokens": 85807,
+   "cache_hit_ratio": 0.9215,
+   "turn_wall_s_median": 399.5,
+   "turn_wall_s_p90": 1598.1,
+   "wall_samples": 18,
+   "outcomes": {
+    "completed": 18,
+    "error": 5,
+    "no_terminal_event": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.2083,
+   "no_terminal_rate": 0.0417,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-09-08",
+   "cost_usd_logged": 16.54,
+   "providers": {
+    "meta": 24
+   },
+   "error_events": 5
+  },
+  {
+   "cli": "opencode",
+   "model": "z-ai/glm-5.3",
+   "effort": "*",
+   "threads": 21,
+   "threads_by_kind": {
+    "primary": 21
+   },
+   "turns": 21,
+   "turns_by_kind": {
+    "primary": 21
+   },
+   "api_calls": 457,
+   "input_tokens_total": 63395685,
+   "cached_input_tokens": 57874144,
+   "cache_write_tokens": 0,
+   "output_tokens": 150504,
+   "reasoning_output_tokens": 415906,
+   "cache_hit_ratio": 0.9129,
+   "turn_wall_s_median": 480.6,
+   "turn_wall_s_p90": 1595.4,
+   "wall_samples": 17,
+   "outcomes": {
+    "completed": 17,
+    "no_terminal_event": 3,
+    "aborted": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0476,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.1429,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-10-06",
+   "cost_usd_logged": 19.2,
+   "providers": {
+    "openrouter": 20,
+    "nvidia": 1
+   },
+   "error_events": 1
+  },
+  {
+   "cli": "opencode",
+   "model": "moonshotai/kimi-k3",
+   "effort": "*",
+   "threads": 19,
+   "threads_by_kind": {
+    "primary": 19
+   },
+   "turns": 20,
+   "turns_by_kind": {
+    "primary": 20
+   },
+   "api_calls": 577,
+   "input_tokens_total": 77950089,
+   "cached_input_tokens": 75498365,
+   "cache_write_tokens": 0,
+   "output_tokens": 153450,
+   "reasoning_output_tokens": 313973,
+   "cache_hit_ratio": 0.9685,
+   "turn_wall_s_median": 536.0,
+   "turn_wall_s_p90": 4162.0,
+   "wall_samples": 20,
+   "outcomes": {
+    "completed": 20
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-09-21",
+   "cost_usd_logged": 33.69,
+   "providers": {
+    "openrouter": 13,
+    "cloudflare-workers-ai": 1,
+    "cloudflare-ai-gateway": 6
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "meta/muse-spark-1.3",
+   "effort": "*",
+   "threads": 16,
+   "threads_by_kind": {
+    "primary": 13,
+    "subagent": 3
+   },
+   "turns": 18,
+   "turns_by_kind": {
+    "primary": 15,
+    "subagent": 3
+   },
+   "api_calls": 65,
+   "input_tokens_total": 5953699,
+   "cached_input_tokens": 4045872,
+   "cache_write_tokens": 0,
+   "output_tokens": 34721,
+   "reasoning_output_tokens": 38157,
+   "cache_hit_ratio": 0.6796,
+   "turn_wall_s_median": 21.6,
+   "turn_wall_s_p90": 155.8,
+   "wall_samples": 15,
+   "outcomes": {
+    "error": 2,
+    "completed": 15,
+    "no_terminal_event": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.1111,
+   "no_terminal_rate": 0.0556,
+   "first_seen": "2026-09-03",
+   "last_seen": "2026-10-06",
+   "cost_usd_logged": 3.3,
+   "providers": {
+    "openrouter": 18
+   },
+   "error_events": 2
+  },
+  {
+   "cli": "opencode",
+   "model": "meta/muse-glimmer-30b",
+   "effort": "*",
+   "threads": 2,
+   "threads_by_kind": {
+    "primary": 2
+   },
+   "turns": 10,
+   "turns_by_kind": {
+    "primary": 10
+   },
+   "api_calls": 39,
+   "input_tokens_total": 2842780,
+   "cached_input_tokens": 2415889,
+   "cache_write_tokens": 0,
+   "output_tokens": 5780,
+   "reasoning_output_tokens": 4807,
+   "cache_hit_ratio": 0.8498,
+   "turn_wall_s_median": 28.7,
+   "turn_wall_s_p90": 270.8,
+   "wall_samples": 10,
+   "outcomes": {
+    "completed": 10
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-08",
+   "last_seen": "2026-09-08",
+   "cost_usd_logged": 0.24,
+   "providers": {
+    "openrouter": 10
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "@cf/zai-org/glm-5.3-flash",
+   "effort": "*",
+   "threads": 5,
+   "threads_by_kind": {
+    "primary": 5
+   },
+   "turns": 9,
+   "turns_by_kind": {
+    "primary": 9
+   },
+   "api_calls": 73,
+   "input_tokens_total": 10594142,
+   "cached_input_tokens": 9618240,
+   "cache_write_tokens": 0,
+   "output_tokens": 229007,
+   "reasoning_output_tokens": 0,
+   "cache_hit_ratio": 0.9079,
+   "turn_wall_s_median": 639.2,
+   "turn_wall_s_p90": 1043.2,
+   "wall_samples": 9,
+   "outcomes": {
+    "completed": 9
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-09-01",
+   "cost_usd_logged": 0.55,
+   "providers": {
+    "cloudflare-workers-ai": 9
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-6-luna",
+   "effort": "*",
+   "threads": 2,
+   "threads_by_kind": {
+    "primary": 2
+   },
+   "turns": 7,
+   "turns_by_kind": {
+    "primary": 7
+   },
+   "api_calls": 266,
+   "input_tokens_total": 32228765,
+   "cached_input_tokens": 31137536,
+   "cache_write_tokens": 0,
+   "output_tokens": 110528,
+   "reasoning_output_tokens": 82807,
+   "cache_hit_ratio": 0.9661,
+   "turn_wall_s_median": 498.1,
+   "turn_wall_s_p90": 727.4,
+   "wall_samples": 5,
+   "outcomes": {
+    "completed": 5,
+    "aborted": 2
+   },
+   "tool_calls": 238,
+   "tool_failure_rate": 0.1471,
+   "aborted_rate": 0.2857,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-28",
+   "last_seen": "2026-09-29"
+  },
+  {
+   "cli": "opencode",
+   "model": "@cf/zai-org/glm-5.3",
+   "effort": "*",
+   "threads": 7,
+   "threads_by_kind": {
+    "primary": 7
+   },
+   "turns": 7,
+   "turns_by_kind": {
+    "primary": 7
+   },
+   "api_calls": 559,
+   "input_tokens_total": 91126505,
+   "cached_input_tokens": 88265408,
+   "cache_write_tokens": 0,
+   "output_tokens": 469778,
+   "reasoning_output_tokens": 0,
+   "cache_hit_ratio": 0.9686,
+   "turn_wall_s_median": 2745.5,
+   "turn_wall_s_p90": 6302.3,
+   "wall_samples": 5,
+   "outcomes": {
+    "completed": 5,
+    "no_terminal_event": 2
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.2857,
+   "first_seen": "2026-09-03",
+   "last_seen": "2026-09-24",
+   "cost_usd_logged": 29.02,
+   "providers": {
+    "cloudflare-workers-ai": 7
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "kimi-k3",
+   "effort": "*",
+   "threads": 7,
+   "threads_by_kind": {
+    "primary": 7
+   },
+   "turns": 7,
+   "turns_by_kind": {
+    "primary": 7
+   },
+   "api_calls": 338,
+   "input_tokens_total": 43614885,
+   "cached_input_tokens": 42561536,
+   "cache_write_tokens": 0,
+   "output_tokens": 101259,
+   "reasoning_output_tokens": 136538,
+   "cache_hit_ratio": 0.9758,
+   "turn_wall_s_median": 1354.4,
+   "turn_wall_s_p90": 2458.4,
+   "wall_samples": 7,
+   "outcomes": {
+    "completed": 7
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-17",
+   "last_seen": "2026-10-06",
+   "cost_usd_logged": 19.5,
+   "providers": {
+    "moonshotai": 7
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "muse-spark-1.3-contributor",
+   "effort": "*",
+   "threads": 4,
+   "threads_by_kind": {
+    "primary": 4
+   },
+   "turns": 6,
+   "turns_by_kind": {
+    "primary": 6
+   },
+   "api_calls": 120,
+   "input_tokens_total": 15758930,
+   "cached_input_tokens": 15256033,
+   "cache_write_tokens": 0,
+   "output_tokens": 23291,
+   "reasoning_output_tokens": 23184,
+   "cache_hit_ratio": 0.9681,
+   "turn_wall_s_median": 103.3,
+   "turn_wall_s_p90": 603.4,
+   "wall_samples": 3,
+   "outcomes": {
+    "no_terminal_event": 1,
+    "completed": 3,
+    "error": 2
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.3333,
+   "no_terminal_rate": 0.1667,
+   "first_seen": "2026-09-04",
+   "last_seen": "2026-10-02",
+   "cost_usd_logged": 0.09,
+   "providers": {
+    "meta": 6
+   },
+   "error_events": 2
+  },
+  {
+   "cli": "grok",
+   "model": "grok-4.5",
+   "effort": "*",
+   "threads": 6,
+   "threads_by_kind": {
+    "primary": 6
+   },
+   "turns": 6,
+   "turns_by_kind": {
+    "primary": 6
+   },
+   "api_calls": 41,
+   "input_tokens_total": 3202417,
+   "cached_input_tokens": 2508288,
+   "cache_write_tokens": 0,
+   "output_tokens": 33318,
+   "reasoning_output_tokens": 6580,
+   "cache_hit_ratio": 0.7832,
+   "turn_wall_s_median": 167.5,
+   "turn_wall_s_p90": 378.9,
+   "wall_samples": 6,
+   "outcomes": {
+    "completed": 6
+   },
+   "tool_calls": 254,
+   "tool_failure_rate": 0.0118,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-02",
+   "last_seen": "2026-09-18",
+   "cost_usd_ticks_logged": 8924713040
+  },
+  {
+   "cli": "opencode",
+   "model": "muse-spark-1.3-contributor-free",
+   "effort": "*",
+   "threads": 4,
+   "threads_by_kind": {
+    "primary": 4
+   },
+   "turns": 4,
+   "turns_by_kind": {
+    "primary": 4
+   },
+   "api_calls": 6,
+   "input_tokens_total": 367625,
+   "cached_input_tokens": 123366,
+   "cache_write_tokens": 0,
+   "output_tokens": 200,
+   "reasoning_output_tokens": 113,
+   "cache_hit_ratio": 0.3356,
+   "turn_wall_s_median": 5.4,
+   "turn_wall_s_p90": 18.2,
+   "wall_samples": 4,
+   "outcomes": {
+    "completed": 4
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-03",
+   "last_seen": "2026-09-03",
+   "providers": {
+    "opencode": 4
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "x-ai/grok-4.6",
+   "effort": "*",
+   "threads": 3,
+   "threads_by_kind": {
+    "primary": 3
+   },
+   "turns": 3,
+   "turns_by_kind": {
+    "primary": 3
+   },
+   "api_calls": 29,
+   "input_tokens_total": 3775330,
+   "cached_input_tokens": 3146752,
+   "cache_write_tokens": 0,
+   "output_tokens": 17611,
+   "reasoning_output_tokens": 14757,
+   "cache_hit_ratio": 0.8335,
+   "turn_wall_s_median": 299.9,
+   "turn_wall_s_p90": 649.6,
+   "wall_samples": 3,
+   "outcomes": {
+    "completed": 3
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-07",
+   "last_seen": "2026-09-08",
+   "cost_usd_logged": 3.02,
+   "providers": {
+    "openrouter": 3
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "effort": "*",
+   "threads": 2,
+   "threads_by_kind": {
+    "primary": 2
+   },
+   "turns": 2,
+   "turns_by_kind": {
+    "primary": 2
+   },
+   "api_calls": 12,
+   "input_tokens_total": 1360825,
+   "cached_input_tokens": 1139200,
+   "cache_write_tokens": 0,
+   "output_tokens": 2636,
+   "reasoning_output_tokens": 3515,
+   "cache_hit_ratio": 0.8371,
+   "turn_wall_s_median": 20.5,
+   "turn_wall_s_p90": 20.5,
+   "wall_samples": 2,
+   "outcomes": {
+    "completed": 2
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-10-06",
+   "last_seen": "2026-10-06",
+   "cost_usd_logged": 0.04,
+   "providers": {
+    "openrouter": 2
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "codex",
+   "model": "unknown",
+   "effort": "*",
+   "threads": 1,
+   "threads_by_kind": {
+    "guardian": 1
+   },
+   "turns": 1,
+   "turns_by_kind": {
+    "guardian": 1
+   },
+   "api_calls": 0,
+   "input_tokens_total": 0,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 0,
+   "reasoning_output_tokens": 0,
+   "cache_hit_ratio": null,
+   "turn_wall_s_median": null,
+   "turn_wall_s_p90": null,
+   "wall_samples": 0,
+   "outcomes": {
+    "completed": 1
+   },
+   "tool_calls": 0,
+   "tool_failure_rate": 0.0,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-09-01"
+  },
+  {
+   "cli": "opencode",
+   "model": "grok-4.6",
+   "effort": "*",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 1,
+   "turns_by_kind": {
+    "primary": 1
+   },
+   "api_calls": 12,
+   "input_tokens_total": 1771416,
+   "cached_input_tokens": 1352192,
+   "cache_write_tokens": 0,
+   "output_tokens": 9104,
+   "reasoning_output_tokens": 8655,
+   "cache_hit_ratio": 0.7633,
+   "turn_wall_s_median": 421.6,
+   "turn_wall_s_p90": 421.6,
+   "wall_samples": 1,
+   "outcomes": {
+    "completed": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-09-01",
+   "cost_usd_logged": 1.73,
+   "providers": {
+    "xai": 1
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "grok",
+   "model": "grok-4.7-build-fast",
+   "effort": "*",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 1,
+   "turns_by_kind": {
+    "primary": 1
+   },
+   "api_calls": 1,
+   "input_tokens_total": 24736,
+   "cached_input_tokens": 1792,
+   "cache_write_tokens": 0,
+   "output_tokens": 437,
+   "reasoning_output_tokens": 436,
+   "cache_hit_ratio": 0.0724,
+   "turn_wall_s_median": 5.8,
+   "turn_wall_s_p90": 5.8,
+   "wall_samples": 1,
+   "outcomes": {
+    "completed": 1
+   },
+   "tool_calls": 0,
+   "tool_failure_rate": 0.0,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-21",
+   "last_seen": "2026-09-21",
+   "cost_usd_ticks_logged": 988120000
+  }
+ ],
+ "by_cli_model_effort": [
+  {
+   "cli": "grok",
+   "model": "grok-4.7",
+   "effort": "high",
+   "threads": 3241,
+   "threads_by_kind": {
+    "primary": 3241
+   },
+   "turns": 3592,
+   "turns_by_kind": {
+    "primary": 3592
+   },
+   "api_calls": 14109,
+   "input_tokens_total": 1314750405,
+   "cached_input_tokens": 1084027008,
+   "cache_write_tokens": 0,
+   "output_tokens": 29549199,
+   "reasoning_output_tokens": 25101799,
+   "cache_hit_ratio": 0.8245,
+   "turn_wall_s_median": 81.3,
+   "turn_wall_s_p90": 246.6,
+   "wall_samples": 3533,
+   "outcomes": {
+    "completed": 3533,
+    "no_terminal_event": 48,
+    "aborted": 10,
+    "error": 1
+   },
+   "tool_calls": 18960,
+   "tool_failure_rate": 0.0741,
+   "aborted_rate": 0.0028,
+   "error_rate": 0.0003,
+   "no_terminal_rate": 0.0134,
+   "first_seen": "2026-09-21",
+   "last_seen": "2026-10-06",
+   "cost_usd_ticks_logged": 5504282990000
+  },
+  {
+   "cli": "codex",
+   "model": "codex-auto-review",
+   "effort": "low",
+   "threads": 303,
+   "threads_by_kind": {
+    "guardian": 303
+   },
+   "turns": 2954,
+   "turns_by_kind": {
+    "guardian": 2954
+   },
+   "api_calls": 2938,
+   "input_tokens_total": 216791498,
+   "cached_input_tokens": 189857536,
+   "cache_write_tokens": 0,
+   "output_tokens": 269681,
+   "reasoning_output_tokens": 115473,
+   "cache_hit_ratio": 0.8758,
+   "turn_wall_s_median": 3.3,
+   "turn_wall_s_p90": 5.7,
+   "wall_samples": 2948,
+   "outcomes": {
+    "completed": 2950,
+    "no_terminal_event": 2,
+    "aborted": 2
+   },
+   "tool_calls": 0,
+   "tool_failure_rate": 0.0,
+   "aborted_rate": 0.0007,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0007,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-10-06"
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-6-astra",
+   "effort": "high",
+   "threads": 188,
+   "threads_by_kind": {
+    "primary": 112,
+    "subagent": 76
+   },
+   "turns": 1179,
+   "turns_by_kind": {
+    "subagent": 464,
+    "primary": 715
+   },
+   "api_calls": 28077,
+   "input_tokens_total": 3632899272,
+   "cached_input_tokens": 3526376320,
+   "cache_write_tokens": 0,
+   "output_tokens": 15953338,
+   "reasoning_output_tokens": 4861026,
+   "cache_hit_ratio": 0.9707,
+   "turn_wall_s_median": 261.3,
+   "turn_wall_s_p90": 1297.4,
+   "wall_samples": 1172,
+   "outcomes": {
+    "completed": 1172,
+    "no_terminal_event": 1,
+    "aborted": 6
+   },
+   "tool_calls": 32999,
+   "tool_failure_rate": 0.0744,
+   "aborted_rate": 0.0051,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0008,
+   "first_seen": "2026-09-04",
+   "last_seen": "2026-10-06"
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-5.6-sol",
+   "effort": "high",
+   "threads": 157,
+   "threads_by_kind": {
+    "primary": 93,
+    "subagent": 64
+   },
+   "turns": 477,
+   "turns_by_kind": {
+    "primary": 352,
+    "subagent": 125
+   },
+   "api_calls": 19439,
+   "input_tokens_total": 2462841703,
+   "cached_input_tokens": 2400873216,
+   "cache_write_tokens": 0,
+   "output_tokens": 8912241,
+   "reasoning_output_tokens": 3529477,
+   "cache_hit_ratio": 0.9748,
+   "turn_wall_s_median": 359.1,
+   "turn_wall_s_p90": 1386.6,
+   "wall_samples": 467,
+   "outcomes": {
+    "completed": 467,
+    "no_terminal_event": 6,
+    "aborted": 4
+   },
+   "tool_calls": 21357,
+   "tool_failure_rate": 0.0733,
+   "aborted_rate": 0.0084,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0126,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-09-21"
+  },
+  {
+   "cli": "claude",
+   "model": "claude-sonnet-5",
+   "effort": "high",
+   "threads": 407,
+   "threads_by_kind": {
+    "primary": 407
+   },
+   "turns": 407,
+   "turns_by_kind": {
+    "primary": 407
+   },
+   "api_calls": 722,
+   "input_tokens_total": 27912198,
+   "cached_input_tokens": 21383218,
+   "cache_write_tokens": 6527536,
+   "output_tokens": 735708,
+   "reasoning_output_tokens": null,
+   "cache_hit_ratio": 0.7661,
+   "turn_wall_s_median": 15.8,
+   "turn_wall_s_p90": 43.3,
+   "wall_samples": 407,
+   "outcomes": {
+    "completed": 407
+   },
+   "tool_calls": 395,
+   "tool_failure_rate": 0.0101,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-10-01",
+   "last_seen": "2026-10-02",
+   "api_error_messages": 0,
+   "api_retry_events": 0,
+   "turns_by_origin": {
+    "sdk": 407
+   }
+  },
+  {
+   "cli": "claude",
+   "model": "claude-opus-5-5",
+   "effort": "xhigh",
+   "threads": 46,
+   "threads_by_kind": {
+    "primary": 25,
+    "subagent": 21
+   },
+   "turns": 347,
+   "turns_by_kind": {
+    "primary": 321,
+    "subagent": 26
+   },
+   "api_calls": 7260,
+   "input_tokens_total": 2676966097,
+   "cached_input_tokens": 2651661713,
+   "cache_write_tokens": 25289480,
+   "output_tokens": 6678846,
+   "reasoning_output_tokens": null,
+   "cache_hit_ratio": 0.9905,
+   "turn_wall_s_median": 93.0,
+   "turn_wall_s_p90": 864.4,
+   "wall_samples": 346,
+   "outcomes": {
+    "completed": 346,
+    "aborted": 1
+   },
+   "tool_calls": 7856,
+   "tool_failure_rate": 0.0289,
+   "aborted_rate": 0.0029,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-29",
+   "last_seen": "2026-10-02",
+   "api_error_messages": 0,
+   "api_retry_events": 0,
+   "turns_by_origin": {
+    "human": 132,
+    "task-notification": 173,
+    "subagent_task": 26,
+    "other": 16
+   }
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-6-astra",
+   "effort": "medium",
+   "threads": 70,
+   "threads_by_kind": {
+    "subagent": 23,
+    "primary": 47
+   },
+   "turns": 287,
+   "turns_by_kind": {
+    "primary": 240,
+    "subagent": 47
+   },
+   "api_calls": 6627,
+   "input_tokens_total": 823346416,
+   "cached_input_tokens": 800286720,
+   "cache_write_tokens": 0,
+   "output_tokens": 3139242,
+   "reasoning_output_tokens": 1047647,
+   "cache_hit_ratio": 0.972,
+   "turn_wall_s_median": 102.1,
+   "turn_wall_s_p90": 1235.9,
+   "wall_samples": 284,
+   "outcomes": {
+    "completed": 284,
+    "aborted": 3
+   },
+   "tool_calls": 8512,
+   "tool_failure_rate": 0.0994,
+   "aborted_rate": 0.0105,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-04",
+   "last_seen": "2026-09-25"
+  },
+  {
+   "cli": "grok",
+   "model": "grok-4.6",
+   "effort": "high",
+   "threads": 84,
+   "threads_by_kind": {
+    "primary": 84
+   },
+   "turns": 262,
+   "turns_by_kind": {
+    "primary": 262
+   },
+   "api_calls": 1391,
+   "input_tokens_total": 281867513,
+   "cached_input_tokens": 259571712,
+   "cache_write_tokens": 0,
+   "output_tokens": 1820687,
+   "reasoning_output_tokens": 1269389,
+   "cache_hit_ratio": 0.9209,
+   "turn_wall_s_median": 192.0,
+   "turn_wall_s_p90": 693.6,
+   "wall_samples": 238,
+   "outcomes": {
+    "no_terminal_event": 13,
+    "completed": 238,
+    "aborted": 9,
+    "error": 2
+   },
+   "tool_calls": 7611,
+   "tool_failure_rate": 0.0184,
+   "aborted_rate": 0.0344,
+   "error_rate": 0.0076,
+   "no_terminal_rate": 0.0496,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-09-21",
+   "cost_usd_ticks_logged": 911458858040
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-5.6-sol",
+   "effort": "xhigh",
+   "threads": 84,
+   "threads_by_kind": {
+    "primary": 27,
+    "subagent": 57
+   },
+   "turns": 253,
+   "turns_by_kind": {
+    "primary": 145,
+    "subagent": 108
+   },
+   "api_calls": 17389,
+   "input_tokens_total": 2298754139,
+   "cached_input_tokens": 2251259136,
+   "cache_write_tokens": 0,
+   "output_tokens": 6048310,
+   "reasoning_output_tokens": 2530847,
+   "cache_hit_ratio": 0.9793,
+   "turn_wall_s_median": 413.5,
+   "turn_wall_s_p90": 1738.4,
+   "wall_samples": 251,
+   "outcomes": {
+    "completed": 251,
+    "aborted": 2
+   },
+   "tool_calls": 17364,
+   "tool_failure_rate": 0.1049,
+   "aborted_rate": 0.0079,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-09-09"
+  },
+  {
+   "cli": "claude",
+   "model": "claude-opus-5-5",
+   "effort": "high",
+   "threads": 33,
+   "threads_by_kind": {
+    "subagent": 8,
+    "primary": 25
+   },
+   "turns": 235,
+   "turns_by_kind": {
+    "primary": 226,
+    "subagent": 9
+   },
+   "api_calls": 4063,
+   "input_tokens_total": 1308143894,
+   "cached_input_tokens": 1293400098,
+   "cache_write_tokens": 14735482,
+   "output_tokens": 3165129,
+   "reasoning_output_tokens": null,
+   "cache_hit_ratio": 0.9887,
+   "turn_wall_s_median": 139.9,
+   "turn_wall_s_p90": 686.2,
+   "wall_samples": 234,
+   "outcomes": {
+    "completed": 234,
+    "aborted": 1
+   },
+   "tool_calls": 4180,
+   "tool_failure_rate": 0.0294,
+   "aborted_rate": 0.0043,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-29",
+   "last_seen": "2026-10-06",
+   "api_error_messages": 0,
+   "api_retry_events": 0,
+   "turns_by_origin": {
+    "human": 134,
+    "other": 7,
+    "subagent_task": 9,
+    "task-notification": 85
+   }
+  },
+  {
+   "cli": "claude",
+   "model": "claude-fable-5-1",
+   "effort": "xhigh",
+   "threads": 174,
+   "threads_by_kind": {
+    "subagent": 172,
+    "primary": 2
+   },
+   "turns": 178,
+   "turns_by_kind": {
+    "primary": 6,
+    "subagent": 172
+   },
+   "api_calls": 2114,
+   "input_tokens_total": 240540276,
+   "cached_input_tokens": 224866613,
+   "cache_write_tokens": 15612007,
+   "output_tokens": 3676794,
+   "reasoning_output_tokens": null,
+   "cache_hit_ratio": 0.9348,
+   "turn_wall_s_median": 172.4,
+   "turn_wall_s_p90": 582.4,
+   "wall_samples": 176,
+   "outcomes": {
+    "completed": 176,
+    "api_error": 2
+   },
+   "tool_calls": 3772,
+   "tool_failure_rate": 0.0241,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0112,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-06",
+   "last_seen": "2026-09-30",
+   "api_error_messages": 2,
+   "api_retry_events": 1,
+   "turns_by_origin": {
+    "human": 4,
+    "task-notification": 2,
+    "subagent_task": 172
+   }
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-5.6-terra",
+   "effort": "high",
+   "threads": 54,
+   "threads_by_kind": {
+    "primary": 35,
+    "subagent": 19
+   },
+   "turns": 164,
+   "turns_by_kind": {
+    "primary": 121,
+    "subagent": 43
+   },
+   "api_calls": 5817,
+   "input_tokens_total": 654118295,
+   "cached_input_tokens": 636039168,
+   "cache_write_tokens": 0,
+   "output_tokens": 1827198,
+   "reasoning_output_tokens": 607817,
+   "cache_hit_ratio": 0.9724,
+   "turn_wall_s_median": 195.7,
+   "turn_wall_s_p90": 650.3,
+   "wall_samples": 159,
+   "outcomes": {
+    "completed": 159,
+    "no_terminal_event": 5
+   },
+   "tool_calls": 4284,
+   "tool_failure_rate": 0.0733,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0305,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-09-16"
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-6.1-sol",
+   "effort": "high",
+   "threads": 48,
+   "threads_by_kind": {
+    "primary": 40,
+    "subagent": 8
+   },
+   "turns": 144,
+   "turns_by_kind": {
+    "primary": 108,
+    "subagent": 36
+   },
+   "api_calls": 2201,
+   "input_tokens_total": 252693128,
+   "cached_input_tokens": 239985792,
+   "cache_write_tokens": 0,
+   "output_tokens": 1266389,
+   "reasoning_output_tokens": 375495,
+   "cache_hit_ratio": 0.9497,
+   "turn_wall_s_median": 233.0,
+   "turn_wall_s_p90": 1235.8,
+   "wall_samples": 142,
+   "outcomes": {
+    "completed": 142,
+    "aborted": 1,
+    "no_terminal_event": 1
+   },
+   "tool_calls": 3187,
+   "tool_failure_rate": 0.0659,
+   "aborted_rate": 0.0069,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0069,
+   "first_seen": "2026-09-29",
+   "last_seen": "2026-10-06"
+  },
+  {
+   "cli": "claude",
+   "model": "claude-fable-5-1",
+   "effort": "high",
+   "threads": 12,
+   "threads_by_kind": {
+    "primary": 12
+   },
+   "turns": 103,
+   "turns_by_kind": {
+    "primary": 103
+   },
+   "api_calls": 1472,
+   "input_tokens_total": 553424356,
+   "cached_input_tokens": 545665568,
+   "cache_write_tokens": 7740972,
+   "output_tokens": 1710242,
+   "reasoning_output_tokens": null,
+   "cache_hit_ratio": 0.986,
+   "turn_wall_s_median": 112.4,
+   "turn_wall_s_p90": 614.8,
+   "wall_samples": 102,
+   "outcomes": {
+    "completed": 102,
+    "aborted": 1
+   },
+   "tool_calls": 1697,
+   "tool_failure_rate": 0.0283,
+   "aborted_rate": 0.0097,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-17",
+   "last_seen": "2026-10-06",
+   "api_error_messages": 0,
+   "api_retry_events": 0,
+   "turns_by_origin": {
+    "human": 48,
+    "task-notification": 55
+   }
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-6-astra",
+   "effort": "xhigh",
+   "threads": 46,
+   "threads_by_kind": {
+    "primary": 44,
+    "subagent": 2
+   },
+   "turns": 83,
+   "turns_by_kind": {
+    "subagent": 3,
+    "primary": 80
+   },
+   "api_calls": 2891,
+   "input_tokens_total": 357358050,
+   "cached_input_tokens": 345955456,
+   "cache_write_tokens": 0,
+   "output_tokens": 2045293,
+   "reasoning_output_tokens": 757144,
+   "cache_hit_ratio": 0.9681,
+   "turn_wall_s_median": 496.4,
+   "turn_wall_s_p90": 2127.3,
+   "wall_samples": 83,
+   "outcomes": {
+    "completed": 83
+   },
+   "tool_calls": 4666,
+   "tool_failure_rate": 0.0673,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-08",
+   "last_seen": "2026-10-01"
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-6-sol",
+   "effort": "high",
+   "threads": 25,
+   "threads_by_kind": {
+    "subagent": 2,
+    "primary": 23
+   },
+   "turns": 77,
+   "turns_by_kind": {
+    "primary": 73,
+    "subagent": 4
+   },
+   "api_calls": 2074,
+   "input_tokens_total": 252621183,
+   "cached_input_tokens": 246749312,
+   "cache_write_tokens": 0,
+   "output_tokens": 902532,
+   "reasoning_output_tokens": 318481,
+   "cache_hit_ratio": 0.9768,
+   "turn_wall_s_median": 214.9,
+   "turn_wall_s_p90": 1000.7,
+   "wall_samples": 74,
+   "outcomes": {
+    "completed": 74,
+    "aborted": 2,
+    "no_terminal_event": 1
+   },
+   "tool_calls": 3037,
+   "tool_failure_rate": 0.0593,
+   "aborted_rate": 0.026,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.013,
+   "first_seen": "2026-09-25",
+   "last_seen": "2026-09-29"
+  },
+  {
+   "cli": "opencode",
+   "model": "meta/muse-spark-1.3-contributor",
+   "effort": "high",
+   "threads": 19,
+   "threads_by_kind": {
+    "primary": 19
+   },
+   "turns": 70,
+   "turns_by_kind": {
+    "primary": 70
+   },
+   "api_calls": 1804,
+   "input_tokens_total": 331479296,
+   "cached_input_tokens": 288270467,
+   "cache_write_tokens": 0,
+   "output_tokens": 434953,
+   "reasoning_output_tokens": 700230,
+   "cache_hit_ratio": 0.8696,
+   "turn_wall_s_median": 163.0,
+   "turn_wall_s_p90": 1012.7,
+   "wall_samples": 69,
+   "outcomes": {
+    "completed": 69,
+    "aborted": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0143,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-03",
+   "last_seen": "2026-10-02",
+   "cost_usd_logged": 5.12,
+   "providers": {
+    "openrouter": 70
+   },
+   "error_events": 1
+  },
+  {
+   "cli": "grok",
+   "model": "grok-4.6",
+   "effort": "xhigh",
+   "threads": 9,
+   "threads_by_kind": {
+    "primary": 9
+   },
+   "turns": 61,
+   "turns_by_kind": {
+    "primary": 61
+   },
+   "api_calls": 730,
+   "input_tokens_total": 167088034,
+   "cached_input_tokens": 158111360,
+   "cache_write_tokens": 0,
+   "output_tokens": 592881,
+   "reasoning_output_tokens": 503974,
+   "cache_hit_ratio": 0.9463,
+   "turn_wall_s_median": 164.2,
+   "turn_wall_s_p90": 1056.5,
+   "wall_samples": 58,
+   "outcomes": {
+    "aborted": 1,
+    "completed": 58,
+    "no_terminal_event": 2
+   },
+   "tool_calls": 2113,
+   "tool_failure_rate": 0.027,
+   "aborted_rate": 0.0164,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0328,
+   "first_seen": "2026-09-03",
+   "last_seen": "2026-09-11",
+   "cost_usd_ticks_logged": 304633467800
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-6-astra",
+   "effort": "low",
+   "threads": 16,
+   "threads_by_kind": {
+    "primary": 16
+   },
+   "turns": 43,
+   "turns_by_kind": {
+    "primary": 43
+   },
+   "api_calls": 585,
+   "input_tokens_total": 60899625,
+   "cached_input_tokens": 58259584,
+   "cache_write_tokens": 0,
+   "output_tokens": 187549,
+   "reasoning_output_tokens": 52820,
+   "cache_hit_ratio": 0.9566,
+   "turn_wall_s_median": 102.9,
+   "turn_wall_s_p90": 345.3,
+   "wall_samples": 42,
+   "outcomes": {
+    "completed": 42,
+    "aborted": 1
+   },
+   "tool_calls": 739,
+   "tool_failure_rate": 0.0798,
+   "aborted_rate": 0.0233,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-07",
+   "last_seen": "2026-10-06"
+  },
+  {
+   "cli": "opencode",
+   "model": "z-ai/glm-5.3-flash",
+   "effort": "max",
+   "threads": 6,
+   "threads_by_kind": {
+    "primary": 6
+   },
+   "turns": 34,
+   "turns_by_kind": {
+    "primary": 34
+   },
+   "api_calls": 422,
+   "input_tokens_total": 81618465,
+   "cached_input_tokens": 77789504,
+   "cache_write_tokens": 0,
+   "output_tokens": 106838,
+   "reasoning_output_tokens": 254430,
+   "cache_hit_ratio": 0.9531,
+   "turn_wall_s_median": 311.1,
+   "turn_wall_s_p90": 822.5,
+   "wall_samples": 33,
+   "outcomes": {
+    "completed": 33,
+    "no_terminal_event": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0294,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-10-06",
+   "cost_usd_logged": 2.03,
+   "providers": {
+    "openrouter": 34
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "muse-spark-1.3",
+   "effort": "unspecified",
+   "threads": 27,
+   "threads_by_kind": {
+    "primary": 27
+   },
+   "turns": 31,
+   "turns_by_kind": {
+    "primary": 31
+   },
+   "api_calls": 222,
+   "input_tokens_total": 22615459,
+   "cached_input_tokens": 20309199,
+   "cache_write_tokens": 0,
+   "output_tokens": 66589,
+   "reasoning_output_tokens": 65402,
+   "cache_hit_ratio": 0.898,
+   "turn_wall_s_median": 16.1,
+   "turn_wall_s_p90": 456.7,
+   "wall_samples": 31,
+   "outcomes": {
+    "completed": 31
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-04",
+   "last_seen": "2026-09-24",
+   "cost_usd_logged": 6.49,
+   "providers": {
+    "meta": 31
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-daybreak-blue-latest",
+   "effort": "xhigh",
+   "threads": 29,
+   "threads_by_kind": {
+    "primary": 29
+   },
+   "turns": 30,
+   "turns_by_kind": {
+    "primary": 30
+   },
+   "api_calls": 1103,
+   "input_tokens_total": 114708977,
+   "cached_input_tokens": 110033536,
+   "cache_write_tokens": 0,
+   "output_tokens": 727564,
+   "reasoning_output_tokens": 329045,
+   "cache_hit_ratio": 0.9592,
+   "turn_wall_s_median": 437.7,
+   "turn_wall_s_p90": 974.0,
+   "wall_samples": 30,
+   "outcomes": {
+    "completed": 30
+   },
+   "tool_calls": 1170,
+   "tool_failure_rate": 0.0624,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-27",
+   "last_seen": "2026-09-27"
+  },
+  {
+   "cli": "claude",
+   "model": "claude-sonnet-5-5",
+   "effort": "high",
+   "threads": 4,
+   "threads_by_kind": {
+    "primary": 4
+   },
+   "turns": 27,
+   "turns_by_kind": {
+    "primary": 27
+   },
+   "api_calls": 351,
+   "input_tokens_total": 95903507,
+   "cached_input_tokens": 94813974,
+   "cache_write_tokens": 1088817,
+   "output_tokens": 356761,
+   "reasoning_output_tokens": null,
+   "cache_hit_ratio": 0.9886,
+   "turn_wall_s_median": 55.2,
+   "turn_wall_s_p90": 675.0,
+   "wall_samples": 27,
+   "outcomes": {
+    "completed": 27
+   },
+   "tool_calls": 371,
+   "tool_failure_rate": 0.0404,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-29",
+   "last_seen": "2026-10-03",
+   "api_error_messages": 0,
+   "api_retry_events": 0,
+   "turns_by_origin": {
+    "human": 20,
+    "task-notification": 7
+   }
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-6-sol",
+   "effort": "medium",
+   "threads": 8,
+   "threads_by_kind": {
+    "primary": 8
+   },
+   "turns": 24,
+   "turns_by_kind": {
+    "primary": 24
+   },
+   "api_calls": 758,
+   "input_tokens_total": 87172028,
+   "cached_input_tokens": 85675648,
+   "cache_write_tokens": 0,
+   "output_tokens": 267843,
+   "reasoning_output_tokens": 106358,
+   "cache_hit_ratio": 0.9828,
+   "turn_wall_s_median": 65.3,
+   "turn_wall_s_p90": 1153.0,
+   "wall_samples": 23,
+   "outcomes": {
+    "completed": 23,
+    "aborted": 1
+   },
+   "tool_calls": 807,
+   "tool_failure_rate": 0.0731,
+   "aborted_rate": 0.0417,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-22",
+   "last_seen": "2026-09-27"
+  },
+  {
+   "cli": "opencode",
+   "model": "meta/muse-spark-1.3-contributor",
+   "effort": "xhigh",
+   "threads": 14,
+   "threads_by_kind": {
+    "subagent": 5,
+    "primary": 9
+   },
+   "turns": 21,
+   "turns_by_kind": {
+    "primary": 16,
+    "subagent": 5
+   },
+   "api_calls": 917,
+   "input_tokens_total": 279534345,
+   "cached_input_tokens": 247760924,
+   "cache_write_tokens": 0,
+   "output_tokens": 295576,
+   "reasoning_output_tokens": 904885,
+   "cache_hit_ratio": 0.8863,
+   "turn_wall_s_median": 473.0,
+   "turn_wall_s_p90": 3740.6,
+   "wall_samples": 20,
+   "outcomes": {
+    "error": 1,
+    "completed": 20
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0476,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-03",
+   "last_seen": "2026-09-08",
+   "cost_usd_logged": 3.91,
+   "providers": {
+    "openrouter": 21
+   },
+   "error_events": 1
+  },
+  {
+   "cli": "claude",
+   "model": "claude-opus-5-5",
+   "effort": "medium",
+   "threads": 2,
+   "threads_by_kind": {
+    "primary": 2
+   },
+   "turns": 17,
+   "turns_by_kind": {
+    "primary": 17
+   },
+   "api_calls": 159,
+   "input_tokens_total": 20713714,
+   "cached_input_tokens": 20416558,
+   "cache_write_tokens": 296826,
+   "output_tokens": 74330,
+   "reasoning_output_tokens": null,
+   "cache_hit_ratio": 0.9857,
+   "turn_wall_s_median": 23.3,
+   "turn_wall_s_p90": 404.0,
+   "wall_samples": 17,
+   "outcomes": {
+    "completed": 17
+   },
+   "tool_calls": 160,
+   "tool_failure_rate": 0.0187,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-10-05",
+   "last_seen": "2026-10-06",
+   "api_error_messages": 0,
+   "api_retry_events": 0,
+   "turns_by_origin": {
+    "human": 11,
+    "task-notification": 6
+   }
+  },
+  {
+   "cli": "opencode",
+   "model": "muse-spark-1.2",
+   "effort": "high",
+   "threads": 15,
+   "threads_by_kind": {
+    "primary": 15
+   },
+   "turns": 15,
+   "turns_by_kind": {
+    "primary": 15
+   },
+   "api_calls": 512,
+   "input_tokens_total": 50367158,
+   "cached_input_tokens": 47781318,
+   "cache_write_tokens": 0,
+   "output_tokens": 125581,
+   "reasoning_output_tokens": 74701,
+   "cache_hit_ratio": 0.9487,
+   "turn_wall_s_median": 614.0,
+   "turn_wall_s_p90": 1598.1,
+   "wall_samples": 10,
+   "outcomes": {
+    "completed": 10,
+    "error": 5
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.3333,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-09-01",
+   "cost_usd_logged": 11.25,
+   "providers": {
+    "meta": 15
+   },
+   "error_events": 5
+  },
+  {
+   "cli": "grok",
+   "model": "grok-4.7",
+   "effort": "xhigh",
+   "threads": 14,
+   "threads_by_kind": {
+    "primary": 14
+   },
+   "turns": 15,
+   "turns_by_kind": {
+    "primary": 15
+   },
+   "api_calls": 138,
+   "input_tokens_total": 48715376,
+   "cached_input_tokens": 42790272,
+   "cache_write_tokens": 0,
+   "output_tokens": 857199,
+   "reasoning_output_tokens": 548484,
+   "cache_hit_ratio": 0.8784,
+   "turn_wall_s_median": 386.4,
+   "turn_wall_s_p90": 1566.4,
+   "wall_samples": 15,
+   "outcomes": {
+    "completed": 15
+   },
+   "tool_calls": 218,
+   "tool_failure_rate": 0.0138,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-21",
+   "last_seen": "2026-10-01",
+   "cost_usd_ticks_logged": 1023168105200
+  },
+  {
+   "cli": "opencode",
+   "model": "z-ai/glm-5.3",
+   "effort": "high",
+   "threads": 12,
+   "threads_by_kind": {
+    "primary": 12
+   },
+   "turns": 12,
+   "turns_by_kind": {
+    "primary": 12
+   },
+   "api_calls": 288,
+   "input_tokens_total": 36604066,
+   "cached_input_tokens": 34271616,
+   "cache_write_tokens": 0,
+   "output_tokens": 108162,
+   "reasoning_output_tokens": 314359,
+   "cache_hit_ratio": 0.9363,
+   "turn_wall_s_median": 480.6,
+   "turn_wall_s_p90": 980.8,
+   "wall_samples": 12,
+   "outcomes": {
+    "completed": 12
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-18",
+   "last_seen": "2026-09-21",
+   "cost_usd_logged": 9.12,
+   "providers": {
+    "openrouter": 12
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "meta/muse-glimmer-30b",
+   "effort": "unspecified",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 9,
+   "turns_by_kind": {
+    "primary": 9
+   },
+   "api_calls": 38,
+   "input_tokens_total": 2774312,
+   "cached_input_tokens": 2415882,
+   "cache_write_tokens": 0,
+   "output_tokens": 5773,
+   "reasoning_output_tokens": 4444,
+   "cache_hit_ratio": 0.8708,
+   "turn_wall_s_median": 28.7,
+   "turn_wall_s_p90": 270.8,
+   "wall_samples": 9,
+   "outcomes": {
+    "completed": 9
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-08",
+   "last_seen": "2026-09-08",
+   "cost_usd_logged": 0.22,
+   "providers": {
+    "openrouter": 9
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-daybreak-blue-latest",
+   "effort": "high",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 8,
+   "turns_by_kind": {
+    "primary": 8
+   },
+   "api_calls": 122,
+   "input_tokens_total": 13968651,
+   "cached_input_tokens": 13579870,
+   "cache_write_tokens": 384165,
+   "output_tokens": 67949,
+   "reasoning_output_tokens": 37993,
+   "cache_hit_ratio": 0.9722,
+   "turn_wall_s_median": 142.6,
+   "turn_wall_s_p90": 1111.8,
+   "wall_samples": 7,
+   "outcomes": {
+    "completed": 7,
+    "aborted": 1
+   },
+   "tool_calls": 207,
+   "tool_failure_rate": 0.0918,
+   "aborted_rate": 0.125,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-14",
+   "last_seen": "2026-09-14"
+  },
+  {
+   "cli": "claude",
+   "model": "claude-sonnet-5-5",
+   "effort": "medium",
+   "threads": 4,
+   "threads_by_kind": {
+    "primary": 4
+   },
+   "turns": 8,
+   "turns_by_kind": {
+    "primary": 8
+   },
+   "api_calls": 99,
+   "input_tokens_total": 13000779,
+   "cached_input_tokens": 12682104,
+   "cache_write_tokens": 318477,
+   "output_tokens": 53538,
+   "reasoning_output_tokens": null,
+   "cache_hit_ratio": 0.9755,
+   "turn_wall_s_median": 40.2,
+   "turn_wall_s_p90": 416.7,
+   "wall_samples": 8,
+   "outcomes": {
+    "completed": 8
+   },
+   "tool_calls": 99,
+   "tool_failure_rate": 0.0404,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-10-05",
+   "last_seen": "2026-10-06",
+   "api_error_messages": 0,
+   "api_retry_events": 0,
+   "turns_by_origin": {
+    "human": 8
+   }
+  },
+  {
+   "cli": "opencode",
+   "model": "muse-spark-1.2",
+   "effort": "unspecified",
+   "threads": 3,
+   "threads_by_kind": {
+    "primary": 3
+   },
+   "turns": 8,
+   "turns_by_kind": {
+    "primary": 8
+   },
+   "api_calls": 80,
+   "input_tokens_total": 15217980,
+   "cached_input_tokens": 12709124,
+   "cache_write_tokens": 0,
+   "output_tokens": 28413,
+   "reasoning_output_tokens": 10881,
+   "cache_hit_ratio": 0.8351,
+   "turn_wall_s_median": 152.0,
+   "turn_wall_s_p90": 2050.4,
+   "wall_samples": 7,
+   "outcomes": {
+    "completed": 7,
+    "no_terminal_event": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.125,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-09-08",
+   "cost_usd_logged": 5.21,
+   "providers": {
+    "meta": 8
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "meta/muse-spark-1.3",
+   "effort": "unspecified",
+   "threads": 6,
+   "threads_by_kind": {
+    "primary": 3,
+    "subagent": 3
+   },
+   "turns": 8,
+   "turns_by_kind": {
+    "primary": 5,
+    "subagent": 3
+   },
+   "api_calls": 45,
+   "input_tokens_total": 4349726,
+   "cached_input_tokens": 3366756,
+   "cache_write_tokens": 0,
+   "output_tokens": 30847,
+   "reasoning_output_tokens": 13303,
+   "cache_hit_ratio": 0.774,
+   "turn_wall_s_median": 67.1,
+   "turn_wall_s_p90": 338.9,
+   "wall_samples": 7,
+   "outcomes": {
+    "error": 1,
+    "completed": 7
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.125,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-03",
+   "last_seen": "2026-09-08",
+   "cost_usd_logged": 1.92,
+   "providers": {
+    "openrouter": 8
+   },
+   "error_events": 1
+  },
+  {
+   "cli": "opencode",
+   "model": "moonshotai/kimi-k3",
+   "effort": "unspecified",
+   "threads": 7,
+   "threads_by_kind": {
+    "primary": 7
+   },
+   "turns": 8,
+   "turns_by_kind": {
+    "primary": 8
+   },
+   "api_calls": 374,
+   "input_tokens_total": 55456316,
+   "cached_input_tokens": 53968056,
+   "cache_write_tokens": 0,
+   "output_tokens": 83802,
+   "reasoning_output_tokens": 188606,
+   "cache_hit_ratio": 0.9732,
+   "turn_wall_s_median": 1568.0,
+   "turn_wall_s_p90": 11312.0,
+   "wall_samples": 8,
+   "outcomes": {
+    "completed": 8
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-03",
+   "last_seen": "2026-09-08",
+   "cost_usd_logged": 24.74,
+   "providers": {
+    "cloudflare-ai-gateway": 6,
+    "openrouter": 2
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-6-luna",
+   "effort": "high",
+   "threads": 2,
+   "threads_by_kind": {
+    "primary": 2
+   },
+   "turns": 7,
+   "turns_by_kind": {
+    "primary": 7
+   },
+   "api_calls": 266,
+   "input_tokens_total": 32228765,
+   "cached_input_tokens": 31137536,
+   "cache_write_tokens": 0,
+   "output_tokens": 110528,
+   "reasoning_output_tokens": 82807,
+   "cache_hit_ratio": 0.9661,
+   "turn_wall_s_median": 498.1,
+   "turn_wall_s_p90": 727.4,
+   "wall_samples": 5,
+   "outcomes": {
+    "completed": 5,
+    "aborted": 2
+   },
+   "tool_calls": 238,
+   "tool_failure_rate": 0.1471,
+   "aborted_rate": 0.2857,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-28",
+   "last_seen": "2026-09-29"
+  },
+  {
+   "cli": "opencode",
+   "model": "moonshotai/kimi-k3",
+   "effort": "high",
+   "threads": 7,
+   "threads_by_kind": {
+    "primary": 7
+   },
+   "turns": 7,
+   "turns_by_kind": {
+    "primary": 7
+   },
+   "api_calls": 142,
+   "input_tokens_total": 14132210,
+   "cached_input_tokens": 13412444,
+   "cache_write_tokens": 0,
+   "output_tokens": 55260,
+   "reasoning_output_tokens": 94988,
+   "cache_hit_ratio": 0.9491,
+   "turn_wall_s_median": 476.9,
+   "turn_wall_s_p90": 1838.4,
+   "wall_samples": 7,
+   "outcomes": {
+    "completed": 7
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-18",
+   "last_seen": "2026-09-21",
+   "cost_usd_logged": 5.38,
+   "providers": {
+    "openrouter": 7
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "z-ai/glm-5.3",
+   "effort": "max",
+   "threads": 6,
+   "threads_by_kind": {
+    "primary": 6
+   },
+   "turns": 6,
+   "turns_by_kind": {
+    "primary": 6
+   },
+   "api_calls": 52,
+   "input_tokens_total": 6078074,
+   "cached_input_tokens": 5102272,
+   "cache_write_tokens": 0,
+   "output_tokens": 10656,
+   "reasoning_output_tokens": 43409,
+   "cache_hit_ratio": 0.8395,
+   "turn_wall_s_median": 41.9,
+   "turn_wall_s_p90": 432.3,
+   "wall_samples": 3,
+   "outcomes": {
+    "completed": 3,
+    "no_terminal_event": 3
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.5,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-10-06",
+   "cost_usd_logged": 1.87,
+   "providers": {
+    "openrouter": 5,
+    "nvidia": 1
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "meta/muse-spark-1.3",
+   "effort": "xhigh",
+   "threads": 6,
+   "threads_by_kind": {
+    "primary": 6
+   },
+   "turns": 6,
+   "turns_by_kind": {
+    "primary": 6
+   },
+   "api_calls": 16,
+   "input_tokens_total": 1341252,
+   "cached_input_tokens": 677339,
+   "cache_write_tokens": 0,
+   "output_tokens": 3679,
+   "reasoning_output_tokens": 20870,
+   "cache_hit_ratio": 0.505,
+   "turn_wall_s_median": 13.1,
+   "turn_wall_s_p90": 74.2,
+   "wall_samples": 4,
+   "outcomes": {
+    "error": 1,
+    "completed": 4,
+    "no_terminal_event": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.1667,
+   "no_terminal_rate": 0.1667,
+   "first_seen": "2026-09-03",
+   "last_seen": "2026-10-06",
+   "cost_usd_logged": 1.04,
+   "providers": {
+    "openrouter": 6
+   },
+   "error_events": 1
+  },
+  {
+   "cli": "opencode",
+   "model": "@cf/zai-org/glm-5.3",
+   "effort": "unspecified",
+   "threads": 6,
+   "threads_by_kind": {
+    "primary": 6
+   },
+   "turns": 6,
+   "turns_by_kind": {
+    "primary": 6
+   },
+   "api_calls": 558,
+   "input_tokens_total": 91126505,
+   "cached_input_tokens": 88265408,
+   "cache_write_tokens": 0,
+   "output_tokens": 469778,
+   "reasoning_output_tokens": 0,
+   "cache_hit_ratio": 0.9686,
+   "turn_wall_s_median": 2745.5,
+   "turn_wall_s_p90": 6302.3,
+   "wall_samples": 5,
+   "outcomes": {
+    "completed": 5,
+    "no_terminal_event": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.1667,
+   "first_seen": "2026-09-03",
+   "last_seen": "2026-09-24",
+   "cost_usd_logged": 29.02,
+   "providers": {
+    "cloudflare-workers-ai": 6
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "muse-spark-1.3",
+   "effort": "max",
+   "threads": 6,
+   "threads_by_kind": {
+    "primary": 6
+   },
+   "turns": 6,
+   "turns_by_kind": {
+    "primary": 6
+   },
+   "api_calls": 43,
+   "input_tokens_total": 5234308,
+   "cached_input_tokens": 4573269,
+   "cache_write_tokens": 0,
+   "output_tokens": 14576,
+   "reasoning_output_tokens": 113178,
+   "cache_hit_ratio": 0.8737,
+   "turn_wall_s_median": 106.6,
+   "turn_wall_s_p90": 333.4,
+   "wall_samples": 6,
+   "outcomes": {
+    "completed": 6
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-21",
+   "last_seen": "2026-09-21",
+   "cost_usd_logged": 2.06,
+   "providers": {
+    "meta": 6
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-6-sol",
+   "effort": "xhigh",
+   "threads": 5,
+   "threads_by_kind": {
+    "primary": 5
+   },
+   "turns": 5,
+   "turns_by_kind": {
+    "primary": 5
+   },
+   "api_calls": 52,
+   "input_tokens_total": 3297971,
+   "cached_input_tokens": 2964096,
+   "cache_write_tokens": 0,
+   "output_tokens": 33538,
+   "reasoning_output_tokens": 16124,
+   "cache_hit_ratio": 0.8988,
+   "turn_wall_s_median": 207.9,
+   "turn_wall_s_p90": 477.5,
+   "wall_samples": 5,
+   "outcomes": {
+    "completed": 5
+   },
+   "tool_calls": 114,
+   "tool_failure_rate": 0.0439,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-27",
+   "last_seen": "2026-09-27"
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-6.1-sol",
+   "effort": "medium",
+   "threads": 2,
+   "threads_by_kind": {
+    "primary": 2
+   },
+   "turns": 5,
+   "turns_by_kind": {
+    "primary": 5
+   },
+   "api_calls": 137,
+   "input_tokens_total": 16017253,
+   "cached_input_tokens": 15452928,
+   "cache_write_tokens": 0,
+   "output_tokens": 67189,
+   "reasoning_output_tokens": 17759,
+   "cache_hit_ratio": 0.9648,
+   "turn_wall_s_median": 380.9,
+   "turn_wall_s_p90": 1806.9,
+   "wall_samples": 5,
+   "outcomes": {
+    "completed": 5
+   },
+   "tool_calls": 206,
+   "tool_failure_rate": 0.1165,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-29",
+   "last_seen": "2026-09-29"
+  },
+  {
+   "cli": "opencode",
+   "model": "@cf/zai-org/glm-5.3-flash",
+   "effort": "unspecified",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 5,
+   "turns_by_kind": {
+    "primary": 5
+   },
+   "api_calls": 52,
+   "input_tokens_total": 9093785,
+   "cached_input_tokens": 8441664,
+   "cache_write_tokens": 0,
+   "output_tokens": 144123,
+   "reasoning_output_tokens": 0,
+   "cache_hit_ratio": 0.9283,
+   "turn_wall_s_median": 646.6,
+   "turn_wall_s_p90": 1043.2,
+   "wall_samples": 5,
+   "outcomes": {
+    "completed": 5
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-09-01",
+   "cost_usd_logged": 0.42,
+   "providers": {
+    "cloudflare-workers-ai": 5
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "moonshotai/kimi-k3",
+   "effort": "max",
+   "threads": 5,
+   "threads_by_kind": {
+    "primary": 5
+   },
+   "turns": 5,
+   "turns_by_kind": {
+    "primary": 5
+   },
+   "api_calls": 61,
+   "input_tokens_total": 8361563,
+   "cached_input_tokens": 8117865,
+   "cache_write_tokens": 0,
+   "output_tokens": 14388,
+   "reasoning_output_tokens": 30379,
+   "cache_hit_ratio": 0.9709,
+   "turn_wall_s_median": 21.6,
+   "turn_wall_s_p90": 691.5,
+   "wall_samples": 5,
+   "outcomes": {
+    "completed": 5
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-09-07",
+   "cost_usd_logged": 3.57,
+   "providers": {
+    "openrouter": 4,
+    "cloudflare-workers-ai": 1
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "kimi-k3",
+   "effort": "max",
+   "threads": 5,
+   "threads_by_kind": {
+    "primary": 5
+   },
+   "turns": 5,
+   "turns_by_kind": {
+    "primary": 5
+   },
+   "api_calls": 304,
+   "input_tokens_total": 40350037,
+   "cached_input_tokens": 39482112,
+   "cache_write_tokens": 0,
+   "output_tokens": 85249,
+   "reasoning_output_tokens": 126235,
+   "cache_hit_ratio": 0.9785,
+   "turn_wall_s_median": 1591.2,
+   "turn_wall_s_p90": 2458.4,
+   "wall_samples": 5,
+   "outcomes": {
+    "completed": 5
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-17",
+   "last_seen": "2026-10-06",
+   "cost_usd_logged": 17.62,
+   "providers": {
+    "moonshotai": 5
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "@cf/zai-org/glm-5.3-flash",
+   "effort": "high",
+   "threads": 4,
+   "threads_by_kind": {
+    "primary": 4
+   },
+   "turns": 4,
+   "turns_by_kind": {
+    "primary": 4
+   },
+   "api_calls": 21,
+   "input_tokens_total": 1500357,
+   "cached_input_tokens": 1176576,
+   "cache_write_tokens": 0,
+   "output_tokens": 84884,
+   "reasoning_output_tokens": 0,
+   "cache_hit_ratio": 0.7842,
+   "turn_wall_s_median": 456.7,
+   "turn_wall_s_p90": 694.6,
+   "wall_samples": 4,
+   "outcomes": {
+    "completed": 4
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-09-01",
+   "cost_usd_logged": 0.13,
+   "providers": {
+    "cloudflare-workers-ai": 4
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "muse-spark-1.3-contributor",
+   "effort": "xhigh",
+   "threads": 2,
+   "threads_by_kind": {
+    "primary": 2
+   },
+   "turns": 4,
+   "turns_by_kind": {
+    "primary": 4
+   },
+   "api_calls": 108,
+   "input_tokens_total": 14847462,
+   "cached_input_tokens": 14443767,
+   "cache_write_tokens": 0,
+   "output_tokens": 20944,
+   "reasoning_output_tokens": 22012,
+   "cache_hit_ratio": 0.9728,
+   "turn_wall_s_median": 603.4,
+   "turn_wall_s_p90": 603.4,
+   "wall_samples": 2,
+   "outcomes": {
+    "no_terminal_event": 1,
+    "completed": 2,
+    "error": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.25,
+   "no_terminal_rate": 0.25,
+   "first_seen": "2026-09-04",
+   "last_seen": "2026-09-08",
+   "cost_usd_logged": 0.08,
+   "providers": {
+    "meta": 4
+   },
+   "error_events": 1
+  },
+  {
+   "cli": "grok",
+   "model": "grok-4.5",
+   "effort": "medium",
+   "threads": 4,
+   "threads_by_kind": {
+    "primary": 4
+   },
+   "turns": 4,
+   "turns_by_kind": {
+    "primary": 4
+   },
+   "api_calls": 41,
+   "input_tokens_total": 3202417,
+   "cached_input_tokens": 2508288,
+   "cache_write_tokens": 0,
+   "output_tokens": 33318,
+   "reasoning_output_tokens": 6580,
+   "cache_hit_ratio": 0.7832,
+   "turn_wall_s_median": 137.8,
+   "turn_wall_s_p90": 242.7,
+   "wall_samples": 4,
+   "outcomes": {
+    "completed": 4
+   },
+   "tool_calls": 217,
+   "tool_failure_rate": 0.0092,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-18",
+   "last_seen": "2026-09-18",
+   "cost_usd_ticks_logged": 8924713040
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-6.1-sol",
+   "effort": "xhigh",
+   "threads": 2,
+   "threads_by_kind": {
+    "primary": 2
+   },
+   "turns": 3,
+   "turns_by_kind": {
+    "primary": 3
+   },
+   "api_calls": 59,
+   "input_tokens_total": 8243844,
+   "cached_input_tokens": 7746560,
+   "cache_write_tokens": 0,
+   "output_tokens": 45998,
+   "reasoning_output_tokens": 22379,
+   "cache_hit_ratio": 0.9397,
+   "turn_wall_s_median": 462.3,
+   "turn_wall_s_p90": 1304.6,
+   "wall_samples": 3,
+   "outcomes": {
+    "completed": 3
+   },
+   "tool_calls": 114,
+   "tool_failure_rate": 0.0351,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-10-01",
+   "last_seen": "2026-10-01"
+  },
+  {
+   "cli": "opencode",
+   "model": "meta/muse-spark-1.3-contributor",
+   "effort": "unspecified",
+   "threads": 3,
+   "threads_by_kind": {
+    "primary": 3
+   },
+   "turns": 3,
+   "turns_by_kind": {
+    "primary": 3
+   },
+   "api_calls": 3,
+   "input_tokens_total": 0,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 0,
+   "reasoning_output_tokens": 0,
+   "cache_hit_ratio": null,
+   "turn_wall_s_median": 0.1,
+   "turn_wall_s_p90": 0.1,
+   "wall_samples": 2,
+   "outcomes": {
+    "error": 1,
+    "completed": 2
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.3333,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-03",
+   "last_seen": "2026-09-07",
+   "providers": {
+    "openrouter": 3
+   },
+   "error_events": 1
+  },
+  {
+   "cli": "opencode",
+   "model": "muse-spark-1.3-contributor-free",
+   "effort": "xhigh",
+   "threads": 3,
+   "threads_by_kind": {
+    "primary": 3
+   },
+   "turns": 3,
+   "turns_by_kind": {
+    "primary": 3
+   },
+   "api_calls": 5,
+   "input_tokens_total": 306402,
+   "cached_input_tokens": 123125,
+   "cache_write_tokens": 0,
+   "output_tokens": 185,
+   "reasoning_output_tokens": 90,
+   "cache_hit_ratio": 0.4018,
+   "turn_wall_s_median": 15.3,
+   "turn_wall_s_p90": 18.2,
+   "wall_samples": 3,
+   "outcomes": {
+    "completed": 3
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-03",
+   "last_seen": "2026-09-03",
+   "providers": {
+    "opencode": 3
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "z-ai/glm-5.3",
+   "effort": "unspecified",
+   "threads": 3,
+   "threads_by_kind": {
+    "primary": 3
+   },
+   "turns": 3,
+   "turns_by_kind": {
+    "primary": 3
+   },
+   "api_calls": 117,
+   "input_tokens_total": 20713545,
+   "cached_input_tokens": 18500256,
+   "cache_write_tokens": 0,
+   "output_tokens": 31686,
+   "reasoning_output_tokens": 58138,
+   "cache_hit_ratio": 0.8931,
+   "turn_wall_s_median": 2629.5,
+   "turn_wall_s_p90": 2629.5,
+   "wall_samples": 2,
+   "outcomes": {
+    "aborted": 1,
+    "completed": 2
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.3333,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-04",
+   "last_seen": "2026-09-08",
+   "cost_usd_logged": 8.21,
+   "providers": {
+    "openrouter": 3
+   },
+   "error_events": 1
+  },
+  {
+   "cli": "grok",
+   "model": "grok-4.7",
+   "effort": "medium",
+   "threads": 3,
+   "threads_by_kind": {
+    "primary": 3
+   },
+   "turns": 3,
+   "turns_by_kind": {
+    "primary": 3
+   },
+   "api_calls": 3,
+   "input_tokens_total": 137792,
+   "cached_input_tokens": 68480,
+   "cache_write_tokens": 0,
+   "output_tokens": 3631,
+   "reasoning_output_tokens": 2266,
+   "cache_hit_ratio": 0.497,
+   "turn_wall_s_median": 19.4,
+   "turn_wall_s_p90": 21.8,
+   "wall_samples": 3,
+   "outcomes": {
+    "completed": 3
+   },
+   "tool_calls": 0,
+   "tool_failure_rate": 0.0,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-10-01",
+   "last_seen": "2026-10-02",
+   "cost_usd_ticks_logged": 1061810000
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-5.6-sol",
+   "effort": "max",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 2,
+   "turns_by_kind": {
+    "primary": 2
+   },
+   "api_calls": 66,
+   "input_tokens_total": 8801051,
+   "cached_input_tokens": 8457728,
+   "cache_write_tokens": 0,
+   "output_tokens": 44320,
+   "reasoning_output_tokens": 29166,
+   "cache_hit_ratio": 0.961,
+   "turn_wall_s_median": 948.8,
+   "turn_wall_s_p90": 948.8,
+   "wall_samples": 2,
+   "outcomes": {
+    "completed": 2
+   },
+   "tool_calls": 93,
+   "tool_failure_rate": 0.0323,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-09-01"
+  },
+  {
+   "cli": "opencode",
+   "model": "meta/muse-spark-1.3",
+   "effort": "high",
+   "threads": 2,
+   "threads_by_kind": {
+    "primary": 2
+   },
+   "turns": 2,
+   "turns_by_kind": {
+    "primary": 2
+   },
+   "api_calls": 2,
+   "input_tokens_total": 130670,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 92,
+   "reasoning_output_tokens": 1574,
+   "cache_hit_ratio": 0.0,
+   "turn_wall_s_median": 17.1,
+   "turn_wall_s_p90": 17.1,
+   "wall_samples": 2,
+   "outcomes": {
+    "completed": 2
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-03",
+   "last_seen": "2026-09-03",
+   "cost_usd_logged": 0.17,
+   "providers": {
+    "openrouter": 2
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "meta/muse-spark-1.3",
+   "effort": "max",
+   "threads": 2,
+   "threads_by_kind": {
+    "primary": 2
+   },
+   "turns": 2,
+   "turns_by_kind": {
+    "primary": 2
+   },
+   "api_calls": 2,
+   "input_tokens_total": 132051,
+   "cached_input_tokens": 1777,
+   "cache_write_tokens": 0,
+   "output_tokens": 103,
+   "reasoning_output_tokens": 2410,
+   "cache_hit_ratio": 0.0135,
+   "turn_wall_s_median": 21.6,
+   "turn_wall_s_p90": 21.6,
+   "wall_samples": 2,
+   "outcomes": {
+    "completed": 2
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-07",
+   "last_seen": "2026-09-08",
+   "cost_usd_logged": 0.17,
+   "providers": {
+    "openrouter": 2
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "x-ai/grok-4.6",
+   "effort": "unspecified",
+   "threads": 2,
+   "threads_by_kind": {
+    "primary": 2
+   },
+   "turns": 2,
+   "turns_by_kind": {
+    "primary": 2
+   },
+   "api_calls": 28,
+   "input_tokens_total": 3708053,
+   "cached_input_tokens": 3146624,
+   "cache_write_tokens": 0,
+   "output_tokens": 17610,
+   "reasoning_output_tokens": 14730,
+   "cache_hit_ratio": 0.8486,
+   "turn_wall_s_median": 649.6,
+   "turn_wall_s_p90": 649.6,
+   "wall_samples": 2,
+   "outcomes": {
+    "completed": 2
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-07",
+   "last_seen": "2026-09-08",
+   "cost_usd_logged": 2.89,
+   "providers": {
+    "openrouter": 2
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "muse-spark-1.3-contributor",
+   "effort": "medium",
+   "threads": 2,
+   "threads_by_kind": {
+    "primary": 2
+   },
+   "turns": 2,
+   "turns_by_kind": {
+    "primary": 2
+   },
+   "api_calls": 12,
+   "input_tokens_total": 911468,
+   "cached_input_tokens": 812266,
+   "cache_write_tokens": 0,
+   "output_tokens": 2347,
+   "reasoning_output_tokens": 1172,
+   "cache_hit_ratio": 0.8912,
+   "turn_wall_s_median": 58.9,
+   "turn_wall_s_p90": 58.9,
+   "wall_samples": 1,
+   "outcomes": {
+    "completed": 1,
+    "error": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.5,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-18",
+   "last_seen": "2026-10-02",
+   "cost_usd_logged": 0.01,
+   "providers": {
+    "meta": 2
+   },
+   "error_events": 1
+  },
+  {
+   "cli": "opencode",
+   "model": "deepseek/deepseek-v4.1-flash",
+   "effort": "max",
+   "threads": 2,
+   "threads_by_kind": {
+    "primary": 2
+   },
+   "turns": 2,
+   "turns_by_kind": {
+    "primary": 2
+   },
+   "api_calls": 12,
+   "input_tokens_total": 1360825,
+   "cached_input_tokens": 1139200,
+   "cache_write_tokens": 0,
+   "output_tokens": 2636,
+   "reasoning_output_tokens": 3515,
+   "cache_hit_ratio": 0.8371,
+   "turn_wall_s_median": 20.5,
+   "turn_wall_s_p90": 20.5,
+   "wall_samples": 2,
+   "outcomes": {
+    "completed": 2
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-10-06",
+   "last_seen": "2026-10-06",
+   "cost_usd_logged": 0.04,
+   "providers": {
+    "openrouter": 2
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "grok",
+   "model": "grok-4.5",
+   "effort": "high",
+   "threads": 2,
+   "threads_by_kind": {
+    "primary": 2
+   },
+   "turns": 2,
+   "turns_by_kind": {
+    "primary": 2
+   },
+   "api_calls": 0,
+   "input_tokens_total": 0,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 0,
+   "reasoning_output_tokens": 0,
+   "cache_hit_ratio": null,
+   "turn_wall_s_median": 378.9,
+   "turn_wall_s_p90": 378.9,
+   "wall_samples": 2,
+   "outcomes": {
+    "completed": 2
+   },
+   "tool_calls": 37,
+   "tool_failure_rate": 0.027,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-02",
+   "last_seen": "2026-09-02"
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-5.6-terra",
+   "effort": "medium",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 1,
+   "turns_by_kind": {
+    "primary": 1
+   },
+   "api_calls": 2,
+   "input_tokens_total": 67800,
+   "cached_input_tokens": 52736,
+   "cache_write_tokens": 0,
+   "output_tokens": 322,
+   "reasoning_output_tokens": 111,
+   "cache_hit_ratio": 0.7778,
+   "turn_wall_s_median": 266.5,
+   "turn_wall_s_p90": 266.5,
+   "wall_samples": 1,
+   "outcomes": {
+    "completed": 1
+   },
+   "tool_calls": 2,
+   "tool_failure_rate": 0.0,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-19",
+   "last_seen": "2026-09-19"
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-daybreak-blue-latest",
+   "effort": "medium",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 1,
+   "turns_by_kind": {
+    "primary": 1
+   },
+   "api_calls": 0,
+   "input_tokens_total": 0,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 0,
+   "reasoning_output_tokens": 0,
+   "cache_hit_ratio": null,
+   "turn_wall_s_median": 3.4,
+   "turn_wall_s_p90": 3.4,
+   "wall_samples": 1,
+   "outcomes": {
+    "completed": 1
+   },
+   "tool_calls": 0,
+   "tool_failure_rate": 0.0,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-21",
+   "last_seen": "2026-09-21"
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-5.6-sol",
+   "effort": "low",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 1,
+   "turns_by_kind": {
+    "primary": 1
+   },
+   "api_calls": 1,
+   "input_tokens_total": 23212,
+   "cached_input_tokens": 12032,
+   "cache_write_tokens": 0,
+   "output_tokens": 5,
+   "reasoning_output_tokens": 0,
+   "cache_hit_ratio": 0.5184,
+   "turn_wall_s_median": 4.3,
+   "turn_wall_s_p90": 4.3,
+   "wall_samples": 1,
+   "outcomes": {
+    "completed": 1
+   },
+   "tool_calls": 0,
+   "tool_failure_rate": 0.0,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-21",
+   "last_seen": "2026-09-21"
+  },
+  {
+   "cli": "codex",
+   "model": "gpt-5.6-sol",
+   "effort": "medium",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 1,
+   "turns_by_kind": {
+    "primary": 1
+   },
+   "api_calls": 98,
+   "input_tokens_total": 12946226,
+   "cached_input_tokens": 12671744,
+   "cache_write_tokens": 0,
+   "output_tokens": 45604,
+   "reasoning_output_tokens": 11020,
+   "cache_hit_ratio": 0.9788,
+   "turn_wall_s_median": 1834.6,
+   "turn_wall_s_p90": 1834.6,
+   "wall_samples": 1,
+   "outcomes": {
+    "completed": 1
+   },
+   "tool_calls": 91,
+   "tool_failure_rate": 0.0769,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-09",
+   "last_seen": "2026-09-09"
+  },
+  {
+   "cli": "codex",
+   "model": "unknown",
+   "effort": "unspecified",
+   "threads": 1,
+   "threads_by_kind": {
+    "guardian": 1
+   },
+   "turns": 1,
+   "turns_by_kind": {
+    "guardian": 1
+   },
+   "api_calls": 0,
+   "input_tokens_total": 0,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 0,
+   "reasoning_output_tokens": 0,
+   "cache_hit_ratio": null,
+   "turn_wall_s_median": null,
+   "turn_wall_s_p90": null,
+   "wall_samples": 0,
+   "outcomes": {
+    "completed": 1
+   },
+   "tool_calls": 0,
+   "tool_failure_rate": 0.0,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-09-01"
+  },
+  {
+   "cli": "opencode",
+   "model": "grok-4.6",
+   "effort": "max",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 1,
+   "turns_by_kind": {
+    "primary": 1
+   },
+   "api_calls": 12,
+   "input_tokens_total": 1771416,
+   "cached_input_tokens": 1352192,
+   "cache_write_tokens": 0,
+   "output_tokens": 9104,
+   "reasoning_output_tokens": 8655,
+   "cache_hit_ratio": 0.7633,
+   "turn_wall_s_median": 421.6,
+   "turn_wall_s_p90": 421.6,
+   "wall_samples": 1,
+   "outcomes": {
+    "completed": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-01",
+   "last_seen": "2026-09-01",
+   "cost_usd_logged": 1.73,
+   "providers": {
+    "xai": 1
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "muse-spark-1.2",
+   "effort": "xhigh",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 1,
+   "turns_by_kind": {
+    "primary": 1
+   },
+   "api_calls": 1,
+   "input_tokens_total": 60775,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 18,
+   "reasoning_output_tokens": 225,
+   "cache_hit_ratio": 0.0,
+   "turn_wall_s_median": 5.0,
+   "turn_wall_s_p90": 5.0,
+   "wall_samples": 1,
+   "outcomes": {
+    "completed": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-03",
+   "last_seen": "2026-09-03",
+   "cost_usd_logged": 0.08,
+   "providers": {
+    "meta": 1
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "muse-spark-1.3-contributor-free",
+   "effort": "unspecified",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 1,
+   "turns_by_kind": {
+    "primary": 1
+   },
+   "api_calls": 1,
+   "input_tokens_total": 61223,
+   "cached_input_tokens": 241,
+   "cache_write_tokens": 0,
+   "output_tokens": 15,
+   "reasoning_output_tokens": 23,
+   "cache_hit_ratio": 0.0039,
+   "turn_wall_s_median": 5.4,
+   "turn_wall_s_p90": 5.4,
+   "wall_samples": 1,
+   "outcomes": {
+    "completed": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-03",
+   "last_seen": "2026-09-03",
+   "providers": {
+    "opencode": 1
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "meta/muse-spark-1.3-contributor",
+   "effort": "max",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 1,
+   "turns_by_kind": {
+    "primary": 1
+   },
+   "api_calls": 1,
+   "input_tokens_total": 0,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 0,
+   "reasoning_output_tokens": 0,
+   "cache_hit_ratio": null,
+   "turn_wall_s_median": null,
+   "turn_wall_s_p90": null,
+   "wall_samples": 0,
+   "outcomes": {
+    "error": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 1.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-07",
+   "last_seen": "2026-09-07",
+   "providers": {
+    "openrouter": 1
+   },
+   "error_events": 1
+  },
+  {
+   "cli": "opencode",
+   "model": "x-ai/grok-4.6",
+   "effort": "max",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 1,
+   "turns_by_kind": {
+    "primary": 1
+   },
+   "api_calls": 1,
+   "input_tokens_total": 67277,
+   "cached_input_tokens": 128,
+   "cache_write_tokens": 0,
+   "output_tokens": 1,
+   "reasoning_output_tokens": 27,
+   "cache_hit_ratio": 0.0019,
+   "turn_wall_s_median": 9.3,
+   "turn_wall_s_p90": 9.3,
+   "wall_samples": 1,
+   "outcomes": {
+    "completed": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-07",
+   "last_seen": "2026-09-07",
+   "cost_usd_logged": 0.13,
+   "providers": {
+    "openrouter": 1
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "meta/muse-glimmer-30b",
+   "effort": "max",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 1,
+   "turns_by_kind": {
+    "primary": 1
+   },
+   "api_calls": 1,
+   "input_tokens_total": 68468,
+   "cached_input_tokens": 7,
+   "cache_write_tokens": 0,
+   "output_tokens": 7,
+   "reasoning_output_tokens": 363,
+   "cache_hit_ratio": 0.0001,
+   "turn_wall_s_median": 17.8,
+   "turn_wall_s_p90": 17.8,
+   "wall_samples": 1,
+   "outcomes": {
+    "completed": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-08",
+   "last_seen": "2026-09-08",
+   "cost_usd_logged": 0.02,
+   "providers": {
+    "openrouter": 1
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "muse-spark-1.3",
+   "effort": "high",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 1,
+   "turns_by_kind": {
+    "primary": 1
+   },
+   "api_calls": 4,
+   "input_tokens_total": 276791,
+   "cached_input_tokens": 138594,
+   "cache_write_tokens": 0,
+   "output_tokens": 3226,
+   "reasoning_output_tokens": 8194,
+   "cache_hit_ratio": 0.5007,
+   "turn_wall_s_median": 123.7,
+   "turn_wall_s_p90": 123.7,
+   "wall_samples": 1,
+   "outcomes": {
+    "completed": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-18",
+   "last_seen": "2026-09-18",
+   "cost_usd_logged": 0.24,
+   "providers": {
+    "meta": 1
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "kimi-k3",
+   "effort": "high",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 1,
+   "turns_by_kind": {
+    "primary": 1
+   },
+   "api_calls": 32,
+   "input_tokens_total": 3147638,
+   "cached_input_tokens": 3021056,
+   "cache_write_tokens": 0,
+   "output_tokens": 15941,
+   "reasoning_output_tokens": 10279,
+   "cache_hit_ratio": 0.9598,
+   "turn_wall_s_median": 1039.9,
+   "turn_wall_s_p90": 1039.9,
+   "wall_samples": 1,
+   "outcomes": {
+    "completed": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-21",
+   "last_seen": "2026-09-21",
+   "cost_usd_logged": 1.68,
+   "providers": {
+    "moonshotai": 1
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "@cf/zai-org/glm-5.3",
+   "effort": "high",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 1,
+   "turns_by_kind": {
+    "primary": 1
+   },
+   "api_calls": 1,
+   "input_tokens_total": 0,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 0,
+   "reasoning_output_tokens": 0,
+   "cache_hit_ratio": null,
+   "turn_wall_s_median": null,
+   "turn_wall_s_p90": null,
+   "wall_samples": 0,
+   "outcomes": {
+    "no_terminal_event": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 1.0,
+   "first_seen": "2026-09-21",
+   "last_seen": "2026-09-21",
+   "providers": {
+    "cloudflare-workers-ai": 1
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "kimi-k3",
+   "effort": "unspecified",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 1,
+   "turns_by_kind": {
+    "primary": 1
+   },
+   "api_calls": 2,
+   "input_tokens_total": 117210,
+   "cached_input_tokens": 58368,
+   "cache_write_tokens": 0,
+   "output_tokens": 69,
+   "reasoning_output_tokens": 24,
+   "cache_hit_ratio": 0.498,
+   "turn_wall_s_median": 18.2,
+   "turn_wall_s_p90": 18.2,
+   "wall_samples": 1,
+   "outcomes": {
+    "completed": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-24",
+   "last_seen": "2026-09-24",
+   "cost_usd_logged": 0.2,
+   "providers": {
+    "moonshotai": 1
+   },
+   "error_events": 0
+  },
+  {
+   "cli": "opencode",
+   "model": "muse-spark-1.3",
+   "effort": "xhigh",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 1,
+   "turns_by_kind": {
+    "primary": 1
+   },
+   "api_calls": 1,
+   "input_tokens_total": 0,
+   "cached_input_tokens": 0,
+   "cache_write_tokens": 0,
+   "output_tokens": 0,
+   "reasoning_output_tokens": 0,
+   "cache_hit_ratio": null,
+   "turn_wall_s_median": null,
+   "turn_wall_s_p90": null,
+   "wall_samples": 0,
+   "outcomes": {
+    "error": 1
+   },
+   "tool_calls": null,
+   "tool_failure_rate": null,
+   "aborted_rate": 0.0,
+   "error_rate": 1.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-10-06",
+   "last_seen": "2026-10-06",
+   "providers": {
+    "meta": 1
+   },
+   "error_events": 1
+  },
+  {
+   "cli": "grok",
+   "model": "grok-4.6",
+   "effort": "medium",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 1,
+   "turns_by_kind": {
+    "primary": 1
+   },
+   "api_calls": 16,
+   "input_tokens_total": 1060584,
+   "cached_input_tokens": 847744,
+   "cache_write_tokens": 0,
+   "output_tokens": 16038,
+   "reasoning_output_tokens": 11495,
+   "cache_hit_ratio": 0.7993,
+   "turn_wall_s_median": 310.2,
+   "turn_wall_s_p90": 310.2,
+   "wall_samples": 1,
+   "outcomes": {
+    "completed": 1
+   },
+   "tool_calls": 85,
+   "tool_failure_rate": 0.0,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-10",
+   "last_seen": "2026-09-10",
+   "cost_usd_ticks_logged": 1607826000
+  },
+  {
+   "cli": "grok",
+   "model": "grok-4.7-build-fast",
+   "effort": "xhigh",
+   "threads": 1,
+   "threads_by_kind": {
+    "primary": 1
+   },
+   "turns": 1,
+   "turns_by_kind": {
+    "primary": 1
+   },
+   "api_calls": 1,
+   "input_tokens_total": 24736,
+   "cached_input_tokens": 1792,
+   "cache_write_tokens": 0,
+   "output_tokens": 437,
+   "reasoning_output_tokens": 436,
+   "cache_hit_ratio": 0.0724,
+   "turn_wall_s_median": 5.8,
+   "turn_wall_s_p90": 5.8,
+   "wall_samples": 1,
+   "outcomes": {
+    "completed": 1
+   },
+   "tool_calls": 0,
+   "tool_failure_rate": 0.0,
+   "aborted_rate": 0.0,
+   "error_rate": 0.0,
+   "no_terminal_rate": 0.0,
+   "first_seen": "2026-09-21",
+   "last_seen": "2026-09-21",
+   "cost_usd_ticks_logged": 988120000
+  }
+ ],
+ "weekly_turns": {
+  "grok/grok-4.7": {
+   "2026-08-31": 0,
+   "2026-09-07": 0,
+   "2026-09-14": 0,
+   "2026-09-21": 3481,
+   "2026-09-28": 126,
+   "2026-10-05": 3
+  },
+  "codex/codex-auto-review": {
+   "2026-08-31": 1009,
+   "2026-09-07": 516,
+   "2026-09-14": 292,
+   "2026-09-21": 721,
+   "2026-09-28": 407,
+   "2026-10-05": 9
+  },
+  "codex/gpt-6-astra": {
+   "2026-08-31": 147,
+   "2026-09-07": 273,
+   "2026-09-14": 237,
+   "2026-09-21": 692,
+   "2026-09-28": 235,
+   "2026-10-05": 8
+  },
+  "codex/gpt-5.6-sol": {
+   "2026-08-31": 545,
+   "2026-09-07": 148,
+   "2026-09-14": 39,
+   "2026-09-21": 2,
+   "2026-09-28": 0,
+   "2026-10-05": 0
+  },
+  "claude/claude-opus-5-5": {
+   "2026-08-31": 0,
+   "2026-09-07": 0,
+   "2026-09-14": 0,
+   "2026-09-21": 0,
+   "2026-09-28": 531,
+   "2026-10-05": 68
+  },
+  "claude/claude-sonnet-5": {
+   "2026-08-31": 0,
+   "2026-09-07": 0,
+   "2026-09-14": 0,
+   "2026-09-21": 0,
+   "2026-09-28": 407,
+   "2026-10-05": 0
+  },
+  "grok/grok-4.6": {
+   "2026-08-31": 120,
+   "2026-09-07": 101,
+   "2026-09-14": 91,
+   "2026-09-21": 12,
+   "2026-09-28": 0,
+   "2026-10-05": 0
+  },
+  "claude/claude-fable-5-1": {
+   "2026-08-31": 8,
+   "2026-09-07": 168,
+   "2026-09-14": 4,
+   "2026-09-21": 0,
+   "2026-09-28": 98,
+   "2026-10-05": 3
+  },
+  "codex/gpt-5.6-terra": {
+   "2026-08-31": 107,
+   "2026-09-07": 45,
+   "2026-09-14": 13,
+   "2026-09-21": 0,
+   "2026-09-28": 0,
+   "2026-10-05": 0
+  },
+  "codex/gpt-6.1-sol": {
+   "2026-08-31": 0,
+   "2026-09-07": 0,
+   "2026-09-14": 0,
+   "2026-09-21": 0,
+   "2026-09-28": 151,
+   "2026-10-05": 1
+  },
+  "codex/gpt-6-sol": {
+   "2026-08-31": 0,
+   "2026-09-07": 0,
+   "2026-09-14": 0,
+   "2026-09-21": 102,
+   "2026-09-28": 4,
+   "2026-10-05": 0
+  },
+  "opencode/meta/muse-spark-1.3-contributor": {
+   "2026-08-31": 62,
+   "2026-09-07": 32,
+   "2026-09-14": 0,
+   "2026-09-21": 0,
+   "2026-09-28": 1,
+   "2026-10-05": 0
+  },
+  "codex/gpt-daybreak-blue-latest": {
+   "2026-08-31": 0,
+   "2026-09-07": 0,
+   "2026-09-14": 8,
+   "2026-09-21": 31,
+   "2026-09-28": 0,
+   "2026-10-05": 0
+  },
+  "opencode/muse-spark-1.3": {
+   "2026-08-31": 3,
+   "2026-09-07": 2,
+   "2026-09-14": 5,
+   "2026-09-21": 28,
+   "2026-09-28": 0,
+   "2026-10-05": 1
+  },
+  "claude/claude-sonnet-5-5": {
+   "2026-08-31": 0,
+   "2026-09-07": 0,
+   "2026-09-14": 0,
+   "2026-09-21": 0,
+   "2026-09-28": 27,
+   "2026-10-05": 8
+  },
+  "opencode/z-ai/glm-5.3-flash": {
+   "2026-08-31": 24,
+   "2026-09-07": 8,
+   "2026-09-14": 0,
+   "2026-09-21": 0,
+   "2026-09-28": 0,
+   "2026-10-05": 2
+  },
+  "opencode/muse-spark-1.2": {
+   "2026-08-31": 20,
+   "2026-09-07": 4,
+   "2026-09-14": 0,
+   "2026-09-21": 0,
+   "2026-09-28": 0,
+   "2026-10-05": 0
+  },
+  "opencode/z-ai/glm-5.3": {
+   "2026-08-31": 3,
+   "2026-09-07": 3,
+   "2026-09-14": 11,
+   "2026-09-21": 2,
+   "2026-09-28": 0,
+   "2026-10-05": 2
+  },
+  "opencode/moonshotai/kimi-k3": {
+   "2026-08-31": 8,
+   "2026-09-07": 5,
+   "2026-09-14": 5,
+   "2026-09-21": 2,
+   "2026-09-28": 0,
+   "2026-10-05": 0
+  },
+  "opencode/meta/muse-spark-1.3": {
+   "2026-08-31": 7,
+   "2026-09-07": 9,
+   "2026-09-14": 0,
+   "2026-09-21": 0,
+   "2026-09-28": 0,
+   "2026-10-05": 2
+  },
+  "opencode/meta/muse-glimmer-30b": {
+   "2026-08-31": 0,
+   "2026-09-07": 10,
+   "2026-09-14": 0,
+   "2026-09-21": 0,
+   "2026-09-28": 0,
+   "2026-10-05": 0
+  },
+  "opencode/@cf/zai-org/glm-5.3-flash": {
+   "2026-08-31": 9,
+   "2026-09-07": 0,
+   "2026-09-14": 0,
+   "2026-09-21": 0,
+   "2026-09-28": 0,
+   "2026-10-05": 0
+  },
+  "codex/gpt-6-luna": {
+   "2026-08-31": 0,
+   "2026-09-07": 0,
+   "2026-09-14": 0,
+   "2026-09-21": 0,
+   "2026-09-28": 7,
+   "2026-10-05": 0
+  },
+  "opencode/@cf/zai-org/glm-5.3": {
+   "2026-08-31": 1,
+   "2026-09-07": 0,
+   "2026-09-14": 4,
+   "2026-09-21": 2,
+   "2026-09-28": 0,
+   "2026-10-05": 0
+  },
+  "opencode/kimi-k3": {
+   "2026-08-31": 0,
+   "2026-09-07": 0,
+   "2026-09-14": 4,
+   "2026-09-21": 2,
+   "2026-09-28": 0,
+   "2026-10-05": 1
+  },
+  "opencode/muse-spark-1.3-contributor": {
+   "2026-08-31": 1,
+   "2026-09-07": 3,
+   "2026-09-14": 1,
+   "2026-09-21": 0,
+   "2026-09-28": 1,
+   "2026-10-05": 0
+  },
+  "grok/grok-4.5": {
+   "2026-08-31": 2,
+   "2026-09-07": 0,
+   "2026-09-14": 4,
+   "2026-09-21": 0,
+   "2026-09-28": 0,
+   "2026-10-05": 0
+  },
+  "opencode/muse-spark-1.3-contributor-free": {
+   "2026-08-31": 4,
+   "2026-09-07": 0,
+   "2026-09-14": 0,
+   "2026-09-21": 0,
+   "2026-09-28": 0,
+   "2026-10-05": 0
+  },
+  "opencode/x-ai/grok-4.6": {
+   "2026-08-31": 0,
+   "2026-09-07": 3,
+   "2026-09-14": 0,
+   "2026-09-21": 0,
+   "2026-09-28": 0,
+   "2026-10-05": 0
+  },
+  "opencode/deepseek/deepseek-v4.1-flash": {
+   "2026-08-31": 0,
+   "2026-09-07": 0,
+   "2026-09-14": 0,
+   "2026-09-21": 0,
+   "2026-09-28": 0,
+   "2026-10-05": 2
+  },
+  "codex/unknown": {
+   "2026-08-31": 1,
+   "2026-09-07": 0,
+   "2026-09-14": 0,
+   "2026-09-21": 0,
+   "2026-09-28": 0,
+   "2026-10-05": 0
+  },
+  "opencode/grok-4.6": {
+   "2026-08-31": 1,
+   "2026-09-07": 0,
+   "2026-09-14": 0,
+   "2026-09-21": 0,
+   "2026-09-28": 0,
+   "2026-10-05": 0
+  },
+  "grok/grok-4.7-build-fast": {
+   "2026-08-31": 0,
+   "2026-09-07": 0,
+   "2026-09-14": 0,
+   "2026-09-21": 1,
+   "2026-09-28": 0,
+   "2026-10-05": 0
+  }
+ },
+ "daily_turns": {
+  "claude/claude-fable-5-1": {
+   "2026-09-06": 8,
+   "2026-09-07": 168,
+   "2026-09-17": 4,
+   "2026-09-29": 12,
+   "2026-09-30": 17,
+   "2026-10-01": 19,
+   "2026-10-02": 50,
+   "2026-10-06": 3
+  },
+  "claude/claude-opus-5-5": {
+   "2026-09-29": 134,
+   "2026-09-30": 42,
+   "2026-10-01": 272,
+   "2026-10-02": 80,
+   "2026-10-03": 3,
+   "2026-10-05": 29,
+   "2026-10-06": 39
+  },
+  "claude/claude-sonnet-5": {
+   "2026-10-01": 270,
+   "2026-10-02": 137
+  },
+  "claude/claude-sonnet-5-5": {
+   "2026-09-29": 13,
+   "2026-10-01": 1,
+   "2026-10-03": 13,
+   "2026-10-05": 4,
+   "2026-10-06": 4
+  },
+  "codex/codex-auto-review": {
+   "2026-09-01": 68,
+   "2026-09-02": 147,
+   "2026-09-03": 406,
+   "2026-09-04": 328,
+   "2026-09-05": 9,
+   "2026-09-06": 51,
+   "2026-09-07": 25,
+   "2026-09-08": 316,
+   "2026-09-09": 81,
+   "2026-09-10": 55,
+   "2026-09-11": 39,
+   "2026-09-14": 151,
+   "2026-09-15": 38,
+   "2026-09-16": 58,
+   "2026-09-17": 4,
+   "2026-09-19": 28,
+   "2026-09-20": 13,
+   "2026-09-21": 49,
+   "2026-09-22": 18,
+   "2026-09-23": 3,
+   "2026-09-24": 15,
+   "2026-09-25": 66,
+   "2026-09-27": 570,
+   "2026-09-28": 125,
+   "2026-09-29": 84,
+   "2026-09-30": 134,
+   "2026-10-01": 64,
+   "2026-10-06": 9
+  },
+  "codex/gpt-5.6-sol": {
+   "2026-09-01": 114,
+   "2026-09-02": 63,
+   "2026-09-03": 152,
+   "2026-09-04": 187,
+   "2026-09-05": 22,
+   "2026-09-06": 7,
+   "2026-09-07": 11,
+   "2026-09-08": 90,
+   "2026-09-09": 18,
+   "2026-09-10": 3,
+   "2026-09-11": 26,
+   "2026-09-14": 5,
+   "2026-09-16": 34,
+   "2026-09-21": 2
+  },
+  "codex/gpt-5.6-terra": {
+   "2026-09-01": 6,
+   "2026-09-02": 19,
+   "2026-09-03": 39,
+   "2026-09-04": 37,
+   "2026-09-05": 3,
+   "2026-09-06": 3,
+   "2026-09-08": 17,
+   "2026-09-09": 11,
+   "2026-09-10": 4,
+   "2026-09-11": 13,
+   "2026-09-14": 3,
+   "2026-09-16": 9,
+   "2026-09-19": 1
+  },
+  "codex/gpt-6-astra": {
+   "2026-09-04": 17,
+   "2026-09-05": 61,
+   "2026-09-06": 69,
+   "2026-09-07": 60,
+   "2026-09-08": 91,
+   "2026-09-09": 50,
+   "2026-09-10": 23,
+   "2026-09-11": 48,
+   "2026-09-12": 1,
+   "2026-09-14": 93,
+   "2026-09-15": 35,
+   "2026-09-16": 48,
+   "2026-09-17": 40,
+   "2026-09-19": 6,
+   "2026-09-20": 15,
+   "2026-09-21": 58,
+   "2026-09-22": 173,
+   "2026-09-23": 244,
+   "2026-09-24": 43,
+   "2026-09-25": 80,
+   "2026-09-26": 44,
+   "2026-09-27": 50,
+   "2026-09-28": 18,
+   "2026-09-29": 49,
+   "2026-09-30": 37,
+   "2026-10-01": 74,
+   "2026-10-02": 57,
+   "2026-10-06": 8
+  },
+  "codex/gpt-6-luna": {
+   "2026-09-28": 2,
+   "2026-09-29": 5
+  },
+  "codex/gpt-6-sol": {
+   "2026-09-22": 1,
+   "2026-09-24": 4,
+   "2026-09-25": 26,
+   "2026-09-26": 37,
+   "2026-09-27": 34,
+   "2026-09-29": 4
+  },
+  "codex/gpt-6.1-sol": {
+   "2026-09-29": 8,
+   "2026-09-30": 22,
+   "2026-10-01": 62,
+   "2026-10-02": 52,
+   "2026-10-03": 7,
+   "2026-10-06": 1
+  },
+  "codex/gpt-daybreak-blue-latest": {
+   "2026-09-14": 8,
+   "2026-09-21": 1,
+   "2026-09-27": 30
+  },
+  "codex/unknown": {
+   "2026-09-01": 1
+  },
+  "grok/grok-4.5": {
+   "2026-09-02": 2,
+   "2026-09-18": 4
+  },
+  "grok/grok-4.6": {
+   "2026-09-01": 49,
+   "2026-09-02": 36,
+   "2026-09-03": 32,
+   "2026-09-04": 3,
+   "2026-09-08": 5,
+   "2026-09-09": 38,
+   "2026-09-10": 53,
+   "2026-09-11": 5,
+   "2026-09-14": 6,
+   "2026-09-16": 57,
+   "2026-09-17": 8,
+   "2026-09-18": 12,
+   "2026-09-19": 5,
+   "2026-09-20": 3,
+   "2026-09-21": 12
+  },
+  "grok/grok-4.7": {
+   "2026-09-21": 35,
+   "2026-09-22": 160,
+   "2026-09-23": 142,
+   "2026-09-24": 161,
+   "2026-09-25": 2976,
+   "2026-09-26": 7,
+   "2026-09-28": 1,
+   "2026-09-29": 9,
+   "2026-09-30": 21,
+   "2026-10-01": 48,
+   "2026-10-02": 47,
+   "2026-10-06": 3
+  },
+  "grok/grok-4.7-build-fast": {
+   "2026-09-21": 1
+  },
+  "opencode/@cf/zai-org/glm-5.3": {
+   "2026-09-03": 1,
+   "2026-09-17": 3,
+   "2026-09-18": 1,
+   "2026-09-21": 1,
+   "2026-09-24": 1
+  },
+  "opencode/@cf/zai-org/glm-5.3-flash": {
+   "2026-09-01": 9
+  },
+  "opencode/deepseek/deepseek-v4.1-flash": {
+   "2026-10-06": 2
+  },
+  "opencode/grok-4.6": {
+   "2026-09-01": 1
+  },
+  "opencode/kimi-k3": {
+   "2026-09-17": 3,
+   "2026-09-18": 1,
+   "2026-09-21": 1,
+   "2026-09-24": 1,
+   "2026-10-06": 1
+  },
+  "opencode/meta/muse-glimmer-30b": {
+   "2026-09-08": 10
+  },
+  "opencode/meta/muse-spark-1.3": {
+   "2026-09-03": 7,
+   "2026-09-07": 6,
+   "2026-09-08": 3,
+   "2026-10-06": 2
+  },
+  "opencode/meta/muse-spark-1.3-contributor": {
+   "2026-09-03": 44,
+   "2026-09-04": 18,
+   "2026-09-07": 4,
+   "2026-09-08": 16,
+   "2026-09-10": 12,
+   "2026-10-02": 1
+  },
+  "opencode/moonshotai/kimi-k3": {
+   "2026-09-01": 1,
+   "2026-09-03": 7,
+   "2026-09-07": 4,
+   "2026-09-08": 1,
+   "2026-09-18": 5,
+   "2026-09-21": 2
+  },
+  "opencode/muse-spark-1.2": {
+   "2026-09-01": 16,
+   "2026-09-03": 1,
+   "2026-09-04": 3,
+   "2026-09-08": 4
+  },
+  "opencode/muse-spark-1.3": {
+   "2026-09-04": 3,
+   "2026-09-08": 2,
+   "2026-09-17": 3,
+   "2026-09-18": 2,
+   "2026-09-21": 6,
+   "2026-09-24": 22,
+   "2026-10-06": 1
+  },
+  "opencode/muse-spark-1.3-contributor": {
+   "2026-09-04": 1,
+   "2026-09-08": 3,
+   "2026-09-18": 1,
+   "2026-10-02": 1
+  },
+  "opencode/muse-spark-1.3-contributor-free": {
+   "2026-09-03": 4
+  },
+  "opencode/x-ai/grok-4.6": {
+   "2026-09-07": 2,
+   "2026-09-08": 1
+  },
+  "opencode/z-ai/glm-5.3": {
+   "2026-09-01": 1,
+   "2026-09-04": 2,
+   "2026-09-07": 2,
+   "2026-09-08": 1,
+   "2026-09-18": 5,
+   "2026-09-19": 6,
+   "2026-09-21": 2,
+   "2026-10-06": 2
+  },
+  "opencode/z-ai/glm-5.3-flash": {
+   "2026-09-01": 24,
+   "2026-09-10": 7,
+   "2026-09-11": 1,
+   "2026-10-06": 2
+  }
+ }
+}

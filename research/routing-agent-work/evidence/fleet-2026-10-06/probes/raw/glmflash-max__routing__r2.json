@@ -1,0 +1,47 @@
+{
+ "run_id": "glmflash-max__routing__r2",
+ "config": "glmflash-max",
+ "cli": "opencode",
+ "model": "openrouter/z-ai/glm-5.3-flash",
+ "effort": "max",
+ "task": "routing",
+ "rep": 2,
+ "workdir": "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/glmflash-max__routing__r2__1791297629/work",
+ "exit_code": 0,
+ "timed_out": false,
+ "wall_s": 37.9,
+ "pass": true,
+ "score": 1.0,
+ "grade": {
+  "pass": true,
+  "score": 1.0,
+  "correct": 6,
+  "traps_correct": 3
+ },
+ "final_message": "DONE",
+ "usage": {
+  "input_tokens": 536627,
+  "output_tokens": 553,
+  "cached_tokens": 426880,
+  "reasoning_tokens": 836,
+  "cost_usd": 0.029963,
+  "api_error": null
+ },
+ "stderr_tail": "",
+ "cmd": [
+  "opencode",
+  "run",
+  "--pure",
+  "-m",
+  "openrouter/z-ai/glm-5.3-flash",
+  "--variant",
+  "max",
+  "--format",
+  "json",
+  "--dir",
+  "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/glmflash-max__routing__r2__1791297629/work",
+  "--auto",
+  "<prompt.txt>"
+ ],
+ "finished_at": "2026-10-06T10:41:07-0400"
+}

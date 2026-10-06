@@ -1,0 +1,51 @@
+{
+ "run_id": "kimi-max__bugfix__r1",
+ "config": "kimi-max",
+ "cli": "opencode",
+ "model": "moonshotai/kimi-k3",
+ "effort": "max",
+ "task": "bugfix",
+ "rep": 1,
+ "workdir": "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/kimi-max__bugfix__r1__1791296866/work",
+ "exit_code": 0,
+ "timed_out": false,
+ "wall_s": 191.8,
+ "pass": true,
+ "score": 1.0,
+ "grade": {
+  "visible_pass": true,
+  "hidden_pass": true,
+  "tests_untouched": true,
+  "extra_test_files": [],
+  "hidden_summary": "5/5 passed",
+  "hidden_fail_lines": [],
+  "pass": true,
+  "score": 1.0
+ },
+ "final_message": "All 6 visible tests pass, plus extra checks against the documented edge cases. Bugs fixed:\n\n1. **`parse_date` (parse.py)** \u2014 returned `(year, day, month)`. It swapped the month and day. Now returns `(year, month, day)`.\n2. **`format_cents` (money.py)** \u2014 broke on negative values. Floor division on a negative number produced `-$-4.90` for `-310`. Now it formats `abs(cents)` and prepends the sign, so `-310` gives `-$3.10` and `-5` gives `-$0.05`.\n3. **`top_items` (report.py)** \u2014 sorted totals ascending, so it returned the smallest items. It also ignored the tie-break rule. Now sorts by total descending, then item name ascending, as the docstring specifies.",
+ "usage": {
+  "input_tokens": 922205,
+  "output_tokens": 3004,
+  "cached_tokens": 895744,
+  "reasoning_tokens": 2334,
+  "cost_usd": 0.428176,
+  "api_error": null
+ },
+ "stderr_tail": "",
+ "cmd": [
+  "opencode",
+  "run",
+  "--pure",
+  "-m",
+  "moonshotai/kimi-k3",
+  "--variant",
+  "max",
+  "--format",
+  "json",
+  "--dir",
+  "/private/tmp/claude-501/-Users-kalepail-Desktop-kalepail-skills/fd5aae97-76bc-4bb3-8597-af0fa91bb3f0/scratchpad/probe-runs/kimi-max__bugfix__r1__1791296866/work",
+  "--auto",
+  "<prompt.txt>"
+ ],
+ "finished_at": "2026-10-06T10:30:58-0400"
+}

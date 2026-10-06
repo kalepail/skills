@@ -1,0 +1,23 @@
+{
+  "extract_id": "extract_32df46dc8dbc37c73a2113445ec3aed8",
+  "session_id": "session_32df46dc8dbc37c73a2113445ec3aed8",
+  "status": "ok",
+  "results": [
+    {
+      "url": "https://artificialanalysis.ai/changelog",
+      "title": "Changelog | Artificial Analysis",
+      "publish_date": null,
+      "excerpts": [
+        "# Changelog\n## 04 Oct 2026\n### 03 Oct 2026\n#### 30 Sept 2026\n[\ud83d\udd14 New article published Gemini 4 Argon: Google is back as one of the top three labs in intelligence achieved ### Gemini 4 Argon: Google is back as one of the top three labs in intelligence achieved Google\u2019s new Gemini 4 Argon equals GPT-6 Astra on the Artificial Analysis Intelligence Index at 60% of the Cost per Task with discounted prices.\nGoogle is now back to being one of the top three labs in intelligence achieved](https://artificialanalysis.ai/articles/gemini-4-argon-google-top-three-labs)\n\n...\n\n[New language model evaluation results available Gemini 4 Argon (High) ### Gemini 4 Argon (High) Intelligence Index: 53](https://artificialanalysis.ai/models/gemini-4-argon)\nUpstage\nUpstage performance results now available\n\n...\n\n[Google Gemini 4 Argon (High)](https://artificialanalysis.ai/models/gemini-4-argon/providers)\n\n...\n\n#### 02 Sept 2026\n[\ud83d\udd14 New article published Google has released Gemini 3.8 Flash, its fourth Flash model in under four months ### Google has released Gemini 3.8 Flash, its fourth Flash model in under four months Gemini 3.8 Flash scores 59 on the Artificial Analysis Intelligence Index and reaches the Intelligence vs. Cost per Task Pareto frontier](https://artificialanalysis.ai/articles/gemini-3-8-flash)"
+      ]
+    }
+  ],
+  "errors": [],
+  "usage": [
+    {
+      "name": "sku_extract_excerpts",
+      "count": 1
+    }
+  ],
+  "warnings": []
+}
