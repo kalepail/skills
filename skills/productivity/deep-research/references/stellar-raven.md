@@ -1,6 +1,6 @@
 # Stellar Raven research guide
 
-Stellar Raven MCP is the unified Stellar-ecosystem gateway. Its `search` tool discovers service operations and runnable skills. Its `execute` tool composes the discovered operations in sandboxed JavaScript. Use Raven as the first discovery surface for each Stellar-ecosystem question: protocol history, SEPs and CAPs, ecosystem projects, funding, audits, events, and official docs wording. The Raven catalog covers content, research, directories, skills, and docs. It does not cover live chain state. For balances, ledgers, transactions, and contract state, use Stellar RPC or Horizon directly.
+Stellar Raven MCP is the unified Stellar-ecosystem gateway. Its `search` tool discovers service operations and runnable skills. Its `execute` tool composes the discovered operations in sandboxed JavaScript. Use Raven as the first discovery surface for each Stellar-ecosystem question: protocol history, SEPs and CAPs, ecosystem projects, funding, audits, events, and official docs wording. The Raven catalog covers content, research, directories, skills, and docs. Stellar RPC and Horizon are the authority for live chain state. Use them directly for balances, ledgers, transactions, and contract state.
 
 Raven is a discovery surface, not the final authority. Verify each consequential claim against the underlying primary source or an independent source family. Use official docs for protocol wording, RPC or Horizon for live chain state, and primary records or general web for ecosystem claims.
 

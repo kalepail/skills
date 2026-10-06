@@ -227,12 +227,12 @@
     },
     {
       "id": 20,
-      "prompt": "Our wallet page has \"Sign\", \"Sign out\", and \"Design\" buttons. Test that the passkey signing ceremony behind \"Sign\" works.",
-      "expected_output": "Use $agent-browser-webauthn. Inside one helper invocation, trigger the ceremony with agent-browser find role button click --name \"Sign\" --exact so the substring default cannot click \"Sign out\" or \"Design\", then assert credentialAsserted plus the application result.",
+      "prompt": "Adapt the passkey E2E to our wallet page. Its buttons are \"Sign up with passkey\", \"Sign in\", and \"Sign transaction\".",
+      "expected_output": "Use $agent-browser-webauthn. Inside one helper invocation, trigger each ceremony with a native agent-browser find role button click that uses the full accessible name and --exact, so that a substring match cannot click a different \"Sign\" button. Assert credentialAdded, credentialAsserted, and the application result after each step.",
       "assertions": [
-        "Uses --exact on the find role --name click for the ceremony button",
-        "Explains that the default name match is a case-insensitive substring",
-        "Asserts credentialAsserted and real application output rather than the click"
+        "Uses --exact with the full accessible name on each find role --name ceremony click",
+        "Keeps sign-up, sign-in, and transaction signing in one helper invocation",
+        "Asserts credential diagnostics and real application output rather than the click"
       ],
       "files": []
     },
@@ -254,6 +254,27 @@
       "assertions": [
         "Does not attach a virtual authenticator for a sign-out click",
         "Routes ordinary navigation and assertion to agent-browser"
+      ],
+      "files": []
+    },
+    {
+      "id": 23,
+      "prompt": "Review our server's WebAuthn assertion verification code. I think the signature counter check is wrong.",
+      "expected_output": "Do not use $agent-browser-webauthn; review the server verification code directly, since no browser ceremony run is requested.",
+      "assertions": [
+        "Does not trigger agent-browser-webauthn for a WebAuthn code review",
+        "Does not open a browser or attach a virtual authenticator",
+        "Reviews the signature counter logic in the server code"
+      ],
+      "files": []
+    },
+    {
+      "id": 24,
+      "prompt": "Add passkey wallet creation to our Next.js app with the Stellar Smart Account Kit.",
+      "expected_output": "Do not use $agent-browser-webauthn for the implementation; route to Stellar dApp guidance when available, since the request is to write passkey code, not to run a browser test. Offer a passkey browser test only as a later verification step.",
+      "assertions": [
+        "Does not trigger agent-browser-webauthn for passkey implementation work",
+        "Does not attach a virtual authenticator before a browser test is requested"
       ],
       "files": []
     }

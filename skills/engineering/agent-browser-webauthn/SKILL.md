@@ -1,6 +1,6 @@
 ---
 name: agent-browser-webauthn
-description: Use agent-browser with Chrome DevTools Protocol virtual WebAuthn authenticators to test passkey, WebAuthn, Stellar smart account, wallet creation, wallet restore, and browser signing flows. Trigger when a task mentions passkeys, WebAuthn, virtual authenticators, Stellar Smart Account Kit browser tests, or agent-browser passkey automation. Do not use for browser flows without a passkey or WebAuthn ceremony—password logins and extension-wallet connects route to agent-browser alone.
+description: Use agent-browser with Chrome DevTools Protocol virtual WebAuthn authenticators to test passkey, WebAuthn, Stellar smart account, wallet creation, wallet restore, and browser signing flows. Trigger when a browser test must run a passkey or WebAuthn ceremony, or when a task asks for virtual authenticators, Stellar Smart Account Kit browser tests, or agent-browser passkey automation. Do not use for browser flows without a passkey or WebAuthn ceremony—password logins and extension-wallet connects route to agent-browser alone. Do not use to write or review passkey or WebAuthn code when no browser run is requested.
 ---
 
 # Agent Browser WebAuthn
@@ -26,7 +26,7 @@ export WEBAUTHN_CONTROL_FILE="$ARTIFACT_DIR/webauthn-control.txt"
 agent-browser --session "$SESSION" --headed open http://localhost:3000
 
 node "$WEBAUTHN_SKILL_DIR/scripts/agent-browser-webauthn-helper.mjs" run \
-  --session "$SESSION" --require-credential true --timeout-ms 300000 -- bash -lc '
+  --session "$SESSION" --require-credential true --timeout-ms 300000 -- bash -c '
     set -euo pipefail
     ab() { agent-browser --session "$SESSION" "$@"; }
 
@@ -55,20 +55,19 @@ agent-browser --session "$SESSION" close
 
 5. Adapt only the app URL, button names, and result text. Keep ceremony triggers as native `agent-browser click` or `find ... click` commands. Never use evaluated DOM `.click()`. Keep `--exact` on each `find role ... --name` click. Without it, the name match is a case-insensitive substring, so `"Sign"` also matches `"Design"` and `"Sign out"`. The command then clicks one match and reports no error.
 6. Assert real app output after each operation. For Stellar Smart Account Kit, assert a `C...` contract id or an explicit transaction/funding error. Do not treat a visible button click as success.
-7. Require both credential events and inspect the final `WebAuthn.getCredentials` diagnostic. `--require-credential true` fails clearly when no virtual credential was observed; without the flag the helper only warns and exits 0, so always pass it for credential flows.
+7. Require both credential events and inspect the final `WebAuthn.getCredentials` diagnostic. Always pass `--require-credential true` for credential flows. Without it, the helper only warns and exits 0 when no virtual credential was observed.
 8. Close the fresh session after smoke tests so virtual authenticators and IndexedDB state do not leak across runs.
 
 ## Important Details
 
-- Open the target before you start the helper, so that it attaches before the first ceremony. A reload keeps the same target. If a tab or page target is replaced, stop and run the whole flow again from a fresh session, with the helper attached to the new target before the first credential. Pass `--pin-tab` on `open` to make commands fail with `tab_gone` when the bound tab closes, instead of driving a different tab.
-- Headed and headless both work with this recipe. Start headed when diagnosing Chrome/WebAuthn behavior, then repeat headless after the headed flow passes.
-- The helper explicitly uses `WebAuthn.enable({enableUI:false})` and this CTAP2 config: `protocol: ctap2`, `transport: internal`, `hasResidentKey: true`, `hasUserVerification: true`, `isUserVerified: true`, and `automaticPresenceSimulation: true`.
+- A reload keeps the same target. If a tab or page target is replaced, stop and run the whole flow again from a fresh session, with the helper attached to the new target before the first credential. Pass `--pin-tab` on `open` to make commands fail with `tab_gone` when the bound tab closes, instead of driving a different tab.
+- The helper uses `WebAuthn.enable({enableUI:false})` and a CTAP2 internal authenticator with resident keys, user verification, and automatic presence. Run the helper with `help` to see the flags that override these defaults.
 - Setup diagnostics include the target id and authenticator id. Credential events and redacted `WebAuthn.getCredentials` output go to stderr or `WEBAUTHN_EVENTS_FILE` as JSONL; private key material is never logged.
-- Set `WEBAUTHN_CONTROL_FILE` to exercise rejection: write `uv:false` before the rejected ceremony and `uv:true` before the next successful ceremony, then wait for the matching `controlApplied` event in `WEBAUTHN_EVENTS_FILE` before the next click—the helper applies directives on a 500 ms poll, so elapsed time does not prove one applied.
+- Use `WEBAUTHN_CONTROL_FILE` to test rejection. Write `uv:false` before the rejected ceremony and `uv:true` before the next successful ceremony. Before the next click, wait for the matching `controlApplied` event in `WEBAUTHN_EVENTS_FILE`. The helper reads the file on a 500 ms poll, so elapsed time does not prove that a directive applied.
 - Setup, CDP calls, and the wrapped command have a 120-second timeout by default. Set `--timeout-ms` to a larger positive value for deliberately long flows.
 - Use a local or otherwise trusted CDP endpoint. Remote CDP URLs are rejected unless `--allow-remote-cdp true` is passed deliberately.
 - Launch the site on `localhost` or HTTPS. WebAuthn requires a secure context; many passkey and smart-account SDKs also reject raw `127.0.0.1` for domain validation.
-- Always use a fresh session name for a full E2E. Do not pass `--profile`, `--state`, or `--restore`, and unset `AGENT_BROWSER_RESTORE`, `AGENT_BROWSER_STATE`, and `AGENT_BROWSER_PROFILE`. These load old browser state into the session. If a session has stale passkey or IndexedDB state, close it. Do not try to repair it in place.
+- Do not pass `--profile`, `--state`, or `--restore`. Unset `AGENT_BROWSER_RESTORE`, `AGENT_BROWSER_STATE`, and `AGENT_BROWSER_PROFILE`. These load old cookies, storage, or passkey state, so a pass no longer proves a fresh ceremony. If a session has stale passkey or IndexedDB state, close it. Do not try to repair it in place.
 - Do not put secrets in command arguments or page text assertions.
 
 ## Requirements

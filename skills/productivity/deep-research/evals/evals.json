@@ -136,11 +136,12 @@
     },
     {
       "id": 12,
-      "prompt": "Check the newest published version of the @stellar/stellar-sdk package.",
-      "expected_output": "Do not use $deep-research; answer with a single registry or search check, no skill and no paid deep-research tooling.",
+      "prompt": "Read CAP-0046 and summarize what it changes.",
+      "expected_output": "Do not use $deep-research; this is a single-source read. Read the CAP from its authoritative source and summarize it with a citation, with no evidence lanes or paid research tooling.",
       "assertions": [
-        "Keeps a version lookup to a single check",
-        "Avoids paid or asynchronous deep-research tooling"
+        "Treats a single-document Stellar read as a narrow task, not deep research",
+        "Reads and cites the authoritative CAP source",
+        "Does not build evidence lanes or launch research providers"
       ],
       "files": []
     },
@@ -261,6 +262,18 @@
         "Does not invoke deep research for an entity list with no synthesis",
         "Uses an entity-discovery surface directly",
         "Avoids paid discovery without budget authority"
+      ],
+      "files": []
+    },
+    {
+      "id": 24,
+      "prompt": "Clerk or Auth0 for our B2B app? Dig in properly and back it up with sources.",
+      "expected_output": "Use $deep-research for a comparative decision: frame the brief and the B2B requirements, plan distinct official-docs, pricing, practitioner, and counterevidence lanes, verify consequential claims against primary sources, and deliver a cited recommendation with downsides.",
+      "assertions": [
+        "Triggers deep-research from casual comparative phrasing that asks for sources",
+        "Frames the decision and the requirements before it plans lanes",
+        "Verifies consequential pricing and capability claims against primary sources",
+        "Delivers a cited recommendation that names downsides and limits"
       ],
       "files": []
     }

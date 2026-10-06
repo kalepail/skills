@@ -15,7 +15,7 @@ Live tool discovery is the authority. Before use, verify provider names and comm
 
 ## Provider roles
 
-| Surface | Current tools or commands | Best role |
+| Surface | Tools or commands | Best role |
 |---|---|---|
 | Parallel CLI | `search`, `extract` (alias `fetch`), `research run/status/poll/processors`, `findall`, `enrich`, `memory retrieve` | Reproducible shell-driven research with saved JSON or Markdown artifacts |
 | Perplexity MCP | `perplexity_search`, `perplexity_ask`, `perplexity_research`, `perplexity_reason` | Independent discovery, cited deep research, conversational search, and evidence-based reasoning |
@@ -53,7 +53,7 @@ Do not call every provider by default. Give each provider a distinct question or
 Save each authoritative output to disk. Set `RESEARCH_DIR` to the working-state directory of the session. Use the same `--session-id` value for all `search` and `extract` calls in one lane.
 
 ```bash
-parallel-cli search "research objective" -q "keyword" --mode advanced --after-date 2026-01-01 \
+parallel-cli search "research objective" -q "keyword" --mode advanced --after-date YYYY-MM-DD \
   --session-id lane-docs --json --max-results 10 -o "$RESEARCH_DIR/topic-search.json"
 parallel-cli search "primary filings" --include-domains sec.gov --json -o "$RESEARCH_DIR/topic-primary.json"
 parallel-cli extract https://example.com --objective "evidence needed" --full-content \
@@ -61,9 +61,9 @@ parallel-cli extract https://example.com --objective "evidence needed" --full-co
 parallel-cli research run "research question" --processor pro-fast --text -o "$RESEARCH_DIR/topic-report"
 ```
 
-- `--mode` sets the search quality: `turbo`, `fast`, `basic` (the default), or `advanced` (the highest quality). Use `advanced` for primary discovery lanes and `fast` for quick in-loop checks.
+- `--mode` sets the search quality. Use `advanced` for primary discovery lanes and `fast` for quick in-loop checks. Run `parallel-cli search --help` for the current modes.
 - `--after-date` (`YYYY-MM-DD`) enforces the freshness date of the brief. `--include-domains` keeps a primary-source lane on official domains.
-- `research run -o NAME` writes `NAME.json`, and also `NAME.md` with `--text`. Without `-o`, the CLI writes to `./parallel-research/<run_id>` in the current directory.
+- `research run -o NAME` writes `NAME.json`, and also `NAME.md` with `--text`. Without `-o`, the CLI saves under the current directory, outside the working state.
 
 Run research asynchronously when useful work can continue:
 
@@ -106,7 +106,7 @@ Use the fewest lanes that cover the question:
 - Counterevidence: contradictory findings, failure cases, criticism, and missing data.
 - Independent synthesis: a separate deep-research provider answers the same decision question. It does not see the conclusion of the lead.
 
-For consequential conclusions, compare claims and the underlying URLs, not provider summaries. Two engines that repeat the same article give one piece of evidence. Research the problem before the proposal. A lane can evaluate the proposed approach. At least one lane must examine whether a smaller or different solution solves the root issue.
+For consequential conclusions, compare claims and the underlying URLs, not provider summaries. Research the problem before the proposal. A lane can evaluate the proposed approach. At least one lane must examine whether a smaller or different solution solves the root issue.
 
 ## Source and citation rules
 
@@ -124,7 +124,7 @@ For consequential conclusions, compare claims and the underlying URLs, not provi
 - Authentication failure: check `parallel-cli auth --json`, record the result, and reroute. Do not run `parallel-cli login` without authority.
 - Rate limit: record it and reroute the lane to a different provider.
 - Parallel `402` or insufficient balance: stop paid work. `parallel-cli balance get` shows the balance. Never run `parallel-cli balance add` without explicit approval.
-- Lost run ID: use `parallel-cli memory retrieve "topic" --kind task --json` to find saved runs, then `poll` the run. Some keys require `--scope-key`. Give the scope key that the run used. If Memory is not available, report the lost run. Do not start a new paid run for the same question without budget authority.
+- Lost run ID: use `parallel-cli memory retrieve "topic" --kind task --json` to find saved runs, then `poll` the run. If the run used a memory scope key, pass the same `--scope-key`. If Memory is not available, report the lost run. Do not start a new paid run for the same question without budget authority.
 - Long-running task: keep its ID and output path, continue other lanes, and check back explicitly.
 - Weak or uncited result: make the question narrower and run a targeted source-discovery lane. Do not repeat the same broad prompt.
 
