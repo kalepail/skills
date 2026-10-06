@@ -30,21 +30,21 @@ node "$WEBAUTHN_SKILL_DIR/scripts/agent-browser-webauthn-helper.mjs" run \
     set -euo pipefail
     ab() { agent-browser --session "$SESSION" "$@"; }
 
-    ab find role button click --name "Create passkey"
+    ab find role button click --name "Create passkey" --exact
     ab wait --text "Connected"
     ab reload
-    ab find role button click --name "Restore session"
+    ab find role button click --name "Restore session" --exact
     ab wait --text "Restored"
-    ab find role button click --name "Connect passkey"
+    ab find role button click --name "Connect passkey" --exact
     ab wait --text "Connected"
 
     printf "uv:false\n" >"$WEBAUTHN_CONTROL_FILE"
     until grep -q "\"controlApplied\":\"uv:false\"" "$WEBAUTHN_EVENTS_FILE"; do sleep 0.2; done
-    ab find role button click --name "Connect passkey"
+    ab find role button click --name "Connect passkey" --exact
     ab wait --text "rejected"
     printf "uv:true\n" >"$WEBAUTHN_CONTROL_FILE"
     until grep -q "\"controlApplied\":\"uv:true\"" "$WEBAUTHN_EVENTS_FILE"; do sleep 0.2; done
-    ab find role button click --name "Sign"
+    ab find role button click --name "Sign" --exact
     ab wait --text "Signed"
   '
 
@@ -53,14 +53,14 @@ grep -q '"event":"WebAuthn.credentialAsserted"' "$WEBAUTHN_EVENTS_FILE"
 agent-browser --session "$SESSION" close
 ```
 
-5. Adapt only the app URL, button names, and result text. Keep ceremony triggers as native `agent-browser click` or `find ... click` commands; never use evaluated DOM `.click()`.
+5. Adapt only the app URL, button names, and result text. Keep ceremony triggers as native `agent-browser click` or `find ... click` commands. Never use evaluated DOM `.click()`. Keep `--exact` on each `find role ... --name` click. Without it, the name match is a case-insensitive substring, so `"Sign"` also matches `"Design"` and `"Sign out"`. The command then clicks one match and reports no error.
 6. Assert real app output after each operation. For Stellar Smart Account Kit, assert a `C...` contract id or an explicit transaction/funding error. Do not treat a visible button click as success.
 7. Require both credential events and inspect the final `WebAuthn.getCredentials` diagnostic. `--require-credential true` fails clearly when no virtual credential was observed; without the flag the helper only warns and exits 0, so always pass it for credential flows.
 8. Close the fresh session after smoke tests so virtual authenticators and IndexedDB state do not leak across runs.
 
 ## Important Details
 
-- Open the target before starting the helper so it attaches before the first ceremony. A reload keeps the same target; after a tab or page target is replaced, reattach by stopping and re-running the whole flow from a fresh session with the helper attached to the new target before creating a credential.
+- Open the target before you start the helper, so that it attaches before the first ceremony. A reload keeps the same target. If a tab or page target is replaced, stop and run the whole flow again from a fresh session, with the helper attached to the new target before the first credential. Pass `--pin-tab` on `open` to make commands fail with `tab_gone` when the bound tab closes, instead of driving a different tab.
 - Headed and headless both work with this recipe. Start headed when diagnosing Chrome/WebAuthn behavior, then repeat headless after the headed flow passes.
 - The helper explicitly uses `WebAuthn.enable({enableUI:false})` and this CTAP2 config: `protocol: ctap2`, `transport: internal`, `hasResidentKey: true`, `hasUserVerification: true`, `isUserVerified: true`, and `automaticPresenceSimulation: true`.
 - Setup diagnostics include the target id and authenticator id. Credential events and redacted `WebAuthn.getCredentials` output go to stderr or `WEBAUTHN_EVENTS_FILE` as JSONL; private key material is never logged.
@@ -68,7 +68,7 @@ agent-browser --session "$SESSION" close
 - Setup, CDP calls, and the wrapped command have a 120-second timeout by default. Set `--timeout-ms` to a larger positive value for deliberately long flows.
 - Use a local or otherwise trusted CDP endpoint. Remote CDP URLs are rejected unless `--allow-remote-cdp true` is passed deliberately.
 - Launch the site on `localhost` or HTTPS. WebAuthn requires a secure context; many passkey and smart-account SDKs also reject raw `127.0.0.1` for domain validation.
-- Always use a fresh session name for a full E2E. If a session has stale passkey/IndexedDB state, close it rather than trying to repair it in place.
+- Always use a fresh session name for a full E2E. Do not pass `--profile`, `--state`, or `--restore`, and unset `AGENT_BROWSER_RESTORE`, `AGENT_BROWSER_STATE`, and `AGENT_BROWSER_PROFILE`. These load old browser state into the session. If a session has stale passkey or IndexedDB state, close it. Do not try to repair it in place.
 - Do not put secrets in command arguments or page text assertions.
 
 ## Requirements
@@ -80,4 +80,4 @@ agent-browser --session "$SESSION" close
 ## Script
 
 - `scripts/agent-browser-webauthn-helper.mjs` - wrap any command while a virtual authenticator is attached to the session.
-- `scripts/agent-browser-webauthn-helper.test.mjs` - run dependency-free CLI safety checks after changing the helper.
+- `scripts/agent-browser-webauthn-helper.test.mjs` - dependency-free CLI safety checks. After you change the helper, run `node "$WEBAUTHN_SKILL_DIR/scripts/agent-browser-webauthn-helper.test.mjs"`. The checks do not start a browser. Prove a helper change with one live run of the workflow recipe against a local passkey page.

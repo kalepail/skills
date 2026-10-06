@@ -205,6 +205,64 @@
         "Does not ask routing-agent-work to choose research providers"
       ],
       "files": []
+    },
+    {
+      "id": 19,
+      "prompt": "Deeply research the market for MPC wallet infrastructure vendors: find the real players, cross-check their funding and primary product, and recommend which two we should evaluate.",
+      "expected_output": "Use $deep-research. Build an entity-discovery landscape lane with parallel-cli findall (entity-search for a fast ranked list, or findall run for verified matches within an approved budget), add consistent per-vendor fields with parallel-cli enrich run or a Task MCP task group, then verify consequential funding claims against primary sources, keep a counterevidence lane, and deliver a cited recommendation.",
+      "assertions": [
+        "Uses findall or an equivalent entity-discovery surface for the vendor set instead of ad hoc searches",
+        "Treats findall run and enrich run as paid work that needs budget authority",
+        "Verifies consequential funding claims against primary or independent sources",
+        "Keeps the final recommendation and reconciliation with the lead"
+      ],
+      "files": []
+    },
+    {
+      "id": 20,
+      "prompt": "I kicked off a parallel-cli deep research run on stablecoin regulation earlier with --no-wait but lost the run ID. Pick it back up and finish the cited synthesis.",
+      "expected_output": "Use $deep-research. Try parallel-cli memory retrieve with --kind task (with the scope key the run used when the key requires one) to find the run, poll it with an explicit -o path in the session working state, and continue the synthesis. Do not start a new paid run for the same question without budget authority; report the lost run if Memory is not available.",
+      "assertions": [
+        "Uses parallel-cli memory retrieve to recover the run ID",
+        "Polls with an explicit -o output path instead of the current-directory default",
+        "Does not start a duplicate paid research run without budget authority",
+        "Reports the lost run when Memory is not available instead of guessing"
+      ],
+      "files": []
+    },
+    {
+      "id": 21,
+      "prompt": "Deeply research whether production Stellar smart-wallet contracts follow the official passkey guidance. Cross-check docs, audits, and real deployments.",
+      "expected_output": "Use $deep-research with Stellar Raven first for official docs wording (stellarDocs) and audit history (scout.searchResearch with the audit source), and use Stellar RPC or Horizon directly for deployed contract state because Raven does not cover live chain state. Verify consequential claims against primary sources and cite returned URLs and dates.",
+      "assertions": [
+        "Uses Stellar Raven first for docs and audit discovery",
+        "Does not expect Raven to return live chain state",
+        "Uses Stellar RPC or Horizon for deployed contract evidence",
+        "Cites returned URLs and dates rather than Raven calls"
+      ],
+      "files": []
+    },
+    {
+      "id": 22,
+      "prompt": "Enrich this CSV of 200 companies with each CEO's name and the HQ city.",
+      "expected_output": "Do not use $deep-research; this is bulk row enrichment with no synthesis or recommendation. Use an enrichment surface directly (for example parallel-cli enrich run or a Parallel Task MCP task group) within an approved budget.",
+      "assertions": [
+        "Does not invoke deep research for bulk table enrichment",
+        "Does not build evidence lanes or a cited synthesis",
+        "Treats paid enrichment as needing budget authority"
+      ],
+      "files": []
+    },
+    {
+      "id": 23,
+      "prompt": "Give me a spreadsheet of every Series A fintech startup in Berlin.",
+      "expected_output": "Do not use $deep-research; the deliverable is an entity list with no decision or synthesis. Use an entity-discovery surface directly (for example parallel-cli findall) within an approved budget.",
+      "assertions": [
+        "Does not invoke deep research for an entity list with no synthesis",
+        "Uses an entity-discovery surface directly",
+        "Avoids paid discovery without budget authority"
+      ],
+      "files": []
     }
   ]
 }

@@ -1,6 +1,6 @@
 # Deep research provider guide
 
-Use current tool discovery as authority; verify provider names and commands against live listings or current official documentation before use. These are the general-web surfaces; for Stellar-ecosystem questions read [stellar-raven.md](stellar-raven.md) first.
+Live tool discovery is the authority. Before use, verify provider names and commands against live listings, `parallel-cli <command> --help`, or current official documentation. This guide covers the general-web surfaces. For a Stellar-ecosystem question, read [stellar-raven.md](stellar-raven.md) first.
 
 ## Contents
 
@@ -17,108 +17,120 @@ Use current tool discovery as authority; verify provider names and commands agai
 
 | Surface | Current tools or commands | Best role |
 |---|---|---|
-| Parallel CLI | `search`, `extract`, `research run/status/poll` | Reproducible shell-driven research with saved JSON or Markdown artifacts |
+| Parallel CLI | `search`, `extract` (alias `fetch`), `research run/status/poll/processors`, `findall`, `enrich`, `memory retrieve` | Reproducible shell-driven research with saved JSON or Markdown artifacts |
 | Perplexity MCP | `perplexity_search`, `perplexity_ask`, `perplexity_research`, `perplexity_reason` | Independent discovery, cited deep research, conversational search, and evidence-based reasoning |
 | Parallel Search MCP | `web_search`, `web_fetch` | Low-latency discovery, current facts, and focused URL retrieval inside an agent loop |
-| Parallel Task MCP | `createDeepResearch`, `createTaskGroup`, `getStatus`, `getResultMarkdown` | Asynchronous cited deep reports; task groups for consistent research across rows or entities |
+| Parallel Task MCP | `createDeepResearch`, `createTaskGroup`, `getStatus`, `getResultMarkdown` | Asynchronous cited deep reports, and task groups for consistent research across rows or entities |
 
 ## Preferred provider flow
 
-Orient the workflow toward:
+Use the providers in this order:
 
-1. `parallel-cli` for primary search, extraction, research, and saved artifacts.
+1. `parallel-cli` for primary search, extraction, research, entity discovery, and saved artifacts.
 2. Perplexity MCP for an independent second view, counterevidence, or reasoning.
-3. Parallel Search MCP when CLI access is absent or an in-loop search/fetch is simpler.
+3. Parallel Search MCP when CLI access is not available, or when an in-loop search or fetch is simpler.
 4. Parallel Task MCP for an optional final deep-verification or report pass.
 
-This is a preference, not a prerequisite chain. Skip or reorder providers when a lane is local-only, a tool is unavailable, cost or latency matters, or another surface clearly fits better. The lead synthesizes the final answer; no provider report is final authority.
+This order is a preference, not a chain of prerequisites. Skip or reorder providers when a lane is local-only, a tool is not available, cost or latency matters, or another surface fits better. The lead synthesizes the final answer. No provider report is the final authority.
 
 ## Choose the smallest useful surface
 
-- Discover candidate sources: prefer `parallel-cli search`; use `perplexity_search` for an independent angle or Parallel `web_search` as fallback.
-- Read known URLs: prefer `parallel-cli extract`; use Parallel `web_fetch` when CLI access is absent or an in-loop fetch is simpler.
-- Produce the primary deep artifact: prefer `parallel-cli research run`.
-- Challenge or independently analyze the primary artifact: use `perplexity_research` or `perplexity_reason`.
-- Run a final deep verification when warranted: use Parallel Task MCP `createDeepResearch`.
-- Analyze already-collected evidence: `perplexity_reason`; do not treat uncited reasoning as source evidence.
-- Handle a quick conversational lookup: `perplexity_ask`; do not use it as the sole deep-research lane.
-- Enrich a list or table consistently: Parallel Task MCP `createTaskGroup`; do not use a task group for one open-ended topic.
+- Find candidate sources: use `parallel-cli search`. Use `perplexity_search` for an independent angle. Use Parallel `web_search` as the fallback.
+- Read known URLs: use `parallel-cli extract`. Use Parallel `web_fetch` when CLI access is not available or an in-loop fetch is simpler.
+- Make the primary deep artifact: use `parallel-cli research run`.
+- Continue a completed run with a follow-up question: use `parallel-cli research run --previous-interaction-id <run_id>`.
+- Find the set of entities for a landscape lane (companies or people): use `parallel-cli findall entity-search` for a fast ranked list, or `parallel-cli findall run` for matched and verified candidates.
+- Add the same fields to each row of a list: use `parallel-cli enrich run`, or Parallel Task MCP `createTaskGroup` when CLI access is not available. Do not use a task group for one open-ended topic.
+- Challenge or analyze the primary artifact independently: use `perplexity_research` or `perplexity_reason`.
+- Run a final deep verification when it is necessary: use Parallel Task MCP `createDeepResearch`.
+- Analyze evidence that you already have: use `perplexity_reason`. Uncited reasoning is not source evidence.
+- Do a quick conversational lookup: use `perplexity_ask`. Do not use it as the only deep-research lane.
 
-Do not call every provider by default. Assign distinct questions or evidence roles so fan-out adds coverage rather than duplicate cost.
+Do not call every provider by default. Give each provider a distinct question or evidence role, so that fan-out adds coverage and not duplicate cost.
 
 ## Parallel CLI patterns
 
-Save authoritative output to disk:
+Save each authoritative output to disk. Set `RESEARCH_DIR` to the working-state directory of the session. Use the same `--session-id` value for all `search` and `extract` calls in one lane.
 
 ```bash
-parallel-cli search "research objective" -q "keyword" --json --max-results 10 -o /tmp/topic-search.json
-parallel-cli extract https://example.com --objective "evidence needed" --full-content --json -o /tmp/topic-source.json
-parallel-cli research run "research question" --processor pro-fast --text -o /tmp/topic-report
+parallel-cli search "research objective" -q "keyword" --mode advanced --after-date 2026-01-01 \
+  --session-id lane-docs --json --max-results 10 -o "$RESEARCH_DIR/topic-search.json"
+parallel-cli search "primary filings" --include-domains sec.gov --json -o "$RESEARCH_DIR/topic-primary.json"
+parallel-cli extract https://example.com --objective "evidence needed" --full-content \
+  --session-id lane-docs --json -o "$RESEARCH_DIR/topic-source.json"
+parallel-cli research run "research question" --processor pro-fast --text -o "$RESEARCH_DIR/topic-report"
 ```
 
-For asynchronous research:
+- `--mode` sets the search quality: `turbo`, `fast`, `basic` (the default), or `advanced` (the highest quality). Use `advanced` for primary discovery lanes and `fast` for quick in-loop checks.
+- `--after-date` (`YYYY-MM-DD`) enforces the freshness date of the brief. `--include-domains` keeps a primary-source lane on official domains.
+- `research run -o NAME` writes `NAME.json`, and also `NAME.md` with `--text`. Without `-o`, the CLI writes to `./parallel-research/<run_id>` in the current directory.
+
+Run research asynchronously when useful work can continue:
 
 ```bash
-parallel-cli research run "research question" --processor pro-fast --no-wait --json
+parallel-cli research run "research question" --processor pro-fast --text --no-wait --json
 parallel-cli research status trun_xxx --json
-parallel-cli research poll trun_xxx --json
+parallel-cli research poll trun_xxx -o "$RESEARCH_DIR/topic-report" --json
 ```
 
-List current processor tiers before choosing one:
+`--no-wait` returns the run ID and saves nothing. Record the run ID in the working state immediately. `research poll` waits for completion and saves the result. Always give `poll` an `-o` path. Check the status explicitly. Do not infer completion from elapsed time.
+
+Before you choose a processor tier, list the current tiers. Use `--dry-run` to preview a paid command without an API call:
 
 ```bash
 parallel-cli research processors --json
+parallel-cli research run "research question" --processor ultra --dry-run
 ```
-
-Use `--no-wait` when useful work can continue meanwhile. Record the returned run ID in your working state and check its status explicitly. Never infer completion from elapsed time.
 
 ## Parallel Task MCP final pass
 
 Parallel Task MCP starts work but does not return the final report immediately:
 
-1. Start with `createDeepResearch` or `createTaskGroup`.
-2. Record the returned task identifier.
-3. Use `getStatus` for lightweight checks when you return to the task.
-4. Call `getResultMarkdown` once complete.
+1. Start the work with `createDeepResearch` or `createTaskGroup`.
+2. Record the task identifier that it returns (`trun_*` or `tgrp_*`).
+3. Use `getStatus` for a lightweight check when you return to the task.
+4. Call `getResultMarkdown` when the task is complete.
 
-Tool names may be namespaced by the host. Discover them live rather than hard-coding the namespace.
+The host can add a namespace to the tool names. Discover the names live. Do not hard-code the namespace.
 
 ## Lane patterns
 
 Use the fewest lanes that cover the question:
 
-- Local codebase: find existing behavior, callers, configuration, dependencies, tests, and reusable patterns before recommending change.
-- Official docs: verify current library, framework, protocol, or product behavior from primary documentation.
+- Local codebase: find current behavior, callers, configuration, dependencies, tests, and reusable patterns before you recommend a change.
+- Official docs: verify the current behavior of the library, framework, protocol, or product from primary documentation.
 - Primary evidence: official documents, filings, specifications, datasets, or direct statements.
 - Landscape: broad discovery of actors, terminology, chronology, and current developments.
-- Dependencies: compare installed versions and constraints against current compatibility or deprecation guidance.
-- User impact: inspect flows, accessibility, error states, edge cases, and established interaction patterns when behavior is user-facing.
+- Dependencies: compare installed versions and constraints with current compatibility or deprecation guidance.
+- User impact: examine flows, accessibility, error states, edge cases, and established interaction patterns when the behavior is user-facing.
 - Counterevidence: contradictory findings, failure cases, criticism, and missing data.
-- Independent synthesis: a separate deep-research provider answers the same decision question without seeing the lead's conclusion.
+- Independent synthesis: a separate deep-research provider answers the same decision question. It does not see the conclusion of the lead.
 
-For consequential conclusions, compare claims and underlying URLs—not provider summaries. Two engines repeating the same article provide one piece of evidence. Research the problem before the proposal: a lane may evaluate the proposed approach, but at least one lane should investigate whether a smaller or different solution addresses the root issue.
+For consequential conclusions, compare claims and the underlying URLs, not provider summaries. Two engines that repeat the same article give one piece of evidence. Research the problem before the proposal. A lane can evaluate the proposed approach. At least one lane must examine whether a smaller or different solution solves the root issue.
 
 ## Source and citation rules
 
-- Prefer primary sources, then high-quality secondary reporting or research.
-- Record title, URL, publisher, publication or update date, and access date when freshness matters.
-- Keep provider-generated reports as research artifacts, not unquestioned authority.
-- Cite the underlying sources when available; cite a provider report only when it is the actual artifact being discussed.
-- Mark inference explicitly and preserve unresolved disagreement.
+- Prefer primary sources. Then use high-quality secondary reporting or research.
+- Record the title, URL, publisher, publication or update date, and access date when freshness matters.
+- Keep provider-generated reports as research artifacts, not as authority.
+- Cite the underlying sources when they are available. Cite a provider report only when the report itself is the subject.
+- Mark each inference explicitly. Keep each unresolved disagreement visible.
 
 ## Recovery
 
-- Missing CLI: use Perplexity next, then Parallel Search MCP when useful; do not install without authority.
-- Missing Perplexity: continue with CLI and add an MCP verification lane only when it improves coverage.
-- Missing MCP tool: finish with CLI and Perplexity evidence when sufficient.
-- Authentication or rate limit failure: record it and reroute.
-- Parallel `402` or insufficient balance: stop paid work; never add credit without explicit approval.
-- Long-running task: retain its ID and output path, continue other lanes, and check back explicitly.
-- Weak or uncited result: narrow the question and run a targeted source-discovery lane instead of repeating the same broad prompt.
+- Missing CLI: use Perplexity next, then Parallel Search MCP when it helps. Do not install without authority.
+- Missing Perplexity: continue with the CLI. Add an MCP verification lane only when it improves coverage.
+- Missing MCP tool: finish with CLI and Perplexity evidence when that evidence is sufficient.
+- Authentication failure: check `parallel-cli auth --json`, record the result, and reroute. Do not run `parallel-cli login` without authority.
+- Rate limit: record it and reroute the lane to a different provider.
+- Parallel `402` or insufficient balance: stop paid work. `parallel-cli balance get` shows the balance. Never run `parallel-cli balance add` without explicit approval.
+- Lost run ID: use `parallel-cli memory retrieve "topic" --kind task --json` to find saved runs, then `poll` the run. Some keys require `--scope-key`. Give the scope key that the run used. If Memory is not available, report the lost run. Do not start a new paid run for the same question without budget authority.
+- Long-running task: keep its ID and output path, continue other lanes, and check back explicitly.
+- Weak or uncited result: make the question narrower and run a targeted source-discovery lane. Do not repeat the same broad prompt.
 
 ## Official references
 
+- https://docs.parallel.ai/integrations/cli
 - https://docs.parallel.ai/integrations/mcp/search-mcp
 - https://docs.parallel.ai/integrations/mcp/task-mcp
-- https://docs.parallel.ai/integrations/cli
 - https://docs.perplexity.ai/docs/getting-started/integrations/mcp-server

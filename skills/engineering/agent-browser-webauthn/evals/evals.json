@@ -224,6 +224,38 @@
         "Does not attach a virtual WebAuthn authenticator"
       ],
       "files": []
+    },
+    {
+      "id": 20,
+      "prompt": "Our wallet page has \"Sign\", \"Sign out\", and \"Design\" buttons. Test that the passkey signing ceremony behind \"Sign\" works.",
+      "expected_output": "Use $agent-browser-webauthn. Inside one helper invocation, trigger the ceremony with agent-browser find role button click --name \"Sign\" --exact so the substring default cannot click \"Sign out\" or \"Design\", then assert credentialAsserted plus the application result.",
+      "assertions": [
+        "Uses --exact on the find role --name click for the ceremony button",
+        "Explains that the default name match is a case-insensitive substring",
+        "Asserts credentialAsserted and real application output rather than the click"
+      ],
+      "files": []
+    },
+    {
+      "id": 21,
+      "prompt": "Run the passkey create-and-login E2E again. My shell exports AGENT_BROWSER_RESTORE so the app remembers me between runs.",
+      "expected_output": "Use $agent-browser-webauthn with a fresh session name, unset AGENT_BROWSER_RESTORE (and do not pass --restore, --state, or --profile) for this run so old cookies, storage, or passkey state do not leak in, then run both ceremonies in one helper invocation and close the session.",
+      "assertions": [
+        "Unsets AGENT_BROWSER_RESTORE or avoids restore, state, and profile flags for the E2E",
+        "Uses a fresh session name",
+        "Keeps both ceremonies in one helper invocation and closes the session"
+      ],
+      "files": []
+    },
+    {
+      "id": 22,
+      "prompt": "Use agent-browser to click the Sign out button on our dashboard and confirm the login page appears.",
+      "expected_output": "Do not use $agent-browser-webauthn; route to $agent-browser, since signing out is not a passkey or WebAuthn ceremony even though the button name contains \"Sign\".",
+      "assertions": [
+        "Does not attach a virtual authenticator for a sign-out click",
+        "Routes ordinary navigation and assertion to agent-browser"
+      ],
+      "files": []
     }
   ]
 }

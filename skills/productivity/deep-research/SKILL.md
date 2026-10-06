@@ -1,72 +1,65 @@
 ---
 name: deep-research
-description: Conduct and synthesize deep, exhaustive, comparative, or cross-checked research into a decision or contested question using independent evidence lanes, claim-level citations, contradiction resolution, and stress-tested conclusions. Use when the deliverable is a cited research synthesis or recommendation, including deep multi-source Stellar-ecosystem investigations. Do not use for a narrow lookup or single-source read — one fact, version, API signature, or docs page, even a Stellar or Soroban one; answer those directly from the authoritative source. Do not use for implementation, code review, or generic multi-agent coordination.
+description: Conduct and synthesize deep, exhaustive, comparative, or cross-checked research into a decision or contested question using independent evidence lanes, claim-level citations, contradiction resolution, and stress-tested conclusions. Use when the deliverable is a cited research synthesis or recommendation, including deep multi-source Stellar-ecosystem investigations. Do not use for a narrow lookup or single-source read — one fact, version, API signature, or docs page, even a Stellar or Soroban one; answer those directly from the authoritative source. Do not use for bulk enrichment of a list or table with no synthesis, implementation, code review, or generic multi-agent coordination.
 ---
 
 # Deep Research
 
-Produce a defensible, cited synthesis from independent evidence. One research method; the providers and the agent topology adapt to what is actually available in the session.
+This skill produces a defensible, cited synthesis from independent evidence. It uses one research method. The providers and the agent topology change with what the session makes available.
 
 ## Frame the Research
 
-Write a concise brief containing:
+Write a short brief. Include these items:
 
-- core problem, separate from any proposed solution;
-- intended decision or deliverable;
-- scope, geography, time horizon, and freshness date;
-- must-prove claims and useful counterclaims;
-- acceptable sources and primary-source requirements;
-- time, cost, and output constraints.
+- the core problem, separate from any proposed solution;
+- the decision or deliverable that the research supports;
+- the scope, geography, time horizon, and freshness date;
+- the claims that the research must prove, and useful counterclaims;
+- the acceptable sources and the primary-source requirements;
+- the time, cost, and output limits.
 
-Treat a proposed solution as a hypothesis unless the user explicitly makes it a constraint. Frame two to four concrete research questions around the underlying problem. State reasonable defaults instead of blocking; batch concise choice questions only when ambiguity would materially change scope, cost, or the recommendation.
+Treat a proposed solution as a hypothesis. Treat it as a constraint only when the user says so. Write two to four concrete research questions about the underlying problem. State reasonable defaults and continue. Ask questions only when an ambiguity changes the scope, the cost, or the recommendation. Put all such questions in one short batch.
 
 ## Discover Live Surfaces
 
-Discover what is enabled before planning lanes; never assume remembered tool names:
+Find the enabled tools before you plan lanes. Do not use tool names from memory.
 
-- **General web:** prefer `parallel-cli` for saved artifacts, Perplexity MCP as an independent lane, Parallel Search or Task MCP as fallback or final pass. Read [providers.md](references/providers.md) before assigning providers, launching paid research, or recovering a missing backend.
-- **Stellar ecosystem:** Stellar Raven MCP is the first discovery surface for any Stellar-ecosystem question. Read [stellar-raven.md](references/stellar-raven.md) before running a Stellar lane.
-- **Fan-out:** read the session's own tool list and skill listing for a vehicle that can run lanes in parallel. Read [orchestration.md](references/orchestration.md) before dispatching a fan-out.
+- **General web:** prefer `parallel-cli` for saved artifacts. Use Perplexity MCP as an independent lane. Use Parallel Search MCP or Parallel Task MCP as a fallback or a final pass. Read [providers.md](references/providers.md) before you assign providers, start paid research, or recover a missing provider.
+- **Stellar ecosystem:** use Stellar Raven MCP first for each Stellar-ecosystem question. Read [stellar-raven.md](references/stellar-raven.md) before you run a Stellar lane.
+- **Fan-out:** read the session tool list and skill listing for a vehicle that runs lanes in parallel. Read [orchestration.md](references/orchestration.md) before you dispatch a fan-out.
 
 ## Plan Evidence Lanes
 
-Keep narrow lookups and simple fact checks out of this skill entirely — one search surface, one citation, done.
+Do not use this skill for a narrow lookup or a simple fact check. Use one search surface and one citation for those.
 
-Fan out only when the question is deep, exhaustive, comparative, or independently verified, or has at least two separable evidence lanes. Prefer two to four distinct lanes; divide by research angle first (local code, official docs, primary evidence, landscape, dependencies, user impact, counterevidence, independent synthesis) and provider second. Duplicate prompts across engines only when measuring provider agreement is itself the point.
+Fan out only when the question is deep, exhaustive, comparative, or independently verified. Fan out also when the question has two or more separable evidence lanes. Use two to four distinct lanes. Divide the work by research angle first and by provider second. The angles are local code, official docs, primary evidence, landscape, dependencies, user impact, counterevidence, and independent synthesis. Send the same prompt to different engines only when provider agreement is the research question.
 
-After defining the lanes, load `routing-agent-work` through the current host when installed and worker selection matters. Otherwise, use the caller's explicit route or the host's configured default. Keep provider and evidence selection here.
+After you define the lanes, load `routing-agent-work` through the current host when it is installed and worker selection matters. If it is not installed, use the route from the caller or the host default. Keep provider and evidence selection in this skill.
 
 ## Choose the Vehicle
 
-Fan-out needs four things from a vehicle: isolated worker context, a bounded lane brief, a completion signal, and a durable place for results. Any host supplying all four can run lanes in parallel. Pick the simplest one that clears the bar for the planned lane count:
+Use host-native subagents when the session can start them. Use sequential lanes when no vehicle is present or the question has one lane. Sequential lanes are a complete vehicle: the citation and verification rules do not change. Read [orchestration.md](references/orchestration.md) for the capability bar, the vehicle families, and the lane brief.
 
-- **Host-native subagents** — the default when the session spawns them itself.
-- **A terminal or worktree manager** — when lanes need separate models, processes, or checkouts.
-- **A durable orchestrator** — when lanes are long or expensive, or findings must outlive the session.
-- **Sequential** — when nothing else is present, or the question has one lane.
-
-Delegate worker mechanics to the vehicle's own companion skill when one is installed; otherwise drive the vehicle from its documentation. Keep provider selection, reconciliation, adversarial cross-check, and the final verdict here — never delegate the verdict.
-
-Sequential is a complete vehicle, not a degraded mode: the same lanes, run one after another, under identical citation and verification discipline. This skill requires no particular orchestrator, and vehicle availability never changes the evidence standard.
+Give worker mechanics to the companion skill of the vehicle when one is installed. Keep provider selection, reconciliation, the adversarial cross-check, and the final verdict in this skill. Never delegate the verdict.
 
 ## Run the Research
 
-1. Record the brief, research questions, lane plan, and source policy in whatever durable working state the session has (scratchpad, plan file, or the report draft itself).
-2. Work each lane to a citation-ready result: findings, exact file paths or URLs, key excerpts, source dates, uncertainty, contradictions, and the provider or tool used. Preserve raw provider artifacts when available.
-3. Verify consequential claims against primary sources or two genuinely independent sources. Different providers citing the same page count as one source.
-4. Run targeted follow-ups only for unresolved claims, stale evidence, or disagreements — never repeat the same broad prompt.
-5. If findings overturn the user's premise or expose a materially different path, pause with a short evidence summary and specific choices before committing to a recommendation.
-6. Synthesize centrally. Evaluate any proposed solution explicitly and recommend a simpler alternative when it solves the underlying problem with less cost or risk.
-7. Stress-test the recommendation with concrete failure modes, regressions, edge cases, user impact, and maintenance burden.
+1. Record the brief, the research questions, the lane plan, and the source policy in durable working state. Use a scratchpad, a plan file, or the report draft.
+2. Work each lane to a citation-ready result. Include findings, exact file paths or URLs, key excerpts, source dates, uncertainty, contradictions, and the provider or tool. Keep raw provider artifacts when they are available.
+3. Verify each consequential claim against a primary source or two independent sources. Different providers that cite the same page give one source.
+4. Run targeted follow-ups only for unresolved claims, stale evidence, or disagreements. Do not repeat the same broad prompt.
+5. If the findings change the premise of the user or show a different path, stop. Give a short evidence summary and specific choices before you recommend.
+6. Synthesize centrally. Evaluate each proposed solution explicitly. Recommend a simpler alternative when it solves the underlying problem with less cost or risk.
+7. Stress-test the recommendation. Name concrete failure modes, regressions, edge cases, user impact, and maintenance cost.
 
 ## Control Cost and Failure
 
-- Paid processors, task creation, and credit purchases are billing actions: require an explicit budget or existing runbook authority first.
-- Never place API keys in prompts, notes, logs, or repository files.
-- If a provider is missing, unauthenticated, rate-limited, or out of credit, record the failure and reroute the lane; do not install, authenticate, or add funds without authority.
-- Prefer saved JSON or Markdown artifacts over truncated terminal output.
-- Do not claim exhaustive coverage; report search boundaries and remaining uncertainty.
+- Paid processors, task creation, and credit purchases are billing actions. Get an explicit budget or runbook authority first.
+- Never put API keys in prompts, notes, logs, or repository files.
+- If a provider is missing, unauthenticated, rate-limited, or out of credit, record the failure and reroute the lane. Do not install, authenticate, or add funds without authority.
+- Prefer saved JSON or Markdown artifacts to truncated terminal output.
+- Do not claim exhaustive coverage. Report the search boundaries and the remaining uncertainty.
 
 ## Complete with Evidence
 
-Use only the sections that add value: **Answer**, **Evidence**, **Sources** (paths and URLs), **Related**, **Downsides & Risks**. Include key disagreements and confidence or limitations. Complete only after citations resolve and consequential claims pass verification. If implementation is next, hand the verified research context to the appropriate planning workflow instead of planning inside this skill.
+Use only the sections that add value: **Answer**, **Evidence**, **Sources** (paths and URLs), **Related**, **Downsides & Risks**. Include key disagreements and the confidence or limits. Complete the work only after the citations resolve and the consequential claims pass verification. If implementation is next, give the verified research context to the applicable planning workflow. Do not plan inside this skill.
