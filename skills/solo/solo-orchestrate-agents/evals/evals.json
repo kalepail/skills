@@ -237,6 +237,29 @@
         "Treats reuse as conditional on route fit, not a default"
       ],
       "files": []
+    },
+    {
+      "id": 22,
+      "prompt": "I have four Solo workers running on separate lanes and two of them already look idle. Set a timer so I harvest whichever finishes first.",
+      "expected_output": "Use $solo-orchestrate-agents. Schedule an idle-any timer on the cohort. Expect an `already_satisfied` response with `already_idle` because two workers are idle now. Inspect those workers' output and evidence immediately, then schedule a new idle-any timer on the busy remainder only.",
+      "assertions": [
+        "Uses timer_fire_when_idle_any rather than sleep or polling",
+        "Treats already_satisfied as an immediate harvest signal, not as an error or a pending timer",
+        "Inspects the idle workers' actual output before completion",
+        "Reschedules with only the still-busy workers in the watch set"
+      ],
+      "files": []
+    },
+    {
+      "id": 23,
+      "prompt": "Which model and effort should the security-review lane use? The Solo workers are already running; I only need the route.",
+      "expected_output": "Do not use $solo-orchestrate-agents; route to routing-agent-work for the model, effort, and reviewer choice. No orchestration mechanics are requested.",
+      "assertions": [
+        "Recognizes a route-only selection request",
+        "Routes to routing-agent-work",
+        "Does not spawn, retask, or time any Solo worker"
+      ],
+      "files": []
     }
   ]
 }

@@ -42,7 +42,7 @@ Configure Solo's application shell around existing projects and processes. Prese
 - Reorder workspaces when numbered bindings or rail order matter.
 - Move workspace to new window for multi-monitor layout; remember one workspace can be open in only one window.
 - Before deleting populated workspace, require destination for contained projects. Never imply disk files are deleted.
-- Use workspace launcher for cross-workspace search and drag moves when direct MCP support is absent.
+- Use workspace MCP tools for scripted moves. In the UI, use the project context menu **Move to workspace** and the palette **All workspaces** scope.
 
 ## Tune sidebar and navigation
 
@@ -50,7 +50,7 @@ Configure Solo's application shell around existing projects and processes. Prese
 - Use collapse state, per-section empty visibility, filter input, favorites, and resource thresholds to reduce noise before hiding useful signals.
 - Preserve unread and running visibility. Running lesser-used commands remain visible by design.
 - Remap configurable hotkeys only after checking collisions and fixed shortcuts.
-- Distinguish command center, context actions, quick jump, focus jump, prompt templates, and new-item palettes; do not overload one shortcut with another mode's job.
+- Distinguish palette scopes: All, Actions, Context, Go to, Focus, Templates, and New. Do not overload one shortcut with another scope's job.
 
 ## Tune settings and appearance
 

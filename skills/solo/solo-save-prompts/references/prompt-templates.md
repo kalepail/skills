@@ -5,7 +5,7 @@ Read this reference before creating, scoping, updating, deleting, exporting, or 
 ## Live discovery
 
 1. Call `whoami`; verify effective project for project scope.
-2. Call `help(topic="docs")` for current docs routing.
+2. Call `help(query="prompt templates")` when current docs matter.
 3. Inspect live tool discovery or `mcp_tools_summary` for prompt-template tools. This feature is off by default for MCP and absent tools may mean disabled feature.
 4. Prefer discovered names and schemas over this reference. Do not enable settings or mutate templates without user authority.
 

@@ -28,14 +28,14 @@ When authority is unclear, inspect only. Ask user before mutation.
 
 ### Tool setup and health
 
-- Built-in tool types include Claude, Codex, Amp, Gemini, OpenCode, Copilot, and Kimi; custom Generic tools can host other terminal agents.
+- Built-in tool types include Claude, Codex, Amp, Gemini, OpenCode, Copilot, Kimi, and Antigravity. Custom Generic tools can host other terminal agents. `list_agent_tools` is the live list.
 - Solo stores command/default arguments and optional generic prompt/summarizer behavior but does not install agent CLIs.
 - Health is environment-specific. Ready is launchable; Not checked remains launchable but inconclusive; Missing and Broken are not launchable; Disabled is separate.
 - Refresh health explicitly. Runtime Doctor explains tool/environment launchability; MCP connection count/repair is a different diagnostic.
 - Saved default flags belong in Settings. `extra_args` appends one-launch flags without changing saved defaults; verify effective launch command in current UI when flags matter.
 - When `routing-agent-work` is installed and a selection remains, invoke it for model, effort, fallback, and reviewer selection. Otherwise, use the caller's explicit route or configured tool defaults.
 - Fleet names are models, not agent tools. `list_agent_tools` returns CLI installations. Apply the route through saved defaults or `extra_args`.
-- `setup_agent_integration` writes or updates Solo guidance in `CLAUDE.md` or `AGENTS.md`. Treat this as repository edit: require request, preserve local instructions, and review diff.
+- `setup_agent_integration` adds a `## Solo Integration` section to `CLAUDE.md` or `AGENTS.md` and leaves an existing section unchanged. Treat this as repository edit: require request, preserve local instructions, and review diff.
 
 | CLI | Model flag | Reasoning flag | Canonical source |
 |---|---|---|---|
@@ -44,17 +44,15 @@ When authority is unclear, inspect only. Ask user before mutation.
 | `opencode` | `-m provider/model` | `--variant <provider-specific-level>` | `opencode run --help` |
 | `grok` | `-m <id>` | `--reasoning-effort <level>` | `grok --help` |
 
-Flags drift with CLI releases. Verify the route's flags against live `--help` before launch. Do not use Solo to discover or score unknown models.
+When `routing-agent-work` is installed, its fleet reference owns flag syntax; use this table only as the fallback. Verify the route's flags against live `--help` before launch. Do not use Solo to discover or score unknown models.
 
-Built-in subagents versus more Solo agents: when a fan-out stays within one provider, prefer the CLI's native subagents over extra Solo processes—faster, cheaper, one harness. All work headless: claude delegates via the Agent tool or description matching (`.claude/agents/*.md` or `--agents '<json>'`; per-agent `model` and `effort`); codex spawns only when the prompt asks explicitly ("spawn one agent per…")—`[features] multi_agent` is stable-on, built-ins `default`/`worker`/`explorer`, per-agent `model`/`model_reasoning_effort` in `~/.codex/agents/<name>.toml`; opencode primaries delegate through the `task` tool to `general`/`explore` or agents in `.opencode/agents/` (per-agent `model`, `reasoningEffort`/`variant`); grok spawns via `spawn_subagent` (built-ins `general-purpose`/`explore`/`plan`; custom `--agents '<json>'` with per-subagent `model`; effort inherits the session; `--no-subagents` disables). Lanes that cross providers—or need a per-subagent setting their CLI cannot pin—stay on Solo, the common case; same-CLI model and tier mixes stay built-in where the CLI pins them (claude/codex: model and effort; opencode: model and variant; grok: model only). Headless `opencode run` lanes auto-reject file access outside their cwd (`external_directory` permission); keep worker briefs and outputs inside the project, or inline them in the prompt.
-
-Claude agent teams (gate: `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` in settings `env`) upgrade subagents to peer teammates with a shared task list and mailbox. Prose-triggered in interactive sessions only—"Spawn three teammates…", always naming each teammate's model since unnamed teammates fall back to the default teammate model, not the lead's (effort is inherited); Solo-spawned claude TUIs form real teams, while `claude -p` silently substitutes subagents. One team per session, no nesting. Use for Claude-family workers that must talk to each other; when `fan-solo` is installed, its house-style reference has more detail.
+Prefer a CLI's built-in subagents when every lane stays within one CLI and that CLI can pin each lane's settings. Use Solo agents when lanes cross CLIs or need settings the CLI cannot pin. Headless `opencode run` lanes reject file access outside their working directory, so keep briefs and outputs inside the project. When `fan-solo` is installed, its house-style reference has the per-CLI subagent and Claude agent-team detail.
 
 ### Spawn and retask
 
 - Route the task first. Retask an owned idle direct child only when its tool, model, effort, and context match. Start fresh when the route or review contract requires fresh context.
 - Before retasking heavy context, use the CLI's own compaction command. If none exists, close after durable handoff and spawn fresh. Solo auto-summary is not compaction.
-- Call `list_agent_tools`; choose returned configured installation by task fit.
+- Call `list_agent_tools`; choose returned configured installation by task fit. Pass `agent_tool_installation_id` when discovery returns environment-specific installations.
 - Prefer `spawn_agent` for agents. Use generic `spawn_process(kind="agent")` only when generic process creation is required.
 - Treat `spawn_agent` response as authoritative for `process_id`, name, and `agent_instructions`.
 - Record child ID, project, tool, task, and durable work record immediately.

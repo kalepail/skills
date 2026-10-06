@@ -12,15 +12,6 @@ Read for exact process kinds, lifecycle tools, trust gates, restart policy, inpu
 
 Use `start_process`/`restart_process` for an existing stored entry. Use `spawn_process` for a new terminal or agent.
 
-## Authority and ownership
-
-- Control only self and Solo descendants self spawned.
-- Record returned child process IDs immediately; Solo reads do not reliably prove parentage later.
-- Require explicit user/runbook authority for parent, sibling, unrelated, YAML-backed shared process, or another agent's descendants.
-- Do not transfer ownership because process is idle, stopped, failed, completed, or handed off.
-- Apply ownership gate to stop, restart, close, rename, input, clear output, UI selection, and timer delivery.
-- Keep root/operator responsible for Git, publishing, deployment, and integration.
-
 ## Lifecycle tools
 
 - `list_processes`: list commands, terminals, agents, stopped entries.
@@ -29,8 +20,8 @@ Use `start_process`/`restart_process` for an existing stored entry. Use `spawn_p
 - `stop_process`: gracefully stop running entry.
 - `restart_process`: stop/start existing entry with latest saved config.
 - `start_all_commands`: start trusted project commands.
-- `stop_all_commands`: stop project commands.
-- `restart_all_commands`: restart project commands.
+- `stop_all_commands`: stop every running project command, regardless of trust.
+- `restart_all_commands`: stop every running command, then start trusted commands only. A running untrusted command stops and stays stopped.
 - `spawn_process`: create/start terminal or agent.
 - `send_input`: send text or bytes; submit appends Enter by default.
 - `close_process`: remove terminal/agent; self-close needs explicit confirmation.

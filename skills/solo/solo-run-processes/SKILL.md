@@ -1,6 +1,6 @@
 ---
 name: solo-run-processes
-description: Operate Solo-managed commands and terminals through start, stop, restart, rename, spawn, input, bulk actions, trust gates, auto-start, crash restart, and file-watch restart. Use when launching a dev stack, controlling project commands, renaming a process, opening terminals, sending input, or changing restart behavior of existing commands. Do not use for read-only status and readiness, project or solo.yml setup, failure diagnosis, or launching and prompting one agent session.
+description: Operate Solo-managed commands and terminals through start, stop, restart, rename, spawn, input, bulk actions, trust gates, auto-start, crash restart, and file-watch restart. Use when launching a dev stack, controlling project commands, renaming a process, opening terminals, sending input, or changing restart behavior of existing commands. Do not use for read-only status and readiness (solo-observe-services), project or solo.yml setup (solo-set-up-projects), failure diagnosis (solo-troubleshoot), or launching and prompting one agent session (solo-work-with-agents).
 ---
 
 # Run Solo Processes
@@ -31,7 +31,7 @@ Control existing process entries with smallest lifecycle action that achieves re
    - Call `stop_process` for running entry.
    - Call `restart_process` when latest saved configuration must relaunch.
    - Use `start_all_commands`, `stop_all_commands`, or `restart_all_commands` only for explicit project-wide command request.
-   - Call `spawn_process` only to create new terminal or agent; do not use spawn to duplicate configured command.
+   - Call `spawn_process(kind="terminal")` only to create a new terminal. Hand a new agent to the single-agent lifecycle workflow. Do not use spawn to duplicate a configured command.
    - Record returned child ID immediately with purpose and owner.
 6. Interact only when requested and authorized.
    - Call `send_input` for terminal text or control bytes.

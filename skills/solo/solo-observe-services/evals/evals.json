@@ -212,6 +212,18 @@
         "Does not treat agent state as service readiness"
       ],
       "files": []
+    },
+    {
+      "id": 20,
+      "prompt": "The rendered log for the worker process looks overwritten by a progress bar. Can you recover the lines underneath?",
+      "expected_output": "Use $solo-observe-services. Read rendered output first, then use the retained (raw) output tools to recover text that rendering hid. State that retained output is lossy, ANSI-stripped text and cannot show escape sequences. Do not clear output or change lifecycle.",
+      "assertions": [
+        "Uses rendered output before retained output",
+        "Uses retained output to recover hidden text",
+        "Does not claim retained output preserves escape sequences or raw bytes",
+        "Does not clear output or mutate the process"
+      ],
+      "files": []
     }
   ]
 }

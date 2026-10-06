@@ -16,15 +16,8 @@ Read for symptom-to-check mappings and authoritative Solo behavior.
 | Running but no URL | ports + child tree | still starting, binds external/non-local, no listener, wrong process | wait for port; inspect child; fix bind config |
 | Port ready but app fails | protocol health | listener initialized before dependencies/app | call health endpoint; inspect app output |
 | Output/status mismatch | short wait + status/output | independent update timing, alternate screen, stale view | poll status; select/reattach owned or authorized process |
+| Solo UI stale, blank, or frozen while processes run | process status through MCP or CLI | stale webview | run command palette **Refresh frontend**; it reloads the interface without stopping processes |
 | CLI cannot connect | `solo doctor` | app stopped, HTTP API off, stale/missing discovery, token/version mismatch | start app/enable API; reread discovery; align versions |
-
-## Repair authority
-
-- Control only self and Solo descendants self spawned; rely on recorded returned child IDs.
-- Require exact user/runbook authority for parent, sibling, unrelated, YAML-backed shared process, or another agent's descendants.
-- Never infer ownership from idle, stopped, failed, completed, or handed-off state.
-- Apply same gate to stop/restart/close, rename, input, clear output, UI selection, and timer delivery.
-- Keep Git, publishing, deployment, and integration with root/operator.
 
 ## Trust and YAML
 
@@ -54,7 +47,7 @@ Solo readiness proves tracked process or descendant has listening localhost port
 
 ## Output and CLI
 
-Use rendered output for normal errors. Use raw output only for escape/control/alternate-screen issues. UI keeps up to 10,000 lines for current run; output is not permanent archive across app restart. Clear removes searchable retained buffer without stopping process.
+Use rendered output for normal errors. Use retained (raw) output only to recover text that rendering hid, such as overwritten redraw lines. Retained output is lossy UTF-8 with ANSI CSI/OSC removed, so it cannot prove escape-sequence behavior. UI keeps up to 10,000 lines for current run; output is not permanent archive across app restart. Clear removes searchable retained buffer without stopping process.
 
 CLI checks:
 

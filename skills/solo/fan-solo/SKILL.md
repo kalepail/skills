@@ -16,8 +16,8 @@ Before any input, stop, restart, close, rename, output clear, UI selection, or t
 Use sources in this order before acting:
 
 1. Call Solo `whoami`; confirm actor, Solo process, and effective project.
-2. Call `help()` for current overview, then `help(topic=...)` for relevant workflow. Use `help(topic="docs")` when documentation lookup is needed.
-3. Consult live Solo Docs MCP or current official docs when behavior, schema, availability, or version matters.
+2. Call `help()` for current overview, then `help(topic=...)` for relevant workflow. Call `mcp_tools_summary` for the enabled tool set.
+3. Search current official docs with `help(query="...")` when behavior, schema, availability, or version matters.
 4. Use bundled references for routing and house style, never as fresher authority than live runtime or docs.
 
 Do not assume every documented tool is enabled. Discover current surface.
@@ -69,7 +69,7 @@ Read [house style](references/house-style.md) before spawning agents, mutating s
 
 ## Protect ownership and safety
 
-- Manage only current process and descendants it spawned. Never infer authority over parent, sibling, unrelated, or shared YAML-backed process from idleness, stopped state, or cleanup intent.
+- Control only the current process and its recorded descendants. Idle, stopped, or cleanup state never grants authority over another process.
 - Use explicit project and process IDs when scope is ambiguous. Record returned child IDs.
 - Treat command trust, locks, and identity as separate gates. Never bypass trust or treat lock as permission.
 - Ask before destructive or externally visible action unless user already authorized exact target and effect.

@@ -82,9 +82,9 @@ Keep the worker tree shallow. Each nesting level pays a self-contained-prompt an
 ## Timers and monitoring
 
 - Solo timers replace software waits entirely: no shell `sleep`, no polling loops, no in-process timeouts for scheduling. If the wait outlives one tool call, it belongs in a Solo timer.
-- `timer_fire_when_idle_any`: ignore already-idle members at scheduling and wait for a new idle transition or deadline. Use to harvest first newly quiet worker, then reschedule.
+- `timer_fire_when_idle_any`: fires when any watched busy process becomes idle, or at the deadline. If any watched process is already idle, Solo creates no timer and returns `already_satisfied` with `already_idle`. Inspect those workers now, then reschedule with only the busy remainder. A created timer reports `waiting_on`.
 - `timer_fire_when_idle_all`: count already-idle members as satisfied; if all are already idle, expect already-satisfied response and no pending timer. Use only for true barrier.
-- `timer_set`: use bounded delayed or periodic checkpoint, then cancel when phase ends.
+- `timer_set`: use a bounded delayed checkpoint. Use `loop` or `repeat_every_ms` only for a periodic checkpoint, and cancel it when the phase ends.
 - Keep watch set separate from `delivery_process_id`. Never re-identify session to reroute timer.
 - Write trusted, self-contained timer body with process IDs, todo/scratchpad IDs, evidence to inspect, and reschedule/cancel rule.
 - Use `wait_for_bound_port` for service readiness. Idle does not prove listener readiness or task completion.

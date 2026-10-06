@@ -1,6 +1,6 @@
 ---
 name: solo-work-with-agents
-description: Configure, health-check, launch, prompt, inspect, resume, summarize, follow up with, and close one Solo-managed agent session. Use for built-in or custom CLI agent setup, launchability, one-off flags, input, output, status, summaries, idle or blocked handling, and owned-agent cleanup. Do not use for multi-agent orchestration (use solo-orchestrate-agents), command or terminal lifecycle (use solo-run-processes), or agents that Solo does not manage.
+description: Configure, health-check, launch, prompt, inspect, resume, summarize, follow up with, and close one Solo-managed agent session. Use for built-in or custom CLI agent setup, launchability, one-off flags, input, output, status, summaries, idle or blocked handling, and owned-agent cleanup. Do not use for multi-agent orchestration (use solo-orchestrate-agents), command or terminal lifecycle (use solo-run-processes), choosing a model or effort by itself (use routing-agent-work), or agents that Solo does not manage.
 ---
 
 # Work With Solo Agents
@@ -22,7 +22,7 @@ Read [agent-lifecycle.md](references/agent-lifecycle.md) before spawning, routin
 - Treat Solo as runtime host, not CLI installer. Repair missing CLI or shell environment outside Solo.
 - Refresh installation health before diagnosing launch menus; distinguish Ready, Not checked, Missing, Broken, and Disabled.
 - Use Runtime Doctor for tool/environment launchability. Keep MCP connection health as separate concern.
-- Call `setup_agent_integration` only when user asks to add/update Solo guidance in `AGENTS.md` or `CLAUDE.md`; review resulting repository diff.
+- Call `setup_agent_integration` only when user asks to add Solo guidance to `AGENTS.md` or `CLAUDE.md`. It leaves an existing `## Solo Integration` section unchanged. Review the resulting repository diff.
 
 ## Enforce Process Ownership
 

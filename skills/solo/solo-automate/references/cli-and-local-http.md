@@ -29,10 +29,10 @@ solo commands start-all|stop-all|restart-all
 solo agents list
 solo todos list|get|create|update|delete|complete|incomplete
 solo scratchpads list|read|create|update|append|rename|archive|unarchive|delete
-solo routine
+solo routine bundle [--scope shipped|project|all] [--root <dir>] [--check] [routine dirs...]
 ```
 
-Use `--project-id` for project-scoped process filters and every todo/scratchpad command. Use `--expected-revision` for scratchpad update/append/rename/delete; delete also requires `--confirm`. Use `--confirm-stop-running` when project/process deletion must stop active work.
+Run `solo help <group>` for the current flags of each group. Use `--project-id` for project-scoped process filters and every todo/scratchpad command. Use `--expected-revision` for scratchpad update/append/rename/delete; delete also requires `--confirm`. Use `--confirm-stop-running` when project/process deletion must stop active work.
 
 ## JSON and exit contract
 

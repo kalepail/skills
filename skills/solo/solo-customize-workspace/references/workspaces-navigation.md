@@ -5,11 +5,12 @@ Use this reference for workspace organization, multi-window layout, sidebar dens
 ## Workspaces and windows
 
 - Every install begins with one **Default Workspace**. Workspace rail appears only after second workspace exists.
+- **Hide inactive workspaces** (rail menu or Settings → Workspaces) collapses other workspaces and their badges into a `+N` stack.
 - Each project belongs to exactly one workspace. Switching workspaces changes visible sidebar but does not stop background processes.
 - Rail top group contains workspaces open in current window; dimmed bottom group contains other workspaces. Unread badge caps at `99+`.
-- Workspace launcher opens with `Cmd/Ctrl+Shift+L`; it searches workspace names, project names, and paths, opens/focuses owning window, and supports dragging projects between workspaces.
-- **Switch to workspace 1–9** actions exist but ship unbound. Workspace order determines their targets.
-- Workspace identity supports up to two initials, eight colors (slate, blue, green, red, purple, cyan, orange, pink) or neutral, and PNG/JPG/JPEG/GIF/ICO/WebP custom image copied into app data.
+- Switch workspaces from the rail, the palette **Go to** results, `Ctrl+Tab` / `Ctrl+Shift+Tab` (workspaces open in the current window), or **Switch to workspace 1–9**. The numbered actions ship unbound and follow configured workspace order.
+- Move a project with its sidebar context menu **Move to workspace**. **New workspace…** creates the destination and moves in one step.
+- Workspace identity supports up to two initials, eight colors (slate, blue, green, red, purple, cyan, orange, pink) or neutral, and a PNG/JPG/JPEG/GIF/ICO/WebP custom image of at most 256 KB copied into app data.
 - Deleting only workspace is blocked. Deleting populated workspace requires destination; projects move and disk files remain.
 - Moving project between workspaces does not stop its processes.
 - A workspace can be open in only one Solo window. Moving last workspace out closes secondary window; main window hides instead.
@@ -44,19 +45,21 @@ Sources: [favorites](https://soloterm.com/docs/sidebar/favorites), [resource sta
 
 | Shortcut | Mode | Purpose |
 |---|---|---|
-| `Cmd/Ctrl+K` | Command center | App and project actions |
-| `Cmd/Ctrl+P` | Context actions | Current process/project actions |
-| `Cmd/Ctrl+E` | Quick jump | Destinations across projects |
-| `Cmd/Ctrl+Shift+E` | Focus jump | Unread or favorite processes |
-| `Cmd/Ctrl+Shift+P` | Prompt templates | Insert/send/copy template |
-| `Cmd/Ctrl+T` | New item | Create in active project |
+| `Cmd/Ctrl+K` | All | Destinations and actions together |
+| `Cmd/Ctrl+Shift+K` | Actions | App and project actions |
+| `Cmd/Ctrl+P` | Context | Current view, project, or process actions |
+| `Cmd/Ctrl+E` | Go to | Destinations across projects |
+| `Cmd/Ctrl+Shift+E` | Focus | Unread or favorite processes |
+| `Cmd/Ctrl+Shift+P` | Templates | Insert/send/copy template |
+| `Cmd/Ctrl+T` | New | Create in active project |
 
 - Scope a search with `project name > action`.
 - With multiple workspaces, search defaults current workspace; press `Tab` for all.
-- Copy/paste `solo://` deep links from Jump results.
+- Copy/paste `solo://` deep links from **Go to** results.
+- **Refresh frontend** reloads the interface without stopping processes.
 - Palette shortcuts retarget open palette but modal/pane overlays block them.
 
-Sources: [command palette](https://soloterm.com/docs/command-palette/using), [context actions](https://soloterm.com/docs/command-palette/context-actions), [new item](https://soloterm.com/docs/command-palette/new-tab-picker).
+Sources: [command palette](https://soloterm.com/docs/command-palette/using), [actions](https://soloterm.com/docs/command-palette/actions), [context actions](https://soloterm.com/docs/command-palette/context-actions), [new item](https://soloterm.com/docs/command-palette/new-tab-picker).
 
 ## Keyboard map and customization
 

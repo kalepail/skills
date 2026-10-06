@@ -1,6 +1,6 @@
 ---
 name: solo-orchestrate-agents
-description: Plan and coordinate multi-agent work through Solo with bounded workers, durable state, locks, timers, evidence review, and handoffs. Use for parallel research, disjoint implementation lanes, cross-model review, cross-project cohorts, or delegation through several Solo agents. Do not use solely because research is deep or cited—citation and synthesis discipline come from a research method, not from orchestration—nor for single-agent, sequential, or shared-file work (use solo-work-with-agents).
+description: Plan and coordinate multi-agent work through Solo with bounded workers, durable state, locks, timers, evidence review, and handoffs. Use for parallel research, disjoint implementation lanes, cross-model review, cross-project cohorts, or delegation through several Solo agents. Do not use solely because research is deep or cited—citation and synthesis discipline come from a research method, not from orchestration—nor for single-agent, sequential, or shared-file work (use solo-work-with-agents), nor for choosing a model, effort, or reviewer by itself (use routing-agent-work).
 ---
 
 # Orchestrate Solo Agents
@@ -52,7 +52,7 @@ Fan out only when lanes are independent, have disjoint write scopes or read-only
 ### 4. Wait Without Polling
 
 - Never wait with shell `sleep` or ad-hoc polling loops; Solo timers are the wait primitive.
-- Schedule idle-any timer to harvest first newly quiet worker; reschedule for remaining cohort.
+- Schedule an idle-any timer to harvest the next quiet worker. On `already_satisfied`, inspect the idle worker now, then reschedule for the busy remainder.
 - Use idle-all only for true barrier after all current lanes must quiet.
 - Put process/todo/scratchpad IDs and exact next action in timer body.
 - Prefer Solo's `timer_followup` MCP prompt for wake handling and stale-timer cleanup when available.

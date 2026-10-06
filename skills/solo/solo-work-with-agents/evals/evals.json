@@ -231,14 +231,37 @@
     },
     {
       "id": 20,
-      "prompt": "Spin up a Fable reviewer for the auth change and have it grill the diff.",
-      "expected_output": "The caller already selected Fable. Do not reroute the lane. Treat Fable as a Claude model, verify its current identifier and effort controls, then spawn one bounded read-only reviewer.",
+      "prompt": "Spin up a Claude reviewer on the exact model ID and effort in reviewer-route.md, and have it grill the auth diff.",
+      "expected_output": "The caller already fixed the route in reviewer-route.md. Do not reroute the lane. Treat the model ID as a Claude model, not a Solo agent tool. Verify its identifier and effort controls, then spawn one bounded read-only reviewer.",
       "assertions": [
         "Does not invoke routing-agent-work when the caller already fixed the route",
-        "Spawns the Claude agent tool rather than searching for a tool named Fable",
+        "Spawns the Claude agent tool rather than searching for a tool named after the model",
         "Verifies and passes the selected model identifier and effort through saved defaults or extra_args",
         "Records the returned child process ID and sends a bounded review-not-fix brief",
         "Keeps the reviewer read-only, with Git and integration left to the operator"
+      ],
+      "files": []
+    },
+    {
+      "id": 21,
+      "prompt": "Which model should I pick for a quick lint-fix lane? I have not decided whether to delegate it yet.",
+      "expected_output": "Do not use $solo-work-with-agents; route to routing-agent-work for the model and effort choice. No Solo agent launch is requested yet.",
+      "assertions": [
+        "Recognizes a model-selection-only request",
+        "Routes to routing-agent-work",
+        "Does not spawn an agent or name a model from Solo guidance"
+      ],
+      "files": []
+    },
+    {
+      "id": 22,
+      "prompt": "Launch the Antigravity agent in this project and have it summarize the README.",
+      "expected_output": "Use $solo-work-with-agents. Call list_agent_tools, select the enabled Antigravity installation (passing agent_tool_installation_id when returned), spawn one owned agent, record its process ID, prepend agent_instructions, and send one bounded prompt.",
+      "assertions": [
+        "Treats Antigravity as a built-in Solo agent tool type found through list_agent_tools",
+        "Passes the returned installation ID when discovery returns environment-specific installations",
+        "Records the returned child process ID before follow-up",
+        "Sends one bounded prompt and inspects actual output before reporting"
       ],
       "files": []
     }

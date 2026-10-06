@@ -1,6 +1,6 @@
 ---
 name: solo-observe-services
-description: Inspect Solo-managed service status, terminal output, resource use, subprocesses, bound ports, localhost URLs, and startup readiness. Use when checking what is running, whether a server is ready, recent logs, stale status, URLs, ports, CPU, or memory without changing runtime. Do not use to change process lifecycle, edit configuration, diagnose or repair failures, or inspect one Solo agent session.
+description: Inspect Solo-managed service status, terminal output, resource use, subprocesses, bound ports, localhost URLs, and startup readiness. Use when checking what is running, whether a server is ready, recent logs, stale status, URLs, ports, CPU, or memory without changing runtime. Do not use to change process lifecycle (solo-run-processes), edit configuration (solo-set-up-projects), diagnose or repair failures (solo-troubleshoot), or inspect one Solo agent session (solo-work-with-agents).
 ---
 
 # Observe Solo Services
@@ -28,7 +28,7 @@ Gather structured runtime evidence before interpreting logs. Treat process runni
 5. Inspect output at right fidelity.
    - Use `get_process_output` for rendered diagnostic rows.
    - Use `search_output` for ordinary text lookup.
-   - Use raw variants only when escape sequences, redraws, or terminal protocol behavior matter.
+   - Use retained-output (raw) variants only when rendering hid needed text, such as lines that a redraw overwrote. They strip ANSI sequences, so they cannot show escape codes.
    - Request smallest useful line count.
 6. Correlate evidence.
    - Distinguish trust from lifecycle status.
@@ -47,7 +47,7 @@ Gather structured runtime evidence before interpreting logs. Treat process runni
 ## Output rules
 
 - Prefer rendered output for ordinary logs.
-- Prefer raw output only for control-sequence or alternate-screen diagnosis.
+- Prefer retained (raw) output only to recover text that rendering hid. It is lossy, ANSI-stripped text, not a byte trace.
 - Remember retained terminal history is operational scrollback, not durable archive.
 - Never clear output during observation. Call `clear_output` only after explicit user request and warn that search history disappears while process continues.
 - Before any explicit clear request, verify target is self/recorded descendant or user/runbook names exact authorized target; idle/stopped state does not transfer ownership.

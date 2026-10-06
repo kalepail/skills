@@ -18,7 +18,7 @@ House style also reflects anonymized local project and session research. Raw loc
 
 1. Current user authorization and project instructions.
 2. Live Solo `whoami`, `help`, topic help, and enabled-tool discovery.
-3. Live Solo Docs MCP/current official docs.
+3. Current official docs, through `help(query="...")`, the hosted docs index, or `GET /api/v1/docs/search`.
 4. Current product site/changelog for positioning and released-version claims.
 5. First-party X posts for intent, examples, and product philosophy.
 6. Local research syntheses above.

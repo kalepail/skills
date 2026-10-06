@@ -9,10 +9,10 @@ Open Settings with `Cmd/Ctrl+,`, app menu, or command palette. Settings is an in
 | Tab | Main controls |
 |---|---|
 | Appearance | Theme, interface font, interface scale |
-| Terminal | Shell/profile, terminal font/weight/size, spacing, focus borders, copy-on-select, TUI scroll, macOS Option-as-Meta |
+| Terminal | Shell/profile, terminal font/weight/size, spacing, focus borders, copy-on-select, TUI scroll, macOS Option-as-Meta, agent context pins |
 | Notifications | Permission, test, bell |
 | Sidebar | Filter, order, decorations, empty visibility, focus, stats, header actions, footer |
-| Workspaces | Names, icons, order, deletion |
+| Workspaces | Names, icons, order, deletion, hide inactive workspaces |
 | Notes & todos | Visibility, previews, MCP exposure |
 | Hotkeys | Search, remap, disable, reset |
 | Agents | Naming, tool settings, summary settings |
@@ -27,12 +27,12 @@ Source: [Settings overview](https://soloterm.com/docs/settings/overview).
 ## App appearance
 
 - User-facing themes documented for packaged app: **Light**, **Dark**, **System**. System follows OS.
-- Solo has no named VS Code theme picker and no in-app, file-drop, or CLI theme importer. Bundled VS Code-style palettes are not selectable UI.
+- Settings exposes no picker for named VS Code-style color themes.
 - Interface font default: **System default**.
 - Interface scale steps: 77%, 85%, 92%, 100%, 108%, 115%, 123%, 131%, 138%; 14 px base.
 - `Cmd/Ctrl+Shift+=/-` changes interface scale.
 
-Sources: [themes](https://soloterm.com/docs/appearance/themes), [bundled palettes caveat](https://soloterm.com/docs/appearance/bundled-vscode-themes), [import caveat](https://soloterm.com/docs/appearance/importing-vscode-themes), [interface font/scale](https://soloterm.com/docs/appearance/font-scale).
+Sources: [themes](https://soloterm.com/docs/appearance/themes), [interface font/scale](https://soloterm.com/docs/appearance/font-scale).
 
 ## Terminal display
 

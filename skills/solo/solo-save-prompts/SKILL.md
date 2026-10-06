@@ -1,6 +1,6 @@
 ---
 name: solo-save-prompts
-description: Create, inspect, update, delete, fill, and export global or project Solo prompt templates with reusable placeholders. Use when saving recurring prompts, standardizing worker briefs or handoffs across agent tools, managing template scope, or backing templates up as Markdown. Do not use for current task state, durable project decisions, or a one-off prompt sent to a single agent.
+description: Create, inspect, update, delete, fill, and export global or project Solo prompt templates with reusable placeholders. Use when saving recurring prompts, standardizing worker briefs or handoffs across agent tools, managing template scope, or backing templates up as Markdown. Do not use for current task state (solo-track-todos or solo-keep-scratchpads), durable project decisions, or a one-off prompt sent to a single agent (solo-work-with-agents).
 ---
 
 # Save Solo Prompts
@@ -10,8 +10,8 @@ Store reusable prompt shape, not current orchestration state.
 ## Discover Current Template Surface
 
 1. Call `whoami`; confirm effective project before project-scoped template work.
-2. Call `help(topic="docs")` and inspect `mcp_tools_summary` or live tool discovery for prompt-template tools.
-3. If tools are absent, report that prompt-template MCP feature may be disabled; do not guess schemas or enable settings without authority.
+2. Call `mcp_tools_summary` or live tool discovery for prompt-template tools. Use `help(query="prompt templates")` when current docs matter.
+3. If tools are absent, report that the **Prompt template MCP tools** toggle in Settings → MCP is off by default. Do not guess schemas or enable settings without authority.
 4. Read existing template before update; preserve omitted fields.
 
 Read [prompt-templates.md](references/prompt-templates.md) before choosing scope, designing placeholders, updating/deleting, exporting, or creating templates that mention orchestration.

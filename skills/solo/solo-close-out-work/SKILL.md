@@ -1,7 +1,6 @@
 ---
 name: solo-close-out-work
-description: >-
-  Reconcile a finished Solo run across scratchpads, todos, timers, locks, and run-scoped KV, then retire the ephemeral copies without losing genuinely incomplete work. Promote only uncaptured durable conclusions into the repository's existing canonical docs first (ordinary completed-work history stays in Git), then archive scratchpads and complete or backlog todos. Use when wrapping up or closing out a finished run whose residue spans two or more of those state surfaces. Triggers: "close out this run", "wrap up and clean up this run", "promote this before we forget". Do not use for single-surface cleanup — creating or editing active scratchpads (solo-keep-scratchpads), maintaining the live actionable todo graph (solo-track-todos), or any single owning skill's own tidying — nor for any process control (that stays with solo-run-processes). This skill decides what is done, files it durably, and clears only the ephemeral copy.
+description: Reconcile a finished Solo run whose residue spans two or more of scratchpads, todos, timers, locks, and run-scoped KV. Promote uncaptured durable conclusions into the repository's existing canonical docs first, then archive scratchpads and complete or backlog todos without losing incomplete work. Use for requests such as "close out this run", "wrap up and clean up this run", or "promote this before we forget". Do not use for single-surface edits of active scratchpads (solo-keep-scratchpads) or the live todo graph (solo-track-todos), or for any process control (solo-run-processes).
 ---
 
 # Close Out Solo Work

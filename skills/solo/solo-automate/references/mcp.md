@@ -6,12 +6,12 @@ Use this reference for Solo MCP transport, live discovery, identity, scope, tool
 
 Enable **Settings > MCP > MCP server** and use generated client configuration. Normal clients launch Solo's bundled stdio helper; no public MCP host or port exists. Helper reconnects across Solo restarts and buffers bounded in-flight requests. Solo-launched process identity persists across helper/app restarts; external clients retain session only for helper lifetime.
 
-Treat live MCP discovery as authority. Core and feature availability varies by Solo version and settings. Scratchpad, todo, timer, key-value, and prompt-template tools can be toggled. Hosted docs may advertise tools absent from the current runtime; call live discovery for the enabled tool set.
+Treat live MCP discovery as authority. Core and feature availability varies by Solo version and settings. Scratchpad, todo, timer, key-value, and prompt-template tools can be toggled. Key-value and prompt-template tools default off. Hosted docs may advertise tools absent from the current runtime; call live discovery for the enabled tool set.
 
 ## Discovery sequence
 
 1. Call `whoami` and inspect actor, process, and effective project.
-2. Call `help()` for overview.
+2. Call `help()` for overview. Call `help(query="...")` to search current official docs; `query` and `topic` do not combine.
 3. Call one canonical topic: `processes`, `timers`, `coordination`, `locks`, `scratchpads`, `todos`, `spawning`, `inspection`, `readiness`, `projects`, `docs`, or `solo.yml`.
 4. Call `mcp_tools_summary()` for enabled names grouped by category. Remember it omits schemas.
 5. Use client tool discovery for exact current input schema before calling a tool.
@@ -42,7 +42,7 @@ Use Solo process IDs returned by Solo tools. Do not substitute OS PID or another
 | Scheduling | `timers` | delay, idle-any/all, list, pause/resume/cancel |
 | Setup/support | overview, `docs` | `help`, `mcp_tools_summary`, smoke test, integration setup, feedback draft |
 
-Documented workspace tools are `list_workspaces`, `create_workspace`, `update_workspace`, `delete_workspace`, `reorder_workspaces`, and `move_project_to_workspace`. Call them only when live discovery exposes them.
+Workspace tools are core tools: `list_workspaces`, `create_workspace`, `update_workspace`, `delete_workspace`, `reorder_workspaces`, and `move_project_to_workspace`. `list_projects` and `create_project` accept an optional `workspace_id`. Confirm exact schemas through live discovery.
 
 ## Output and search controls
 

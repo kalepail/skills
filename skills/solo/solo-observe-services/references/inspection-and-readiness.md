@@ -20,10 +20,12 @@ Services:
 
 Output:
 
-- `get_process_output`: rendered terminal rows; default 50, maximum 200.
+- `get_process_output`: rendered terminal rows.
 - `search_output`: search rendered rows.
-- `get_process_raw_output`: raw bytes/control sequences; default 50, maximum 200.
-- `search_raw_output`: search raw stream.
+- `get_process_raw_output`: retained output as lossy UTF-8 lines with ANSI CSI/OSC sequences removed. It can show text that rendering hid. It is not a byte-preserving trace and cannot show escape sequences.
+- `search_raw_output`: search those retained lines.
+
+Take line defaults and maximums from the live schema.
 - `clear_output`: clear saved buffer only; process/PTY keeps running.
 
 Read-only status/output/port inspection may cover project scope. Any control action—including UI selection, rename, input, output clearing, stop/restart/close, or timer delivery—requires self/recorded-descendant ownership or exact user/runbook authority. Idle/stopped/completed state never transfers ownership.

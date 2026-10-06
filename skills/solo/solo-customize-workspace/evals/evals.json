@@ -214,6 +214,19 @@
         "Routes to $solo-observe-services by name."
       ],
       "files": []
+    },
+    {
+      "id": 19,
+      "name": "workspace-cycling-and-project-move",
+      "prompt": "Give me a keyboard way to flip between the workspaces I have open in this window, and move the billing project into the Client workspace.",
+      "expected_output": "Use $solo-customize-workspace. Explain Ctrl+Tab and Ctrl+Shift+Tab for workspaces open in the current window and the unbound Switch to workspace 1–9 actions. Move the billing project with Move to workspace or move_project_to_workspace after confirming the destination. State that the move does not stop its processes.",
+      "assertions": [
+        "Uses Ctrl+Tab and Ctrl+Shift+Tab or bindable Switch to workspace 1–9 actions",
+        "Does not cite a separate workspace launcher shortcut",
+        "Moves the project through the context menu or workspace MCP tool after confirming the destination",
+        "States that moving a project does not stop its processes"
+      ],
+      "files": []
     }
   ]
 }

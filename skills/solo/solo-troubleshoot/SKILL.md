@@ -1,6 +1,6 @@
 ---
 name: solo-troubleshoot
-description: Diagnose Solo project, command, terminal, service, CLI, shell, version-manager, trust, solo.yml sync, working-directory, execution-profile, WSL, restart-loop, output, port, and readiness failures. Use when tooling is missing, commands fail, YAML changes do not apply, status disagrees, or services never become ready. Do not use for routine status views, authorized routine start, stop, and restart, planned new configuration, or agent setup and health checks.
+description: Diagnose Solo project, command, terminal, service, CLI, shell, version-manager, trust, solo.yml sync, working-directory, execution-profile, WSL, restart-loop, output, port, and readiness failures. Use when tooling is missing, commands fail, YAML changes do not apply, status disagrees, or services never become ready. Do not use for routine status views (solo-observe-services), authorized routine start, stop, and restart (solo-run-processes), planned new configuration (solo-set-up-projects), or agent setup and health checks (solo-work-with-agents).
 ---
 
 # Troubleshoot Solo
@@ -23,7 +23,7 @@ Find root cause with smallest evidence set. Separate configuration, trust, lifec
    - Control plane: CLI/API discovery, token, version, app startup, or MCP scope issue.
 4. Gather narrow evidence.
    - Use rendered output first; search exact error text.
-   - Use raw output only for control sequences/redraw issues.
+   - Use retained (raw) output only to recover text that rendering hid. It strips ANSI sequences, so it cannot diagnose escape codes.
    - Inspect ports and subprocesses before scraping “ready” log messages.
    - Run `solo doctor` for CLI/app discovery failures.
 5. State root cause and evidence.

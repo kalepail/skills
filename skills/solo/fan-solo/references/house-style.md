@@ -18,7 +18,7 @@ Apply before any Solo mutation, agent spawn, shared-state edit, or process contr
 1. Honor current user decision.
 2. Call `whoami`; confirm actor, Solo process, and effective project.
 3. Read `help()` and required topic help. Discover enabled tools.
-4. Consult live Solo Docs MCP/current official docs for behavior and schemas.
+4. Search current official docs with `help(query="...")` or the hosted docs index for behavior and schemas.
 5. Treat bundled research as orientation and evidence, not current runtime authority.
 
 Keep current project unless cross-project work is explicit. Project scope and caller identity are separate.
@@ -50,7 +50,7 @@ When the skill is absent, use an explicit route from the user or caller. Otherwi
 
 Fleet names are models, not Solo agent tools. Discover live launchable tools with `list_agent_tools`. Apply the route through the selected tool's saved defaults or `extra_args`.
 
-Solo's built-in tool types are Claude, Codex, Amp, Gemini, OpenCode, Copilot, and Kimi. Add any other terminal agent, such as Grok, as a custom Generic tool before spawning it. This list states intent; it does not prove a given tool is installed and enabled.
+Solo's built-in tool types include Claude, Codex, Amp, Gemini, OpenCode, Copilot, Kimi, and Antigravity. Add any other terminal agent, such as Grok, as a custom Generic tool before spawning it. This list does not prove that a tool is installed and enabled. `list_agent_tools` is the live list. Pass the returned `agent_tool_installation_id` when a project has environment-specific installations.
 
 ### Set model and reasoning explicitly
 
@@ -63,7 +63,7 @@ Every routed spawn sets the model and effort explicitly. Put standing choices in
 | `opencode` | `-m provider/model` | `--variant <provider-specific-level>` | `opencode run --help` |
 | `grok` | `-m <id>` | `--reasoning-effort <level>` | `grok --help` |
 
-Verify flags and accepted values against the installed CLI before launching. Do not use Solo to discover or score new models.
+When `routing-agent-work` is installed, its fleet reference owns flag syntax and accepted values. Use this table only as the fallback. Verify flags against the installed CLI before launching. Do not use Solo to discover or score new models.
 
 ### Built-in subagents vs Solo workers
 
@@ -73,7 +73,7 @@ All four trigger routes work headless; re-run a route live before relying on it:
 
 | CLI | How to trigger | Definitions and per-subagent settings |
 |---|---|---|
-| `claude` | Auto-delegation from agent `description`, "use the X subagent", or the Agent tool; works under `claude -p` | `.claude/agents/*.md` or `--agents '<json>'`; per-agent `model` (`sonnet`/`opus`/`haiku`/`fable`/id/`inherit`) and `effort` (`low…max`); `--forward-subagent-text` exposes child transcripts in stream-json. Source: code.claude.com/docs/en/sub-agents |
+| `claude` | Auto-delegation from agent `description`, "use the X subagent", or the Agent tool; works under `claude -p` | `.claude/agents/*.md` or `--agents '<json>'`; per-agent `model` (alias, ID, or `inherit`) and `effort`; `--forward-subagent-text` exposes child transcripts in stream-json. Source: code.claude.com/docs/en/sub-agents |
 | `codex` | Conversational only—ask explicitly ("spawn one agent per…") or name custom agents in prose ("Have `pr_explorer` map the affected paths"); `AGENTS.md` standing instructions; `spawn_agents_on_csv` for batch; works under `codex exec` | `[features] multi_agent` stable-on; built-ins `default`/`worker`/`explorer`; per-agent `model` + `model_reasoning_effort` in `~/.codex/agents/<name>.toml` or `.codex/agents/`; `[agents] max_threads=6`, `max_depth=1`. Source: developers.openai.com/codex/subagents |
 | `opencode` | Primary agent auto-delegates via the `task` tool from agent descriptions; `@name` in TUI; works under `opencode run` | Built-in subagents such as `general`/`explore` (the set varies by version); custom in `.opencode/agents/*.md`, `~/.config/opencode/agents/`, or `opencode.json` `agent` key; per-agent `model` and `reasoningEffort`/`variant`; gate with `permission.task`. Source: opencode.ai/docs/agents |
 | `grok` | Model-driven `spawn_subagent`—steer by naming a type ("use the explore subagent"); `--no-subagents` disables; works under `--single` | Built-ins `general-purpose`/`explore`/`plan`; custom via `--agents '<json>'` or `--agent <file>` (Claude-compatible schema with per-subagent `model`); effort inherits session `--reasoning-effort`; `--best-of-n <N>` runs N headless attempts plus judge. Source: docs.x.ai/build CLI reference |
@@ -108,7 +108,8 @@ Complete or backlog todos, promote durable conclusions as evidence lands, and ca
 ## Monitor without guessing
 
 - Use timers instead of sleep loops or tight polling.
-- Use idle-any to harvest next newly quiet worker; idle-all only for true barrier.
+- Use idle-any to harvest the next quiet worker. An `already_satisfied` response means a watched worker is idle now: inspect it, then reschedule for the busy remainder.
+- Use idle-all only for a true barrier.
 - Treat idle as quiet heuristic, not completion.
 - Use service/port readiness for listener state, not agent idle.
 - Inspect actual output and artifacts after timer fires.

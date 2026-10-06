@@ -216,6 +216,17 @@
         "Does not classify a failure"
       ],
       "files": []
+    },
+    {
+      "id": 19,
+      "prompt": "Solo's window went blank but my commands still seem to be running. How do I get the UI back without killing anything?",
+      "expected_output": "Use $solo-troubleshoot. Confirm through MCP or the CLI that processes still run, then recommend the command palette Refresh frontend action, which reloads the interface without stopping processes. Do not reset state, delete projects, or restart processes.",
+      "assertions": [
+        "Verifies process state outside the UI first",
+        "Recommends Refresh frontend as the cheapest repair",
+        "Does not reset app data, delete state, or restart processes"
+      ],
+      "files": []
     }
   ]
 }

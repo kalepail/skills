@@ -198,6 +198,28 @@
         "Does not create or edit scratchpad content without explicit authority."
       ],
       "files": []
+    },
+    {
+      "id": 19,
+      "prompt": "Write a CI step that type-checks our Solo routine sources without writing generated files.",
+      "expected_output": "Use $solo-automate. Use `solo routine bundle --check` with the needed `--scope` or `--root`, add `--json`, and branch on exit codes. Note that routine bundling works without the running app.",
+      "assertions": [
+        "Uses the exact `solo routine bundle --check` command",
+        "Adds --json and exit-code handling",
+        "Does not require the running Solo app for bundling"
+      ],
+      "files": []
+    },
+    {
+      "id": 20,
+      "prompt": "From a script, find the Solo docs page about todo locks and fetch its Markdown.",
+      "expected_output": "Use $solo-automate. Call GET https://soloterm.com/api/v1/docs/search?q=... to rank pages, then fetch the best Markdown page under /api/v1/docs/. Do not scrape the human /docs HTML and do not send the local Solo token.",
+      "assertions": [
+        "Uses the hosted docs search endpoint before fetching",
+        "Fetches Markdown from /api/v1/docs paths",
+        "Keeps the local HTTP token out of hosted requests"
+      ],
+      "files": []
     }
   ]
 }

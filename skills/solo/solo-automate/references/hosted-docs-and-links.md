@@ -19,10 +19,11 @@ Start with:
 GET https://soloterm.com/api/v1/health
 GET https://soloterm.com/api/v1/agents
 GET https://soloterm.com/api/v1/docs
+GET https://soloterm.com/api/v1/docs/search?q={query}&limit={1-50}
 GET https://soloterm.com/api/v1/docs/{section}/{page}
 ```
 
-`/api/v1/agents` is machine-readable manifest for current public/admin surface. `/api/v1/docs` and child paths return Markdown. Prefer these over scraping human `/docs` pages.
+`/api/v1/agents` is machine-readable manifest for current public/admin surface. `/api/v1/docs` and child paths return Markdown. `/api/v1/docs/search` returns ranked JSON results with Markdown page URLs. Search first, then fetch the best pages. Prefer these over scraping human `/docs` pages. Inside an MCP session, `help(query="...")` runs the same search.
 
 ## Hosted public endpoints
 
@@ -31,6 +32,7 @@ GET https://soloterm.com/api/v1/docs/{section}/{page}
 | GET `/api/v1/health` | status and timestamp |
 | GET `/api/v1/agents` | current machine manifest |
 | GET `/api/v1/docs[/{path}]` | Markdown index/page |
+| GET `/api/v1/docs/search` | `q` required; `limit` 1–50, default 10; JSON results with excerpts |
 | GET `/api/v1/download/{platform}` | `darwin-universal|windows-x86_64|linux-x86_64`; redirect, not JSON; `source?` |
 | GET `/api/v1/updates/manifest` | platform from `X-Platform` preferred or `platform|target`; optional license/device/current version; JSON or 204 |
 | POST `/api/v1/license/validate` | device hash, license key, app version; optional device/platform/OS metadata |
