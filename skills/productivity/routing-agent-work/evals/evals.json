@@ -415,7 +415,7 @@
     },
     {
       "prompt": "Launch the selected GLM-5.3 Flash challenger as a headless OpenCode run from this orchestrator script, then collect its answer.",
-      "expected_output": "Follow references/opencode.md: use scripts/opencode_worker.py, or close stdin, raise the output cap, set a time limit, and read the event stream. Accept the answer only when the status is complete and the lane's completion check passes.",
+      "expected_output": "Follow references/opencode.md. Use scripts/opencode_worker.py, or run with --standalone in the work directory. Close stdin, set a time limit, and read the event stream. Accept the answer only when the status is complete and the lane's completion check passes.",
       "assertions": [
         "Reads references/opencode.md before launch",
         "Closes stdin or uses the launcher",
@@ -429,7 +429,7 @@
     {
       "id": 65,
       "prompt": "I ran Muse Spark 1.3, GLM-5.3, and Kimi K3 as parallel headless challengers on our rate limiter. Muse returned three findings. GLM exited 0 with no text and reason length. Kimi failed at start with database is locked. What now?",
-      "expected_output": "Run GLM again with a raised output cap or through the launcher, and start Kimi once more. Treat every finding as a lead, reproduce it with a test or command, and keep a capable different-family reviewer for the verdict.",
+      "expected_output": "Run GLM again with a raised model output limit or a lower variant, and start Kimi once more. Treat every finding as a lead. Reproduce it with a test or command. Keep a capable different-family reviewer for the verdict.",
       "assertions": [
         "Reads GLM's result as truncated, not as no findings",
         "Retries the lock failure once",

@@ -1,17 +1,20 @@
 # Run OpenCode Workers
 
-Read this before you launch an OpenCode route. An interactive OpenCode session in a terminal multiplexer needs only the catalog check.
+Read this before you launch an OpenCode route. An interactive OpenCode session in a terminal multiplexer needs only the catalog check and a model selection.
 
 ## Check the catalog
 
-Before you reject a new or recently updated identifier, refresh the model catalog once:
+Model availability is project-specific. Confirm the identifier from the work directory:
 
 ```bash
-opencode models --refresh
-opencode models <provider>
+cd <work-dir> && opencode models | grep '^<provider>/'
 ```
 
-Check only the selected provider. Treat an identifier that is absent after the refresh as unavailable, and use the next fallback. Skip the refresh when host status already confirms the identifier.
+Check only the selected provider. Treat an identifier that is absent as unavailable, and use the next fallback. Skip the check when host status already confirms the identifier.
+
+## Select the model for an interactive session
+
+Start the TUI in the work directory with `opencode <work-dir>`, so it loads that project's config. The TUI takes no model flag. Set `model` in the work directory's `opencode.json`, or pick the model with `/models` after launch. The config `model` sets the model only; choose the variant in the session.
 
 ## Launch a headless worker
 
@@ -27,10 +30,13 @@ python3 <skill-dir>/scripts/opencode_worker.py \
 
 The launcher does these steps:
 
-- It sends the prompt on stdin and then closes stdin. Long briefs do not hit argument-size limits.
-- It turns off each MCP server that `opencode debug config` lists for the work directory. Use `--keep-mcp` when the lane needs MCP tools.
-- It raises the output token cap through `OPENCODE_EXPERIMENTAL_OUTPUT_TOKEN_MAX`.
-- It runs with `--pure` and turns off automatic updates.
+- It runs a private `--standalone` server, so the per-run config reaches the worker.
+- It runs in the `--dir` work directory and sets `PWD` to that path. OpenCode takes its project directory from `PWD`.
+- It sends the prompt on stdin and then closes stdin. A long brief stays inside the argument-size limit.
+- It turns off each MCP server that `opencode debug config --standalone` lists for the work directory. Use `--keep-mcp` when the lane needs MCP tools.
+- It adds `--permission` rules, a JSON array in the `permissions` format, after the existing rules. The last matching rule wins.
+- It clears multiplexer pane variables, so pane-reporting plugins stay silent. Configured plugins still load.
+- It turns off automatic updates.
 - It stops the run after the time limit.
 - It starts the run once more after a `database is locked` failure at start.
 - It prints one JSON summary line. `--text-out` receives the text of the final step only. `--events-out` keeps the full stream.
@@ -38,48 +44,64 @@ The launcher does these steps:
 | Exit code | Status | Meaning |
 |---|---|---|
 | 0 | `complete` | The last step ended with `stop`, and that step has answer text |
-| 2 | `truncated` | The output token cap stopped the model |
-| 2 | `incomplete` | The run stopped after a tool call, often a rejected permission |
+| 2 | `truncated` | The output token limit stopped the model |
+| 2 | `incomplete` | The last step has no finish, or it stopped after a tool call, often a rejected permission |
 | 2 | `empty` | The last step has no answer text |
 | 2 | `filtered` | A content filter stopped the model |
 | 2 | `unconfirmed` | The last step has text, but the provider gave no clear finish reason |
 | 3 | `timeout` | The run passed the time limit |
-| 4 | `error` | OpenCode, the provider, or the launcher reported an error |
+| 4 | `error` | OpenCode, the provider, or the launcher reported an error, or the last step ended with `error` |
 | 64 | usage error | A required argument, file, or directory is missing |
 
-Accept a result only when the status is `complete` and the lane's own completion check passes.
+Accept a result only when the status is `complete` and the lane's own completion check passes. A worker that lacks a tool can still end with `complete` and explain that it could not do the task.
 Treat `unconfirmed` text as a lead: read it, then confirm it with the lane's check.
 Run `python3 <skill-dir>/scripts/opencode_worker.py --self-test` after you change the launcher.
+
+## Set the permission boundary
+
+The default rules allow every action, including access to paths outside the work directory. A headless run rejects only an action that a rule sets to `ask`. The work directory is not an access boundary by itself.
+
+Pass a deny rule for each action that the lane must not do. This rule blocks access outside the work directory and its project worktree:
+
+```json
+[{"action": "external_directory", "resource": "*", "effect": "deny"}]
+```
+
+Paths elsewhere in the same worktree stay open. A narrower lane needs explicit file-action rules. Shell commands need their own narrow `shell` rules. Use `--auto` only in a disposable work directory. See the [permissions documentation](https://opencode.ai/v2/docs/permissions/).
 
 ## Know the failure modes
 
 | Symptom | Cause | Control |
 |---|---|---|
 | The run makes no progress and never ends | `opencode run` reads stdin until it closes. An open pipe keeps it waiting | Send the prompt on stdin, or redirect stdin from `/dev/null` |
-| Exit code 0, no text, last `step_finish` reason `length` | OpenCode's output cap can be lower than a reasoning model needs at `max`. The model spends the cap on reasoning | Raise `OPENCODE_EXPERIMENTAL_OUTPUT_TOKEN_MAX` to the model's output limit |
-| Exit code 0, no text, last reason `tool-calls` | A headless run rejects each permission request that needs approval | Put all inputs inside `--dir`. Grant only the needed permissions through `OPENCODE_PERMISSION`. Use `--auto` only in a disposable work directory |
-| Many extra input tokens on each step, and slow start-up | `--pure` turns off plugins, not MCP servers. Each run loads every configured MCP server | Turn the servers off through `OPENCODE_CONFIG_CONTENT` |
+| The worker cannot find files that exist in the work directory | `PWD` still names the caller's directory | `cd` into the work directory, so `PWD` and the process directory agree |
+| Per-run config or environment has no effect | The command used the shared background service, which keeps its own config | Pass `--standalone` |
+| Exit code 0, no text, last `step_finish` reason `length` | The model spent its output limit, often on reasoning at `max` | Raise the model's `limit.output` in the provider config, or lower the variant |
+| Exit code 0, no text, last reason `tool-calls` | A headless run rejects each permission request that a rule sets to `ask` | Allow only the actions the lane needs. See the permission boundary above |
 | `database is locked` at start | Many OpenCode processes start at the same time on one data directory | Start the run once more. Stagger large batches |
 
 ## Run without the launcher
 
-Apply the same controls by hand:
+Apply the same controls by hand. Run each command from the work directory:
 
 ```bash
-OPENCODE_EXPERIMENTAL_OUTPUT_TOKEN_MAX=<model-output-limit> \
-OPENCODE_CONFIG_CONTENT='{"mcp":{"<server>":{"enabled":false}}}' \
-opencode run --pure --format json --dir <work-dir> \
-  -m <provider/model> --variant <effort> < brief.md > events.jsonl
+cd <work-dir>
+opencode debug config --standalone
+env -u TMUX -u TMUX_PANE -u HERDR_ENV -u HERDR_PANE_ID -u HC_TERMINAL_ID \
+  OPENCODE_DISABLE_AUTOUPDATE=1 \
+  OPENCODE_CONFIG_CONTENT='{"mcp":{"servers":{"<server>":{<its config>,"disabled":true}}}}' \
+  opencode run --standalone --format json \
+  -m '<provider/model>#<effort>' < brief.md > events.jsonl
 ```
 
-List the server names with `opencode debug config`. Add one entry for each name.
+`opencode debug config --standalone` lists the servers. A config entry replaces the whole server entry, so copy each entry and add `"disabled": true`.
+Unset every other multiplexer pane variable in the environment, such as other `HERDR_*`, `HC_*`, and `ZELLIJ*` names.
 Put a time limit on the process.
-Read the events after the last `step_start`: the last `step_finish` reason must be `stop`, and the step must have text.
+Read the events after the last `step_start`. That step must end with a `step_finish` reason of `stop` and must have text.
 
-## Read attached sessions through export
+## Reuse one server across runs
 
-`opencode serve` with `opencode run --attach <url>` can save start-up time across many runs.
-The attached client can stop its output after the first event while the server finishes the session.
-Read the result with `opencode export <sessionID>`. Do not trust the stdout of an attached client.
+`opencode serve` with `opencode run --server <url>` saves start-up time across many runs.
+When the client output ends early, read the result with `opencode session export --server <url> <sessionID>`.
 
-Check flag and variable names with `opencode run --help` and the [OpenCode CLI documentation](https://opencode.ai/docs/cli).
+Check flag and variable names with `opencode run --help` and the [OpenCode CLI documentation](https://opencode.ai/v2/docs/cli/commands/).

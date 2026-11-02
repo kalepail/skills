@@ -49,7 +49,7 @@ Before launch, check only the selected route. Do not enumerate or score unrelate
 3. If only the effort value fails, use a supported value that meets the lane requirement and the model's range. Otherwise, use the next fallback.
 4. When a route needs a harness property, such as preserved reasoning history, confirm it through host documentation or the caller. Skip the route when nobody can confirm it.
 
-For OpenCode routes, read [references/opencode.md](references/opencode.md). It covers the catalog refresh and the completion check. An OpenCode exit code alone does not prove that the worker finished.
+For OpenCode routes, read [references/opencode.md](references/opencode.md). It covers the catalog check, model selection, and the completion check. An OpenCode exit code alone does not prove that the worker finished.
 
 ## Set effort
 
