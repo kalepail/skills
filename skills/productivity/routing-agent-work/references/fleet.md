@@ -132,8 +132,8 @@ Try the identifiers for the selected model in order. Skip a route whose data ter
 | GLM-5.3 | 1. `cloudflare-workers-ai/@cf/zai-org/glm-5.3`. 2. `openrouter/z-ai/glm-5.3`, pinned to `cloudflare` with zero data retention |
 | GLM-5.3 Flash | 1. `cloudflare-workers-ai/@cf/zai-org/glm-5.3-flash`. 2. `openrouter/z-ai/glm-5.3-flash`, pinned to `z-ai` with zero data retention. 3. `opencode/glm-5.3-flash-free`, when the lane fits its smaller context and output limits |
 | DeepSeek V4.1 Flash | 1. `cloudflare-workers-ai/@cf/deepseek-ai/deepseek-v4.1-flash-1017`. 2. `openrouter/deepseek/deepseek-v4.1-flash-1017`, pinned to `cloudflare` with zero data retention. 3. `opencode/deepseek-v4.1-flash-free`, when the lane fits its smaller context and output limits |
-| Muse Spark 1.3 | 1. `openrouter/meta/muse-spark-1.3-contributor`, only when contributor terms are accepted. 2. `openrouter/meta/muse-spark-1.3`. 3. `meta/muse-spark-1.3-contributor`, only when contributor terms are accepted; it stops at `xhigh`. 4. `meta/muse-spark-1.3`. Pin OpenRouter routes to `meta`; no zero-retention host exists |
-| Muse Wonder 1.0 | 1. `openrouter/meta/muse-wonder`, pinned to `meta`. 2. `meta/muse-wonder-1.0`. No zero-retention host exists |
+| Muse Spark 1.3 | 1. `openrouter/meta/muse-spark-1.3-contributor`, only when contributor terms are accepted. 2. `openrouter/meta/muse-spark-1.3`. Pin both to `meta`; no zero-retention host exists |
+| Muse Wonder 1.0 | `openrouter/meta/muse-wonder`, pinned to `meta`. No zero-retention host exists |
 | MiMo V2.6 Pro | `openrouter/xiaomi/mimo-v2.6-pro`, pinned to `deepinfra` with zero data retention |
 
 Follow these host rules:
