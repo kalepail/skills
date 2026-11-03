@@ -30,7 +30,7 @@ Apply these decision axes in order:
 1. **Lane fit**: match the model to the primary output.
 2. **Failure cost**: use a stronger route or independent review when errors are expensive.
 3. **Constraints**: check context length, modality, privacy, tool use, and available providers.
-4. **Cost and latency**: use them as tie-breakers between routes that can meet the quality bar.
+4. **Cost and latency**: use them as tie-breakers between routes that can meet the quality bar. The fleet reference explains how subscription headroom and API spend count.
 
 Use only the fixed fleet. Try listed fallbacks in order. If every listed route is unavailable, mark the lane `Unrouted`.
 
@@ -94,7 +94,7 @@ Use lower-cost models from other families as extra challengers. The fleet refere
 
 Treat prose as a separate lane only when prose is a meaningful deliverable. Keep the existing worker when it can write the required text well.
 
-Pass the caller's writing standard into the worker brief. Opus 5.5 is the quality-first default for technical prose. It follows supplied writing rules closely.
+Pass the caller's writing standard into the worker brief. Opus 5.5 is the quality-first default for technical prose. It leads independent human-preference evaluations of writing and instruction following.
 
 ## Return a route card
 

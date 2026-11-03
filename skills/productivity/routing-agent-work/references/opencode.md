@@ -12,6 +12,14 @@ cd <work-dir> && opencode models | grep '^<provider>/'
 
 Check only the selected provider. Treat an identifier that is absent as unavailable, and use the next fallback. Skip the check when host status already confirms the identifier.
 
+Effort values differ between providers for one model. OpenCode caches the catalog, so read the route's values there:
+
+```bash
+python3 -c 'import json,os,sys; d=json.load(open(os.path.expanduser("~/.cache/opencode/models.json"))); print(d[sys.argv[1]]["models"][sys.argv[2]].get("reasoning_options"))' <provider> <model>
+```
+
+A `toggle` entry with no `effort` list means the route has no effort variants. A run with a missing variant stops at once with `Variant unavailable`.
+
 ## Select the model for an interactive session
 
 Start the TUI in the work directory with `opencode <work-dir>`, so it loads that project's config. The TUI takes no model flag. Set `model` in the work directory's `opencode.json`, or pick the model with `/models` after launch. The config `model` sets the model only; choose the variant in the session.
@@ -27,6 +35,8 @@ python3 <skill-dir>/scripts/opencode_worker.py \
   --dir <work-dir> --prompt-file <brief.md> \
   --text-out <answer.md> --timeout 900
 ```
+
+Use `--no-variant` in place of `--variant` for a route without effort variants. The route's default mode then applies.
 
 The launcher does these steps:
 
@@ -69,6 +79,19 @@ Pass a deny rule for each action that the lane must not do. This rule blocks acc
 
 Paths elsewhere in the same worktree stay open. A narrower lane needs explicit file-action rules. Shell commands need their own narrow `shell` rules. Use `--auto` only in a disposable work directory. See the [permissions documentation](https://opencode.ai/v2/docs/permissions/).
 
+## Pin an OpenRouter route
+
+OpenRouter picks an upstream host for each request. Without a pin, it can choose a low-precision host that collects data.
+Pin the host in the model's request body. Add `"zdr": true` when the fleet reference lists zero data retention for that route. Pass the pin in `OPENCODE_CONFIG_CONTENT`; the launcher keeps it:
+
+```bash
+OPENCODE_CONFIG_CONTENT='{"providers":{"openrouter":{"models":{"moonshotai/kimi-k3.1-pro":{"body":{"provider":{"order":["moonshotai"],"allow_fallbacks":false,"zdr":true}}}}}}}' \
+python3 <skill-dir>/scripts/opencode_worker.py --model openrouter/moonshotai/kimi-k3.1-pro --variant high ...
+```
+
+The same `providers` entry can go in the work directory's `opencode.json`. The fleet reference names the host for each route.
+A pin that no host matches stops at once with `No endpoints found`. Treat that route as unavailable, and use the next provider.
+
 ## Know the failure modes
 
 | Symptom | Cause | Control |
@@ -94,6 +117,7 @@ env -u TMUX -u TMUX_PANE -u HERDR_ENV -u HERDR_PANE_ID -u HC_TERMINAL_ID \
   -m '<provider/model>#<effort>' < brief.md > events.jsonl
 ```
 
+For a route without effort variants, pass `-m '<provider/model>'` with no `#` suffix.
 `opencode debug config --standalone` lists the servers. A config entry replaces the whole server entry, so copy each entry and add `"disabled": true`.
 Unset every other multiplexer pane variable in the environment, such as other `HERDR_*`, `HC_*`, and `ZELLIJ*` names.
 Put a time limit on the process.

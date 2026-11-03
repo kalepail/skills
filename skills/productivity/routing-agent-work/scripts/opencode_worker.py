@@ -117,6 +117,15 @@ def parse_events(stdout):
     return events
 
 
+def args_valid(args):
+    """True when the run arguments name one model, one directory, one effort choice, and one prompt."""
+    variant_given = args.variant is not None
+    if variant_given and not args.variant.strip():
+        return False
+    return bool(args.model and args.dir and variant_given != args.no_variant
+                and bool(args.prompt) != bool(args.prompt_file))
+
+
 def model_ref(model, variant):
     """V2 selects a variant with `provider/model#variant`."""
     return model + "#" + variant if variant else model
@@ -254,6 +263,14 @@ def self_test():
     assert len(parse_events('noise\n{"type":"text","part":{"text":"a"}}\n{bad\n')) == 1
     assert model_ref("moonshotai/kimi-k3", "max") == "moonshotai/kimi-k3#max"
     assert model_ref("moonshotai/kimi-k3", None) == "moonshotai/kimi-k3"
+    base = dict(model="m/x", dir="/tmp", prompt="hi", prompt_file=None)
+    for variant, no_variant, ok in (("high", False, True), (None, True, True), (None, False, False),
+                                    ("high", True, False), ("", True, False), ("", False, False),
+                                    (" ", False, False)):
+        got = args_valid(argparse.Namespace(variant=variant, no_variant=no_variant, **base))
+        assert got == ok, ("args_valid", variant, no_variant, got)
+    assert not args_valid(argparse.Namespace(variant="high", no_variant=False, model="m/x", dir="/tmp",
+                                             prompt="hi", prompt_file="b.md"))
     env = worker_env({"PATH": "/bin", "HERDR_PANE_ID": "p1", "HC_TERMINAL_ID": "t1", "TMUX": "x", "HOME": "/h", "PWD": "/caller"}, "/work")
     assert env == {"PATH": "/bin", "HOME": "/h", "PWD": "/work"}
     sources = [
@@ -287,6 +304,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--model", help="provider/model, for example openrouter/z-ai/glm-5.3")
     parser.add_argument("--variant", help="provider-supported effort variant, sent as provider/model#variant")
+    parser.add_argument("--no-variant", action="store_true",
+                        help="send no variant, for a route without effort variants; the route default applies")
     parser.add_argument("--prompt", help="prompt text")
     parser.add_argument("--prompt-file", help="read the prompt from this file")
     parser.add_argument("--dir", help="work directory; the worker runs in it as its project")
@@ -301,9 +320,10 @@ def main():
 
     if args.self_test:
         return self_test()
-    if not args.model or not args.variant or not args.dir or bool(args.prompt) == bool(args.prompt_file):
+    if not args_valid(args):
         parser.print_usage(sys.stderr)
-        print("error: --model, --variant, --dir, and exactly one of --prompt or --prompt-file are required", file=sys.stderr)
+        print("error: --model, --dir, exactly one of --variant or --no-variant, and exactly one of "
+              "--prompt or --prompt-file are required", file=sys.stderr)
         return 64
     if not os.path.isdir(args.dir):
         return fail(args.model, args.variant, "work directory does not exist: " + args.dir, 64)

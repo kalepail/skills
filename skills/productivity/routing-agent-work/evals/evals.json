@@ -32,11 +32,12 @@
     },
     {
       "id": 3,
-      "prompt": "Route an ambiguous planning lane. Host status says the Opus 5.5 identifier is unavailable. Fable 5.1 is available at xhigh.",
-      "expected_output": "Record the failed identifier check, advance to the first planning fallback, and route to Fable 5.1 at xhigh. Return Unrouted if every listed fallback fails.",
+      "prompt": "Route an ambiguous planning lane. Host status says the Opus 5.5 identifier is unavailable and Codex is down. Fable 5.1 is available at xhigh.",
+      "expected_output": "Record the failed identifier checks. Advance through the planning fallbacks in order: GPT-6 Astra, GPT-6.1 Sol, then Fable 5.1. Route to Fable 5.1 at xhigh, because Codex is down. Return Unrouted if every listed fallback fails.",
       "assertions": [
         "Records verification evidence for the unavailable identifier",
         "Advances through listed fallbacks in order",
+        "Selects Fable 5.1 at xhigh only after the Codex fallbacks fail",
         "Returns Unrouted rather than inventing a route when all fallbacks fail"
       ],
       "files": [],
@@ -45,7 +46,7 @@
     {
       "id": 4,
       "prompt": "Assign a worker to read a very large text-only design archive and trace its decisions into a long-running implementation.",
-      "expected_output": "Treat the lane as difficult long-context implementation. Route it to Opus 5.5 at high or xhigh through Claude after a host check confirms the context limit fits. Do not route it to Codex when the archive exceeds the Codex host window. Use GLM-5.3 at max only when the caller requires an open-weight model.",
+      "expected_output": "Treat the lane as difficult long-context implementation. Route it to Opus 5.5 at high or xhigh through Claude after a host check confirms the context limit fits. Do not route it to Codex when the archive exceeds the Codex host window. Use GLM-5.3 at high only when the caller requires an open-weight model.",
       "assertions": [
         "Selects Opus 5.5 for difficult long-context implementation",
         "Checks the selected host's context limit before launch",
@@ -57,11 +58,11 @@
     },
     {
       "id": 5,
-      "prompt": "Pick a low-cost model for multimodal tool use and a second model to challenge its findings.",
-      "expected_output": "Route the primary lane to GLM-5.3 Flash at high or max through OpenCode. Select a capable challenger from another family, such as GPT-6.1 Sol or Opus 5.5, for the failure cost. Require the challenger to reproduce each finding.",
+      "prompt": "Pick a low-cost open-weight model for multimodal tool use and a second model to challenge its findings.",
+      "expected_output": "Route the primary lane to DeepSeek V4.1 Flash at max through OpenCode, on its Cloudflare Workers AI route. GLM-5.3 Flash at high is the next fallback. Select a capable challenger from another family, such as GPT-6.1 Sol or Opus 5.5, for the failure cost. Require the challenger to reproduce each finding.",
       "assertions": [
-        "Uses GLM-5.3 Flash rather than full GLM-5.3",
-        "Uses at least high effort",
+        "Selects DeepSeek V4.1 Flash at max for the low-cost lane",
+        "Uses a Cloudflare or pinned OpenRouter route, never DeepSeek's own API",
         "Selects a capable different-family challenger",
         "Requires reproducible findings",
         "Separates verification, fallback, reviewer, and report contract fields",
@@ -121,13 +122,12 @@
     {
       "id": 11,
       "prompt": "Assign a cheap worker to extract the same five fields from thousands of small independent records. The lane needs no broad judgment.",
-      "expected_output": "Route narrow high-volume extraction to GPT-6 Luna (gpt-6-luna) at high through Codex. Keep batches small. Raise effort only when a local sample proves a material gain. Escalate to GPT-6.1 Sol, then GLM-5.3 Flash, when recall is inadequate.",
+      "expected_output": "Route narrow high-volume extraction to GPT-6 Luna (gpt-6-luna) at max through Codex. Keep batches small. Use high only when the cost per call dominates. Fall back to GPT-6.1 Terra at medium, then Haiku 5.5 at high, when recall is inadequate.",
       "assertions": [
         "Selects GPT-6 Luna only for narrow high-volume extraction",
-        "Starts at high effort",
-        "Requires local task evidence before using xhigh or max",
+        "Starts at max effort",
         "Keeps the lane small",
-        "Names GPT-6.1 Sol as the recall fallback"
+        "Names GPT-6.1 Terra as the next fallback"
       ],
       "files": [],
       "should_trigger": true
@@ -135,21 +135,19 @@
     {
       "id": 13,
       "prompt": "Assign a worker to inspect screenshots and a PDF, then build and verify a long-running visual interface change.",
-      "expected_output": "Route the multimodal visual implementation to Muse Spark 1.3 at high, xhigh, or max when supported through OpenCode. Use contributor identifiers only when the lane contract states acceptance of their data terms. Use the multimodal row's fallbacks: Opus 5.5, GPT-6.1 Sol, then Kimi K3 when the harness preserves full history.",
+      "expected_output": "Route the visual implementation to Opus 5.5 at high through Claude, because it leads screenshot coding at a lower cost per test. Use the row's fallbacks: GPT-6.1 Sol, Gemini 4 Argon at high, Kimi K3.1 Pro, then Muse Spark 1.3. Keep Gemini 4 Argon first only for audio or video input or when another model family is needed.",
       "assertions": [
-        "Selects Muse Spark 1.3 for visual implementation rather than GLM-5.3 Flash for multimodal review",
-        "Uses high, xhigh, or supported max effort",
-        "Tries eligible contributor identifiers before full Muse Spark 1.3 identifiers",
-        "Checks provider data terms",
-        "Names GLM-5.3 Flash or Astra as fallback",
-        "Names a fallback from the multimodal row"
+        "Selects Opus 5.5 for screenshot and PDF visual implementation",
+        "Sets effort explicitly",
+        "Names a fallback from the visual implementation row",
+        "Does not send the lane to an API route while the subscription route meets the quality bar"
       ],
       "files": [],
       "should_trigger": true
     },
     {
       "id": 14,
-      "prompt": "Configure my OpenCode providers and API credentials so Kimi K3 can launch.",
+      "prompt": "Configure my OpenCode providers and API credentials so Kimi K3.1 Pro can launch.",
       "expected_output": "Do not use $routing-agent-work for provider setup or authentication. Use the relevant tool-management workflow and require normal credential safeguards.",
       "assertions": [
         "Does not invoke the skill for provider setup",
@@ -205,10 +203,10 @@
     },
     {
       "id": 21,
-      "prompt": "Assign a worker to continue a multimodal long-horizon knowledge task that Kimi K3 started. The OpenCode provider preserves complete Kimi reasoning and tool history.",
-      "expected_output": "Keep the lane on Kimi K3 at high or max, because a model switch loses its preserved reasoning. Require complete preserved reasoning and tool history. Add a capable different-family reviewer for consequential results.",
+      "prompt": "Assign a worker to continue a multimodal long-horizon knowledge task that Kimi K3.1 Pro started. The OpenCode provider preserves complete Kimi reasoning and tool history.",
+      "expected_output": "Keep the lane on Kimi K3.1 Pro at high or max, because a model switch loses its preserved reasoning. Require complete preserved reasoning and tool history. Add a capable different-family reviewer for consequential results.",
       "assertions": [
-        "Keeps Kimi K3 for a session it started",
+        "Keeps Kimi K3.1 Pro for a session it started",
         "Uses high or max effort",
         "Requires complete preserved reasoning and tool history",
         "Does not move the session to Muse or GLM without a reason"
@@ -219,10 +217,12 @@
     {
       "id": 29,
       "prompt": "Select a worker to review our authentication service for vulnerabilities and validate patches. Testing stays in our isolated checkout. Host status confirms Daybreak Blue access and high effort.",
-      "expected_output": "Use Daybreak Blue at high for refusal calibration. Check its alias on the live Daybreak model page. Keep the target and testing scope.",
+      "expected_output": "Use Codex with GPT-6 Sol (gpt-6-sol) at high under the account's Daybreak Blue access for refusal calibration. Turn Daybreak on for that run with -c daybreak=true, and confirm it in host status. Daybreak is an access program, and the gpt-daybreak-blue-latest alias is deprecated. Check the eligible models on the live Daybreak guide. Keep the target and testing scope.",
       "assertions": [
-        "Selects gpt-daybreak-blue-latest at high",
-        "Checks the alias on the live model page",
+        "Selects gpt-6-sol at high under Daybreak Blue access",
+        "Turns Daybreak on for the run with -c daybreak=true or /daybreak",
+        "Does not select the deprecated gpt-daybreak-blue-latest alias",
+        "Checks eligible models on the live Daybreak pages",
         "Keeps the target and testing scope",
         "Does not infer permission for external testing"
       ],
@@ -244,9 +244,10 @@
     {
       "id": 34,
       "prompt": "Choose a Codex model for a very hard debugging task. Only one worker is allowed, with no automatic or nested delegation. Host status confirms Astra max and ultra.",
-      "expected_output": "Use GPT-6.1 Sol at xhigh, or escalate to Astra at xhigh or max, with a stop budget. Ultra conflicts with the single-worker limit.",
+      "expected_output": "Use GPT-6.1 Sol at max with a stop budget. Astra at xhigh or max is the escalation for the hardest interpretation. Ultra conflicts with the single-worker limit.",
       "assertions": [
-        "Selects GPT-6.1 Sol at xhigh or Astra at xhigh or max",
+        "Selects GPT-6.1 Sol at max",
+        "Adds a stop budget",
         "Does not use ultra",
         "Preserves the single-worker limit"
       ],
@@ -267,11 +268,11 @@
     },
     {
       "id": 41,
-      "prompt": "Route cheap bounded repository sweeps. No CLI is pinned. Host status confirms GPT-6.1 Sol at medium, Sonnet 5.5 at medium, Opus 5.5 at medium, and Grok 4.7 at high.",
-      "expected_output": "Use GPT-6.1 Sol at medium for the budget-sensitive lane. Sonnet 5.5 at medium is the next fallback. Do not select Grok 4.7 for budget coding.",
+      "prompt": "Route cheap bounded repository sweeps. No CLI is pinned. Host status confirms GPT-6.1 Sol at medium, GPT-6.1 Terra at xhigh, Opus 5.5 at medium, and Grok 4.7 at xhigh.",
+      "expected_output": "Use GPT-6.1 Sol at medium for the budget-sensitive lane. GPT-6.1 Terra at xhigh is the next fallback. Do not select Grok 4.7 for budget coding.",
       "assertions": [
         "Selects GPT-6.1 Sol at medium",
-        "Names Sonnet 5.5 as the next fallback",
+        "Names GPT-6.1 Terra at xhigh as the next fallback",
         "Does not select Grok 4.7 as a coding fallback"
       ],
       "files": [],
@@ -280,7 +281,7 @@
     {
       "id": 44,
       "prompt": "Choose a worker to explore vulnerabilities in our owned parser and build local exploit reproducers. The host pins Claude. Host status confirms Opus 5.5 at high. No external targets are allowed.",
-      "expected_output": "Return Unrouted to the caller. Opus 5.5 fits only defensive review of the caller's own code, and cyber safeguards can hand vulnerability work to a model outside the fleet. Name Daybreak Blue, Astra, or GPT-6.1 Sol as options if the caller lifts the Claude pin.",
+      "expected_output": "Return Unrouted to the caller. Opus 5.5 fits only defensive review of the caller's own code, and cyber safeguards can hand vulnerability work to a model outside the fleet. Name GPT-6 Sol under Daybreak Blue access, Astra, or GPT-6.1 Sol as options if the caller lifts the Claude pin.",
       "assertions": [
         "Respects the pinned CLI",
         "Does not route vulnerability exploration to Opus 5.5",
@@ -305,7 +306,7 @@
     },
     {
       "id": 46,
-      "prompt": "Route cheap bounded repository sweeps. Codex is pinned. GPT-6.1 Sol is unavailable and Astra exceeds the budget. Host status lists two older Codex models that are not in the fleet, both at medium.",
+      "prompt": "Route cheap bounded repository sweeps. Codex is pinned. GPT-6.1 Sol and GPT-6.1 Terra are unavailable, and Astra exceeds the budget. Host status lists two older Codex models that are not in the fleet, both at medium.",
       "expected_output": "Return Unrouted. Catalog models outside the fleet are not routes, and the budget row's other fallbacks need a different CLI.",
       "assertions": [
         "Does not select a catalog model outside the fleet",
@@ -329,10 +330,10 @@
     },
     {
       "prompt": "Route a bounded bug-fix lane through Claude. The caller wants it fast and cheap. Host status confirms Sonnet 5.5 and Opus 5.5 at every effort level.",
-      "expected_output": "Use Sonnet 5.5 at medium or high. Do not raise Sonnet 5.5 above high; use Opus 5.5 when the lane needs more.",
+      "expected_output": "Use Opus 5.5 at medium, the bounded row's Claude route. Sonnet 5.5 scores far lower below xhigh, and at xhigh and max its quality is similar to Opus 5.5. Set the effort explicitly.",
       "assertions": [
-        "Selects Sonnet 5.5 at medium or high",
-        "Does not choose Sonnet 5.5 at xhigh or max while Opus 5.5 is available",
+        "Selects Opus 5.5 at medium",
+        "Does not choose Sonnet 5.5 below xhigh for the lane",
         "Sets effort explicitly"
       ],
       "id": 52,
@@ -341,18 +342,18 @@
     },
     {
       "prompt": "Route a hard multi-file Codex refactor. Host status confirms GPT-6.1 Sol at high, xhigh, and max. The caller asks for the best effort setting.",
-      "expected_output": "Use GPT-6.1 Sol at xhigh. Prefer xhigh over max for coding unless a local sample shows a gain. Escalate to Astra if it falls short.",
+      "expected_output": "Use GPT-6.1 Sol at max with a stop budget, because max scores higher than xhigh on independent evaluations. Escalate to Opus 5.5 through Claude if it falls short.",
       "assertions": [
-        "Selects GPT-6.1 Sol at xhigh",
-        "Does not default to max",
-        "Names Astra as the escalation route"
+        "Selects GPT-6.1 Sol at max",
+        "Adds a stop budget",
+        "Names a stronger escalation route"
       ],
       "id": 54,
       "files": [],
       "should_trigger": true
     },
     {
-      "prompt": "Route a lane that asks Kimi K3, GLM-5.3, and Muse Spark 1.3 to find edge cases in our new rate limiter. The implementer is Opus 5.5.",
+      "prompt": "Route a lane that asks Kimi K3.1 Pro, GLM-5.3, and Muse Spark 1.3 to find edge cases in our new rate limiter. The implementer is Opus 5.5.",
       "expected_output": "Run the three models as parallel challengers. Treat each finding as a lead. Require a test or command that reproduces each finding before Opus 5.5 or another strong route acts on it.",
       "assertions": [
         "Routes the challengers through OpenCode with supported effort",
@@ -390,10 +391,9 @@
     },
     {
       "prompt": "Route a multi-file migration under a strict, stated cost limit. No CLI is pinned.",
-      "expected_output": "Use GPT-6.1 Sol at high or xhigh, then Sonnet 5.5 at high, with a stop budget. Do not use the bounded budget row for difficult work.",
+      "expected_output": "Use GPT-6.1 Sol at xhigh or max with a stop budget. Do not use the bounded budget row for difficult work.",
       "assertions": [
-        "Selects GPT-6.1 Sol at high or xhigh",
-        "Names Sonnet 5.5 at high as the fallback",
+        "Selects GPT-6.1 Sol at xhigh or max",
         "Adds a stop budget",
         "Does not treat the migration as bounded work"
       ],
@@ -402,10 +402,11 @@
       "should_trigger": true
     },
     {
-      "prompt": "Add an independent reviewer for a finished GPT-6.1 Sol migration. The Claude provider is down, so Opus 5.5, Sonnet 5.5, and Fable 5.1 cannot run. Grok 4.7 and GLM-5.3 are available.",
-      "expected_output": "Return the review lane as Unrouted. Grok 4.7 and GLM-5.3 can run as extra challengers, but they do not replace the capable reviewer.",
+      "prompt": "Add an independent reviewer for a finished GPT-6.1 Sol migration. The Claude provider is down, so Opus 5.5, Sonnet 5.5, and Fable 5.1 cannot run. OpenRouter and Cloudflare AI Gateway are also down. Grok 4.7 and GLM-5.3 are available.",
+      "expected_output": "Return the review lane as Unrouted. Gemini 4 Argon has no available route. Grok 4.7 and GLM-5.3 can run as extra challengers, but they do not replace the capable reviewer.",
       "assertions": [
         "Does not promote Grok 4.7 or GLM-5.3 to the reviewer",
+        "Checks the Gemini 4 Argon routes before returning Unrouted",
         "Marks the review lane Unrouted",
         "May add challengers whose findings need reproduction"
       ],
@@ -428,8 +429,8 @@
     },
     {
       "id": 65,
-      "prompt": "I ran Muse Spark 1.3, GLM-5.3, and Kimi K3 as parallel headless challengers on our rate limiter. Muse returned three findings. GLM exited 0 with no text and reason length. Kimi failed at start with database is locked. What now?",
-      "expected_output": "Run GLM again with a raised model output limit or a lower variant, and start Kimi once more. Treat every finding as a lead. Reproduce it with a test or command. Keep a capable different-family reviewer for the verdict.",
+      "prompt": "I ran Muse Spark 1.3, GLM-5.3, and Kimi K3.1 Pro as parallel headless challengers on our rate limiter. Muse returned three findings. GLM exited 0 with no text and reason length. Kimi failed at start with database is locked. What now?",
+      "expected_output": "Run GLM again at high with a raised model output limit, and start Kimi once more. Treat every finding as a lead. Reproduce it with a test or command. Keep a capable different-family reviewer for the verdict.",
       "assertions": [
         "Reads GLM's result as truncated, not as no findings",
         "Retries the lock failure once",
@@ -471,7 +472,7 @@
     },
     {
       "prompt": "who should i hand this review to? opus wrote the patch and it touches auth",
-      "expected_output": "Treat the auth change as a security review. Use Daybreak Blue at high when access exists, otherwise GPT-6.1 Sol or Astra, in a fresh context, because Opus 5.5 wrote the patch. Require reproducible evidence.",
+      "expected_output": "Treat the auth change as a security review. Use GPT-6 Sol at high under Daybreak Blue access when the account has it, with Daybreak turned on for the run, otherwise GPT-6.1 Sol or Astra, in a fresh context, because Opus 5.5 wrote the patch. Require reproducible evidence.",
       "assertions": [
         "Selects a different-family capable reviewer",
         "Uses the security route for an auth change",
@@ -493,6 +494,97 @@
       "id": 70,
       "should_trigger": true,
       "files": []
+    },
+    {
+      "prompt": "Add an independent reviewer for a finished GPT-6.1 Sol migration. The Claude provider is down, so Opus 5.5, Sonnet 5.5, and Fable 5.1 cannot run. OpenRouter works.",
+      "expected_output": "Route the review to Gemini 4 Argon at high through OpenCode. Use cloudflare-ai-gateway/google/gemini-4-argon when the lane accepts Google API terms and gateway logs. Otherwise use openrouter/google/gemini-4-argon pinned to google-vertex with zero data retention. Give it a fresh context with the artifact and requirements. Require reproducible evidence.",
+      "assertions": [
+        "Selects Gemini 4 Argon as the different-family reviewer",
+        "Uses high effort for the consequential review",
+        "Pins the OpenRouter route or uses the Cloudflare route when the output fits",
+        "Uses a fresh review context",
+        "Requires reproducible evidence"
+      ],
+      "files": [],
+      "should_trigger": true,
+      "id": 71
+    },
+    {
+      "prompt": "The Claude weekly limit is almost used up. Route a large bounded repository sweep and a hard planning lane for this week.",
+      "expected_output": "Move the bounded sweep to Codex with GPT-6.1 Sol at medium, which uses few tokens per task. Keep the planning lane on its first route only when Claude headroom fits it; otherwise use GPT-6 Astra. Use OpenCode API routes only when Codex headroom is also low.",
+      "assertions": [
+        "Treats weekly-limit headroom as the subscription cost",
+        "Moves bounded work to another subscription CLI before an API route",
+        "Follows the planning fallbacks in order",
+        "Checks host status for headroom"
+      ],
+      "files": [],
+      "should_trigger": true,
+      "id": 72
+    },
+    {
+      "prompt": "Route a lane that summarizes a set of audio recordings and short videos. The caller requires an open-weight model.",
+      "expected_output": "Route it to MiMo V2.6 Pro through OpenCode on openrouter/xiaomi/mimo-v2.6-pro, pinned to deepinfra with zero data retention. Pass --no-variant, because the route has no effort variants. State that open weights do not keep the data local.",
+      "assertions": [
+        "Selects MiMo V2.6 Pro for open-weight audio and video input",
+        "Pins the OpenRouter route",
+        "Uses --no-variant instead of an invented effort value",
+        "Notes that the provider still receives the input"
+      ],
+      "files": [],
+      "should_trigger": true,
+      "id": 73
+    },
+    {
+      "prompt": "Use Muse Wonder Full for our defensive review lane. It tops the Vals Index for Meta models.",
+      "expected_output": "Muse Wonder Full is not routable from the fleet; Meta offers it only in its Muse Code subscription. Route the security lane through its row: GPT-6 Sol under Daybreak Blue access first, with Muse Wonder 1.0 as the Meta-family defensive fallback.",
+      "assertions": [
+        "States that Muse Wonder Full is not routable",
+        "Does not invent a Muse Wonder Full identifier",
+        "Uses the security row's routes",
+        "Names Muse Wonder 1.0 as the Meta-family option"
+      ],
+      "files": [],
+      "should_trigger": true,
+      "id": 74
+    },
+    {
+      "prompt": "Launch Kimi K3.1 Pro through OpenRouter as a headless edge-case challenger for our parser.",
+      "expected_output": "Follow references/opencode.md. Check the route's effort values, then run scripts/opencode_worker.py with openrouter/moonshotai/kimi-k3.1-pro at high. Pin the route to moonshotai with zero data retention in OPENCODE_CONFIG_CONTENT. Treat each finding as a lead.",
+      "assertions": [
+        "Uses high effort",
+        "Pins the OpenRouter route to moonshotai with zero data retention",
+        "Uses the launcher or its controls",
+        "Treats findings as leads that need reproduction"
+      ],
+      "files": [],
+      "should_trigger": true,
+      "id": 75
+    },
+    {
+      "id": 76,
+      "prompt": "Route cheap bounded repository sweeps. Codex is pinned. GPT-6.1 Sol is unavailable. Host status confirms GPT-6.1 Terra at xhigh.",
+      "expected_output": "Use GPT-6.1 Terra at xhigh, the first budget fallback on the pinned Codex CLI. Record the failed Sol check.",
+      "assertions": [
+        "Selects GPT-6.1 Terra at xhigh",
+        "Records the failed Sol check",
+        "Stays on the pinned Codex CLI"
+      ],
+      "files": [],
+      "should_trigger": true
+    },
+    {
+      "id": 77,
+      "prompt": "The Claude weekly limit is used up, so Opus 5.5 cannot run this week. Route a difficult multi-file refactor. No CLI is pinned and no cost limit is stated.",
+      "expected_output": "Skip Sonnet 5.5, because it shares the Claude weekly limit. Route the refactor to Codex with GPT-6.1 Sol at max with a stop budget. Use Kimi K3.1 Pro at high through OpenCode only when Codex headroom is also low.",
+      "assertions": [
+        "Skips Sonnet 5.5 because it shares the Claude weekly limit",
+        "Selects GPT-6.1 Sol at max",
+        "Adds a stop budget",
+        "Keeps the OpenCode API route behind the Codex subscription route"
+      ],
+      "files": [],
+      "should_trigger": true
     }
   ]
 }
