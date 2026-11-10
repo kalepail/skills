@@ -32,12 +32,12 @@
     },
     {
       "id": 3,
-      "prompt": "Route an ambiguous planning lane. Host status says the Opus 5.5 identifier is unavailable and Codex is down. Fable 5.1 is available at xhigh.",
-      "expected_output": "Record the failed identifier checks. Advance through the planning fallbacks in order: GPT-6 Astra, GPT-6.1 Sol, then Fable 5.1. Route to Fable 5.1 at xhigh, because Codex is down. Return Unrouted if every listed fallback fails.",
+      "prompt": "Route an ambiguous planning lane. Host status says the Opus 5.5 identifier is unavailable and Codex is down. The Claude weekly limit has headroom, and Fable 5.2 is available at high and xhigh.",
+      "expected_output": "Record the failed Opus 5.5 identifier check. Advance to the first planning fallback, Fable 5.2, at xhigh because the planning is hard and ambiguous. GPT-6 Astra and GPT-6.1 Sol follow but Codex is down. Return Unrouted if every listed fallback fails.",
       "assertions": [
         "Records verification evidence for the unavailable identifier",
         "Advances through listed fallbacks in order",
-        "Selects Fable 5.1 at xhigh only after the Codex fallbacks fail",
+        "Selects Fable 5.2 at an explicit supported effort (high or xhigh)",
         "Returns Unrouted rather than inventing a route when all fallbacks fail"
       ],
       "files": [],
@@ -135,7 +135,7 @@
     {
       "id": 13,
       "prompt": "Assign a worker to inspect screenshots and a PDF, then build and verify a long-running visual interface change.",
-      "expected_output": "Route the visual implementation to Opus 5.5 at high through Claude, because it leads screenshot coding at a lower cost per test. Use the row's fallbacks: GPT-6.1 Sol, Gemini 4 Argon at high, Kimi K3.1 Pro, then Muse Spark 1.3. Keep Gemini 4 Argon first only for audio or video input or when another model family is needed.",
+      "expected_output": "Route the visual implementation to Opus 5.5 at high through Claude. Use the row's fallbacks in order: Fable 5.2 at high, GPT-6.1 Sol, Gemini 4 Carbon at high, then Kimi K3.1 Pro. Keep Gemini 4 Carbon first only for audio or video input or when another model family is needed.",
       "assertions": [
         "Selects Opus 5.5 for screenshot and PDF visual implementation",
         "Sets effort explicitly",
@@ -180,7 +180,7 @@
     },
     {
       "id": 17,
-      "prompt": "Launch Claude with Fable 5.1 at xhigh for this already-written planning brief.",
+      "prompt": "Launch Claude with Fable 5.2 at xhigh for this already-written planning brief.",
       "expected_output": "Do not use $routing-agent-work because the worker CLI, model, effort, and lane are already fixed. Apply the route through the current orchestration host.",
       "assertions": [
         "Does not invoke the skill when no selection remains",
@@ -353,7 +353,7 @@
       "should_trigger": true
     },
     {
-      "prompt": "Route a lane that asks Kimi K3.1 Pro, GLM-5.3, and Muse Spark 1.3 to find edge cases in our new rate limiter. The implementer is Opus 5.5.",
+      "prompt": "Route a lane that asks Kimi K3.1 Pro, GLM-5.3, and Muse Ember to find edge cases in our new rate limiter. The implementer is Opus 5.5.",
       "expected_output": "Run the three models as parallel challengers. Treat each finding as a lead. Require a test or command that reproduces each finding before Opus 5.5 or another strong route acts on it.",
       "assertions": [
         "Routes the challengers through OpenCode with supported effort",
@@ -402,11 +402,11 @@
       "should_trigger": true
     },
     {
-      "prompt": "Add an independent reviewer for a finished GPT-6.1 Sol migration. The Claude provider is down, so Opus 5.5, Sonnet 5.5, and Fable 5.1 cannot run. OpenRouter and Cloudflare AI Gateway are also down. Grok 4.7 and GLM-5.3 are available.",
-      "expected_output": "Return the review lane as Unrouted. Gemini 4 Argon has no available route. Grok 4.7 and GLM-5.3 can run as extra challengers, but they do not replace the capable reviewer.",
+      "prompt": "Add an independent reviewer for a finished GPT-6.1 Sol migration. The Claude provider is down, so Opus 5.5, Sonnet 5.5, and Fable 5.2 cannot run. OpenRouter is also down. Grok 4.7 and GLM-5.3 are available.",
+      "expected_output": "Return the review lane as Unrouted. Gemini 4 Carbon has no available route, because its only route is OpenRouter. Grok 4.7 and GLM-5.3 can run as extra challengers, but they do not replace the capable reviewer.",
       "assertions": [
         "Does not promote Grok 4.7 or GLM-5.3 to the reviewer",
-        "Checks the Gemini 4 Argon routes before returning Unrouted",
+        "Checks the Gemini 4 Carbon route before returning Unrouted",
         "Marks the review lane Unrouted",
         "May add challengers whose findings need reproduction"
       ],
@@ -429,7 +429,7 @@
     },
     {
       "id": 65,
-      "prompt": "I ran Muse Spark 1.3, GLM-5.3, and Kimi K3.1 Pro as parallel headless challengers on our rate limiter. Muse returned three findings. GLM exited 0 with no text and reason length. Kimi failed at start with database is locked. What now?",
+      "prompt": "I ran Muse Ember, GLM-5.3, and Kimi K3.1 Pro as parallel headless challengers on our rate limiter. Muse returned three findings. GLM exited 0 with no text and reason length. Kimi failed at start with database is locked. What now?",
       "expected_output": "Run GLM again at high with a raised model output limit, and start Kimi once more. Treat every finding as a lead. Reproduce it with a test or command. Keep a capable different-family reviewer for the verdict.",
       "assertions": [
         "Reads GLM's result as truncated, not as no findings",
@@ -496,12 +496,12 @@
       "files": []
     },
     {
-      "prompt": "Add an independent reviewer for a finished GPT-6.1 Sol migration. The Claude provider is down, so Opus 5.5, Sonnet 5.5, and Fable 5.1 cannot run. OpenRouter works.",
-      "expected_output": "Route the review to Gemini 4 Argon at high through OpenCode. Use cloudflare-ai-gateway/google/gemini-4-argon when the lane accepts Google API terms and gateway logs. Otherwise use openrouter/google/gemini-4-argon pinned to google-vertex with zero data retention. Give it a fresh context with the artifact and requirements. Require reproducible evidence.",
+      "prompt": "Add an independent reviewer for a finished GPT-6.1 Sol migration. The Claude provider is down, so Opus 5.5, Sonnet 5.5, and Fable 5.2 cannot run. OpenRouter works.",
+      "expected_output": "Route the review to Gemini 4 Carbon at high through OpenCode, on openrouter/google/gemini-4-carbon pinned to google-vertex with zero data retention. Give it a fresh context with the artifact and requirements. Require reproducible evidence.",
       "assertions": [
-        "Selects Gemini 4 Argon as the different-family reviewer",
+        "Selects Gemini 4 Carbon as the different-family reviewer",
         "Uses high effort for the consequential review",
-        "Pins the OpenRouter route or uses the Cloudflare route when the output fits",
+        "Pins the OpenRouter route to google-vertex with zero data retention",
         "Uses a fresh review context",
         "Requires reproducible evidence"
       ],
@@ -582,6 +582,56 @@
         "Selects GPT-6.1 Sol at max",
         "Adds a stop budget",
         "Keeps the OpenCode API route behind the Codex subscription route"
+      ],
+      "files": [],
+      "should_trigger": true
+    },
+    {
+      "id": 78,
+      "prompt": "Opus 5.5 at xhigh fell short on a hard architecture plan for our distributed scheduler. Claude weekly headroom is fine and Fable has not been used this week. Escalate.",
+      "expected_output": "Escalate to Fable 5.2 at high or xhigh through Claude with a stop budget, not Opus 5.5 at max. Fable 5.2 at high scores above Opus 5.5 at max on the Artificial Analysis index at a lower cost per task. Set the effort explicitly, because Claude Code defaults Fable 5.2 to medium.",
+      "assertions": [
+        "Selects Fable 5.2 rather than Opus 5.5 at max",
+        "Sets high or xhigh explicitly",
+        "Adds a stop budget",
+        "Does not use Fable 5.2 at max"
+      ],
+      "files": [],
+      "should_trigger": true
+    },
+    {
+      "id": 79,
+      "prompt": "Opus 5.5 at xhigh fell short on a hard planning lane. Host status says Fable 5.2 has already used half of the Claude weekly limit. Codex has headroom.",
+      "expected_output": "Treat Fable 5.2 as unavailable, because it can use at most half of the Claude weekly limit. Escalate Opus 5.5 to max with a stop budget, or use the next planning fallback, GPT-6 Astra, through Codex.",
+      "assertions": [
+        "Treats Fable 5.2 as unavailable at its weekly cap",
+        "Escalates Opus 5.5 to max with a stop budget or advances to GPT-6 Astra",
+        "Does not route to a model outside the fleet"
+      ],
+      "files": [],
+      "should_trigger": true
+    },
+    {
+      "id": 80,
+      "prompt": "Use Gemini 4 Argon at medium as our independent challenger on this API design.",
+      "expected_output": "Gemini 4 Argon is outside the fleet; Gemini 4 Carbon scores higher on the independent boards at a lower cost per task. Do not launch Argon. Return the lane Unrouted for an explicit model change, and name Gemini 4 Carbon at medium through OpenCode, on openrouter/google/gemini-4-carbon pinned to google-vertex with zero data retention, as the fleet route.",
+      "assertions": [
+        "Does not route to Gemini 4 Argon",
+        "Names Gemini 4 Carbon at medium as the fleet route",
+        "Pins the OpenRouter route to google-vertex with zero data retention"
+      ],
+      "files": [],
+      "should_trigger": true
+    },
+    {
+      "id": 81,
+      "prompt": "Route narrow high-volume extraction of five fields from thousands of records. Codex and Claude weekly limits are both nearly used up. The lane requires zero data retention.",
+      "expected_output": "Skip the Codex and Claude rows because their headroom is low. Route to Muse Ember at max through OpenCode on openrouter/meta/muse-ember pinned to google-vertex with zero data retention. DeepSeek V4.1 Flash at max on its Cloudflare Workers AI route is the next fallback. Keep consequential interpretation on a stronger route.",
+      "assertions": [
+        "Moves off the low-headroom subscription routes",
+        "Selects Muse Ember at max",
+        "Pins Muse Ember to google-vertex with zero data retention",
+        "Names DeepSeek V4.1 Flash as the next fallback"
       ],
       "files": [],
       "should_trigger": true

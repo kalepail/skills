@@ -94,7 +94,7 @@ Use lower-cost models from other families as extra challengers. The fleet refere
 
 Treat prose as a separate lane only when prose is a meaningful deliverable. Keep the existing worker when it can write the required text well.
 
-Pass the caller's writing standard into the worker brief. Opus 5.5 is the quality-first default for technical prose. It leads independent human-preference evaluations of writing and instruction following.
+Pass the caller's writing standard into the worker brief. Opus 5.5 is the quality-first default for technical prose. It places near the top of independent human-preference evaluations of text and writing.
 
 ## Return a route card
 
