@@ -16,23 +16,36 @@ runs with stdin closed and a timeout. --listing-file reads saved output instead.
 Matching rules:
 - A pattern must match the whole identifier. Identifiers that carry an unlisted
   suffix, such as a speed variant or a sibling tier, do not match.
-- A pattern has at most one named group, `v`. It captures the version, written as
-  digits and dots. A match with no version ranks below every versioned match.
+- A pattern may use two named groups and no others (any other name is a usage
+  error). `v` captures the version, written as digits and dots. `s` captures a
+  snapshot identity, which is compared for equality only and never sorted. A match
+  with no `v` ranks below every versioned match.
 - Versions compare as integer tuples: 6 < 6.1 < 6.2 and 4.7 < 4.20. Trailing zero
-  components are ignored. When the tuple winner and the plain-decimal winner differ
-  (4.20 against 4.7, 6.10 against 6.9), the vendor's numbering is unclear and the
-  result is `ambiguous`.
+  components are ignored. The result is `ambiguous` when that order and the plain
+  decimal order of the major.minor prefix disagree about the newest version
+  (4.20 against 4.7, 6.10 against 6.9, or 4.20 beside 4.7 and 4.6.1). A patch
+  release of one prefix (4.7.1 beside 4.7) is not a disagreement.
 - --pattern repeats, one per provider row, in provider order. The script finds the
   highest version across every pattern and returns the first pattern that carries
   it. A pattern that carries only an older version is reported as `stale` and is
   never selected. Later patterns at the top version are reported as `alternates`.
-- More than one identifier at the top version inside the selected pattern is
-  `ambiguous`. The script never sorts snapshot suffixes.
+- Each of these is `ambiguous`: more than one distinct identifier at the top
+  version inside any one row, selected or not; more than one distinct `s` value
+  (or an `s` value beside a match with none) among the top-version matches of all
+  rows. Mirrors of one snapshot across rows resolve in provider order.
 - Codex entries with `visibility: hide` are ignored. --access-program (Codex only)
   keeps an entry only when `available_access_programs.cyber` lists that program.
+  Missing or null metadata means no programs. Any other shape than a mapping with a
+  list of strings under `cyber` is a listing error.
+- Grok rows must sit under an `Available models:` line. OpenCode rows must be
+  provider-qualified identifiers. A malformed row is a listing error, not a no
+  match. --dir sets both the working directory and `PWD` of the listing command.
 
-Output: one JSON line on stdout with `status`, `cli`, `patterns`, `resolved`,
-`version`, `pattern_index`, `alternates`, `stale`, and `candidates`.
+Output, one JSON line on stdout. Exit 0, 1, and 3 print the full shape: `status`
+(resolved, no-match, or ambiguous), `cli`, `patterns`, `resolved`, `version`,
+`pattern_index`, `alternates`, `stale`, and `candidates`. Ambiguous results list
+every contender in `candidates`. Exit 4 and 64 print only `{status, error}`, with
+status `error` or `usage-error`.
 
 Exit codes: 0 resolved; 1 no match; 3 ambiguous; 4 the listing failed, could not be
 parsed, or the script hit an internal error; 64 usage error.
@@ -56,7 +69,10 @@ LISTING_CMDS = {
 }
 DEFAULT_TIMEOUT = 60
 VERSION_RE = re.compile(r"[0-9]+(\.[0-9]+)*")
-GROK_LINE = re.compile(r"^\s*[*-]\s+(\S+)")
+GROK_SECTION = re.compile(r"^\s*Available models:\s*$")
+GROK_ROW = re.compile(r"^\s+[*-]\s+([A-Za-z0-9][A-Za-z0-9._-]*)(\s+\(default\))?\s*$")
+QUALIFIED_ID = re.compile(r"[^\s/]+(/[^\s/]+)+")
+ALLOWED_GROUPS = {"v", "s"}
 ACCESS_KEY = "cyber"
 
 
@@ -74,6 +90,8 @@ class QuietParser(argparse.ArgumentParser):
 
 
 def run_listing(cmd, work_dir, timeout):
+    cwd = os.path.abspath(work_dir) if work_dir else None
+    env = dict(os.environ, PWD=cwd) if cwd else None
     try:
         done = subprocess.run(
             cmd,
@@ -81,7 +99,8 @@ def run_listing(cmd, work_dir, timeout):
             capture_output=True,
             text=True,
             timeout=timeout,
-            cwd=work_dir,
+            cwd=cwd,
+            env=env,
         )
     except subprocess.TimeoutExpired:
         raise ListingError("listing timed out after %ss: %s" % (timeout, " ".join(cmd)))
@@ -90,6 +109,20 @@ def run_listing(cmd, work_dir, timeout):
     if done.returncode != 0:
         raise ListingError("%s exited %d: %s" % (" ".join(cmd), done.returncode, done.stderr[-300:].strip()))
     return done.stdout
+
+
+def entry_programs(entry):
+    programs = entry.get("available_access_programs")
+    if programs is None:
+        return []
+    if not isinstance(programs, dict):
+        raise ListingError("%s: available_access_programs is not a mapping" % entry["slug"])
+    cyber = programs.get(ACCESS_KEY)
+    if cyber is None:
+        return []
+    if not isinstance(cyber, list) or not all(isinstance(item, str) for item in cyber):
+        raise ListingError("%s: available_access_programs.%s is not a list of strings" % (entry["slug"], ACCESS_KEY))
+    return cyber
 
 
 def codex_identifiers(text, access_program):
@@ -106,20 +139,38 @@ def codex_identifiers(text, access_program):
             raise ListingError("codex listing has an entry with no slug")
         if entry.get("visibility") == "hide":
             continue
-        if access_program:
-            programs = (entry.get("available_access_programs") or {}).get(ACCESS_KEY) or []
-            if access_program not in programs:
-                continue
+        if access_program and access_program not in entry_programs(entry):
+            continue
         found.append(entry["slug"])
     return found
 
 
 def grok_identifiers(text):
-    return [m.group(1) for m in map(GROK_LINE.match, text.splitlines()) if m]
+    lines = text.splitlines()
+    start = next((n + 1 for n, line in enumerate(lines) if GROK_SECTION.match(line)), None)
+    if start is None:
+        raise ListingError("grok listing has no 'Available models:' section")
+    found = []
+    for line in lines[start:]:
+        if not line.strip():
+            continue
+        match = GROK_ROW.match(line)
+        if not match:
+            raise ListingError("grok listing has a malformed model row: %r" % line.strip()[:80])
+        found.append(match.group(1))
+    return found
 
 
 def opencode_identifiers(text):
-    return [line.strip() for line in text.splitlines() if line.strip() and not re.search(r"\s", line.strip())]
+    found = []
+    for line in text.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        if not QUALIFIED_ID.fullmatch(line):
+            raise ListingError("opencode listing has a malformed row: %r" % line[:80])
+        found.append(line)
+    return found
 
 
 def load_listing(cli, access_program, work_dir, listing_file, timeout):
@@ -155,10 +206,23 @@ def compile_patterns(patterns):
     compiled = []
     for pattern in patterns:
         try:
-            compiled.append(re.compile(pattern))
+            regex = re.compile(pattern)
         except re.error as error:
             raise UsageError("bad pattern %r: %s" % (pattern, error))
+        extra = sorted(set(regex.groupindex) - ALLOWED_GROUPS)
+        if extra:
+            raise UsageError("pattern %r has unsupported named groups %s; only v and s are allowed" % (pattern, extra))
+        compiled.append(regex)
     return compiled
+
+
+def prefix_decimal(text):
+    parts = text.split(".")
+    return Decimal(parts[0] + ("." + parts[1] if len(parts) > 1 else ""))
+
+
+def prefix_tuple(key):
+    return (key[0], key[1] if len(key) > 1 else 0)
 
 
 def resolve(identifiers, patterns):
@@ -172,31 +236,43 @@ def resolve(identifiers, patterns):
             if not match or ident in seen:
                 continue
             seen.add(ident)
-            text = match.groupdict().get("v") or ""
-            key, dec = parse_version(text)
-            candidates.append({"id": ident, "version": text, "pattern_index": index, "key": key, "dec": dec})
+            groups = match.groupdict()
+            text = groups.get("v") or ""
+            key, _ = parse_version(text)
+            candidates.append({"id": ident, "version": text, "pattern_index": index, "key": key,
+                               "snap": groups.get("s"), "dec": prefix_decimal(text) if text else None})
     result = {"patterns": list(patterns), "resolved": None, "version": None, "pattern_index": None,
               "alternates": [], "stale": [], "candidates": []}
     if not candidates:
         return "no-match", result
     top = max(c["key"] for c in candidates)
     tops = [c for c in candidates if c["key"] == top]
+    contenders = []  # every identifier that makes the result unclear
+
+    def contend(items):
+        for item in items:
+            if item not in contenders:
+                contenders.append(item)
+
+    if len({c["snap"] for c in tops}) > 1:
+        contend(tops)
+    for index in sorted({c["pattern_index"] for c in tops}):
+        row = [c for c in tops if c["pattern_index"] == index]
+        if len(row) > 1:
+            contend(row)
     versioned = [c for c in candidates if c["key"]]
-    status = "resolved"
-    if versioned and all(c["dec"] is not None for c in versioned):
+    if versioned and top:
         best = max(c["dec"] for c in versioned)
-        decimal_tops = {c["id"] for c in versioned if c["dec"] == best}
-        if decimal_tops != {c["id"] for c in tops}:
-            status = "ambiguous"
-    selected = min(c["pattern_index"] for c in tops)
-    in_pattern = [c for c in tops if c["pattern_index"] == selected]
-    if len(in_pattern) > 1:
-        status = "ambiguous"
+        if any(c["dec"] > t["dec"] or (c["dec"] == t["dec"] and prefix_tuple(c["key"]) != prefix_tuple(t["key"]))
+               for t in tops for c in versioned):
+            contend(tops)
+            contend([c for c in versioned if c["dec"] == best])
     public = lambda c: {"id": c["id"], "version": c["version"], "pattern_index": c["pattern_index"]}
-    if status == "ambiguous":
-        result["candidates"] = [public(c) for c in (tops if len(in_pattern) > 1 else candidates)]
-        return status, result
-    winner = in_pattern[0]
+    if contenders:
+        result["candidates"] = [public(c) for c in sorted(contenders, key=lambda c: (c["pattern_index"], c["id"]))]
+        return "ambiguous", result
+    selected = min(c["pattern_index"] for c in tops)
+    winner = next(c for c in tops if c["pattern_index"] == selected)
     result.update(resolved=winner["id"], version=winner["version"], pattern_index=selected,
                   alternates=[c["id"] for c in tops if c["pattern_index"] != selected],
                   candidates=[public(c) for c in candidates])
@@ -204,16 +280,16 @@ def resolve(identifiers, patterns):
     for index in sorted({c["pattern_index"] for c in candidates} - top_patterns):
         newest = max((c for c in candidates if c["pattern_index"] == index), key=lambda c: c["key"])
         result["stale"].append({"pattern_index": index, "newest": newest["id"], "version": newest["version"]})
-    return status, result
+    return "resolved", result
 
 
 def build_parser():
     parser = QuietParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--cli", choices=sorted(LISTING_CMDS), help="worker CLI whose listing to read")
     parser.add_argument("--pattern", action="append", default=[],
-                        help="identifier regex with an optional (?P<v>...) version group; repeat once per provider row, in order")
+                        help="identifier regex with optional (?P<v>...) version and (?P<s>...) snapshot groups; repeat once per provider row, in order")
     parser.add_argument("--access-program", help="Codex only: keep entries whose cyber access programs list this name")
-    parser.add_argument("--dir", help="run the listing command in this directory")
+    parser.add_argument("--dir", help="run the listing command in this directory, with PWD set to it")
     parser.add_argument("--listing-file", help="read saved listing output instead of running the CLI")
     parser.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT, help="seconds before the listing command is stopped")
     parser.add_argument("--self-test", action="store_true", help="run offline checks")
@@ -303,11 +379,13 @@ def self_test():
                 code = main(argv + list(extra))
             return code, json.loads(out.getvalue())
 
-    def check(name, got, want_code, want_id=None, **extra):
+    def check(name, got, want_code, want_id=None, candidate_ids=None, **extra):
         code, out = got
         assert code == want_code, (name, "exit", code, out)
         if want_id is not None or want_code == 0:
             assert out.get("resolved") == want_id, (name, "resolved", out)
+        if candidate_ids is not None:
+            assert {c["id"] for c in out["candidates"]} == set(candidate_ids), (name, "candidates", out["candidates"])
         for key, value in extra.items():
             assert out.get(key) == value, (name, key, out)
 
@@ -326,7 +404,8 @@ def self_test():
 
     kimi = r"openrouter/moonshotai/kimi-k(?P<v>[0-9.]+)(-pro)?"
     check("kimi drops code, thinking, and highspeed", listing("opencode", oc, [kimi]), 0,
-          "openrouter/moonshotai/kimi-k3.1-pro", version="3.1")
+          "openrouter/moonshotai/kimi-k3.1-pro", version="3.1",
+          candidate_ids=["openrouter/moonshotai/kimi-k3", "openrouter/moonshotai/kimi-k3.1-pro"])
     check("kimi highspeed own call", listing("opencode", oc, [r"moonshotai/kimi-k(?P<v>[0-9.]+)-pro-highspeed"]), 0,
           "moonshotai/kimi-k3.1-pro-highspeed")
     check("kimi provider order", listing("opencode", oc, [kimi, r"moonshotai/kimi-k(?P<v>[0-9.]+)-pro"]), 0,
@@ -342,18 +421,40 @@ def self_test():
     assert got[1]["stale"] == [{"pattern_index": 0, "newest": "cloudflare-workers-ai/@cf/zai-org/glm-4.7-flash",
                                 "version": "4.7"}], got
 
-    snap = [r"cloudflare-workers-ai/@cf/deepseek-ai/deepseek-v(?P<v>[0-9.]+)-flash-[0-9]{4}",
-            r"openrouter/deepseek/deepseek-v(?P<v>[0-9.]+)-flash-[0-9]{4}"]
+    snap = [r"cloudflare-workers-ai/@cf/deepseek-ai/deepseek-v(?P<v>[0-9.]+)-flash-(?P<s>[0-9]{4})",
+            r"openrouter/deepseek/deepseek-v(?P<v>[0-9.]+)-flash-(?P<s>[0-9]{4})"]
+    cf, orr = "cloudflare-workers-ai/@cf/deepseek-ai/deepseek-v", "openrouter/deepseek/deepseek-v"
     check("deepseek requires the snapshot", listing("opencode", oc, snap), 0,
-          "cloudflare-workers-ai/@cf/deepseek-ai/deepseek-v4.1-flash-1017")
+          cf + "4.1-flash-1017", alternates=[orr + "4.1-flash-1017"], stale=[])
     check("deepseek second snapshot fails closed",
-          listing("opencode", oc + "openrouter/deepseek/deepseek-v4.1-flash-1101\n", snap[1:]), 3, None)
+          listing("opencode", oc + orr + "4.1-flash-1101\n", snap[1:]), 3)
+    check("deepseek split snapshots across rows", listing("opencode", cf + "5-flash-0301\n" + orr + "5-flash-0415\n", snap), 3,
+          candidate_ids=[cf + "5-flash-0301", orr + "5-flash-0415"])
+    check("deepseek tied alternate row",
+          listing("opencode", cf + "5-flash-0301\n" + orr + "5-flash-0301\n" + orr + "5-flash-0415\n", snap), 3,
+          candidate_ids=[cf + "5-flash-0301", orr + "5-flash-0301", orr + "5-flash-0415"])
+    check("deepseek same-snapshot mirrors keep provider order",
+          listing("opencode", cf + "5-flash-0301\n" + orr + "5-flash-0301\n", snap), 0, cf + "5-flash-0301",
+          alternates=[orr + "5-flash-0301"])
+    check("deepseek older snapshot row is stale",
+          listing("opencode", cf + "4.1-flash-1017\n" + orr + "5-flash-0301\n", snap), 0, orr + "5-flash-0301",
+          stale=[{"pattern_index": 0, "newest": cf + "4.1-flash-1017", "version": "4.1"}])
     check("deepseek no-snapshot pattern ties", listing("opencode", oc, [r"openrouter/deepseek/deepseek-v(?P<v>[0-9.]+)-flash(-[0-9]{4})?"]), 3)
+    check("snapshot beside a match with none is ambiguous",
+          listing("opencode", "p/m-1-0301\np/m-1\n", [r"p/m-(?P<v>[0-9.]+)-(?P<s>[0-9]{4})", r"p/m-(?P<v>[0-9.]+)"]), 3)
 
     grok_or = r"openrouter/x-ai/grok-(?P<v>[0-9.]+)"
     check("4.20 against 4.7 is ambiguous", listing("opencode", oc, [grok_or]), 3)
     check("6.10 against 6.9 is ambiguous", listing("opencode", "p/m-6.9\np/m-6.10\n", [r"p/m-(?P<v>[0-9.]+)"]), 3)
     check("6 < 6.1 < 6.2", listing("opencode", "p/m-6\np/m-6.2\np/m-6.1\n", [r"p/m-(?P<v>[0-9.]+)"]), 0, "p/m-6.2")
+    gv = r"p/g-(?P<v>[0-9.]+)"
+    check("4.20 beside 4.7 and an older patch release", listing("opencode", "p/g-4.20\np/g-4.7\np/g-4.6.1\n", [gv]), 3,
+          candidate_ids=["p/g-4.20", "p/g-4.7"])
+    check("patch release of the same prefix", listing("opencode", "p/g-4.7.1\np/g-4.7\n", [gv]), 0, "p/g-4.7.1")
+    check("4.70 beside 4.7 is unclear", listing("opencode", "p/g-4.70\np/g-4.7\n", [gv]), 3)
+    check("row tie and decimal disagreement list both sets",
+          listing("opencode", "p/g-4.20\np/g-4.20.0\np/g-4.7\n", [gv]), 3,
+          candidate_ids=["p/g-4.20", "p/g-4.20.0", "p/g-4.7"])
     check("trailing zero is the same version", listing("opencode", "p/m-6\np/m-6.0\n", [r"p/m-(?P<v>[0-9.]+)"]), 3)
 
     check("unversioned family", listing("opencode", oc, [r"openrouter/meta/muse-ember"]), 0, "openrouter/meta/muse-ember", version="")
@@ -365,7 +466,34 @@ def self_test():
     check("no match keeps patterns empty of a pick", listing("opencode", oc, [r"openrouter/z-ai/glm-(?P<v>[0-9.]+)-pro"]), 1, resolved=None)
     check("empty opencode listing", listing("opencode", "\n", [r"p/m"]), 4)
 
+    check("grok error bullet", listing("grok", "- error: catalog unavailable\n", [r"grok-(?P<v>[0-9.]+)"]), 4)
+    check("grok error row inside the section", listing("grok", "Available models:\n  - error: catalog unavailable\n", [r"grok-(?P<v>[0-9.]+)"]), 4)
+    check("grok valid sibling-only listing", listing("grok", grok, [r"grok-code-(?P<v>[0-9.]+)"]), 1)
+    check("opencode error text", listing("opencode", "Unauthorized\n", [r"openrouter/google/gemini-(?P<v>[0-9.]+)-carbon"]), 4)
+    check("opencode error row with spaces", listing("opencode", "Error: x/y failed\n", [r"x/y"]), 4)
+    check("opencode valid sibling-only listing", listing("opencode", "openrouter/google/gemini-5-titanium\n",
+                                                       [r"openrouter/google/gemini-(?P<v>[0-9.]+)-carbon"]), 1)
+    check("opencode nested and @cf rows", listing("opencode", "cloudflare-workers-ai/@cf/zai-org/glm-5.3\nopenrouter/~z-ai/glm-latest\n",
+                                                 [r"cloudflare-workers-ai/@cf/zai-org/glm-(?P<v>[0-9.]+)"]), 0,
+          "cloudflare-workers-ai/@cf/zai-org/glm-5.3")
+
+    def access(programs):
+        entry = {"slug": "gpt-7-sol", "visibility": "list"}
+        if programs != "absent":
+            entry["available_access_programs"] = {"cyber": programs}
+        return json.dumps({"models": [entry]})
+    want = ["--access-program", "daybreak_blue"]
+    check("access program string is invalid", listing("codex", access("not_daybreak_blue"), [sol], want), 4)
+    check("access program map is invalid", listing("codex", access({"daybreak_blue": False}), [sol], want), 4)
+    check("access program list of non-strings is invalid", listing("codex", access([1]), [sol], want), 4)
+    check("access program null means none", listing("codex", access(None), [sol], want), 1)
+    check("access program absent means none",
+          listing("codex", json.dumps({"models": [{"slug": "gpt-7-sol", "visibility": "list"}]}), [sol], want), 1)
+    check("access program list", listing("codex", access(["standard", "daybreak_blue"]), [sol], want), 0, "gpt-7-sol")
+    check("access program metadata is not read without the option", listing("codex", access("odd"), [sol]), 0, "gpt-7-sol")
+
     check("bad regex", listing("opencode", oc, ["(unclosed"]), 64)
+    check("misspelled version group", listing("opencode", "example/model-2\nexample/model-3\n", [r"example/model-(?P<version>[0-9]+)"]), 64)
     check("duplicate version group", listing("opencode", oc, [r"(?P<v>1)(?P<v>2)"]), 64)
 
     with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
@@ -380,6 +508,31 @@ def self_test():
             assert main(["--cli", "grok", "--pattern", "x"]) == 4, "internal error"
         finally:
             globals()["load_listing"] = real
+    with tempfile.TemporaryDirectory() as tmp:
+        project = os.path.join(os.path.realpath(tmp), "project")
+        os.mkdir(project)
+        stubs = {}
+        for name, body in (("show", 'import os\nprint("openrouter/stub/cwd-%s-pwd-%s" % (os.path.basename(os.getcwd()), os.path.basename(os.environ["PWD"])))\n'),
+                           ("slow", "import time\ntime.sleep(5)\n")):
+            stub_dir = os.path.join(os.path.realpath(tmp), name)
+            os.mkdir(stub_dir)
+            path = os.path.join(stub_dir, "opencode")
+            with open(path, "w", encoding="utf-8") as handle:
+                handle.write("#!%s\n%s" % (sys.executable, body))
+            os.chmod(path, 0o755)
+            stubs[name] = stub_dir
+        old_path = os.environ["PATH"]
+        try:
+            for name, extra, want in (("show", [], 0), ("slow", ["--timeout", "1"], 4)):
+                os.environ["PATH"] = stubs[name] + os.pathsep + old_path
+                out = io.StringIO()
+                with contextlib.redirect_stdout(out), contextlib.redirect_stderr(io.StringIO()):
+                    code = main(["--cli", "opencode", "--dir", project, "--pattern", "openrouter/stub/cwd-project-pwd-project"] + extra)
+                assert code == want, ("public CLI stub", name, code, out.getvalue())
+                if want == 0:
+                    assert json.loads(out.getvalue())["resolved"] == "openrouter/stub/cwd-project-pwd-project", out.getvalue()
+        finally:
+            os.environ["PATH"] = old_path
     try:
         run_listing([sys.executable, "-c", "import time; time.sleep(5)"], None, 1)
         raise AssertionError("timeout not raised")

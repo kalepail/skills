@@ -38,7 +38,7 @@ Fallbacks handle an unavailable route. Escalation handles failure cost. Escalate
 
 When the caller pins only the worker CLI, apply the pinned-CLI rule in the fleet reference.
 
-A model version the caller names is a caller constraint, like a pinned CLI. Honor it and record it on the card as `caller-pinned`. If that version is not listed, the route is unavailable. The skill never picks a version itself.
+A model version the caller names is a caller constraint, like a pinned CLI. Honor it and mark it `(caller-pinned)` on the card. If that version is not listed, the route is unavailable. The skill never picks a version itself.
 
 An `Unrouted` lane does not launch. Return it to the caller for an explicit constraint change or fleet update.
 
@@ -46,8 +46,8 @@ Treat a safeguard handoff to a model outside the fleet as an unavailable route. 
 
 Before launch, check only the selected route. Do not enumerate or score unrelated models.
 
-1. Resolve the selected family on the host that launches the worker, and confirm the effort control. The resolution is the identifier check. Claude takes an alias. For Codex, Grok, and OpenCode, run `scripts/resolve_model.py` with the patterns in the fleet reference ("Resolve the family").
-2. If the resolved identifier fails, try its alternates and each provider the fleet lists for that family, then the next fallback. When the newest version is unavailable, the family is unavailable. Do not launch an older version.
+1. Resolve the selected family on the host that launches the worker, and confirm the effort control. The resolution is the identifier check. Claude takes an alias. For Codex, Grok, and OpenCode, run `scripts/resolve_model.py` with the patterns in the fleet reference ("Resolve the family"), passing only the rows the lane's data terms accept. For a caller-pinned version, check the pinned identifier directly in the same listing instead.
+2. If the resolved or pinned identifier fails, try only its same-version alternates, then the next family. When the newest version is unavailable, the family is unavailable. Do not launch an older version.
 3. If only the effort value fails, use a supported value that meets the lane requirement and the model's range. Otherwise, use the next fallback.
 4. When a route needs a harness property, such as preserved reasoning history, confirm it through host documentation or the caller. Skip the route when nobody can confirm it.
 
@@ -105,7 +105,7 @@ Return one compact card for each lane:
 ```text
 Lane: <bounded output>
 Worker CLI: <Claude | Codex | Grok | OpenCode | none>
-Model: <fleet family> → <resolved identifier> | caller-pinned <version> | Unrouted
+Model: <fleet family> → <resolved identifier> | <fleet family> → <identifier> (caller-pinned) | Unrouted
 Effort: <explicit supported value | none>
 Reason: <lane fit and failure-cost rationale>
 Verified: <resolution or host status check>

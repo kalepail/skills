@@ -51,10 +51,10 @@ Resolve only the selected route, on the host that launches the worker. Listings 
 
 Read the result:
 
-- Exit 0: launch `resolved`. If that identifier fails on sign-in, billing, or a missing variant, try each identifier in `alternates`, which carry the same version on later provider rows.
-- A row in `stale` carries only an older version. Never launch it.
+- Exit 0: launch `resolved`. If that identifier fails on sign-in, billing, or a missing variant, try only the identifiers in `alternates`, which carry the same version on later provider rows. Then take the next fallback family.
+- A row in `stale` carries only an older version. Never launch it, and never launch an older version of the family.
 - Exit 1 (no match) and exit 3 (ambiguous): the family is unavailable. Take the next fallback and flag the fleet for review.
-- Exit 4: the listing failed or could not be parsed. Read the listing by hand with the CLI's own command, or take the next fallback.
+- Exit 4: the listing failed or could not be parsed, or the script hit an internal error. Read the listing by hand with the CLI's own command and apply the same rules: full match, newest version, and a tie fails. Or take the next fallback.
 - Exit 64: the call is wrong. Fix it.
 
 Follow these resolution rules:
@@ -62,8 +62,8 @@ Follow these resolution rules:
 - Patterns match the whole identifier, so sibling tiers and speed variants fall out. Speed variants are a mode of their family, never a family: Grok `-build-fast`, Kimi `-highspeed`, MiMo `-ultraspeed`, and the Codex `fast` and `ultrafast` service tiers. The one fleet use is the Kimi highspeed provider row, which resolves in its own call.
 - Do not use the OpenRouter `~<vendor>/<family>-latest` aliases. They hide the model they run, so the provider pin, the effort variants, and the run record cannot name it.
 - Do not select `gpt-daybreak-blue-latest`. It does not name the model it runs.
-- DeepSeek Flash patterns require the four-digit snapshot suffix. A second snapshot of the same version fails closed with exit 3 and triggers a fleet review.
-- A family whose newest release drops its tier name no longer matches. Take the next fallback and flag the fleet for review.
+- DeepSeek Flash patterns require the four-digit snapshot suffix and capture it as `s`, for equality only. A second snapshot of the same version, on any row, fails closed with exit 3 and triggers a fleet review. The same snapshot on several rows resolves in provider order.
+- A vendor's renamed tier is a new family. When you identify one, flag a fleet review. The pattern keeps selecting the older tier until the fleet changes. If every matching identifier disappears, the family is unavailable.
 
 ## Route by lane
 
@@ -151,7 +151,7 @@ These stay out of the fleet:
 
 ## Select the provider
 
-Resolve the family with every row's pattern in one call, in this order. The result is the first row that carries the newest version. Skip a row whose data terms the lane does not accept. Treat a route that fails on sign-in, billing, or a missing variant as unavailable, and try `alternates`, then the next fallback.
+Resolve the family with every eligible row's pattern in one call, in this order. The result is the first row that carries the newest version. Drop a row whose data terms the lane does not accept before you resolve, and pass only the remaining rows' patterns. Treat a route that fails on sign-in, billing, or a missing variant as unavailable, and try `alternates`, then the next fallback.
 
 | Family | Provider order |
 |---|---|
@@ -159,7 +159,7 @@ Resolve the family with every row's pattern in one call, in this order. The resu
 | Gemini Carbon | `openrouter/google/gemini-(?P<v>[0-9.]+)-carbon`, pinned to `google-vertex` with zero data retention |
 | GLM | 1. `cloudflare-workers-ai/@cf/zai-org/glm-(?P<v>[0-9.]+)`. 2. `openrouter/z-ai/glm-(?P<v>[0-9.]+)`, pinned to `cloudflare` with zero data retention |
 | GLM Flash | 1. `cloudflare-workers-ai/@cf/zai-org/glm-(?P<v>[0-9.]+)-flash`. 2. `openrouter/z-ai/glm-(?P<v>[0-9.]+)-flash`, pinned to `z-ai` with zero data retention. 3. `opencode/glm-(?P<v>[0-9.]+)-flash-free`, when the lane fits its smaller context and output limits |
-| DeepSeek Flash | 1. `cloudflare-workers-ai/@cf/deepseek-ai/deepseek-v(?P<v>[0-9.]+)-flash-[0-9]{4}`. 2. `openrouter/deepseek/deepseek-v(?P<v>[0-9.]+)-flash-[0-9]{4}`, pinned to `cloudflare` with zero data retention. 3. `opencode/deepseek-v(?P<v>[0-9.]+)-flash-free`, when the lane fits its smaller context and output limits |
+| DeepSeek Flash | 1. `cloudflare-workers-ai/@cf/deepseek-ai/deepseek-v(?P<v>[0-9.]+)-flash-(?P<s>[0-9]{4})`. 2. `openrouter/deepseek/deepseek-v(?P<v>[0-9.]+)-flash-(?P<s>[0-9]{4})`, pinned to `cloudflare` with zero data retention |
 | Muse Ember | `openrouter/meta/muse-ember(-(?P<v>[0-9.]+))?`, pinned to `google-vertex` with zero data retention |
 | Muse Wonder | `openrouter/meta/muse-wonder(-(?P<v>[0-9.]+))?`, pinned to `meta`. No zero-retention host exists |
 | MiMo Pro | `openrouter/xiaomi/mimo-v(?P<v>[0-9.]+)-pro`, pinned to `deepinfra` with zero data retention |

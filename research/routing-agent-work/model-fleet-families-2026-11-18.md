@@ -26,7 +26,7 @@ Resolution is mechanical, repeated on every non-Claude launch, and fragile when 
 - Versions sort numerically (`6` < `6.1` < `6.2`), and xAI numbering breaks a pure numeric order: the OpenRouter listing has `grok-4.20` beside `grok-4.3` to `grok-4.7`, and `grok-4.20-0309` is the older model. When the integer-tuple winner and the plain-decimal winner differ, the script reports `ambiguous`.
 - Speed variants and sibling tiers must drop out: `-build-fast`, `-highspeed`, `-ultraspeed`, `-flash`, `-flashx`, `-prime`, `-turbo`, and the hidden `gpt-reserve`.
 - A provider order can pin a stale version. On agentpc, Cloudflare Workers AI lists `glm-4.7-flash` and OpenRouter lists `glm-5.3-flash`, so resolving each provider row alone would launch the older model. The script resolves across every row and reports the older rows as `stale`.
-- DeepSeek Flash ties inside one provider: `deepseek-v4.1-flash` and `deepseek-v4.1-flash-1017` share version 4.1. The patterns require the four-digit snapshot, and a second snapshot of one version exits 3. The script never sorts snapshots, because `MMDD` wraps at the year boundary.
+- DeepSeek Flash ties inside one provider: `deepseek-v4.1-flash` and `deepseek-v4.1-flash-1017` share version 4.1. The patterns require the four-digit snapshot and capture it as `s`. A second snapshot of one version on any row, or different snapshots on different rows, exits 3, and one snapshot mirrored across rows resolves in provider order. The script never sorts snapshots, because `MMDD` wraps at the year boundary.
 
 ### Decision: no OpenRouter `~vendor/<family>-latest` aliases
 
@@ -49,7 +49,7 @@ These runs read the live listings on 2026-11-18 from `/home/tyler/code/kalepail-
 | Gemini Carbon | `openrouter/google/gemini-4-carbon` |
 | GLM | `cloudflare-workers-ai/@cf/zai-org/glm-5.3`, with `openrouter/z-ai/glm-5.3` as an alternate |
 | GLM Flash | `openrouter/z-ai/glm-5.3-flash`; the Cloudflare row is stale at `glm-4.7-flash` |
-| DeepSeek Flash | `cloudflare-workers-ai/@cf/deepseek-ai/deepseek-v4.1-flash-1017`, with the OpenRouter and free routes as alternates |
+| DeepSeek Flash | `cloudflare-workers-ai/@cf/deepseek-ai/deepseek-v4.1-flash-1017`, with the OpenRouter mirror of the same snapshot as an alternate (the free row was removed afterward; see the dispositions) |
 | Muse Ember | `openrouter/meta/muse-ember` |
 | Muse Wonder | `openrouter/meta/muse-wonder` |
 | MiMo Pro | `openrouter/xiaomi/mimo-v2.6-pro` |
@@ -407,9 +407,9 @@ Each claim below is quoted exactly from `git show origin/main:skills/productivit
 - Quote: "`openrouter/deepseek/deepseek-v4.1-flash-1017`"
   - Measured on: Pinned identifier; no measurement.
   - Disposition: replaced by the family's identifier pattern in `fleet.md` ("Select the provider").
-- Quote: "`opencode/deepseek-v4.1-flash-free`"
-  - Measured on: Pinned identifier; no measurement.
-  - Disposition: replaced by the family's identifier pattern in `fleet.md` ("Select the provider").
+- Quote: "3. `opencode/deepseek-v4.1-flash-free`, when the lane fits its smaller context and output limits"
+  - Measured on: Provider row; no measurement.
+  - Disposition: removed from the provider order. The free identifier carries no snapshot, so its snapshot identity cannot be checked against the Cloudflare and OpenRouter rows. Resolution requires the four-digit snapshot (captured as `s`) on every DeepSeek Flash row. The owner may want the row back with an identity check; see the owner questions in `EXEC.md`.
 - Quote: "`openrouter/meta/muse-ember`"
   - Measured on: Pinned identifier; no measurement.
   - Disposition: replaced by the family's identifier pattern in `fleet.md` ("Select the provider").

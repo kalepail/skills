@@ -11,7 +11,7 @@ python3 <skill-dir>/scripts/resolve_model.py --cli opencode --dir <work-dir> \
   --pattern '<first provider row>' --pattern '<next provider row>'
 ```
 
-Launch the `resolved` identifier. Treat exit 1 or 3 as unavailable, and use the next fallback. Skip the script when host status already names the resolved identifier.
+Launch the `resolved` identifier. Treat exit 1 or 3 as unavailable, and use the next fallback. Skip the script only when host status shows a resolution on the same host and work directory.
 
 Effort values differ between providers for one model. OpenCode caches the catalog, so read the route's values there:
 
@@ -20,6 +20,8 @@ python3 -c 'import json,os,sys; d=json.load(open(os.path.expanduser("~/.cache/op
 ```
 
 A `toggle` entry with no `effort` list means the route has no effort variants. A run with a missing variant stops at once with `Variant unavailable`.
+
+When the variant metadata cannot be read, such as a missing cache file or a route absent from it, effort support is unconfirmed. That differs from "no effort variants". Confirm it through host status, or take the next fallback.
 
 ## Select the model for an interactive session
 
@@ -91,7 +93,7 @@ python3 <skill-dir>/scripts/opencode_worker.py --model openrouter/<vendor>/<mode
 ```
 
 Take `<vendor>/<model>` from the resolved identifier, after its `openrouter/` prefix. The same `providers` entry can go in the work directory's `opencode.json`. The fleet reference names the `<host>` for each family.
-A pin that no host matches stops at once with `No endpoints found`. Treat that route as unavailable, and use the next provider.
+A pin that no host matches stops at once with `No endpoints found`. Treat that route as unavailable. Try a same-version alternate from the resolution, then the next fallback.
 
 ## Know the failure modes
 
