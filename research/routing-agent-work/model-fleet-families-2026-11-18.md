@@ -34,7 +34,7 @@ OpenRouter lists aliases such as `~moonshotai/kimi-latest`, `~google/gemini-pro-
 
 ### Live resolution on agentpc
 
-These runs read the live listings on 2026-11-18 from `/home/tyler/code/kalepail-skills`. The direct `moonshotai/` provider is absent from agentpc's OpenCode listing, so the Kimi highspeed fixture in the self-test is synthetic and its live run reports no match.
+These runs read the live listings on 2026-11-18 from the repository root. The direct `moonshotai/` provider is absent from agentpc's OpenCode listing, so the Kimi highspeed fixture in the self-test is synthetic and its live run reports no match.
 
 | Family | Resolved identifier |
 |---|---|
