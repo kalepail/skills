@@ -1,16 +1,17 @@
 # Run OpenCode Workers
 
-Read this before you launch an OpenCode route. An interactive OpenCode session in a terminal multiplexer needs only the catalog check and a model selection.
+Read this before you launch an OpenCode route. An interactive OpenCode session in a terminal multiplexer needs only the resolution and a model selection.
 
-## Check the catalog
+## Resolve the model
 
-Model availability is project-specific. Confirm the identifier from the work directory:
+Model availability is project-specific. Resolve the family from the work directory, with one `--pattern` per provider row from the fleet reference, in order:
 
 ```bash
-cd <work-dir> && opencode models | grep '^<provider>/'
+python3 <skill-dir>/scripts/resolve_model.py --cli opencode --dir <work-dir> \
+  --pattern '<first provider row>' --pattern '<next provider row>'
 ```
 
-Check only the selected provider. Treat an identifier that is absent as unavailable, and use the next fallback. Skip the check when host status already confirms the identifier.
+Launch the `resolved` identifier. Treat exit 1 or 3 as unavailable, and use the next fallback. Skip the script when host status already names the resolved identifier.
 
 Effort values differ between providers for one model. OpenCode caches the catalog, so read the route's values there:
 
@@ -85,11 +86,11 @@ OpenRouter picks an upstream host for each request. Without a pin, it can choose
 Pin the host in the model's request body. Add `"zdr": true` when the fleet reference lists zero data retention for that route. Pass the pin in `OPENCODE_CONFIG_CONTENT`; the launcher keeps it:
 
 ```bash
-OPENCODE_CONFIG_CONTENT='{"providers":{"openrouter":{"models":{"moonshotai/kimi-k3.1-pro":{"body":{"provider":{"order":["moonshotai"],"allow_fallbacks":false,"zdr":true}}}}}}}' \
-python3 <skill-dir>/scripts/opencode_worker.py --model openrouter/moonshotai/kimi-k3.1-pro --variant high ...
+OPENCODE_CONFIG_CONTENT='{"providers":{"openrouter":{"models":{"<vendor>/<model>":{"body":{"provider":{"order":["<host>"],"allow_fallbacks":false,"zdr":true}}}}}}}' \
+python3 <skill-dir>/scripts/opencode_worker.py --model openrouter/<vendor>/<model> --variant <effort> ...
 ```
 
-The same `providers` entry can go in the work directory's `opencode.json`. The fleet reference names the host for each route.
+Take `<vendor>/<model>` from the resolved identifier, after its `openrouter/` prefix. The same `providers` entry can go in the work directory's `opencode.json`. The fleet reference names the `<host>` for each family.
 A pin that no host matches stops at once with `No endpoints found`. Treat that route as unavailable, and use the next provider.
 
 ## Know the failure modes

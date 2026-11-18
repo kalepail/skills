@@ -261,8 +261,8 @@ def self_test():
     assert final_step_text(multi) == "final"
     assert classify(multi, 0, "", False)[2]["tokens"] == {"input": 20, "output": 4, "cache": {"read": 10}}
     assert len(parse_events('noise\n{"type":"text","part":{"text":"a"}}\n{bad\n')) == 1
-    assert model_ref("moonshotai/kimi-k3", "max") == "moonshotai/kimi-k3#max"
-    assert model_ref("moonshotai/kimi-k3", None) == "moonshotai/kimi-k3"
+    assert model_ref("vendor/model-x", "max") == "vendor/model-x#max"
+    assert model_ref("vendor/model-x", None) == "vendor/model-x"
     base = dict(model="m/x", dir="/tmp", prompt="hi", prompt_file=None)
     for variant, no_variant, ok in (("high", False, True), (None, True, True), (None, False, False),
                                     ("high", True, False), ("", True, False), ("", False, False),
@@ -302,7 +302,7 @@ def self_test():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--model", help="provider/model, for example openrouter/z-ai/glm-5.3")
+    parser.add_argument("--model", help="provider/model, for example openrouter/<vendor>/<model>")
     parser.add_argument("--variant", help="provider-supported effort variant, sent as provider/model#variant")
     parser.add_argument("--no-variant", action="store_true",
                         help="send no variant, for a route without effort variants; the route default applies")

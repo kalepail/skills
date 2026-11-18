@@ -2,7 +2,7 @@
 
 This research supports `routing-agent-work`. The shipped skill keeps only durable routing clues.
 
-Read [the current fleet update](routing-agent-work/model-fleet-update-2026-10-06.md) for measured scores, costs, latency, local probes, and runtime checks.
+Read [the family-routing record](routing-agent-work/model-fleet-families-2026-11-18.md) for the claims that left the skill, the version each was measured on, and how each CLI resolves a family. The earlier fleet updates hold the measured scores, costs, latency, local probes, and runtime checks.
 
 ## Research method
 
@@ -21,9 +21,11 @@ The review rejected one overall model ranking. Benchmark results changed with th
 7. Use a different model family as a useful independence clue.
 8. Keep child reports compact and send them to the direct parent.
 9. Use a sub-orchestrator when it reduces parent context load.
-10. Maintain the fleet manually. Do not add unknown models during task execution.
+10. Maintain the list of model families manually. Resolve the selected family to its newest model at launch. Do not add an unlisted family during task execution.
 
 ## Evidence by model family
+
+The versions named in this section are the versions that were measured. The skill routes by family, not by version.
 
 OpenAI documents GPT-6 Astra, GPT-6.1 Sol, and GPT-6 Luna as separate operating points. Its Codex guidance recommends GPT-6.1 Sol for complex coding and agentic work. It keeps Astra for the hardest end-to-end work and Luna for clear, repeatable tasks. Independent measurements put GPT-6.1 Sol near Astra at about one fifth of its task cost. The routing skill therefore uses GPT-6.1 Sol as the Codex default and Astra as escalation.
 

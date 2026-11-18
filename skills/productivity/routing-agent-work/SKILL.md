@@ -32,11 +32,13 @@ Apply these decision axes in order:
 3. **Constraints**: check context length, modality, privacy, tool use, and available providers.
 4. **Cost and latency**: use them as tie-breakers between routes that can meet the quality bar. The fleet reference explains how subscription headroom and API spend count.
 
-Use only the fixed fleet. Try listed fallbacks in order. If every listed route is unavailable, mark the lane `Unrouted`.
+Use only the fixed families. Try listed fallbacks in order. If every listed route is unavailable, mark the lane `Unrouted`.
 
 Fallbacks handle an unavailable route. Escalation handles failure cost. Escalate to a stronger route or a higher effort when errors are expensive or the first attempt falls short.
 
 When the caller pins only the worker CLI, apply the pinned-CLI rule in the fleet reference.
+
+A model version the caller names is a caller constraint, like a pinned CLI. Honor it and record it on the card as `caller-pinned`. If that version is not listed, the route is unavailable. The skill never picks a version itself.
 
 An `Unrouted` lane does not launch. Return it to the caller for an explicit constraint change or fleet update.
 
@@ -44,12 +46,12 @@ Treat a safeguard handoff to a model outside the fleet as an unavailable route. 
 
 Before launch, check only the selected route. Do not enumerate or score unrelated models.
 
-1. Confirm the configured identifier and effort control through host status or a targeted CLI check.
-2. If the identifier fails, try each provider the fleet lists for that model, then the next fallback.
+1. Resolve the selected family on the host that launches the worker, and confirm the effort control. The resolution is the identifier check. Claude takes an alias. For Codex, Grok, and OpenCode, run `scripts/resolve_model.py` with the patterns in the fleet reference ("Resolve the family").
+2. If the resolved identifier fails, try its alternates and each provider the fleet lists for that family, then the next fallback. When the newest version is unavailable, the family is unavailable. Do not launch an older version.
 3. If only the effort value fails, use a supported value that meets the lane requirement and the model's range. Otherwise, use the next fallback.
 4. When a route needs a harness property, such as preserved reasoning history, confirm it through host documentation or the caller. Skip the route when nobody can confirm it.
 
-For OpenCode routes, read [references/opencode.md](references/opencode.md). It covers the catalog check, model selection, and the completion check. An OpenCode exit code alone does not prove that the worker finished.
+For OpenCode routes, read [references/opencode.md](references/opencode.md). It covers resolution, model selection, and the completion check. An OpenCode exit code alone does not prove that the worker finished.
 
 ## Set effort
 
@@ -63,7 +65,7 @@ Choose the effort from the lane, not from the CLI default. An effort in a lane r
 - Use `xhigh` for hard planning, hard debugging, multi-source synthesis, and adversarial review.
 - Use `max` for the hardest quality-first work with a clear stopping condition.
 
-Keep each value inside the selected model's range in the fleet reference. Raise it to the model's floor when the level above is lower.
+Keep each value inside the selected family's range in the fleet reference. Raise it to the family's floor when the level above is lower.
 
 Use only supported effort values. Omit an unsupported flag only when the configured route confirms the required mode.
 
@@ -76,7 +78,7 @@ Use one direct worker for one bounded lane. Use a sub-orchestrator when a lane c
 
 One worker layer plus one nested layer is usually sufficient. This is guidance, not a universal limit.
 
-Ask a sub-orchestrator to load `routing-agent-work` only when it must choose child routes and can load the skill. Otherwise, pass each child route in its brief. Each child reports only to its direct parent.
+Ask a sub-orchestrator to load `routing-agent-work` only when it must choose child routes and can load the skill. Otherwise, pass each child route in its brief, with its resolved identifier. Each child reports only to its direct parent.
 
 The parent watches completion signals. It requests more context only when the compact report cannot support a decision.
 
@@ -94,7 +96,7 @@ Use lower-cost models from other families as extra challengers. The fleet refere
 
 Treat prose as a separate lane only when prose is a meaningful deliverable. Keep the existing worker when it can write the required text well.
 
-Pass the caller's writing standard into the worker brief. Opus 5.5 is the quality-first default for technical prose. It places near the top of independent human-preference evaluations of text and writing.
+Pass the caller's writing standard into the worker brief. Opus is the quality-first default for technical prose.
 
 ## Return a route card
 
@@ -103,13 +105,15 @@ Return one compact card for each lane:
 ```text
 Lane: <bounded output>
 Worker CLI: <Claude | Codex | Grok | OpenCode | none>
-Model: <fixed fleet model | Unrouted>
+Model: <fleet family> → <resolved identifier> | caller-pinned <version> | Unrouted
 Effort: <explicit supported value | none>
 Reason: <lane fit and failure-cost rationale>
-Verified: <host status or targeted CLI check>
-Fallback: <next fixed-fleet model, or none>
-Reviewer: <different-family fixed-fleet model, or none>
+Verified: <resolution or host status check>
+Fallback: <next fixed-fleet family, or none>
+Reviewer: <different-family fixed-fleet family, or none>
 Report contract: <result, artifact paths, checks, risks, blockers>
 ```
+
+For Claude, the model line reads `Opus → alias opus`, and the worker's report states the model the session ran.
 
 The worker returns the result, evidence paths, completed checks, unresolved risks, and blockers. It does not return a full transcript.

@@ -47,7 +47,7 @@ Inspect all three files after adding, renaming, moving, or removing a skill. Alw
 
 `routing-agent-work` is the official selection authority for agent CLIs, models, effort, fallbacks, and reviewers. Use it when delegation selection can change the result.
 
-The skill uses a fixed, manually maintained fleet. It does not discover unknown models or update itself. Update its fleet reference and evals together.
+The skill uses a fixed, manually maintained list of model families. At launch it resolves the selected family to that family's newest model through the worker CLI's own listing, so a new version needs no edit. Adding or removing a family is the manual change; update the fleet reference and evals together. The skill never adds an unlisted family during a task.
 
 `skills/solo/fan-solo/references/house-style.md` owns Solo-specific safety and orchestration mechanics. Read it before any Solo mutation, agent spawn, shared-state edit, or process control.
 
