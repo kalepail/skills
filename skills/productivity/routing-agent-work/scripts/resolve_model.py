@@ -5,11 +5,11 @@ The fleet reference gives each family an identifier pattern. This script runs th
 CLI's listing, keeps the identifiers that match, and prints the newest one.
 
 Usage:
-  resolve_model.py --cli codex|grok|opencode --pattern '<regex>' [--pattern '<regex>' ...]
+  resolve_model.py --cli agy|codex|grok|opencode --pattern '<regex>' [--pattern '<regex>' ...]
                    [--access-program <name>] [--dir <work-dir>] [--listing-file <path>]
   resolve_model.py --self-test
 
-Listing sources: `codex debug models` (JSON), `grok models`, and `opencode models`
+Listing sources: `agy models`, `codex debug models` (JSON), `grok models`, and `opencode models`
 (run in --dir, because OpenCode catalogs are project-specific). The listing command
 runs with stdin closed and a timeout. --listing-file reads saved output instead.
 
@@ -40,6 +40,9 @@ Matching rules:
 - Grok rows must sit under an `Available models:` line. OpenCode rows must be
   provider-qualified identifiers. A malformed row is a listing error, not a no
   match. --dir sets both the working directory and `PWD` of the listing command.
+- Antigravity rows carry the identifier and display name separated by a tab.
+  Gemini effort suffixes collapse to the base identifier before version selection.
+  Check the selected model's effort with Antigravity's /effort command.
 
 Output, one JSON line on stdout. Exit 0, 1, and 3 print the full shape: `status`
 (resolved, no-match, or ambiguous), `cli`, `patterns`, `resolved`, `version`,
@@ -63,6 +66,7 @@ import tempfile
 from decimal import Decimal
 
 LISTING_CMDS = {
+    "agy": ["agy", "models"],
     "codex": ["codex", "debug", "models"],
     "grok": ["grok", "models"],
     "opencode": ["opencode", "models"],
@@ -72,6 +76,8 @@ VERSION_RE = re.compile(r"[0-9]+(\.[0-9]+)*")
 GROK_SECTION = re.compile(r"^\s*Available models:\s*$")
 GROK_ROW = re.compile(r"^\s+[*-]\s+([A-Za-z0-9][A-Za-z0-9._-]*)(\s+\(default\))?\s*$")
 QUALIFIED_ID = re.compile(r"[^\s/]+(/[^\s/]+)+")
+AGY_ID = re.compile(r"[a-z0-9][a-z0-9._-]*")
+AGY_EFFORT_ID = re.compile(r"(gemini-[0-9.]+-[a-z0-9-]+)-(low|medium|high|xhigh|max)")
 ALLOWED_GROUPS = {"v", "s"}
 ACCESS_KEY = "cyber"
 
@@ -173,6 +179,19 @@ def opencode_identifiers(text):
     return found
 
 
+def agy_identifiers(text):
+    found = []
+    for line in text.splitlines():
+        if not line.strip():
+            continue
+        identifier, _, label = line.partition("\t")
+        if not AGY_ID.fullmatch(identifier) or not label.strip():
+            raise ListingError("agy listing has a malformed model row")
+        effort_variant = AGY_EFFORT_ID.fullmatch(identifier)
+        found.append(effort_variant.group(1) if effort_variant else identifier)
+    return list(dict.fromkeys(found))
+
+
 def load_listing(cli, access_program, work_dir, listing_file, timeout):
     if listing_file:
         try:
@@ -184,7 +203,8 @@ def load_listing(cli, access_program, work_dir, listing_file, timeout):
         text = run_listing(LISTING_CMDS[cli], work_dir, timeout)
     if cli == "codex":
         return codex_identifiers(text, access_program)
-    found = grok_identifiers(text) if cli == "grok" else opencode_identifiers(text)
+    parse = {"agy": agy_identifiers, "grok": grok_identifiers, "opencode": opencode_identifiers}[cli]
+    found = parse(text)
     if not found:
         raise ListingError("no identifiers found in the %s listing" % cli)
     return found
@@ -401,6 +421,20 @@ def self_test():
 
     check("grok skips speed variant", listing("grok", grok, [r"grok-(?P<v>[0-9.]+)"]), 0, "grok-4.7", version="4.7")
     check("grok unparseable listing", listing("grok", "Available models:\n", [r"grok-(?P<v>[0-9.]+)"]), 4)
+
+    neon = r"gemini-(?P<v>[0-9.]+)-neon"
+    agy = ("gemini-4-neon-high\tGemini 4 Neon (High)\n"
+           "gemini-4-neon-xhigh\tGemini 4 Neon (XHigh)\n"
+           "gemini-5-neon-high\tGemini 5 Neon (High)\n"
+           "gemini-5-neon-medium\tGemini 5 Neon (Medium)\n"
+           "gemini-5-neon-fast\tGemini 5 Neon Fast\n"
+           "gemini-5-carbon-high\tGemini 5 Carbon (High)\n"
+           "gemini-pro-orchestrator-neon\tOrchestrator (Neon)\n")
+    check("agy resolves newest family before selecting effort", listing("agy", agy, [neon]), 0,
+          "gemini-5-neon", candidate_ids=["gemini-4-neon", "gemini-5-neon"])
+    check("agy orchestrator stays outside single-model lane",
+          listing("agy", "gemini-pro-orchestrator-neon\tOrchestrator (Neon)\n", [neon]), 1)
+    check("agy invalid catalog", listing("agy", "Error: Please sign in\n", [neon]), 4)
 
     kimi = r"openrouter/moonshotai/kimi-k(?P<v>[0-9.]+)(-pro)?"
     check("kimi drops code, thinking, and highspeed", listing("opencode", oc, [kimi]), 0,

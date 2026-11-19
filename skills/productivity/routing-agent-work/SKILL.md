@@ -1,13 +1,13 @@
 ---
 name: routing-agent-work
-description: Select an agent CLI, model, and reasoning effort for delegated work. Use when an orchestrator, parent agent, or user must assign implementation, security review, authorized vulnerability exploration, research, review, second-opinion or edge-case confirmation, synthesis, multimodal, long-context, high-volume extraction, or prose lanes across Claude, Codex, Grok, or OpenCode. Also use it to check that a headless OpenCode worker finished. Do not use for other orchestration mechanics, research provider or source selection, live model discovery, provider setup, general model comparisons, single-agent work with no delegation choice, or a lane whose worker, model, and effort are already fixed.
+description: Select an agent CLI, model, and effort for delegated implementation, planning, research, review, synthesis, multimodal work, extraction, or prose across Claude, Codex, Grok, OpenCode, and Antigravity (agy). Also use to verify completion of headless OpenCode or Antigravity workers. Do not use for launch mechanics alone, research source selection, provider setup, general model comparisons, or reselecting a route the caller already fixed.
 ---
 
 # Route Agent Work
 
 Route only when the selection can change the result. Continue with the current agent when no delegation choice exists.
 
-The caller owns orchestration mechanics, except the completion check for a headless OpenCode worker. Orchestration hosts include Herdr, Orca, Conductor, and Solo. Worker CLIs are Claude, Codex, Grok, and OpenCode.
+The caller owns orchestration mechanics. It can use Herdr, Orca, Conductor, Solo, or another host that supports the selected worker.
 
 ## Define the lane
 
@@ -46,12 +46,14 @@ Treat a safeguard handoff to a model outside the fleet as an unavailable route. 
 
 Before launch, check only the selected route. Do not enumerate or score unrelated models.
 
-1. Resolve the selected family on the host that launches the worker, and confirm the effort control. The resolution is the identifier check. Claude takes an alias. For Codex, Grok, and OpenCode, run `scripts/resolve_model.py` with the patterns in the fleet reference ("Resolve the family"), passing only the rows the lane's data terms accept. For a caller-pinned version, check the pinned identifier directly in the same listing instead.
+1. Resolve the selected family on the launch host and confirm its effort control. Claude takes an alias. For other workers, use `scripts/resolve_model.py` with the [fleet reference](references/fleet.md#resolve-the-family) patterns for routes whose data terms the lane accepts. Check a caller-pinned version directly in the listing.
 2. If the resolved or pinned identifier fails, try only its same-version alternates, then the next family. When the newest version is unavailable, the family is unavailable. Do not launch an older version.
 3. If only the effort value fails, use a supported value that meets the lane requirement and the model's range. Otherwise, use the next fallback.
 4. When a route needs a harness property, such as preserved reasoning history, confirm it through host documentation or the caller. Skip the route when nobody can confirm it.
 
 For OpenCode routes, read [references/opencode.md](references/opencode.md). It covers resolution, model selection, and the completion check. An OpenCode exit code alone does not prove that the worker finished.
+
+For Antigravity routes, read [references/antigravity.md](references/antigravity.md) for effort, quota, and completion checks.
 
 ## Set effort
 
@@ -86,7 +88,7 @@ The parent watches completion signals. It requests more context only when the co
 
 Add review when the failure cost justifies it. Give the reviewer a fresh context with the specification and artifact first.
 
-Prefer a capable reviewer from a different model family. Treat model diversity as a clue, not proof of independence.
+Apply the fleet's family grouping before selecting a candidate when the lane requires independence. Give the reviewer fresh evidence and require its own checks.
 
 Require reproducible evidence. Ask for tests, paths, commands, or cited sources instead of an unsupported verdict.
 
@@ -104,7 +106,7 @@ Return one compact card for each lane:
 
 ```text
 Lane: <bounded output>
-Worker CLI: <Claude | Codex | Grok | OpenCode | none>
+Worker CLI: <Claude | Codex | Grok | OpenCode | Antigravity | none>
 Model: <fleet family> → <resolved identifier> | <fleet family> → <identifier> (caller-pinned) | Unrouted
 Effort: <explicit supported value | none>
 Reason: <lane fit and failure-cost rationale>

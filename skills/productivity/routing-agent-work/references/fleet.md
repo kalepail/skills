@@ -8,8 +8,8 @@ Every route names a model family. The router resolves the family to its newest m
 
 The fleet owner pays for each worker CLI in one of two ways. Use the cost basis as the cost tie-breaker.
 
-- **Subscription routes:** Claude, Codex, and Grok signed in with their subscriptions have weekly limits. A task costs weekly-limit headroom, not dollars.
-- **API routes:** OpenCode routes bill per token from API accounts. A Codex run that signs in with an API key is also an API route.
+- **Subscription routes:** Claude, Codex, Grok, and Antigravity use plan headroom when signed into their subscriptions. For Antigravity, check the model's quota group and credit overage setting.
+- **API routes:** OpenCode and workers configured with API keys bill from the selected provider account.
 - **API accounts:** Spend from Cloudflare first, then OpenRouter. The other API accounts have tighter limits. Use them only when the family has no Cloudflare or OpenRouter route.
 
 Apply these rules:
@@ -29,6 +29,7 @@ Apply these rules:
 | Codex | Sol at `high` | Sol at `xhigh` or `max`; Astra for science, research, and final interpretation | Implementation, terminal work, verification, and sweeps |
 | Grok | Grok at `xhigh` | None | Independent challenge and live web or X research |
 | OpenCode | Set by the lane table | Set by the lane table | Other model families, multimodal input, open weights, and low-cost lanes |
+| Antigravity | Gemini Neon at `high` | Neon at `xhigh` for hard reasoning, Carbon at `high` for a longer-horizon alternative | Bounded coding and independent challenge when the lane accepts consumer Antigravity |
 
 When the caller pins a worker CLI, use the lane row's first route on that CLI. If the row has none, use a route on that CLI whose strong clues fit the lane. Otherwise, mark the lane `Unrouted`. A pinned Grok CLI has no coding route.
 
@@ -37,7 +38,7 @@ When the caller pins a worker CLI, use the lane row's first route on that CLI. I
 Resolve only the selected route, on the host that launches the worker. Listings differ by host and account. Record the resolved identifier on the route card.
 
 - **Claude.** Pass the alias `opus`, `fable`, `sonnet`, or `haiku` to `--model`. The alias selects the family's newest model. The worker's report states the model the session ran.
-- **Codex, Grok, and OpenCode.** Run `python3 <skill-dir>/scripts/resolve_model.py --cli <codex|grok|opencode> --pattern '<regex>'`. It reads the CLI's own listing and prints one JSON line. Repeat `--pattern` once per provider row, in provider order. Pass `--dir <work-dir>` for OpenCode, because its catalog is project-specific. Run it with `--help` for the matching rules.
+- **Antigravity, Codex, Grok, and OpenCode.** Run `python3 <skill-dir>/scripts/resolve_model.py --cli <agy|codex|grok|opencode> --pattern '<regex>'`. Repeat `--pattern` per eligible provider row in provider order. Pass `--dir <work-dir>` for OpenCode's project catalog. Antigravity resolves the base family across effort variants first. Then verify the effort with [Antigravity's native command](antigravity.md#verify-the-route).
 
 | Family | Worker CLI | `--pattern` |
 |---|---|---|
@@ -47,6 +48,10 @@ Resolve only the selected route, on the host that launches the worker. Listings 
 | Luna | Codex | `gpt-(?P<v>[0-9.]+)-luna` |
 | Sol under Daybreak Blue | Codex | The Sol pattern, with `--access-program daybreak_blue` |
 | Grok | Grok | `grok-(?P<v>[0-9.]+)` |
+| Gemini Neon | Antigravity | `gemini-(?P<v>[0-9.]+)-neon` |
+| Gemini Hydrogen | Antigravity | `gemini-(?P<v>[0-9.]+)-hydrogen` |
+| Gemini Carbon | Antigravity | `gemini-(?P<v>[0-9.]+)-carbon` |
+| Gemini Argon | Antigravity | `gemini-(?P<v>[0-9.]+)-argon` |
 | Each OpenCode family | OpenCode | The patterns in "Select the provider", in order |
 
 Read the result:
@@ -76,12 +81,12 @@ Security lanes keep the caller's target and action limits on every route and fal
 | Ambiguous planning, architecture, orchestration, or synthesis | Claude with Opus | Fable; Astra; Sol |
 | Difficult implementation, refactoring, debugging, or test construction | Claude with Opus | Fable at `high`; Sonnet at `max`; Sol at `max`; Kimi at `high`; Astra |
 | Terminal workflows, primary verification, or acting on gathered evidence | Codex with Sol | Opus; Sonnet at `max`; Kimi at `high`; Astra |
-| Bounded implementation, repository sweep, data collection, or tool calling | Codex with Sol at `medium` | Terra at `xhigh`; Opus at `medium`; Muse Ember at `max`; DeepSeek Flash at `max` |
-| Budget-sensitive bounded coding or repository sweeps | Codex with Sol at `medium` | Terra at `xhigh`; Haiku at `max`; Muse Ember at `max`; DeepSeek Flash at `max` |
+| Bounded implementation, repository sweep, data collection, or tool calling | Codex with Sol at `medium` | Terra at `xhigh`; Antigravity with Gemini Neon at `high`; Opus at `medium`; Muse Ember at `max`; DeepSeek Flash at `max` |
+| Budget-sensitive bounded coding or repository sweeps | Codex with Sol at `medium` | Terra at `xhigh`; Antigravity with Gemini Hydrogen at `high`; Haiku at `max`; Muse Ember at `max`; DeepSeek Flash at `max` |
 | Narrow high-volume extraction or triage | Codex with Luna at `max` | Terra at `medium`; Haiku at `high`; Muse Ember at `max`; DeepSeek Flash at `max` |
 | Security review, authorized vulnerability exploration, or patch validation | Codex with Sol under Daybreak Blue access | Astra; Sol; Opus for defensive review of the caller's own code; Muse Wonder or Gemini Carbon for defensive review; GLM for text-only input |
 | Precision review or quality-first technical prose | Claude with Opus | Fable; Gemini Carbon at `high`; Sonnet at `max`; Astra; Sol |
-| Independent challenge or second opinion | OpenCode with Gemini Carbon at `medium` | Kimi at `high`; Grok; GLM at `high`; Muse Ember at `max` |
+| Independent challenge or second opinion | OpenCode with Gemini Carbon at `medium` | Antigravity with Gemini Neon at `high` when consumer terms fit; Kimi at `high`; Grok; GLM at `high`; Muse Ember at `max` |
 | Live web and X research | Grok | Astra and Opus for web research only |
 | Edge-case discovery and confirmation across model families | OpenCode with Kimi at `high` | Gemini Carbon at `medium`; GLM at `high` for text-only input; Grok; Muse Ember at `max`; DeepSeek Flash at `max` |
 | Visual implementation, screenshots, or long-context documents | Claude with Opus | Fable at `high`; Sol; Gemini Carbon at `high`; Kimi at `high` |
@@ -118,6 +123,10 @@ When one of these families owns a lane, accept its result only after the lane's 
 | Luna | Codex | `high` or `max` | Narrow, high-volume extraction and triage | Use `max`; it scores higher than `high`. Use `high` only when the cost per call dominates. Keep the lane small. Give consequential interpretation to Sol, Astra, or Opus. |
 | Sol under Daybreak Blue | Codex | `medium` to `max`; host `ultra` mode when permitted | Defensive cybersecurity reviews when refusal calibration matters. Daybreak Blue gives it reduced refusals | Daybreak is an access program, not a family. Resolve the newest Sol whose catalog entry lists `daybreak_blue`. A Sol or Astra version whose catalog entry does not list `daybreak_blue` is not a Daybreak Blue route. Check the eligible models on the [Daybreak guide](https://developers.openai.com/api/docs/guides/daybreak) and the [access overview](https://help.openai.com/en/articles/20001258). The account must have Daybreak Blue approval. Model choice alone does not turn Daybreak on. In a headless Codex run, pass `-m <resolved> -c daybreak=true` on that command. In an interactive Codex session, turn it on with `/daybreak`. Do not save Daybreak as the default; it can block models without Daybreak support. Confirm the active access program in host status. On the API, send `access_programs.cyber` as `daybreak_blue`. Without approval, use Astra. It is not a general route. It is not a different-family reviewer of other OpenAI work. Start at `high`. Keep the caller's target and action limits. |
 | Grok | Grok | `xhigh` | Independent challenge from another family, research with live web and X context, and second opinions. Runs on a subscription | Use `xhigh`. Do not use it as a coding fallback. Verify its factual claims and executed checks. |
+| Gemini Neon | Antigravity | `medium` to `xhigh` | Default Antigravity worker. Use `high` for bounded implementation or independent challenge. Use `xhigh` for a bounded problem when deeper reasoning warrants it | Require artifact or test evidence before accepting edits. Check the CLI's context window for large inputs. |
+| Gemini Hydrogen | Antigravity | `medium` to `xhigh` | Use `high` for routine edits, sweeps, and other bounded tasks with a cheap check | Reserve `medium` for mechanical work. Route ambiguous work or consequential review to a stronger model. |
+| Gemini Carbon | Antigravity | `medium` or `high` | Use `high` as a longer-horizon Gemini alternative when the lane fits Antigravity's terms | Check headroom and effort. Follow the OpenCode entry when the lane needs its provider or modality. |
+| Gemini Argon | Antigravity | `medium` or `high` | Available when the caller selects the Argon family | Use the verified native effort. An explicit Argon choice leaves ordinary route priorities intact. |
 | Gemini Carbon | OpenCode | `medium` or `high` | Audio, video, and PDF input. Independent challenge and review from a third model family. Use `high` for consequential review and visual coding | It is not a low-cost route. Check the provider's current price. Use it when its family or modality changes the result. |
 | Kimi | OpenCode | `high`; `max` for hard lanes | Terminal-heavy challenge, edge-case discovery, long-context multimodal sessions, and different-family challenge | Start each new lane in a fresh session. The harness must pass back its full reasoning and tool history; OpenCode does this. Keep a session that Kimi started on Kimi, because a model switch loses that history. Do not use `low`. Use the highspeed route only when a person waits on the output. |
 | Muse Wonder | OpenCode | `high` to `max` | Defensive cyber review from another family. Meta-family challenge | Muse Wonder Full is not routable from the fleet. |
@@ -136,7 +145,7 @@ Use the selected host's context limit and effort controls when they differ from 
 
 A fleet review adds a family only after it beats a listed family on the independent boards. A family that the tables do not list is not a route. The identifier patterns exclude sibling tiers.
 
-These models are not routable from the four worker CLIs:
+The worker CLIs lack the required access or product integration for:
 
 - Muse Wonder Full: Meta's Muse Code subscription only.
 - Claude Mythos: Anthropic's approved cybersecurity and life-sciences programs only.
@@ -185,6 +194,7 @@ Use the host's installed controls. These forms show the intended mapping:
 | Codex | `-m <model-id>` | `-c model_reasoning_effort="low|medium|high|xhigh|max|ultra"` within the selected route's policy |
 | Grok | `-m <grok-model-id>` | `--reasoning-effort low|medium|high|xhigh` |
 | OpenCode | `-m <provider/model>` on `opencode run`; `model` in `opencode.json` or `/models` in the TUI | `#<provider-supported-value>` appended to the model, as `-m <provider/model>#<value>` |
+| Antigravity | `--model <resolved-base-id>` | `--effort <verified-value>` |
 
 Do not translate effort names as equal compute across providers. Choose the level within the selected family's supported range.
 
@@ -195,7 +205,7 @@ The Codex host's `ultra` mode includes automatic delegation; it is not a portabl
 
 - Review OpenAI work with Opus, Fable, Sonnet, or Gemini Carbon.
 - Review Opus, Sonnet, Haiku, or Fable work with Sol, Astra, or Gemini Carbon. The Claude families are one model family.
-- Review Gemini Carbon work with Opus, Fable, Sol, or Astra.
+- Review Gemini work with Opus, Fable, Sol, or Astra. Neon, Carbon, Argon, and Hydrogen count as one family for reviewer independence across CLIs.
 - Review Grok, Kimi, GLM, DeepSeek, MiMo, or Muse work with Sol, Astra, Opus, or Gemini Carbon.
 - Kimi can review code and terminal work from another family. Do not use it to review science or research.
 - Use Kimi, Grok, Muse, GLM, or DeepSeek Flash as extra challengers. Their findings need reproduction.
@@ -213,6 +223,7 @@ Review the fleet when a new model family appears, a listed family leaves the lis
 - Use the [Artificial Analysis leaderboard](https://artificialanalysis.ai/leaderboards/models) and its [coding-agent index](https://artificialanalysis.ai/agents/coding-agents).
 - Use [LMArena](https://lmarena.ai/leaderboard) for human preference.
 - Label vendor-reported scores as vendor claims.
+- Record the harness, model, effort, task version, and price basis for each comparison. Use Grok's X search to find practitioner reports and concrete failure cases to reproduce.
 - Compare the cost per task, not the token price.
 - Check the score at each effort level before you set an effort range.
 - Run one tool-using task on each provider route before you list it.

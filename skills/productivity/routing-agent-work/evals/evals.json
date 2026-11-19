@@ -772,6 +772,46 @@
       ],
       "files": [],
       "should_trigger": true
+    },
+    {
+      "id": 92,
+      "prompt": "Choose an Antigravity worker for a bounded Python fix with hidden tests. Personal Antigravity is allowed. The launch host lists gemini-4-neon-high and gemini-4-hydrogen-high.",
+      "expected_output": "Route to Antigravity with Gemini Neon at high. Resolve the base ID from the live host listing, verify high, and require the hidden tests and the requested completion report.",
+      "assertions": ["Uses agy and Neon high", "Separates model-family resolution from effort", "Requires the task acceptance check"],
+      "files": [],
+      "should_trigger": true
+    },
+    {
+      "id": 93,
+      "prompt": "Gemini Neon in agy wrote the plan. Choose an independent reviewer. OpenCode has Gemini Carbon under approved data terms, Codex has Sol, and Claude is unavailable.",
+      "expected_output": "Choose Sol to review independently. Treat OpenCode Carbon and Antigravity Neon as Gemini for reviewer independence.",
+      "assertions": ["Selects Sol", "Counts sibling Gemini tiers across clients as one reviewer family"],
+      "files": [],
+      "should_trigger": true
+    },
+    {
+      "id": 94,
+      "prompt": "Only Antigravity with Neon at xhigh is authorized. Its live catalog lists gemini-5-neon-high and gemini-4-neon-xhigh. Pick a worker.",
+      "expected_output": "Resolve Gemini 5 Neon first. If its native effort check rejects xhigh, return Unrouted.",
+      "assertions": ["Checks the newest family before effort", "Avoids falling back to an older version just for xhigh"],
+      "files": [],
+      "should_trigger": true
+    },
+    {
+      "id": 95,
+      "prompt": "My headless agy run returned exit 0 and status SUCCESS with a Bash denial. The worker was required to create result.txt and it is absent. Can I mark the lane done?",
+      "expected_output": "Mark it incomplete. Resume with the specific authorized permission or an interactive approval and verify result.txt.",
+      "assertions": ["Treats the missing artifact as incomplete", "Uses denied_actions to diagnose the run", "Preserves the lane's permissions"],
+      "files": [],
+      "should_trigger": true
+    },
+    {
+      "id": 96,
+      "prompt": "How do I install agy on Ubuntu and sign into my Google account through SSH?",
+      "expected_output": "Use installation and sign-in guidance for Antigravity.",
+      "assertions": ["Keeps installation outside delegated model routing"],
+      "files": [],
+      "should_trigger": false
     }
   ]
 }
