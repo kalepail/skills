@@ -1,18 +1,6 @@
 # Fan Solo sources
 
-Use the live Solo runtime and current official docs as authority for behavior, schemas, and availability; these notes record provenance only.
-
-## Maintainer research basis
-
-These provenance records live in the repository, not the standalone skill package, and are not required at runtime.
-
-- [Skill best practices](https://github.com/kalepail/skills/blob/main/research/skill-best-practices.md) — OpenAI/Anthropic skill architecture, triggering, disclosure, evals, and portability.
-- [Solo product docs synthesis](https://github.com/kalepail/skills/blob/main/research/fan-solo/solo-product-docs.md) — product hierarchy, UI, projects, processes, settings, and official documentation map.
-- [Solo MCP/API synthesis](https://github.com/kalepail/skills/blob/main/research/fan-solo/solo-mcp-api.md) — MCP, CLI, local HTTP, deep links, hosted API, schemas, discovery, and safety.
-- [Solo coordination synthesis](https://github.com/kalepail/skills/blob/main/research/fan-solo/solo-coordination.md) — agent ownership, spawning, timers, locks, KV, scratchpads, todos, handoffs, and completion.
-- [Solo X research](https://github.com/kalepail/skills/blob/main/research/fan-solo/solo-x-research.md) — first-party product philosophy and workflow examples from Aaron Francis; narrative evidence, not API authority.
-
-House style also reflects anonymized local project and session research. Raw local evidence and machine-specific reports are intentionally not shipped.
+Use the live Solo runtime and current official docs as authority for behavior, schemas, and availability.
 
 ## Authority order
 
@@ -21,9 +9,8 @@ House style also reflects anonymized local project and session research. Raw loc
 3. Current official docs, through `help(query="...")`, the hosted docs index, or `GET /api/v1/docs/search`.
 4. Current product site/changelog for positioning and released-version claims.
 5. First-party X posts for intent, examples, and product philosophy.
-6. Local research syntheses above.
 
-When sources conflict, runtime controls availability; official docs control supported behavior; product site controls public positioning; X supplies author commentary; local audit supplies user-specific convention.
+When sources conflict, runtime controls availability; official docs control supported behavior; product site controls public positioning; and X supplies author commentary.
 
 ## Official entry points
 

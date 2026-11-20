@@ -1,1 +1,0 @@
-"""Tiny sales ledger utilities."""

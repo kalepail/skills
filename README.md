@@ -141,10 +141,6 @@ Use `$agent-browser-webauthn` with `$agent-browser` for virtual WebAuthn browser
 
 These skills are personal and opinionated: model routing and tool preferences are baked in. [AGENTS.md](AGENTS.md) is the guide for working in this repo.
 
-## Research
-
-Architecture derives from [skill authoring research](research/skill-best-practices.md) and [agent-routing research](research/agent-routing.md). Solo evidence lives under [research/fan-solo](research/fan-solo/).
-
 ## Status and license
 
 Unofficial community work, licensed [Apache-2.0](LICENSE). Not affiliated with, endorsed by, or maintained by Solo, SoloTerm, OpenAI, or Anthropic. Product names belong to their respective owners.

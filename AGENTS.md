@@ -32,8 +32,6 @@ All current skills are model-invoked. Their descriptions include positive trigge
 | `.agents/skills/<name>`, `.claude/skills/<name>` | Flat project-discovery links into categorized sources |
 | `skills/productivity/routing-agent-work/` | Official agent, model, effort, fallback, and reviewer selection rules |
 | `skills/solo/fan-solo/references/house-style.md` | Solo-specific safety and orchestration mechanics |
-| `research/skill-best-practices.md` | The authoring standard this repo builds skills by |
-| `research/fan-solo/` | Solo product research: orientation and evidence, never fresher authority than live runtime or docs |
 
 ### Distribution surfaces
 
@@ -53,16 +51,16 @@ The skill uses a fixed, manually maintained list of model families. At launch it
 
 Solo skills invoke `routing-agent-work` when it is installed and a selection remains. Otherwise, they use the caller's explicit route or the configured tool defaults.
 
-## Build skills by the research
+## Skill authoring standard
 
-`research/skill-best-practices.md` is the authoring standard. Apply it on every skill change:
+Apply these rules on every skill change:
 
 - Portable core: `SKILL.md` frontmatter is `name` + `description` (plus `license` and string-valued `metadata` when useful). Claude-only fields stay out; Codex presentation and dependencies go in `agents/openai.yaml`.
 - Description is routing code: what + when + trigger cues + an explicit "Do not use for…" boundary so sibling skills do not false-trigger on each other.
 - Progressive disclosure: `SKILL.md` routes; branch detail lives in `references/`, one hop deep, each link stating when to read it. New `SKILL.md` files target under 200 lines; 500 is the ceiling.
 - A skill stays useful installed alone: no required local resource links outside its own directory. Links to live official docs are fine.
 - Start instruction-only. Add a script only for fragile, repeated, or mechanically verifiable operations, and execute-test it on representative success and failure inputs.
-- Forward-only truth: present tense, single best current behavior, no dates, no not-this-anymore framing. Point drift-prone facts at live authorities (`--help`, model listings, live schemas, current official docs). Fix reality before documenting a workaround; discrepancy history stays in research or session artifacts.
+- Forward-only truth: present tense, single best current behavior, no dates, no not-this-anymore framing. Point drift-prone facts at live authorities (`--help`, model listings, live schemas, current official docs). Fix reality before documenting a workaround; discrepancy history stays in commit messages or session artifacts.
 - Evals are tests, not fixtures: keep realistic positive and hard-negative trigger cases plus behavior cases in `evals/evals.json`, and update them with any description or behavior change — triggering is API surface. A JSON file alone proves nothing; prove changed behavior in clean sessions against no-skill or the prior version.
 
 ## Dogfood: use the skills to build the skills
