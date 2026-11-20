@@ -6,7 +6,7 @@ Personal, opinionated AI-agent skills for Tyler van der Hoeven. This file define
 
 Shipped skills live under category folders in `skills/`:
 
-- `engineering/`: technical testing skills.
+- `engineering/`: technical testing and release workflows.
 - `productivity/`: general workflows that are not tied to one product.
 - `solo/`: product-specific Solo and SoloTerm workflows.
 

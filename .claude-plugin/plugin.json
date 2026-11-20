@@ -1,7 +1,7 @@
 {
   "name": "kalepail-skills",
   "description": "Engineering, productivity, and Solo agent skills.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "license": "Apache-2.0",
   "author": {
     "name": "Tyler van der Hoeven"
@@ -10,6 +10,8 @@
   "repository": "https://github.com/kalepail/skills",
   "skills": [
     "./skills/engineering/agent-browser-webauthn",
+    "./skills/engineering/commit-push-deploy",
+    "./skills/productivity/audio-convert",
     "./skills/productivity/deep-research",
     "./skills/productivity/routing-agent-work",
     "./skills/solo/fan-solo",

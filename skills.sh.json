@@ -4,15 +4,17 @@
   "groupings": [
     {
       "title": "Engineering",
-      "description": "Technical testing skills.",
+      "description": "Technical testing and release workflows.",
       "skills": [
-        "agent-browser-webauthn"
+        "agent-browser-webauthn",
+        "commit-push-deploy"
       ]
     },
     {
       "title": "Productivity",
-      "description": "General workflows for research and agent routing.",
+      "description": "General workflows for audio conversion, research, and agent routing.",
       "skills": [
+        "audio-convert",
         "deep-research",
         "routing-agent-work"
       ]

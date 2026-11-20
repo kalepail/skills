@@ -1,0 +1,58 @@
+{
+  "skill_name": "audio-convert",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Convert this iPhone .qta spatial audio recording into a normal m4a I can share.",
+      "expected_output": "Probe with both afinfo and ffprobe, stream-copy Track 0 (stereo AAC) with ffmpeg -map 0:a:0 -c:a copy to a .m4a beside the source without removing the source, and verify with afinfo.",
+      "assertions": [
+        "Triggers audio-convert",
+        "Probes with both afinfo and ffprobe first",
+        "Uses stream copy (-map 0:a:0 -c:a copy) for the stereo AAC track",
+        "Leaves the source file in place and verifies the output with afinfo"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Extract the 4-channel APAC ambisonic track from recording.qta as a 24-bit WAV for Reaper.",
+      "expected_output": "Probe first, decode Track 1 with afconvert --read-track 1 -f WAVE -d LEI24 because ffmpeg cannot decode APAC, verify with afinfo, and note that the resulting WAV carries ACN/SN3D ambisonics without a channel-layout tag.",
+      "assertions": [
+        "Uses afconvert --read-track 1 -f WAVE -d LEI24 instead of ffmpeg for APAC",
+        "Warns that the WAV has no channel-layout tag and the channels are ACN/SN3D ambisonics",
+        "Verifies output codec, channel count, and duration with afinfo"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Pull the audio track out of demo.mov as an MP3.",
+      "expected_output": "Probe demo.mov with afinfo and ffprobe, re-encode the audio stream with ffmpeg -map 0:a:0 -c:a libmp3lame -q:a 2 beside the source, and verify with afinfo.",
+      "assertions": [
+        "Triggers audio-convert for extracting audio from video",
+        "Maps the audio stream explicitly with -map 0:a:0",
+        "Re-encodes to MP3 and verifies output with afinfo"
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Transcribe this interview.m4a into a text transcript with speaker labels.",
+      "expected_output": "Do not trigger audio-convert; route to a speech-to-text or transcription workflow.",
+      "assertions": [
+        "Does not trigger audio-convert for transcription",
+        "Does not run ffmpeg or afconvert format conversion unless transcription requires a format change"
+      ],
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Re-encode this 4K ProRes video to 1080p H.264 MP4.",
+      "expected_output": "Do not trigger audio-convert; video transcoding is outside this skill's scope.",
+      "assertions": [
+        "Does not trigger audio-convert for video transcoding"
+      ],
+      "files": []
+    }
+  ]
+}

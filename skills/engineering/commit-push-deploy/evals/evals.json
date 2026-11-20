@@ -1,0 +1,60 @@
+{
+  "skill_name": "commit-push-deploy",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Git commit, git push, and deploy these changes live.",
+      "expected_output": "Resolve scope and destination, reuse or run relevant checks, stage only approved changes, run git diff --cached --check and a staged secret scan before committing, push without force-pushing, deploy the validated commit, and verify the specific delivered change on the live target.",
+      "assertions": [
+        "Triggers commit-push-deploy",
+        "Inspects git status, upstream, and ahead commits before pushing",
+        "Stages approved files before running git diff --cached --check and gitleaks git --staged --redact",
+        "Verifies the delivered change on the live target rather than stopping at deploy exit code 0",
+        "Reports commit SHA, deployment target or ID, and live verification result"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Ship this fix live and rebuild the Worker.",
+      "expected_output": "Trigger commit-push-deploy even though 'commit' was omitted, verify target repo/branch/deploy profile, commit and push approved changes if uncommitted, deploy using the project's documented script, and verify the changed live endpoint behavior.",
+      "assertions": [
+        "Triggers commit-push-deploy even when the word commit is omitted",
+        "Uses the project's documented deploy script and profile",
+        "Checks live endpoint behavior after deployment"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Push and deploy the pricing update, but leave my unfinished auth refactor in the working tree untouched.",
+      "expected_output": "Stage only the approved pricing files, keep unrelated auth files unstaged, commit and push, and deploy from a clean worktree at the pushed commit if the deploy tool bundles the working tree.",
+      "assertions": [
+        "Preserves unrelated working-tree edits",
+        "Deploys from a clean worktree at the pushed commit when the deploy tool bundles the working tree",
+        "Does not leak unrelated dirty files into the commit or live artifact"
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Just commit these changes locally; do not push or deploy yet.",
+      "expected_output": "Do not trigger commit-push-deploy; handle as a plain commit-only request without pushing or deploying.",
+      "assertions": [
+        "Does not trigger commit-push-deploy for a commit-only request",
+        "Does not push or deploy"
+      ],
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Open a pull request for this branch so the team can review it.",
+      "expected_output": "Do not trigger commit-push-deploy; route to a PR workflow rather than releasing live.",
+      "assertions": [
+        "Does not trigger commit-push-deploy for a PR-only request",
+        "Does not deploy changes live"
+      ],
+      "files": []
+    }
+  ]
+}

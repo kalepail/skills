@@ -10,14 +10,16 @@ Skills use plain task names and live in three categories: engineering, productiv
 
 ### Engineering
 
-Technical testing skills. See the [engineering catalog](skills/engineering/README.md).
+Technical testing and release workflows. See the [engineering catalog](skills/engineering/README.md).
 
 - [Agent Browser WebAuthn](skills/engineering/agent-browser-webauthn/) — test passkey, WebAuthn, wallet, and Stellar smart-account browser flows.
+- [Commit, push, deploy](skills/engineering/commit-push-deploy/) — commit, push, deploy, and live-verify approved project changes end to end.
 
 ### Productivity
 
 General workflows that are not tied to one product. See the [productivity catalog](skills/productivity/README.md).
 
+- [Audio convert](skills/productivity/audio-convert/) — convert macOS and Apple-only audio files (`.qta`, `.caf`, `.aifc`, APAC spatial audio) with `ffmpeg` and `afconvert`.
 - [Deep research](skills/productivity/deep-research/) — produce cited syntheses from independent evidence lanes.
 - [Routing agent work](skills/productivity/routing-agent-work/) — choose an agent CLI, model, effort, fallback, reviewer, and report contract.
 
@@ -60,6 +62,8 @@ Skills orchestrate external tools; they do not bundle or authenticate them.
 - **A fan-out vehicle** — optional for `deep-research`. It runs lanes sequentially when no orchestration vehicle exists.
 - **Optional research providers** — `deep-research` prefers Parallel CLI and uses Perplexity as an independent lane. It uses Stellar Raven first for Stellar questions.
 - **agent-browser and Node.js 22+** — Agent Browser WebAuthn requires the `agent-browser` CLI and Node.js 22 or newer; the `$agent-browser` skill is recommended but not bundled here.
+- **ffmpeg and macOS `afconvert`** — `audio-convert` uses `ffmpeg`/`ffprobe` and Apple's built-in `afconvert`/`afinfo` on macOS.
+- **Optional secret scanner** — `commit-push-deploy` uses `gitleaks` (or the repository's configured scanner) before committing.
 
 ## Install
 

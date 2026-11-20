@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audio Convert"
+  short_description: "Convert macOS and Apple-only audio files with ffmpeg and afconvert"
+  default_prompt: "Use $audio-convert to probe and convert this audio file into the requested format."
