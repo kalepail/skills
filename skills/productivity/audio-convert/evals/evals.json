@@ -4,51 +4,84 @@
     {
       "id": 1,
       "prompt": "Convert this iPhone .qta spatial audio recording into a normal m4a I can share.",
-      "expected_output": "Probe with both afinfo and ffprobe, stream-copy Track 0 (stereo AAC) with ffmpeg -map 0:a:0 -c:a copy to a .m4a beside the source without removing the source, and verify with afinfo.",
+      "expected_output": "Probe with afinfo and ffprobe. Stream-copy Track 0 (stereo AAC) with ffmpeg -map 0:a:0 -c:a copy to a .m4a next to the source. Keep the source and verify the output with afinfo.",
       "assertions": [
         "Triggers audio-convert",
         "Probes with both afinfo and ffprobe first",
-        "Uses stream copy (-map 0:a:0 -c:a copy) for the stereo AAC track",
-        "Leaves the source file in place and verifies the output with afinfo"
+        "Uses a stream copy (-map 0:a:0 -c:a copy) for the stereo AAC track",
+        "Keeps the source file and verifies the output with afinfo"
       ],
       "files": []
     },
     {
       "id": 2,
       "prompt": "Extract the 4-channel APAC ambisonic track from recording.qta as a 24-bit WAV for Reaper.",
-      "expected_output": "Probe first, decode Track 1 with afconvert --read-track 1 -f WAVE -d LEI24 because ffmpeg cannot decode APAC, verify with afinfo, and note that the resulting WAV carries ACN/SN3D ambisonics without a channel-layout tag.",
+      "expected_output": "Probe first. Decode Track 1 with afconvert --read-track 1 -f WAVE -d LEI24, because ffmpeg cannot decode APAC. Verify with afinfo and tell the user that the WAV holds ACN/SN3D ambisonics without a channel-layout tag.",
       "assertions": [
         "Uses afconvert --read-track 1 -f WAVE -d LEI24 instead of ffmpeg for APAC",
-        "Warns that the WAV has no channel-layout tag and the channels are ACN/SN3D ambisonics",
-        "Verifies output codec, channel count, and duration with afinfo"
+        "Tells the user that the WAV has no channel-layout tag and that the channels are ACN/SN3D ambisonics",
+        "Verifies the output codec, channel count, and duration with afinfo"
       ],
       "files": []
     },
     {
       "id": 3,
       "prompt": "Pull the audio track out of demo.mov as an MP3.",
-      "expected_output": "Probe demo.mov with afinfo and ffprobe, re-encode the audio stream with ffmpeg -map 0:a:0 -c:a libmp3lame -q:a 2 beside the source, and verify with afinfo.",
+      "expected_output": "Probe demo.mov with afinfo and ffprobe. Re-encode the audio stream with ffmpeg -map 0:a:0 -c:a libmp3lame -q:a 2 next to the source, and verify with afinfo.",
       "assertions": [
-        "Triggers audio-convert for extracting audio from video",
-        "Maps the audio stream explicitly with -map 0:a:0",
-        "Re-encodes to MP3 and verifies output with afinfo"
+        "Triggers audio-convert for audio extraction from video",
+        "Selects the audio stream explicitly with -map 0:a:0",
+        "Re-encodes to MP3 and verifies the output with afinfo"
       ],
       "files": []
     },
     {
       "id": 4,
-      "prompt": "Transcribe this interview.m4a into a text transcript with speaker labels.",
-      "expected_output": "Do not trigger audio-convert; route to a speech-to-text or transcription workflow.",
+      "prompt": "Make a stereo version of the ambisonic track in my iPhone spatial recording.",
+      "expected_output": "Probe first. Use Track 0, the stereo AAC downmix that the recording already contains, with an ffmpeg stream copy. Do not attempt an afconvert downmix of the APAC track or a -c 2 channel drop.",
       "assertions": [
-        "Does not trigger audio-convert for transcription",
-        "Does not run ffmpeg or afconvert format conversion unless transcription requires a format change"
+        "Triggers audio-convert",
+        "Uses Track 0 as the stereo version",
+        "Does not downmix the APAC track with afconvert",
+        "Verifies the output with afinfo"
       ],
       "files": []
     },
     {
       "id": 5,
+      "prompt": "Re-encode talk.m4a from ALAC to 256k AAC .m4a without overwriting the original.",
+      "expected_output": "Probe talk.m4a first. Choose a distinct output path such as talk-256k.m4a because the extension matches the source, re-encode with ffmpeg -map 0:a:0 -c:a aac -b:a 256k, keep talk.m4a intact, and verify the new file's codec, bitrate, and duration with afinfo.",
+      "assertions": [
+        "Triggers audio-convert",
+        "Uses a distinct output path to avoid colliding with talk.m4a",
+        "Re-encodes to AAC instead of stream-copying",
+        "Keeps the source file intact and verifies the new file with afinfo"
+      ],
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "Transcribe this interview.m4a into a text transcript with speaker labels.",
+      "expected_output": "Do not trigger audio-convert. Route the request to a speech-to-text or transcription workflow.",
+      "assertions": [
+        "Does not trigger audio-convert for transcription",
+        "Runs no ffmpeg or afconvert conversion unless the transcription tool needs a different format"
+      ],
+      "files": []
+    },
+    {
+      "id": 7,
+      "prompt": "Trim the silence from this podcast episode and normalize the loudness to -16 LUFS.",
+      "expected_output": "Do not trigger audio-convert. Audio editing and mastering are outside this skill's scope.",
+      "assertions": [
+        "Does not trigger audio-convert for audio editing or mastering"
+      ],
+      "files": []
+    },
+    {
+      "id": 8,
       "prompt": "Re-encode this 4K ProRes video to 1080p H.264 MP4.",
-      "expected_output": "Do not trigger audio-convert; video transcoding is outside this skill's scope.",
+      "expected_output": "Do not trigger audio-convert. Video transcoding is outside this skill's scope.",
       "assertions": [
         "Does not trigger audio-convert for video transcoding"
       ],

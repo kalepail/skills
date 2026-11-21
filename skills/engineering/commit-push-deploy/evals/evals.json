@@ -4,42 +4,67 @@
     {
       "id": 1,
       "prompt": "Git commit, git push, and deploy these changes live.",
-      "expected_output": "Resolve scope and destination, reuse or run relevant checks, stage only approved changes, run git diff --cached --check and a staged secret scan before committing, push without force-pushing, deploy the validated commit, and verify the specific delivered change on the live target.",
+      "expected_output": "Resolve scope and destination. Reuse or run the relevant checks. Stage only the approved changes. Run git diff --cached --check and a staged secret scan before the commit. Push without a force-push. Deploy the validated commit and verify the delivered change on the live target.",
       "assertions": [
         "Triggers commit-push-deploy",
-        "Inspects git status, upstream, and ahead commits before pushing",
+        "Inspects git status, upstream, and unpushed commits before pushing",
         "Stages approved files before running git diff --cached --check and gitleaks git --staged --redact",
-        "Verifies the delivered change on the live target rather than stopping at deploy exit code 0",
-        "Reports commit SHA, deployment target or ID, and live verification result"
+        "Confirms the remote branch holds the intended commit SHA",
+        "Verifies the delivered change on the live target instead of stopping at deploy exit code 0",
+        "Reports the commit SHA, the deploy target or ID, and the live verification result"
       ],
       "files": []
     },
     {
       "id": 2,
       "prompt": "Ship this fix live and rebuild the Worker.",
-      "expected_output": "Trigger commit-push-deploy even though 'commit' was omitted, verify target repo/branch/deploy profile, commit and push approved changes if uncommitted, deploy using the project's documented script, and verify the changed live endpoint behavior.",
+      "expected_output": "Trigger commit-push-deploy although the prompt omits 'commit'. Confirm the target repository, branch, and deploy profile. Commit and push uncommitted approved changes. Deploy with the project's documented script and verify the changed live endpoint behavior.",
       "assertions": [
-        "Triggers commit-push-deploy even when the word commit is omitted",
+        "Triggers commit-push-deploy when the word commit is absent",
         "Uses the project's documented deploy script and profile",
-        "Checks live endpoint behavior after deployment"
+        "Checks the live endpoint behavior after the deploy"
       ],
       "files": []
     },
     {
       "id": 3,
       "prompt": "Push and deploy the pricing update, but leave my unfinished auth refactor in the working tree untouched.",
-      "expected_output": "Stage only the approved pricing files, keep unrelated auth files unstaged, commit and push, and deploy from a clean worktree at the pushed commit if the deploy tool bundles the working tree.",
+      "expected_output": "Stage only the approved pricing files. Keep the unrelated auth files unstaged and unchanged. Commit and push. Deploy from a clean worktree at the pushed commit if the deploy tool bundles the working tree.",
       "assertions": [
-        "Preserves unrelated working-tree edits",
+        "Keeps unrelated working-tree edits intact",
         "Deploys from a clean worktree at the pushed commit when the deploy tool bundles the working tree",
-        "Does not leak unrelated dirty files into the commit or live artifact"
+        "Keeps unrelated dirty files out of the commit and the live artifact"
       ],
       "files": []
     },
     {
       "id": 4,
+      "prompt": "Deploy this to production. Heads up: I added the Stripe live key to config.ts while testing.",
+      "expected_output": "Run the secret scan on staged changes and the full outgoing commit range before pushing. On a finding, stop before committing or pushing, report the file and rule with the secret redacted, and ask how to remove the key. Push and deploy nothing.",
+      "assertions": [
+        "Triggers commit-push-deploy",
+        "Runs gitleaks git --staged --redact and scans the outgoing commit range before pushing",
+        "Stops on the finding and keeps the secret out of every commit and push",
+        "Prints no unredacted secret value",
+        "Does not push or deploy"
+      ],
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Push and deploy only the header fix in header.tsx. I already staged an unrelated database migration and also have unstaged debug prints in header.tsx.",
+      "expected_output": "Isolate only the approved header hunk using an isolated index (for example a temporary GIT_INDEX_FILE copied from HEAD) instead of git commit -- header.tsx, scan and commit only the approved snapshot while preserving the unrelated staged migration and unstaged debug prints, push, and deploy from a clean worktree at the pushed commit.",
+      "assertions": [
+        "Preserves the previously staged unrelated migration",
+        "Does not use git commit -- header.tsx to commit unstaged debug prints",
+        "Scans and commits only the approved snapshot and deploys from a clean worktree"
+      ],
+      "files": []
+    },
+    {
+      "id": 6,
       "prompt": "Just commit these changes locally; do not push or deploy yet.",
-      "expected_output": "Do not trigger commit-push-deploy; handle as a plain commit-only request without pushing or deploying.",
+      "expected_output": "Do not trigger commit-push-deploy. Handle the request as a commit-only task without a push or deploy.",
       "assertions": [
         "Does not trigger commit-push-deploy for a commit-only request",
         "Does not push or deploy"
@@ -47,11 +72,21 @@
       "files": []
     },
     {
-      "id": 5,
-      "prompt": "Open a pull request for this branch so the team can review it.",
-      "expected_output": "Do not trigger commit-push-deploy; route to a PR workflow rather than releasing live.",
+      "id": 7,
+      "prompt": "Push my local commits to origin. I'll handle the deploy myself later.",
+      "expected_output": "Do not trigger commit-push-deploy. Handle the request as a push-only task without a deploy.",
       "assertions": [
-        "Does not trigger commit-push-deploy for a PR-only request",
+        "Does not trigger commit-push-deploy for a push-only request",
+        "Does not deploy"
+      ],
+      "files": []
+    },
+    {
+      "id": 8,
+      "prompt": "Open a pull request for this branch so the team can review it.",
+      "expected_output": "Do not trigger commit-push-deploy. Route the request to a pull-request workflow without a live release.",
+      "assertions": [
+        "Does not trigger commit-push-deploy for a pull-request-only request",
         "Does not deploy changes live"
       ],
       "files": []

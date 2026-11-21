@@ -2,9 +2,9 @@
 
 # kalepail Skills
 
-Personal, opinionated AI-agent skills by [Tyler van der Hoeven](https://github.com/kalepail). The collection works across Claude Code, Codex, OpenCode, and Grok.
+Personal, opinionated AI-agent skills by [Tyler van der Hoeven](https://github.com/kalepail). Model routing and tool preferences are built in. The skills install in Claude Code, Codex, OpenCode, and Grok.
 
-Skills use plain task names and live in three categories: engineering, productivity, and Solo.
+Skills use plain task names. They live in three categories: engineering, productivity, and Solo.
 
 ## Skills
 
@@ -21,7 +21,7 @@ General workflows that are not tied to one product. See the [productivity catalo
 
 - [Audio convert](skills/productivity/audio-convert/) — convert macOS and Apple-only audio files (`.qta`, `.caf`, `.aifc`, APAC spatial audio) with `ffmpeg` and `afconvert`.
 - [Deep research](skills/productivity/deep-research/) — produce cited syntheses from independent evidence lanes.
-- [Routing agent work](skills/productivity/routing-agent-work/) — choose an agent CLI, model, effort, fallback, reviewer, and report contract.
+- [Routing agent work](skills/productivity/routing-agent-work/) — choose an agent CLI (Claude, Codex, Grok, OpenCode, or Antigravity), model, effort, fallback, reviewer, and report contract.
 
 ### Solo
 
@@ -56,14 +56,14 @@ General workflows that are not tied to one product. See the [productivity catalo
 
 ## Requirements
 
-Skills orchestrate external tools; they do not bundle or authenticate them.
+The skills orchestrate external tools. They do not bundle or authenticate them.
 
 - **Solo MCP** — required by `fan-solo` and every `solo-*` skill. Enable [Solo's local MCP server](https://soloterm.com/docs/integrations/mcp-server) and connect your agent host to it.
-- **A fan-out vehicle** — optional for `deep-research`. It runs lanes sequentially when no orchestration vehicle exists.
-- **Optional research providers** — `deep-research` prefers Parallel CLI and uses Perplexity as an independent lane. It uses Stellar Raven first for Stellar questions.
-- **agent-browser and Node.js 22+** — Agent Browser WebAuthn requires the `agent-browser` CLI and Node.js 22 or newer; the `$agent-browser` skill is recommended but not bundled here.
-- **ffmpeg and macOS `afconvert`** — `audio-convert` uses `ffmpeg`/`ffprobe` and Apple's built-in `afconvert`/`afinfo` on macOS.
-- **Optional secret scanner** — `commit-push-deploy` uses `gitleaks` (or the repository's configured scanner) before committing.
+- **A fan-out vehicle** — optional for `deep-research`. Without one, it runs lanes sequentially.
+- **Research providers** — optional for `deep-research`. It prefers the Parallel CLI and uses Perplexity MCP as an independent lane. It uses Stellar Raven MCP first for Stellar questions.
+- **agent-browser and Node.js 22+** — required by `agent-browser-webauthn`. The `$agent-browser` skill is recommended; this repository does not bundle it.
+- **ffmpeg and macOS `afconvert`** — required by `audio-convert`. It uses `ffmpeg`/`ffprobe` and Apple's built-in `afconvert`/`afinfo`.
+- **A secret scanner** — required by `commit-push-deploy`. It scans staged changes and outgoing commits with `gitleaks`, or with the repository's configured scanner, before it commits and pushes.
 
 ## Install
 
@@ -101,11 +101,11 @@ claude plugin install agent-browser-webauthn@kalepail-skills
 npx skills add kalepail/skills -g -a codex -y --skill '*'
 ```
 
-Use `--skill <name>` when only selected Codex skills are wanted. The repository does not ship a native Codex plugin.
+To install selected skills, pass `--skill <name>`. This repository does not ship a native Codex plugin.
 
 ### OpenCode
 
-Use the skills.sh CLI above. OpenCode natively discovers `.agents/skills` project installs and `~/.agents/skills` global installs; no mirror or plugin is needed.
+Use the skills.sh CLI above. OpenCode discovers project installs in `.agents/skills` and global installs in `~/.agents/skills`. It needs no mirror or plugin.
 
 ### Grok
 
@@ -119,7 +119,7 @@ grok plugin install kalepail/skills
 grok plugin install kalepail/skills#skills/engineering/agent-browser-webauthn
 ```
 
-Review Grok's trust prompt before enabling.
+Review Grok's trust prompt before you enable the plugin.
 
 ### Manual
 
@@ -127,7 +127,7 @@ Review Grok's trust prompt before enabling.
 git clone https://github.com/kalepail/skills.git
 ```
 
-Copy chosen `skills/<category>/<name>` directories intact into your agent's skill directory.
+Copy each chosen `skills/<category>/<name>` directory, complete, into your agent's skill directory.
 
 ## Use
 
@@ -139,12 +139,14 @@ Use $fan-solo to choose and run the right Solo workflow for this task.
 
 For one clearly scoped Solo task, invoke the matching `$solo-*` skill directly.
 
-Use `$routing-agent-work` when delegated lanes need model and effort selection. Use `$deep-research` for deep, cross-checked research.
+Use `$routing-agent-work` to select the model and effort for delegated lanes. Use `$deep-research` for deep, cross-checked research.
 
 Use `$agent-browser-webauthn` with `$agent-browser` for virtual WebAuthn browser tests.
 
-These skills are personal and opinionated: model routing and tool preferences are baked in. [AGENTS.md](AGENTS.md) is the guide for working in this repo.
+Use `$commit-push-deploy` to ship approved changes through live verification. Use `$audio-convert` to probe and convert macOS or Apple-only audio files.
+
+To work in this repository, read [AGENTS.md](AGENTS.md).
 
 ## Status and license
 
-Unofficial community work, licensed [Apache-2.0](LICENSE). Not affiliated with, endorsed by, or maintained by Solo, SoloTerm, OpenAI, or Anthropic. Product names belong to their respective owners.
+Unofficial community work, licensed [Apache-2.0](LICENSE). It has no affiliation with Solo, SoloTerm, OpenAI, or Anthropic, and they do not endorse or maintain it. Product names belong to their owners.

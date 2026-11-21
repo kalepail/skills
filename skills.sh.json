@@ -12,7 +12,7 @@
     },
     {
       "title": "Productivity",
-      "description": "General workflows for audio conversion, research, and agent routing.",
+      "description": "General workflows that are not tied to one product.",
       "skills": [
         "audio-convert",
         "deep-research",
@@ -21,7 +21,7 @@
     },
     {
       "title": "Solo",
-      "description": "Complete Solo and SoloTerm collection covering setup, runtime, agents, durable state, and integrations.",
+      "description": "Solo and SoloTerm workflows for setup, runtime, agents, durable state, and integrations.",
       "skills": [
         "fan-solo",
         "solo-set-up-projects",

@@ -1,4 +1,4 @@
 interface:
-  display_name: "Commit, push, deploy"
+  display_name: "Commit, Push, Deploy"
   short_description: "Release approved changes and verify the live result"
-  default_prompt: "Use $commit-push-deploy to commit, push, deploy, and verify this project's approved changes."
+  default_prompt: "Use $commit-push-deploy to commit, push, deploy, and live-verify this project's approved changes."
